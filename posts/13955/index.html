@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="2 工作队列（Work Queues） In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a Work Queue that will be used to distribute time-consuming tasks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ Spring-AMQP官方教程（二）--工作队列">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/13955/index.html">
+<meta property="og:site_name" content="PENG">
+<meta property="og:description" content="2 工作队列（Work Queues） In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a Work Queue that will be used to distribute time-consuming tasks">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/python-two.png">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/prefetch-count.png">
+<meta property="article:published_time" content="2022-05-30T08:45:23.000Z">
+<meta property="article:modified_time" content="2022-05-30T08:47:53.429Z">
+<meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="RabbitMQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.rabbitmq.com/img/tutorials/python-two.png">
+
+
+<link rel="canonical" href="https://jiapengcai.github.io/posts/13955/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/13955/","path":"posts/13955/","title":"RabbitMQ Spring-AMQP官方教程（二）--工作队列"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RabbitMQ Spring-AMQP官方教程（二）--工作队列 | PENG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">PENG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97%EF%BC%88Work-Queues%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">2 工作队列（Work Queues）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preparation%EF%BC%88%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">Preparation（准备工作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sender%EF%BC%88%E5%8F%91%E9%80%81%E8%80%85%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">Sender（发送者）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Receiver%EF%BC%88%E6%8E%A5%E6%94%B6%E8%80%85%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">Receiver（接收者）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Putting-it-all-together%EF%BC%88%E4%BB%A3%E7%A0%81%E6%95%B4%E5%90%88%EF%BC%89"><span class="nav-number">1.0.4.</span> <span class="nav-text">Putting it all together（代码整合）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-acknowledgment%EF%BC%88%E6%B6%88%E6%81%AF%E7%A1%AE%E8%AE%A4%EF%BC%89"><span class="nav-number">1.0.5.</span> <span class="nav-text">Message acknowledgment（消息确认）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Forgotten-acknowledgment%EF%BC%88%E8%A2%AB%E9%81%97%E5%BF%98%E7%9A%84%E7%A1%AE%E8%AE%A4%EF%BC%89"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">Forgotten acknowledgment（被遗忘的确认）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-durability%EF%BC%88%E6%B6%88%E6%81%AF%E6%8C%81%E4%B9%85%E6%80%A7%EF%BC%89"><span class="nav-number">1.0.6.</span> <span class="nav-text">Message durability（消息持久性）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note-on-message-persistence%EF%BC%88%E5%85%B3%E4%BA%8E%E6%B6%88%E6%81%AF%E6%8C%81%E4%B9%85%E5%8C%96%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">Note on message persistence（关于消息持久化要注意的地方）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fair-dispatch-vs-Round-robin-dispatching%EF%BC%88%E5%85%AC%E5%B9%B3%E8%B0%83%E5%BA%A6vs%E5%BE%AA%E7%8E%AF%E8%B0%83%E5%BA%A6%EF%BC%89"><span class="nav-number">1.0.7.</span> <span class="nav-text">Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note-about-queue-size%EF%BC%88%E5%85%B3%E4%BA%8E%E9%98%9F%E5%88%97%E5%A4%A7%E5%B0%8F%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%89"><span class="nav-number">1.0.7.1.</span> <span class="nav-text">Note about queue size（关于队列大小需要注意的地方）</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiapeng Cai"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiapeng Cai</p>
+  <div class="site-description" itemprop="description">Life can be programmed.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jiapengcai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jiapengcai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:635793@gmail.com" title="E-Mail → mailto:635793@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/13955/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="RabbitMQ Spring-AMQP官方教程（二）--工作队列 | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RabbitMQ Spring-AMQP官方教程（二）--工作队列
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-05-30 16:45:23 / 修改时间：16:47:53" itemprop="dateCreated datePublished" datetime="2022-05-30T16:45:23+08:00">2022-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/RabbitMQ-Spring-AMQP%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">RabbitMQ Spring-AMQP官方教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="2-工作队列（Work-Queues）"><a href="#2-工作队列（Work-Queues）" class="headerlink" title="2 工作队列（Work Queues）"></a>2 工作队列（Work Queues）</h1><p><img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="image"></p>
+<p>In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a <em>Work</em> <em>Queue</em> that will be used to distribute time-consuming tasks among multiple workers.</p>
+<p>在第一个教程中，我们编写了两个程序，一个用于往一个命名了的队列发送消息，另一个从这个队列里接收消息。在本教程里，我们将创建一个工作队列（Work Queue），它将被用来在多个工作者之间分发耗时任务。</p>
+<p>The main idea behind Work Queues (aka: _Task Queues_) is to avoid doing a resource-intensive task immediately and having to wait for it to complete. Instead we schedule the task to be done later. We encapsulate a <em>task</em> as a message and send it to a queue. A worker process running in the background will pop the tasks and eventually execute the job. When you run many workers the tasks will be shared between them.</p>
+<p>工作队列（也叫做任务队列）背后的主要目的是为了避免立即执行资源密集型的任务以及避免必须等待任务完成的情况，相反，它计划着让这些任务可以留到后面去执行。我们将任务分装成消息，并将它发送到队列里。运行在后台的工作进程将取出任务并最终执行它。如果你运行了多个工作进程，那么所有的任务将被它们共享。</p>
+<p>This concept is especially useful in web applications where it’s impossible to handle a complex task during a short HTTP request window.</p>
+<p>对于web应用，这个概念特别有用，因为web应用无法在短短的HTTP请求窗口内处理复杂的任务。</p>
+<h3 id="Preparation（准备工作）"><a href="#Preparation（准备工作）" class="headerlink" title="Preparation（准备工作）"></a>Preparation（准备工作）</h3><p>In the previous part of this tutorial we sent a message containing “Hello World!”. Now we’ll be sending strings that stand for complex tasks. We don’t have a real-world task, like images to be resized or pdf files to be rendered, so let’s fake it by just pretending we’re busy - by using the Thread.sleep() function. We’ll take the number of dots in the string as its complexity; every dot will account for one second of “work”. For example, a fake task described by Hello… will take three seconds.</p>
+<p>在教程1里，我们实现了如何发送包含“Hello World!”的消息。现在，我们将发送表示复杂任务的字符串。由于我们没有真实的任务，如调整图片大小或者渲染pdf文件，所以我们通过使用Thread.sleep()函数来模拟繁忙的耗时任务。我们将在字符串中用点号的个数来表示复杂度，点号的个数表示整个任务执行秒的秒数。例如，Hello…表示模拟任务需要执行三秒。</p>
+<p>Please see the setup in first tutorial if you have not setup the project. We will follow the same pattern as in the first tutorial: create a package (tut2) and create a Tut2Config, Tut2Receiver, and Tut2Sender. Start by creating a new package (tut2) where we’ll place our three classes. In the configuration class we setup two profiles, the label for the tutorial (“tut2”) and the name of the pattern (“work-queues”). We leverage spring to expose the queue as a bean. We setup the receiver as a profile and define two beans to correspond to the workers in our diagram above： receiver1 and receiver2. Finally, we define a profile for the sender and define the sender bean. The configuration is now done.</p>
+<p>如果你还未建立配置好项目，请见教程1的配置过程。我们将采用与教程1相同的方式，新建一个包目录（tut2）并创建一个名为Tut2Config的配置类，一个名为Tut2Receiver的消息接收类，以及一个名为Tut2Sender的消息发送类。首先新建包目录（tut2），我们将在这个包下面放刚说到的那三个类。在配置类里，我们将配置两个配置组，一个作为当前教程的标签（“tut2”），一个作为当前RabbitMQ使用模式的名字（“work-queue”）。我们利用Spring框架将队列暴露为一个bean。我们设置一个接受者配置组，并定义两个bean来对应于上面图中的两个消费者：receiver1和receiver2。最后，我们会定义一个发送者配置组，并定义作为发送者的bean。这样配置就结束了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut2&quot;, &quot;work-queues&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut2Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sender（发送者）"><a href="#Sender（发送者）" class="headerlink" title="Sender（发送者）"></a>Sender（发送者）</h3><p>We will modify the sender to provide a means for identifying whether its a longer running task by appending a dot to the message in a very contrived fashion using the same method on the RabbitTemplate to publish the message, convertAndSend. The documentation defines this as, “Convert a Java object to an Amqp Message and send it to a default exchange with a default routing key.”</p>
+<p>我们将对发送者类进行修改，在发送方法中，通过人为地在消息后面添加点号来识别当前任务是否耗时，并依旧使用RabbitTemplate的convertAndSend方法来发布消息。文档把convertAndSend方法定义为，“将一个Java对象转换成一个Amqp消息，并用一个默认路由键（routing key）将其发送到一个默认的exchange里。”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Queue queue;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(queue.getName(), message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Receiver（接收者）"><a href="#Receiver（接收者）" class="headerlink" title="Receiver（接收者）"></a>Receiver（接收者）</h3><p>Our receiver, Tut2Receiver, simulates an arbitary length for a fake task in the doWork() method where the number of dots translates into the number of seconds the work will take. Again, we leverage a @RabbitListener on the “hello” queue and a @RabbitHandler to receive the message. The instance that is consuming the message is added to our monitor to show which instance, the message and the length of time to process the message.</p>
+<p>我们的接收者类，Tut2Receiver，在doWork()方法里根据消息所带点号的个数，将其转换成任务所需消耗的秒数，以此模拟了任意任务的长度。同样地，我们对“hello”队列使用了@RabbitListener注解，并通过@RabbitHandler注解来接收消息。同时，用一个编号来标识正在消费消息的实例，并将它加入我们的监控中，最终打印出实例编号，消息内容以及处理消息所耗费的时长。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> instance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Tut2Receiver</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.instance = i;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitHandler</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">				<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Putting-it-all-together（代码整合）"><a href="#Putting-it-all-together（代码整合）" class="headerlink" title="Putting it all together（代码整合）"></a>Putting it all together（代码整合）</h3><p>Compile them using mvn package and run with the following options</p>
+<p>使用mvn package来编译上述代码，并在运行时添加下面的命令行参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,receiver</span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,sender</span><br></pre></td></tr></table></figure>
+
+<p>The output of the sender should look something like:</p>
+<p>发送者类的输出看起来应该是类似于这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">[x] Sent &#x27;Hello.1&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..2&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...3&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.4&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..5&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...6&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.7&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..8&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...9&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.10&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>And the output from the workers should look something like:</p>
+<p>而工作者类的输出看起来应该是类似于这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">instance 1 [x] Received &#x27;Hello.1&#x27;</span><br><span class="line">instance 2 [x] Received &#x27;Hello..2&#x27;</span><br><span class="line">instance 1 [x] Done in 1.001s</span><br><span class="line">instance 1 [x] Received &#x27;Hello...3&#x27;</span><br><span class="line">instance 2 [x] Done in 2.004s</span><br><span class="line">instance 2 [x] Received &#x27;Hello.4&#x27;</span><br><span class="line">instance 2 [x] Done in 1.0s</span><br><span class="line">instance 2 [x] Received &#x27;Hello..5&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Message-acknowledgment（消息确认）"><a href="#Message-acknowledgment（消息确认）" class="headerlink" title="Message acknowledgment（消息确认）"></a>Message acknowledgment（消息确认）</h3><p>Doing a task can take a few seconds. You may wonder what happens if one of the consumers starts a long task and dies with it only partly done. Spring AMQP by default takes a conservative approach to <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/confirms.html">message acknowledgement</a>. If the listener throws an exception the container calls:</p>
+<p>完成一个任务需要耗费几秒。对于一个开始了长任务的消费者，你可能会想知道，当它只完成了部分任务就挂掉时发生了什么。Spring AMQP默认采用保守的方式来进行<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/confirms.html">消息确认</a>。如果监听器抛出了一个异常，那么容器会调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.basicReject(deliveryTag, requeue)</span><br></pre></td></tr></table></figure>
+
+<p>Requeue is true by default unless you explicitly set:</p>
+<p>requeue（重入队列）默认为true，除非你显示地将其设置为false：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaultRequeueRejected=false</span><br></pre></td></tr></table></figure>
+
+<p>or the listener throws an AmqpRejectAndDontRequeueException. This is typically the bahavior you want from your listener. In this mode there is no need to worry about a forgotten acknowledgement. After processing the message the listener calls:</p>
+<p>否则监听器抛出AmqpRejectAndDontRequeueException异常。这通常会是你想要监听器的行为。在这种模式下，无需担心一个被忘记了的确认。在处理完消息后，监听器会调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.basicAck()</span><br></pre></td></tr></table></figure>
+
+<p>Acknowledgement must be sent on the same channel the delivery it is for was received on. Attempts to acknowledge using a different channel will result in a channel-level protocol exception. See the <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/confirms.html">doc guide on confirmations</a> to learn more. Spring AMQP generally takes care of this but when used in combination with code that uses RabbitMQ Java client directly, this is something to keep in mind.</p>
+<p>消息确认必须在与接收信息相同的通道（channel）上进行发送。试图使用不同的通道来进行确认将导致通道级别的协议异常。若想更详细了解，可以参阅<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/confirms.html">关于消息确认的文档指南</a>。Spring AMQP一般都会处理好这种问题，但与直接使用RabbitMQ的Java客户端的代码结合使用时，这点要小心。</p>
+<blockquote>
+<h4 id="Forgotten-acknowledgment（被遗忘的确认）"><a href="#Forgotten-acknowledgment（被遗忘的确认）" class="headerlink" title="Forgotten acknowledgment（被遗忘的确认）"></a>Forgotten acknowledgment（被遗忘的确认）</h4><p>It’s a common mistake to miss the basicAck and spring-amqp helps to avoid this through its default configuraiton. The consequences are serious. Messages will be redelivered when your client quits (which may look like random redelivery), but RabbitMQ will eat more and more memory as it won’t be able to release any unacked messages.</p>
+<p>忘记调用basciAck方法是常见的一个错误，spring-amqp通过它的默认配置来避免它。这个错误的后果是很严重的。当你的客户端退出后，消息会被重复发送（看起来就像是随机重发），但RabbitMQ将吃掉越来越多的内存，因为它无法释放任何未确认的消息。</p>
+<p>In order to debug this kind of mistake you can use rabbitmqctl to print the messages_unacknowledged field:</p>
+<p>为了调试这种错误，你可以使用rabbitmqctl来打印messages_unacknowledged域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
+
+<p>On Windows, drop the sudo:</p>
+<p>在Windows环境下，去掉sudo：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="Message-durability（消息持久性）"><a href="#Message-durability（消息持久性）" class="headerlink" title="Message durability（消息持久性）"></a>Message durability（消息持久性）</h3><p>With spring-amqp there are reasonable default values in the MessageProperties that account for message durability. In particular you can check the table for <a target="_blank" rel="noopener" href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">common properties</a>. You’ll see two relevant to our discussion here on durability:</p>
+<p>对于spring-amqp，消息属性配置里有很多合理的默认值，这些默认值共同决定了消息的持久性。你可以查阅<a target="_blank" rel="noopener" href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">常用属性表</a>。你将会看到与我们正在讨论的消息持久性相关的两个属性：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Property</th>
+<th align="left">default</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">durable</td>
+<td align="left">true</td>
+<td align="left">When declareExchange is true the durable flag is set to this value</td>
+</tr>
+<tr>
+<td align="left">deliveryMode</td>
+<td align="left">PERSISTENT</td>
+<td align="left">PERSISTENT or NON_PERSISTENT to determine whether or not RabbitMQ should persist the messages</td>
+</tr>
+</tbody></table>
+<blockquote>
+<h4 id="Note-on-message-persistence（关于消息持久化要注意的地方）"><a href="#Note-on-message-persistence（关于消息持久化要注意的地方）" class="headerlink" title="Note on message persistence（关于消息持久化要注意的地方）"></a>Note on message persistence（关于消息持久化要注意的地方）</h4><p>Marking messages as persistent doesn’t fully guarantee that a message won’t be lost. Although it tells RabbitMQ to save the message to disk, there is still a short time window when RabbitMQ has accepted a message and hasn’t saved it yet. Also, RabbitMQ doesn’t do fsync(2) for every message – it may be just saved to cache and not really written to the disk. The persistence guarantees aren’t strong, but it’s more than enough for our simple task queue. If you need a stronger guarantee then you can use publisher confirms.</p>
+<p>将消息标记为持久化并不能完全保证消息将不会丢失。虽然它告诉RabbitMQ要将消息保存到磁盘，但当RabbitMQ接收了某条消息并且还没有保存该消息时，仍有一个小的时间窗口。而且，RabbitMQ不会为每条消息都进行fsync操作——它可能仅仅只是将其缓存起来，但并没有真的将消息写入磁盘。这么做虽然无法完全保证持久化，但对于我们简单的任务队列来说，这已经很足够了。如果你需要完全保证持久化，那么你可以使用发布者确认。</p>
+</blockquote>
+<h3 id="Fair-dispatch-vs-Round-robin-dispatching（公平调度vs循环调度）"><a href="#Fair-dispatch-vs-Round-robin-dispatching（公平调度vs循环调度）" class="headerlink" title="Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）"></a>Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）</h3><p>By default, RabbitMQ will send each message to the next consumer, in sequence. On average every consumer will get the same number of messages. This way of distributing messages is called round-robin. In this mode dispatching doesn’t necessarily work exactly as we want. For example in a situation with two workers, when all odd messages are heavy and even messages are light, one worker will be constantly busy and the other one will do hardly any work. Well, RabbitMQ doesn’t know anything about that and will still dispatch messages evenly.</p>
+<p>默认情况下，RabbitMQ将把每一条消息按顺序逐一发送给下一个消费者。每个消费者都将被平均分到相同的个数的消息。这种消息分派方式被称为循环调度。这种调度模式有时无法完全满足我们的需求。例如，假设有两个工作者，第奇数条消息是重任务，第偶数条消息是轻任务，那么其中一个工作者将会总是很繁忙，而另一个工作者则有可能没什么事做。然而，RabbitMQ并不知道这个状况，并且仍然会这么均匀地分发消息。</p>
+<p>This happens because RabbitMQ just dispatches a message when the message enters the queue. It doesn’t look at the number of unacknowledged messages for a consumer. It just blindly dispatches every n-th message to the n-th consumer.</p>
+<p>会发生这个情况是因为，当消息进入队列时，RabbitMQ仅仅是将消息分派出去。它不会去看某个消费者未确认的消息的数量。它只是盲目地将消息均匀分派给各个消费者。</p>
+<p>However, “Fair dispatch” is the default configuration for spring-amqp. The SimpleMessageListenerContainer defines the value for DEFAULT_PREFETCH_COUNT to be 1. If the DEFAULT_PREFECTH_COUNT were set to 0 the behavior would be round robin messaging as described above.</p>
+<p>然而，“公平调度”是spring-amqp的默认配置。SimpleMessageListenerContainer类将DEFAULT_PREFETCH_COUNT的值定义为1。如果DEFAULT_PREFETCH_COUNT的值被设置为0，那么调度方式将变成循环调用。</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/prefetch-count.png" alt="image"></p>
+<p>However, with the prefetchCount set to 1 by default, this tells RabbitMQ not to give more than one message to a worker at a time. Or, in other words, don’t dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch it to the next worker that is not still busy.</p>
+<p>然而，prefetchCount的值默认设为1，这告诉RabbitMQ不要同时将多个消息分派给一个工作者。换句话说，在某个工作者处理完一条消息并确认它之前，RabbitMQ不会给该工作者分派新的消息，而是将新的消息分派给下一个不是很繁忙的工作者。</p>
+<blockquote>
+<h4 id="Note-about-queue-size（关于队列大小需要注意的地方）"><a href="#Note-about-queue-size（关于队列大小需要注意的地方）" class="headerlink" title="Note about queue size（关于队列大小需要注意的地方）"></a>Note about queue size（关于队列大小需要注意的地方）</h4><p>If all the workers are busy, your queue can fill up. You will want to keep an eye on that, and maybe add more workers, or have some other strategy.</p>
+<p>如果所有的工作者都繁忙，那么你的队列会被填满。你需要注意这种情况，要么添加多几个工作者，要么就采用其它策略。</p>
+</blockquote>
+<p>By using spring-amqp you get reasonable values configured for message acknowledgments and fair dispatching. The default durability for queues and persistence for messages provided by spring-amqp allow let the messages to survive even if RabbitMQ is restarted.</p>
+<p>通过使用spring-amqp，你会发现，它已经为消息确认和公平调度配置好合理值。spring-amqp为队列和消息持久化提供的默认持久属性使得即使在RabbitMQ重启的情况下，消息还能保存下来。</p>
+<p>For more information on Channel methods and MessageProperties, you can browse the <a target="_blank" rel="noopener" href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">javadocs online</a>. For understanding the underlying foundation for spring-amqp you can find the <a target="_blank" rel="noopener" href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client</a>.</p>
+<p>关于channel方法和MessageProperties的更多信息，可以浏览<a target="_blank" rel="noopener" href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">在线的javadocs</a>。若要了解spring-amqp的底层机制，可以参阅<a target="_blank" rel="noopener" href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client文档</a>。</p>
+<p>Now we can move on to tutorial 3 and learn how to deliver the same message to many consumers.</p>
+<p>现在我们可以开始教程3，学习如何将相同的消息发送给多个消费者。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/13955/" title="RabbitMQ Spring-AMQP官方教程（二）--工作队列">https://jiapengcai.github.io/posts/13955/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"><i class="fa fa-tag"></i> Translation</a>
+              <a href="/tags/RabbitMQ/" rel="tag"><i class="fa fa-tag"></i> RabbitMQ</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/53264/" rel="prev" title="RabbitMQ Spring-AMQP官方教程（一）--Hello World">
+                  <i class="fa fa-chevron-left"></i> RabbitMQ Spring-AMQP官方教程（一）--Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/14583/" rel="next" title="RabbitMQ Spring-AMQP官方教程（三）--发布/订阅">
+                  RabbitMQ Spring-AMQP官方教程（三）--发布/订阅 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-blog"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiapeng Cai</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

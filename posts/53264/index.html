@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 “Hello World!”Introduction（简介）RabbitMQ is a message broker: it accepts and forwards messages. You can think about it as a post office: when you put the mail that you want posting in a post box, you">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ Spring-AMQP官方教程（一）--Hello World">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/53264/index.html">
+<meta property="og:site_name" content="PENG">
+<meta property="og:description" content="1 “Hello World!”Introduction（简介）RabbitMQ is a message broker: it accepts and forwards messages. You can think about it as a post office: when you put the mail that you want posting in a post box, you">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/producer.png">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/queue.png">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/consumer.png">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/python-one.png">
+<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/sending.png">
+<meta property="article:published_time" content="2022-05-30T08:00:20.000Z">
+<meta property="article:modified_time" content="2022-05-30T08:39:15.567Z">
+<meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="RabbitMQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.rabbitmq.com/img/tutorials/producer.png">
+
+
+<link rel="canonical" href="https://jiapengcai.github.io/posts/53264/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/53264/","path":"posts/53264/","title":"RabbitMQ Spring-AMQP官方教程（一）--Hello World"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RabbitMQ Spring-AMQP官方教程（一）--Hello World | PENG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">PENG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E2%80%9CHello-World-%E2%80%9D"><span class="nav-number">1.</span> <span class="nav-text">1 “Hello World!”</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction%EF%BC%88%E7%AE%80%E4%BB%8B%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction（简介）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9CHello-World%E2%80%9D"><span class="nav-number">1.2.</span> <span class="nav-text">“Hello World”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The-Spring-AMQP-Framework%EF%BC%88Spring-AMQP%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">The Spring AMQP Framework（Spring AMQP框架）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-the-project%EF%BC%88%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">Configuring the project（配置项目）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sending%EF%BC%88%E5%8F%91%E9%80%81%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">Sending（发送）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sending-doesn%E2%80%99t-work-%EF%BC%88%E6%97%A0%E6%B3%95%E5%8F%91%E9%80%81%EF%BC%81%EF%BC%89"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Sending doesn’t work!（无法发送！）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Receiving%EF%BC%88%E6%8E%A5%E6%94%B6%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">Receiving（接收）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Putting-it-all-together%EF%BC%88%E4%BB%A3%E7%A0%81%E6%95%B4%E5%90%88%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">Putting it all together（代码整合）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Listing-queues%EF%BC%88%E5%88%97%E5%87%BA%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">Listing queues（列出队列）</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiapeng Cai"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiapeng Cai</p>
+  <div class="site-description" itemprop="description">Life can be programmed.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jiapengcai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jiapengcai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:635793@gmail.com" title="E-Mail → mailto:635793@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/53264/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="RabbitMQ Spring-AMQP官方教程（一）--Hello World | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RabbitMQ Spring-AMQP官方教程（一）--Hello World
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-05-30 16:00:20 / 修改时间：16:39:15" itemprop="dateCreated datePublished" datetime="2022-05-30T16:00:20+08:00">2022-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/RabbitMQ-Spring-AMQP%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">RabbitMQ Spring-AMQP官方教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="1-“Hello-World-”"><a href="#1-“Hello-World-”" class="headerlink" title="1 “Hello World!”"></a>1 “Hello World!”</h1><h2 id="Introduction（简介）"><a href="#Introduction（简介）" class="headerlink" title="Introduction（简介）"></a>Introduction（简介）</h2><p>RabbitMQ is a message broker: it accepts and forwards messages. You can think about it as a post office: when you put the mail that you want posting in a post box, you can be sure that Mr. Postman will eventually deliver the mail to your recipient. In this analogy, RabbitMQ is a post box, a post office and a postman.</p>
+<p>RabbitMQ是一个消息代理：它接受并转发消息。你可以将它看成是一个邮局：当你将想发送的邮件丢进邮箱时，你就可以确定邮差最终会把这封邮件送到收件人手上。通过这个类比来看，RabbitMQ既是邮箱，又是邮局，而且还是邮差。</p>
+<p>The major difference between RabbitMQ and the post office is that it doesn’t deal with paper, instead it accepts, stores and forwards binary blobs of data ‒ <em>messages</em>.</p>
+<p>RabbitMQ和邮局之间的主要不同点是，RabbitMQ不跟纸打交道，它只接收，存储并转发二进制的数据包—消息。</p>
+<p>RabbitMQ, and messaging in general, uses some jargon.</p>
+<p>RabbitMQ，一般称它为消息队列，它使用了一些术语。</p>
+<p><em>Producing</em> means nothing more than sending. A program that sends messages is a producer:</p>
+<p>消息生产其实就是消息发送。发送消息的程序就是生产者：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/producer.png" alt="image"></p>
+<p>A <em>queue</em> is the name for a post box which lives inside RabbitMQ. Although messages flow through RabbitMQ and your applications, they can only be stored inside a <em>queue</em>. A queue is only bound by the host’s memory &amp; disk limits, it’s essentially a large message buffer. Many producers can send messages that go to one queue, and many consumers can try to receive data from one <em>queue</em>. This is how we represent a queue:</p>
+<p>队列就是相当于RabbitMQ内部的邮箱。虽然消息在传递时是流经RabbitMQ和你的应用，但它们只能被存储在某个队列里。队列大小只受限于主机内存和硬盘容量，它本质上就是个大的消息缓存。多个生产者可以往一个队列里发送消息，多个消费者可以从一个队列里获取数据。以下是我们表示一个队列的方式：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/queue.png" alt="image"></p>
+<p><em>Consuming</em> has a similar meaning to receiving. A <em>consumer</em> is a program that mostly waits to receive messages:</p>
+<p>消息消费其实就是消息接收。等待接收消息的程序就是一个消费者：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/consumer.png" alt="image"></p>
+<p>Note that the producer, consumer, and broker do not have to reside on the same host; indeed in most applications they don’t.</p>
+<p>注意，生产者，消费者和代理不一定都在同一个主机里；实际上，在大多数应用中，这三者都不是在同一个主机里。</p>
+<h2 id="“Hello-World”"><a href="#“Hello-World”" class="headerlink" title="“Hello World”"></a>“Hello World”</h2><p>In this part of the tutorial we’ll write two programs using the spring-amqp library; a producer that sends a single message, and a consumer that receives messages and prints them out. We’ll gloss over some of the detail in the Spring-amqp API, concentrating on this very simple thing just to get started. It’s a “Hello World” of messaging.</p>
+<p>在本教程里，我们将写两个基于spring-amqp类库的程序，其中一个是发送单条消息的生产者，另一个是消费者，它接收消息并将它们打印出来。我们将省略Spring-amqp API的一些细节，专注于即将开始的东西。它是消息队列版本的“Hello World”程序。</p>
+<p>In the diagram below, “P” is our producer and “C” is our consumer. The box in the middle is a queue - a message buffer that RabbitMQ keeps on behalf of the consumer.</p>
+<p>在下面的图中，“P”是我们的生产者，“C”是我们的消费者。图中间的箱子是一个队列，也就是RabbitMQ给消费者用的的消息缓存：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-one.png" alt="image"></p>
+<blockquote>
+<h4 id="The-Spring-AMQP-Framework（Spring-AMQP框架）"><a href="#The-Spring-AMQP-Framework（Spring-AMQP框架）" class="headerlink" title="The Spring AMQP Framework（Spring AMQP框架）"></a>The Spring AMQP Framework（Spring AMQP框架）</h4><p>RabbitMQ speaks multiple protocols. This tutorial uses AMQP 0-9-1, which is an open, general-purpose protocol for messaging. There are a number of clients for RabbitMQ in many different languages.</p>
+<p>RabbitMQ支持多种协议。本教程使用AMQP 0-9-1协议，它是一个开放，通用的消息队列协议。很多编程语言都提供了RabbitMQ客户端。</p>
+</blockquote>
+<p>Spring AMQP leverages Spring Boot for configuration and dependency management. Spring supports maven or gradle but for this tutorial we’ll select maven with Spring Boot 1.5.2. Open the <a target="_blank" rel="noopener" href="http://start.spring.io/">Spring Initializr</a> and provide: the group id (e.g. org.springframework.amqp.tutorials) the artifact id (e.g. rabbitmq-amqp-tutorials). Search for the amqp dependency and select the AMQP dependency.</p>
+<p>Spring AMQP利用Spring Boot来进行配置和依赖管理。Spring同时支持maven或者gradle，但在本教程里我们选择用maven，同时采用Spring Boot 1.5.2版本。我们打开<a target="_blank" rel="noopener" href="http://start.spring.io/">Spring Initializr</a>并提供group id（如org.springframework.amqp.tutorials）和artifact id（如rabbitmq-amqp-tutorials）。查找amqp依赖并选择AMQP依赖。（译者注：应该是搜索rabbitmq）</p>
+<p>Generate the project and unzip the generated project into the location of your choice. This can now be imported into your favorite IDE. Alternatively you can work on it from your favorite editor.</p>
+<p>点击Generate Project生成项目，下载并将其解压到你想存放的目录。现在你可以在你喜欢的IDE里面导入这个项目。你也可以在你喜欢的编辑器上进行下一步编辑。</p>
+<h3 id="Configuring-the-project（配置项目）"><a href="#Configuring-the-project（配置项目）" class="headerlink" title="Configuring the project（配置项目）"></a>Configuring the project（配置项目）</h3><p>Spring Boot offers numerous features but we will only highlight a few here. First, Spring Boot applications have the option of providing their properties through either an application.properties or application.yml file (there are many more options as well but this will get us going). You’ll find an application.properties file in the generated project with nothing in it. Rename application.properties to application.yml file with the following properties:</p>
+<p>Spring Boot提供了很多特性，但在这里我们只显示几个需要用到的。首先，Spring Boot应用的配置可以写在application.properties文件或者application.yml文件里（还有许多其它的方式，但对于我们，用这两种文件就足够了）。你在生成的项目里将会找到一个空的application.properties文件。将这个文件重命名为application.yml，并写上这些属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">    profiles:</span><br><span class="line">        active: usage_message</span><br><span class="line"></span><br><span class="line">logging:</span><br><span class="line">    level:</span><br><span class="line">        org: ERROR</span><br><span class="line"></span><br><span class="line">tutorial:</span><br><span class="line">    client:</span><br><span class="line">        duration: 10000</span><br></pre></td></tr></table></figure>
+
+<p>Create a new directory (package - tut1) where we can put the tutorial code. We’ll now create a JavaConfig file (Tut1Config.java) to describe our beans in the following manner:</p>
+<p>创建一个新的目录（package - tut1）用来放我们的教程代码。现在我们将通过以下方式创建一个Java配置文件（Tut1Config.java）来描述我们的Bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut1&quot;,&quot;hello-world&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Config</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Tut1Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut1Receiver</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Tut1Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut1Sender</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Note that we’ve defined the 1st tutorial profile as either tut1, the package name, or hello-world. We use the @Configuration to let Spring know that this is a Java Configuration and in it we create the definition for our Queue (“hello”) and define our Sender and Receiver beans.</p>
+<p>注意，我们已经将教程的第一个配置组定义为tu1（即报名），或者hello-world。我们用@Configuration注解来让Spring知道这是个Java配置，并且在配置里我们定义了队列Queue(“hello”)，而且也定义了我们的发送者和接收者。</p>
+<p>We will run all of our tutorials through the Boot Application now by simply passing in which profiles we are using. To enable this we will modify the generated RabbitAmqpTutorialsApplication.java with the following:  </p>
+<p>现在我们将传入需要用到配置组，通过Boot Application来运行我们的教程。为了做到这一点，我们将修改生成的RabbitAmqpTutorialsApplication.java文件，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableScheduling;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitAmqpTutorialsApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;usage_message&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CommandLineRunner <span class="title function_">usage</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CommandLineRunner</span>() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... arg0)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;This app uses Spring Profiles to control its behavior.\n&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;Sample usage: java -jar rabbit-tutorials.jar --spring.profiles.active=helloworld,sender&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;!usage_message&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CommandLineRunner <span class="title function_">tutorial</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RabbitAmqpTutorialsRunner</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        SpringApplication.run(RabbitAmqpTutorialsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>and add the RabbitAmqpTutorialsRunner.java code as follows:</p>
+<p>然后像下面那样添加RabbitAmqpTutorialsRunner.java代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ConfigurableApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitAmqpTutorialsRunner</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;tutorial.client.duration:0&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> duration;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ConfigurableApplicationContext ctx;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... arg0)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Ready ... running for &quot;</span> + duration + <span class="string">&quot;ms&quot;</span>);</span><br><span class="line">        Thread.sleep(duration);</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sending（发送）"><a href="#Sending（发送）" class="headerlink" title="Sending（发送）"></a>Sending（发送）</h3><p><img src="https://www.rabbitmq.com/img/tutorials/sending.png" alt="image"></p>
+<p>Now there is very little code that needs to go into the sender and receiver classes. Let’s call them Tut1Receiver and Tut1Sender. The Sender leverages our config and the RabbitTemplate to send the message.</p>
+<p>现在发送者类和接收者类需要写的代码很少。我们把接收者的类名叫做Tut1Receiver，把发送者的类名叫做Tut1Sender。发送者类利用我们的配置和RabbitTemplate类来发送消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sender</span></span><br><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Queue queue;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">        <span class="built_in">this</span>.template.convertAndSend(queue.getName(), message);</span><br><span class="line">        System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You’ll notice that spring-amqp removes the boiler plate code leaving you with only the logic of the messaging to be concerned about. We autowire in the queue that was configured in our bean definition in the Tut1Config class and like many spring connection abstractions, we wrap the boilerplate rabbitmq client classes with a RabbitTemplate that can be autowired into the sender. All that is left is to create a message and invoke the template’s convertAndSend method passing in the queue name from the bean we defined and the message we just created.</p>
+<p>你会发觉，spring-amqp移除了样板化代码，让你只专注于消息发送逻辑。我们自动注入了队列queue，它已经在前面的Tut1Config类里做了配置。就像大多数Spring连接抽象，我们用RabbitTemplate包装了样板化的rabbitmq客户端类，并将它自动注入到发送者类里。我们要做的就是创建一条信息，并调用template的convertAndSend方法，传入我们定义的队列bean的名字以及我们刚创建的信息。</p>
+<blockquote>
+<h4 id="Sending-doesn’t-work-（无法发送！）"><a href="#Sending-doesn’t-work-（无法发送！）" class="headerlink" title="Sending doesn’t work!（无法发送！）"></a>Sending doesn’t work!（无法发送！）</h4><p>If this is your first time using RabbitMQ and you don’t see the “Sent” message then you may be left scratching your head wondering what could be wrong. Maybe the broker was started without enough free disk space (by default it needs at least 200 MB free) and is therefore refusing to accept messages. Check the broker logfile to confirm and reduce the limit if necessary. The configuration file documentation will show you how to set disk_free_limit.</p>
+<p>如果这是你第一次使用RabbitMQ并且你看不到打印出来的“Sent”消息，你可能会在那里苦恼着哪里出错了。也许消息代理在启动时不够磁盘空间（默认它需要200MB的空间），由此导致拒绝接收信息。如有必要，检查代理的日志文件来确认并减少所需最小磁盘空间的限制。配置文件文档里会告诉你如何设置disk_free_limit（最小所需磁盘空间）参数</p>
+</blockquote>
+<h3 id="Receiving（接收）"><a href="#Receiving（接收）" class="headerlink" title="Receiving（接收）"></a>Receiving（接收）</h3><p>The receiver is equally simple. We annotate our Receiver class with @RabbitListener and pass in the name of the queue. We then annotate our receive method with @RabbitHandler passing in the payload that has been pushed to the queue.</p>
+<p>接收者类很简单。我们用@RabbitListener来注解我们的接收者类，并往注解里传入队列的名字。然后我们用@RabbitHandler来注解我们的接收方法，接收的参数为推入队列里的负载。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitHandler</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Putting-it-all-together（代码整合）"><a href="#Putting-it-all-together（代码整合）" class="headerlink" title="Putting it all together（代码整合）"></a>Putting it all together（代码整合）</h3><p>The app uses Spring Profiles to control what tutorial it’s running, and whether it’s a Sender or Receiver. Choose which tutorial to run by using the profile. For example:</p>
+<p>程序通过使用Spring配置组来控制正在运行的是哪个教程代码，以及控制正在运行的是发送者还是接收者。我们选择使用不同的配置组来运行不同的教程代码。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- &#123;tut1|hello-world&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut2|work-queues&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut3|pub-sub|publish-subscribe&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut4|routing&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut5|topics&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut6|rpc&#125;,&#123;client|server&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We’ll come back to this list as we progress through the other five tutorials. After building with maven, run the app however you like to run boot apps (e.g. from the ide, or command line). We’ll show how to run from the command line.</p>
+<p>涉及到其它五个教程时我们还会回来参照这个列表。用maven构建完后，你可以用你喜欢的方式来运行程序（例如，通过ide或通过命令行）。我们将展示如何通过命令行来运行。</p>
+<p>For example（例如）:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># publisher</span><br><span class="line">java -jar rabbitmq-tutorials.jar --spring.profiles.active=hello-world,sender</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># consumer</span><br><span class="line">java -jar rabbitmq-tutorials.jar --spring.profiles.active=hello-world,receiver</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h4 id="Listing-queues（列出队列）"><a href="#Listing-queues（列出队列）" class="headerlink" title="Listing queues（列出队列）"></a>Listing queues（列出队列）</h4><p>You may wish to see what queues RabbitMQ has and how many messages are in them. You can do it (as a privileged user) using the rabbitmqctl tool:</p>
+<p>你可能希望看一下RabbitMQ有哪些队列，这些队列里有多少消息。你可以通过使用rabbitmqctl工具来查看（但你必须是个授权用户）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues</span><br></pre></td></tr></table></figure>
+
+<p>On Windows, omit the sudo:</p>
+<p>在Windows系统上，输入命令时要去掉sudo：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Time to move on to part 2 and build a simple <em>work queue</em>.</p>
+<p>接下来我们开始教程的第2部份，并构建一个简单的工作队列。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/53264/" title="RabbitMQ Spring-AMQP官方教程（一）--Hello World">https://jiapengcai.github.io/posts/53264/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"><i class="fa fa-tag"></i> Translation</a>
+              <a href="/tags/RabbitMQ/" rel="tag"><i class="fa fa-tag"></i> RabbitMQ</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/13955/" rel="next" title="RabbitMQ Spring-AMQP官方教程（二）--工作队列">
+                  RabbitMQ Spring-AMQP官方教程（二）--工作队列 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-blog"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiapeng Cai</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
