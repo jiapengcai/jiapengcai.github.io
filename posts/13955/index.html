@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/python-two.png">
 <meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/prefetch-count.png">
 <meta property="article:published_time" content="2022-05-30T08:45:23.000Z">
-<meta property="article:modified_time" content="2022-05-30T08:47:53.429Z">
+<meta property="article:modified_time" content="2022-05-30T14:46:03.256Z">
 <meta property="article:author" content="Jiapeng Cai">
 <meta property="article:tag" content="Translation">
 <meta property="article:tag" content="RabbitMQ">
@@ -254,7 +254,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-05-30 16:45:23 / 修改时间：16:47:53" itemprop="dateCreated datePublished" datetime="2022-05-30T16:45:23+08:00">2022-05-30</time>
+      <time title="创建时间：2022-05-30 16:45:23 / 修改时间：22:46:03" itemprop="dateCreated datePublished" datetime="2022-05-30T16:45:23+08:00">2022-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,6 +279,8 @@
         <h1 id="2-工作队列（Work-Queues）"><a href="#2-工作队列（Work-Queues）" class="headerlink" title="2 工作队列（Work Queues）"></a>2 工作队列（Work Queues）</h1><p><img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="image"></p>
 <p>In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a <em>Work</em> <em>Queue</em> that will be used to distribute time-consuming tasks among multiple workers.</p>
 <p>在第一个教程中，我们编写了两个程序，一个用于往一个命名了的队列发送消息，另一个从这个队列里接收消息。在本教程里，我们将创建一个工作队列（Work Queue），它将被用来在多个工作者之间分发耗时任务。</p>
+<span id="more"></span>
+
 <p>The main idea behind Work Queues (aka: _Task Queues_) is to avoid doing a resource-intensive task immediately and having to wait for it to complete. Instead we schedule the task to be done later. We encapsulate a <em>task</em> as a message and send it to a queue. A worker process running in the background will pop the tasks and eventually execute the job. When you run many workers the tasks will be shared between them.</p>
 <p>工作队列（也叫做任务队列）背后的主要目的是为了避免立即执行资源密集型的任务以及避免必须等待任务完成的情况，相反，它计划着让这些任务可以留到后面去执行。我们将任务分装成消息，并将它发送到队列里。运行在后台的工作进程将取出任务并最终执行它。如果你运行了多个工作进程，那么所有的任务将被它们共享。</p>
 <p>This concept is especially useful in web applications where it’s impossible to handle a complex task during a short HTTP request window.</p>
