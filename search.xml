@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>9. 回文数</title>
-    <url>/posts/35052/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
-回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
-例如，121 是回文，而 123 不是。</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>约束条件</strong></p>
-<ul>
-<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
-</ul>
-<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>175. 组合两个表</title>
-    <url>/posts/55850/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个SQL查询来报告 Person 表中每个人的姓、名、城市和州。如果 personId 的地址不在 Address 表中，则报告为空  null 。<br />
-以<strong>任意顺序</strong>返回结果表。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (personId <span class="type">int</span>, firstName <span class="type">varchar</span>(<span class="number">255</span>), lastName <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Address (addressId <span class="type">int</span>, personId <span class="type">int</span>, city <span class="type">varchar</span>(<span class="number">255</span>), state <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Wang&#x27;</span>, <span class="string">&#x27;Allen&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Alice&#x27;</span>, <span class="string">&#x27;Bob&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Address</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;New York City&#x27;</span>, <span class="string">&#x27;New York&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Leetcode&#x27;</span>, <span class="string">&#x27;California&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表: Person</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> FirstName   <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> LastName    <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">personId 是该表的主键列。</span><br><span class="line">该表包含一些人的 ID 和他们的姓和名的信息。</span><br></pre></td></tr></table></figure>
-<p>表: Address</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> AddressId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> City        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> State       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">addressId 是该表的主键列。</span><br><span class="line">该表的每一行都包含一个 ID <span class="operator">=</span> PersonId 的人的城市和州的信息。</span><br></pre></td></tr></table></figure>
-<p>查询结果格式如下所示。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> personId <span class="operator">|</span> lastName <span class="operator">|</span> firstName <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> Wang     <span class="operator">|</span> Allen     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Alice    <span class="operator">|</span> Bob       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line">Address表:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> addressId <span class="operator">|</span> personId <span class="operator">|</span> city          <span class="operator">|</span> state      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Leetcode      <span class="operator">|</span> California <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> firstName <span class="operator">|</span> lastName <span class="operator">|</span> city          <span class="operator">|</span> state    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> Allen     <span class="operator">|</span> Wang     <span class="operator">|</span> <span class="keyword">Null</span>          <span class="operator">|</span> <span class="keyword">Null</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bob       <span class="operator">|</span> Alice    <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId <span class="operator">=</span> <span class="number">1</span> 的地址，所以它们的城市和州返回 <span class="keyword">null</span>。</span><br><span class="line">addressId <span class="operator">=</span> <span class="number">1</span> 包含了 personId <span class="operator">=</span> <span class="number">2</span> 的地址信息。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.FirstName, a.LastName, b.City, b.State</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.PersonId <span class="operator">=</span> b.PersonId</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/combine-two-tables">https://leetcode.cn/problems/combine-two-tables</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>136. 只出现一次的数字</title>
     <url>/posts/63105/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
@@ -88,6 +24,167 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">singleNumber</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            result ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/single-number">https://leetcode.cn/problems/single-number</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何进行代码审查</title>
+    <url>/posts/41083/</url>
+    <content><![CDATA[<h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
+<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
+<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
+<span id="more"></span>
+<ul>
+<li>
+<p><a href="standard.md">The Standard of Code Review</a></p>
+</li>
+<li>
+<p>What to Look For In a Code Review</p>
+</li>
+<li>
+<p>Navigating a CL in Review</p>
+</li>
+<li>
+<p>Speed of Code Reviews</p>
+</li>
+<li>
+<p>How to Write Code Review Comments</p>
+</li>
+<li>
+<p>Handling Pushback in Code Reviews</p>
+</li>
+<li>
+<p><a href="standard.md">代码审查的标准</a></p>
+</li>
+<li>
+<p>代码审查要做什么</p>
+</li>
+<li>
+<p>在审查里定向变更记录</p>
+</li>
+<li>
+<p>代码审查的速度</p>
+</li>
+<li>
+<p>如何编写代码审查评论</p>
+</li>
+<li>
+<p>处理代码审查中的退回</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>Code Review</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>how to write code review comments</title>
+    <url>/posts/12266/</url>
+    <content><![CDATA[<h1 id="how-to-write-code-review-comments"><a class="markdownIt-Anchor" href="#how-to-write-code-review-comments"></a> How to write code review comments</h1>
+<h1 id="如何写代码审查评论"><a class="markdownIt-Anchor" href="#如何写代码审查评论"></a> 如何写代码审查评论</h1>
+<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<ul>
+<li>
+<p>Be kind.</p>
+</li>
+<li>
+<p>Explain your reasoning.</p>
+</li>
+<li>
+<p>Balance giving explicit directions with just pointing out problems and letting the developer decide.</p>
+</li>
+<li>
+<p>Encourage developers to simplify code or add code comments instead of just explaining the complexity to you.</p>
+</li>
+<li>
+<p>语气要和善；</p>
+</li>
+<li>
+<p>解释这么评论的原因；</p>
+</li>
+<li>
+<p>在明确指示与指出问题之间做好平衡，并让开发人员自己决定；</p>
+</li>
+<li>
+<p>鼓励开发人员简化代码或者增加注释，而不是让他们向你就代码的复杂性进行说明。</p>
+</li>
+</ul>
+<h2 id="courtesy"><a class="markdownIt-Anchor" href="#courtesy"></a> Courtesy</h2>
+<h2 id="礼貌"><a class="markdownIt-Anchor" href="#礼貌"></a> 礼貌</h2>
+<p>In general, it is important to be <a href="https://chromium.googlesource.com/chromium/src/+/master/docs/cr_respect.md">courteous and respectful</a> while also being very clear and helpful to the developer whose code you are reviewing. One way to do this is to be sure that you are always making comments about the <em>code</em> and never making comments about the <em>developer</em>. You don’t always have to follow this practice, but you should definitely use it when<br />
+saying something that might otherwise be upsetting or contentious. For example:<br />
+通常情况下，礼貌和尊重是很重要的，做到这两点对于其代码正在被审查的开发人员也是有帮助的。要做到这点的一个做法是，确保你只是对<em>代码</em>做评论，而不是<em>开发人员</em>本身。虽然你不用每次都这么做，但在说一些可能会令人不安或者有争议的话时，就一定要这么做。例如：</p>
+<p>Bad: “Why did <strong>you</strong> use threads here when there’s obviously no benefit to be gained from concurrency?”<br />
+反例：“为什么这里<strong>你</strong>要使用线程？很明显这里使用并发是没有好处的。”</p>
+<p>Good: “The concurrency model here is adding complexity to the system without any actual performance benefit that I can see. Because there’s no performance benefit, it’s best for this code to be single-threaded instead of using multiple threads.”<br />
+正例：“这里使用并发模型增加了系统复杂度，我从中看不到实际的性能优势。由于没有性能优势，这里最好使用单线程来替代多线程。”</p>
+<h2 id="explain-why"><a class="markdownIt-Anchor" href="#explain-why"></a> Explain Why</h2>
+<h2 id="解释为什么"><a class="markdownIt-Anchor" href="#解释为什么"></a> 解释为什么</h2>
+<p>One thing you’ll notice about the “good” example from above is that it helps the developer understand <em>why</em> you are making your comment. You don’t always need to include this information in your review comments, but sometimes it’s appropriate to give a bit more explanation around your intent, the best practice you’re following, or how your suggestion improves code health.<br />
+从上面的正例你会看到，那样子说明能帮助开发人员理解你的意见。虽然你不用每次都用这种形式来写评论意见，但有时应当适当地对你的意图、你所遵循的最佳实践，或者你的意见如何提高代码质量做多点解释。</p>
+<h2 id="giving-guidance"><a class="markdownIt-Anchor" href="#giving-guidance"></a> Giving Guidance</h2>
+<h2 id="给予指导"><a class="markdownIt-Anchor" href="#给予指导"></a> 给予指导</h2>
+<p><strong>In general it is the developer’s responsibility to fix a CL, not the reviewer’s.</strong> You are not required to do detailed design of a solution or write code for the developer.<br />
+<strong>一般情况下，修复CL是开发人员的责任，而不是审核人员的。</strong> 你无需为开发人员做具体的解决方案设计或者写代码。</p>
+<p>This doesn’t mean the reviewer should be unhelpful, though. In general you should strike an appropriate balance between pointing out problems and providing direct guidance. Pointing out problems and letting the developer make a decision often helps the developer learn, and makes it easier to do code reviews. It also<br />
+can result in a better solution, because the developer is closer to the code than the reviewer is.<br />
+但这不意味着审查人员就不用提供帮助。通常，你应该在指出问题和提供指导之间取一个平衡。指出问题并且让开发人员做出决定通常能帮助开发人员学习，并且使得代码审查变得更容易。这么做同时还能产生更好的解决方案，毕竟开发人员才是更接近代码的。</p>
+<p>However, sometimes direct instructions, suggestions, or even code are more helpful. The primary goal of code review is to get the best CL possible. A secondary goal is improving the skills of developers so that they require less and less review over time.<br />
+然而，有时一些明确的指示，提示甚至是代码会更有用些。代码审查的主要目的是尽可能地获得最好的CL。第二个目的是为了提高开发人员的技能，以便随着时间的推移他们需要越来越少的代码审查。</p>
+<p>Remember that people learn from reinforcement of what they are doing well and not just what they could do better. If you see things you like in the CL, comment on those too! Examples: developer cleaned up a messy algorithm, added exemplary test coverage, or you as the reviewer learned something from the CL.<br />
+Just as with all comments, include <a href="#why">why</a> you liked something, further encouraging the developer to continue good practices.</p>
+<h2 id="accepting-explanations"><a class="markdownIt-Anchor" href="#accepting-explanations"></a> Accepting Explanations</h2>
+<h2 id="接受解释"><a class="markdownIt-Anchor" href="#接受解释"></a> 接受解释</h2>
+<p>If you ask a developer to explain a piece of code that you don’t understand, that should usually result in them <strong>rewriting the code more clearly</strong>. Occasionally, adding a comment in the code is also an appropriate response, as long as it’s not just explaining overly complex code.<br />
+如果你让开发人员解释一段你不理解的代码，这通常会使得他们<strong>重新把代码写得更清晰一点。</strong> 偶尔，在代码里添加一段注释也是个恰当的回应，前提是这段注释不仅仅只是为了解释过于复杂的代码。</p>
+<p><strong>Explanations written only in the code review tool are not helpful to future code readers.</strong> They are acceptable only in a few circumstances, such as when you are reviewing an area you are not very familiar with and the developer explains something that normal readers of the code would have already known.<br />
+<strong>只在code review工具里做解释对于以后的代码读者是没有好处的。</strong> 只有少数情况下才会这么做，例如当你在审查一个你不熟悉的功能模块，开发人员就可以解释一下一般读者已经理解的代码。</p>
+<p>Next: <a href="pushback.md">Handling Pushback in Code Reviews</a></p>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>Code Review</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9. 回文数</title>
+    <url>/posts/35052/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
+例如，121 是回文，而 123 不是。</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>约束条件</strong></p>
+<ul>
+<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
+</ul>
+<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -170,143 +267,6 @@
       <tags>
         <tag>Translation</tag>
         <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何进行代码审查</title>
-    <url>/posts/41083/</url>
-    <content><![CDATA[<h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
-<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
-<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
-<span id="more"></span>
-<ul>
-<li>
-<p><a href="standard.md">The Standard of Code Review</a></p>
-</li>
-<li>
-<p>What to Look For In a Code Review</p>
-</li>
-<li>
-<p>Navigating a CL in Review</p>
-</li>
-<li>
-<p>Speed of Code Reviews</p>
-</li>
-<li>
-<p>How to Write Code Review Comments</p>
-</li>
-<li>
-<p>Handling Pushback in Code Reviews</p>
-</li>
-<li>
-<p><a href="standard.md">代码审查的标准</a></p>
-</li>
-<li>
-<p>代码审查要做什么</p>
-</li>
-<li>
-<p>在审查里定向变更记录</p>
-</li>
-<li>
-<p>代码审查的速度</p>
-</li>
-<li>
-<p>如何编写代码审查评论</p>
-</li>
-<li>
-<p>处理代码审查中的退回</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Google代码评审规约</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
-    <url>/posts/48556/</url>
-    <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
-<p>In the previous tutorial we built a simple fanout exchange. We were able to broadcast messages to many receivers.</p>
-<p>在上一个教程里，我们构建了一个简单的广播交换器。通过它我们能将消息广播到多个接收者。</p>
-<p>In this tutorial we’re going to add a feature to it - we’re going to make it possible to subscribe only to a subset of the messages. For example, we will be able to direct only messages to the certain colors of interest (“orange”, “black”, “green”), while still being able to print all of the messages on the console.</p>
-<p>在本教程里，我们将往里添加一个功能——我们准备让接收者可以只订阅部分消息。例如，我们将只要某些我们感兴趣的颜色（“橙色”，“黑色”，“绿色”）的消息，但仍能在控制台里打印出所有的信息。</p>
-<span id="more"></span>
-<h2 id="bindings绑定"><a class="markdownIt-Anchor" href="#bindings绑定"></a> Bindings（绑定）</h2>
-<p>In previous examples we were already creating bindings. You may recall code like this in our Tut3Config file:</p>
-<p>在之前的例子当中，我们创建了绑定器。通过下面的代码片段回顾下我们的Tut3Config配置文件：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.</p>
-<p>交换器和队列是通过绑定器连结在一起的。这种关系可以读作：这个队列对这个交换器里的消息感兴趣。</p>
-<p>Bindings can take an extra routingKey parameter. Spring-amqp uses a fluent API to make this relationship very clear. We pass in the exchange and queue into the BindingBuilder and simply bind the queue “to” the exchange “with a routing key” as follows:</p>
-<p>可以再传一个路由键（routingKey）参数给绑定。在这点上，Spring-amqp使用了流式API，使得队列，交换器和路由键之间的关系变得很清晰。我们将某个交换器和某个队列传给BindingBuilder，将传入的队列用某个路由键绑定到传入的交换器上，如下所示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The meaning of a binding key depends on the exchange type. The fanout exchanges, which we used previously, simply ignored its value.</p>
-<p>绑定键的含义取决与交换器的类型。我们之前使用的广播交换器就忽略了这个值。</p>
-<h2 id="direct-exchange直接交换器"><a class="markdownIt-Anchor" href="#direct-exchange直接交换器"></a> Direct exchange（直接交换器）</h2>
-<p>Our messaging system from the previous tutorial broadcasts all messages to all consumers. We want to extend that to allow filtering messages based on their color type. For example, we may want a program which writes log messages to the disk to only receive critical errors, and not waste disk space on warning or info log messages.</p>
-<p>在上一个教程里，我们的消息队列系统将所有消息广播给所有的消费者。现在我们需要让消息队列系统可以基于消息的颜色类型进行消息过滤。例如，对于一个将日志消息写入磁盘的程序，我们可能只想让它接收严重错误类型的日志消息，而不是警告或者信息级别的日志消息，从而不致于浪费磁盘空间。</p>
-<p>We were using a fanout exchange, which doesn’t give us much flexibility - it’s only capable of mindless broadcasting.</p>
-<p>在上一个教程里，我们用到的广播交换器不能给我们这个灵活性，因为它只会做机械广播。</p>
-<p>We will use a direct exchange instead. The routing algorithm behind a direct exchange is simple - a message goes to the queues whose binding key exactly matches the routing key of the message.</p>
-<p>我们将使用直连交换器来替换它。直连交换器背后的路由算法很简单——当消息被推入到某个队列时，这个队列绑定的键要与消息的路由键完全匹配。</p>
-<p>To illustrate that, consider the following setup:</p>
-<p>为了说明这一点，考虑下面的情况：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange.png" alt="image" /></p>
-<p>In this setup, we can see the direct exchange X with two queues bound to it. The first queue is bound with binding key orange, and the second has two bindings, one with binding key black and the other one with green.</p>
-<p>从图中我们可以看到，有两个队列绑定了直连交换器X。第一个队列绑定时用了orange键，第二个队列用了两个，一个是black键，另一个是green键。</p>
-<p>In such a setup a message published to the exchange with a routing key orange will be routed to queue Q1. Messages with a routing key of black or green will go to Q2. All other messages will be discarded.</p>
-<p>在这种情况下，带有orange路由键的消息被发布到交换器时，会被路由到队列Q1。带有black键或green键的消息将被推入到队列Q2。所有其它的消息将被丢弃。</p>
-<h2 id="multiple-bindings多绑定"><a class="markdownIt-Anchor" href="#multiple-bindings多绑定"></a> Multiple bindings（多绑定）</h2>
-<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange-multiple.png" alt="image" /></p>
-<p>It is perfectly legal to bind multiple queues with the same binding key. In our example we could add a binding between X and Q1 with binding key black. In that case, the direct exchange will behave like fanout and will broadcast the message to all the matching queues. A message with routing key black will be delivered to both Q1 and Q2.</p>
-<p>多个队列用同个键绑定到同个交换器是完全合法的。在我们的例子当中，我们可以用键black在交换器X和队列Q1之间添加绑定。在这种情况下，直接交换器的行为将和广播交换器一样，将消息广播给所有匹配的队列。带有路由键black的消息将被发送给队列Q1和队列Q2。</p>
-<h2 id="publishing-messages发布消息"><a class="markdownIt-Anchor" href="#publishing-messages发布消息"></a> Publishing messages（发布消息）</h2>
-<p>We’ll use this model for our routing system. Instead of fanout we’ll send messages to a direct exchange. We will supply the color as a routing key. That way the receiving program will be able to select the color it wants to receive (or subscribe to). Let’s focus on sending messages first.</p>
-<p>我们将在我们的路由系统中使用这种模型。我们将发送消息给直连交换器，而不是广播交换器。我们将使用颜色作为路由键。这么做的话接收者程序就可以选择它想接收（或者说订阅）的颜色。让我们先看看如何发送消息。</p>
-<p>As always, we do some spring boot configuration in Tut4Config:</p>
-<p>照例，我们在Tut4Config配置文件里做些spring boot配置：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> FanoutExchange <span class="title function_">fanout</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;tut.fanout&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>And we’re ready to send a message. Colors, as in the diagram, can be one of ‘orange’, ‘black’, or ‘green’.</p>
-<p>现在我们准备发送一条消息。如图所示，颜色可以是&quot;orange&quot;，“black”，或者“green”</p>
-<h2 id="subscribing订阅"><a class="markdownIt-Anchor" href="#subscribing订阅"></a> Subscribing（订阅）</h2>
-<p>Receiving messages will work just like in the previous tutorial, with one exception - we’re going to create a new binding for each color we’re interested in. This also goes into the Tut4Config.</p>
-<p>接收消息将会像上一个教程那样，除了有一点不同——我们将为每一个我们感兴趣的颜色创建一个新的绑定器。这一点也将在Tut4Config里体现。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="putting-it-all-together整合代码"><a class="markdownIt-Anchor" href="#putting-it-all-together整合代码"></a> Putting it all together（整合代码）</h2>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-four.png" alt="image" /></p>
-<p>As in the previous tutorials, create a new package for this tutorial called “tut4” and create the Tut4Config class. The code for Tut4Config.java class:</p>
-<p>像之前的教程那样，为本教程创建一个新的包目录“tut4”，并创建Tut4Config类。以下为TutConfig.java的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut4&quot;,&quot;routing&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;green&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut4Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Receiver</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut4Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code for our sender class is:</p>
-<p>我们的发送者类是这样的：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DirectExchange direct;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> index;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String[] keys = &#123;<span class="string">&quot;orange&quot;</span>, <span class="string">&quot;black&quot;</span>, <span class="string">&quot;green&quot;</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello to &quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (++<span class="built_in">this</span>.index == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="built_in">this</span>.index = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keys[<span class="built_in">this</span>.index];</span><br><span class="line">		builder.append(key).append(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">		builder.append(Integer.toString(++<span class="built_in">this</span>.count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(direct.getName(), key, message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code for Tut4Receiver.java is:</p>
-<p>然后下面为Tut4Receiver.java的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue1.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive1</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue2.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive2</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in, <span class="type">int</span> receiver)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Compile as usual (see tutorial one for maven compilation and executing the options from the jar).</p>
-<p>像之前那样去编译（对于如何用maven进行编译以及如何通过参数来运行jar包，请见教程1）。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
-<p>In one terminal window you can run:</p>
-<p>打开一个终端窗口，运行以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,receiver</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
-<p>and in the other temrinal window run the sender：</p>
-<p>打开另一个终端窗口，输入以下命令来运行发送者：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,sender</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
-<p>Full source code for <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java source</a> and <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java source</a>. The configuration is in<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java source</a>.</p>
-<p>完整的源代码可以参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java源码</a>和<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java源码</a>。配置类请参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java源码</a></p>
-<p>Move on to tutorial 5 to find out how to listen for messages based on a pattern.</p>
-<p>下面开始教程5，看看如何基于主题来监听消息。</p>
-]]></content>
-      <categories>
-        <category>RabbitMQ Spring-AMQP官方教程</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>RabbitMQ</tag>
       </tags>
   </entry>
   <entry>
@@ -397,6 +357,187 @@
 <p>（完整的代码请参阅<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut5/Tut5Receiver.java">Tut5Receiver.java</a>和<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut5/Tut5Sender.java">Tut5Sender.java</a> 。配置在<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut5/Tut5Config.java">Tut5Config.java</a>里）</p>
 <p>Next, find out how to do a round trip message as a remote procedure call in tutorial 6.</p>
 <p>接下来，我们将进入教程6，看看如何进行消息交互，即远程过程调用。</p>
+]]></content>
+      <categories>
+        <category>RabbitMQ Spring-AMQP官方教程</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
+    <url>/posts/48556/</url>
+    <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
+<p>In the previous tutorial we built a simple fanout exchange. We were able to broadcast messages to many receivers.</p>
+<p>在上一个教程里，我们构建了一个简单的广播交换器。通过它我们能将消息广播到多个接收者。</p>
+<p>In this tutorial we’re going to add a feature to it - we’re going to make it possible to subscribe only to a subset of the messages. For example, we will be able to direct only messages to the certain colors of interest (“orange”, “black”, “green”), while still being able to print all of the messages on the console.</p>
+<p>在本教程里，我们将往里添加一个功能——我们准备让接收者可以只订阅部分消息。例如，我们将只要某些我们感兴趣的颜色（“橙色”，“黑色”，“绿色”）的消息，但仍能在控制台里打印出所有的信息。</p>
+<span id="more"></span>
+<h2 id="bindings绑定"><a class="markdownIt-Anchor" href="#bindings绑定"></a> Bindings（绑定）</h2>
+<p>In previous examples we were already creating bindings. You may recall code like this in our Tut3Config file:</p>
+<p>在之前的例子当中，我们创建了绑定器。通过下面的代码片段回顾下我们的Tut3Config配置文件：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.</p>
+<p>交换器和队列是通过绑定器连结在一起的。这种关系可以读作：这个队列对这个交换器里的消息感兴趣。</p>
+<p>Bindings can take an extra routingKey parameter. Spring-amqp uses a fluent API to make this relationship very clear. We pass in the exchange and queue into the BindingBuilder and simply bind the queue “to” the exchange “with a routing key” as follows:</p>
+<p>可以再传一个路由键（routingKey）参数给绑定。在这点上，Spring-amqp使用了流式API，使得队列，交换器和路由键之间的关系变得很清晰。我们将某个交换器和某个队列传给BindingBuilder，将传入的队列用某个路由键绑定到传入的交换器上，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The meaning of a binding key depends on the exchange type. The fanout exchanges, which we used previously, simply ignored its value.</p>
+<p>绑定键的含义取决与交换器的类型。我们之前使用的广播交换器就忽略了这个值。</p>
+<h2 id="direct-exchange直接交换器"><a class="markdownIt-Anchor" href="#direct-exchange直接交换器"></a> Direct exchange（直接交换器）</h2>
+<p>Our messaging system from the previous tutorial broadcasts all messages to all consumers. We want to extend that to allow filtering messages based on their color type. For example, we may want a program which writes log messages to the disk to only receive critical errors, and not waste disk space on warning or info log messages.</p>
+<p>在上一个教程里，我们的消息队列系统将所有消息广播给所有的消费者。现在我们需要让消息队列系统可以基于消息的颜色类型进行消息过滤。例如，对于一个将日志消息写入磁盘的程序，我们可能只想让它接收严重错误类型的日志消息，而不是警告或者信息级别的日志消息，从而不致于浪费磁盘空间。</p>
+<p>We were using a fanout exchange, which doesn’t give us much flexibility - it’s only capable of mindless broadcasting.</p>
+<p>在上一个教程里，我们用到的广播交换器不能给我们这个灵活性，因为它只会做机械广播。</p>
+<p>We will use a direct exchange instead. The routing algorithm behind a direct exchange is simple - a message goes to the queues whose binding key exactly matches the routing key of the message.</p>
+<p>我们将使用直连交换器来替换它。直连交换器背后的路由算法很简单——当消息被推入到某个队列时，这个队列绑定的键要与消息的路由键完全匹配。</p>
+<p>To illustrate that, consider the following setup:</p>
+<p>为了说明这一点，考虑下面的情况：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange.png" alt="image" /></p>
+<p>In this setup, we can see the direct exchange X with two queues bound to it. The first queue is bound with binding key orange, and the second has two bindings, one with binding key black and the other one with green.</p>
+<p>从图中我们可以看到，有两个队列绑定了直连交换器X。第一个队列绑定时用了orange键，第二个队列用了两个，一个是black键，另一个是green键。</p>
+<p>In such a setup a message published to the exchange with a routing key orange will be routed to queue Q1. Messages with a routing key of black or green will go to Q2. All other messages will be discarded.</p>
+<p>在这种情况下，带有orange路由键的消息被发布到交换器时，会被路由到队列Q1。带有black键或green键的消息将被推入到队列Q2。所有其它的消息将被丢弃。</p>
+<h2 id="multiple-bindings多绑定"><a class="markdownIt-Anchor" href="#multiple-bindings多绑定"></a> Multiple bindings（多绑定）</h2>
+<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange-multiple.png" alt="image" /></p>
+<p>It is perfectly legal to bind multiple queues with the same binding key. In our example we could add a binding between X and Q1 with binding key black. In that case, the direct exchange will behave like fanout and will broadcast the message to all the matching queues. A message with routing key black will be delivered to both Q1 and Q2.</p>
+<p>多个队列用同个键绑定到同个交换器是完全合法的。在我们的例子当中，我们可以用键black在交换器X和队列Q1之间添加绑定。在这种情况下，直接交换器的行为将和广播交换器一样，将消息广播给所有匹配的队列。带有路由键black的消息将被发送给队列Q1和队列Q2。</p>
+<h2 id="publishing-messages发布消息"><a class="markdownIt-Anchor" href="#publishing-messages发布消息"></a> Publishing messages（发布消息）</h2>
+<p>We’ll use this model for our routing system. Instead of fanout we’ll send messages to a direct exchange. We will supply the color as a routing key. That way the receiving program will be able to select the color it wants to receive (or subscribe to). Let’s focus on sending messages first.</p>
+<p>我们将在我们的路由系统中使用这种模型。我们将发送消息给直连交换器，而不是广播交换器。我们将使用颜色作为路由键。这么做的话接收者程序就可以选择它想接收（或者说订阅）的颜色。让我们先看看如何发送消息。</p>
+<p>As always, we do some spring boot configuration in Tut4Config:</p>
+<p>照例，我们在Tut4Config配置文件里做些spring boot配置：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> FanoutExchange <span class="title function_">fanout</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;tut.fanout&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>And we’re ready to send a message. Colors, as in the diagram, can be one of ‘orange’, ‘black’, or ‘green’.</p>
+<p>现在我们准备发送一条消息。如图所示，颜色可以是&quot;orange&quot;，“black”，或者“green”</p>
+<h2 id="subscribing订阅"><a class="markdownIt-Anchor" href="#subscribing订阅"></a> Subscribing（订阅）</h2>
+<p>Receiving messages will work just like in the previous tutorial, with one exception - we’re going to create a new binding for each color we’re interested in. This also goes into the Tut4Config.</p>
+<p>接收消息将会像上一个教程那样，除了有一点不同——我们将为每一个我们感兴趣的颜色创建一个新的绑定器。这一点也将在Tut4Config里体现。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="putting-it-all-together整合代码"><a class="markdownIt-Anchor" href="#putting-it-all-together整合代码"></a> Putting it all together（整合代码）</h2>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-four.png" alt="image" /></p>
+<p>As in the previous tutorials, create a new package for this tutorial called “tut4” and create the Tut4Config class. The code for Tut4Config.java class:</p>
+<p>像之前的教程那样，为本教程创建一个新的包目录“tut4”，并创建Tut4Config类。以下为TutConfig.java的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut4&quot;,&quot;routing&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;green&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut4Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Receiver</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut4Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code for our sender class is:</p>
+<p>我们的发送者类是这样的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DirectExchange direct;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> index;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String[] keys = &#123;<span class="string">&quot;orange&quot;</span>, <span class="string">&quot;black&quot;</span>, <span class="string">&quot;green&quot;</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello to &quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (++<span class="built_in">this</span>.index == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="built_in">this</span>.index = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keys[<span class="built_in">this</span>.index];</span><br><span class="line">		builder.append(key).append(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">		builder.append(Integer.toString(++<span class="built_in">this</span>.count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(direct.getName(), key, message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code for Tut4Receiver.java is:</p>
+<p>然后下面为Tut4Receiver.java的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue1.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive1</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue2.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive2</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in, <span class="type">int</span> receiver)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Compile as usual (see tutorial one for maven compilation and executing the options from the jar).</p>
+<p>像之前那样去编译（对于如何用maven进行编译以及如何通过参数来运行jar包，请见教程1）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+<p>In one terminal window you can run:</p>
+<p>打开一个终端窗口，运行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,receiver</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
+<p>and in the other temrinal window run the sender：</p>
+<p>打开另一个终端窗口，输入以下命令来运行发送者：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,sender</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
+<p>Full source code for <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java source</a> and <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java source</a>. The configuration is in<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java source</a>.</p>
+<p>完整的源代码可以参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java源码</a>和<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java源码</a>。配置类请参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java源码</a></p>
+<p>Move on to tutorial 5 to find out how to listen for messages based on a pattern.</p>
+<p>下面开始教程5，看看如何基于主题来监听消息。</p>
+]]></content>
+      <categories>
+        <category>RabbitMQ Spring-AMQP官方教程</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ Spring-AMQP官方教程（一）--Hello World</title>
+    <url>/posts/53264/</url>
+    <content><![CDATA[<h1 id="1-hello-world"><a class="markdownIt-Anchor" href="#1-hello-world"></a> 1 “Hello World!”</h1>
+<h2 id="introduction简介"><a class="markdownIt-Anchor" href="#introduction简介"></a> Introduction（简介）</h2>
+<p>RabbitMQ is a message broker: it accepts and forwards messages. You can think about it as a post office: when you put the mail that you want posting in a post box, you can be sure that Mr. Postman will eventually deliver the mail to your recipient. In this analogy, RabbitMQ is a post box, a post office and a postman.</p>
+<p>RabbitMQ是一个消息代理：它接受并转发消息。你可以将它看成是一个邮局：当你将想发送的邮件丢进邮箱时，你就可以确定邮差最终会把这封邮件送到收件人手上。通过这个类比来看，RabbitMQ既是邮箱，又是邮局，而且还是邮差。</p>
+<span id="more"></span>
+<p>The major difference between RabbitMQ and the post office is that it doesn’t deal with paper, instead it accepts, stores and forwards binary blobs of data ‒ <em>messages</em>.</p>
+<p>RabbitMQ和邮局之间的主要不同点是，RabbitMQ不跟纸打交道，它只接收，存储并转发二进制的数据包—消息。</p>
+<p>RabbitMQ, and messaging in general, uses some jargon.</p>
+<p>RabbitMQ，一般称它为消息队列，它使用了一些术语。</p>
+<p><em>Producing</em> means nothing more than sending. A program that sends messages is a producer:</p>
+<p>消息生产其实就是消息发送。发送消息的程序就是生产者：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/producer.png" alt="image" /></p>
+<p>A <em>queue</em> is the name for a post box which lives inside RabbitMQ. Although messages flow through RabbitMQ and your applications, they can only be stored inside a <em>queue</em>. A queue is only bound by the host’s memory &amp; disk limits, it’s essentially a large message buffer. Many producers can send messages that go to one queue, and many consumers can try to receive data from one <em>queue</em>. This is how we represent a queue:</p>
+<p>队列就是相当于RabbitMQ内部的邮箱。虽然消息在传递时是流经RabbitMQ和你的应用，但它们只能被存储在某个队列里。队列大小只受限于主机内存和硬盘容量，它本质上就是个大的消息缓存。多个生产者可以往一个队列里发送消息，多个消费者可以从一个队列里获取数据。以下是我们表示一个队列的方式：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/queue.png" alt="image" /></p>
+<p><em>Consuming</em> has a similar meaning to receiving. A <em>consumer</em> is a program that mostly waits to receive messages:</p>
+<p>消息消费其实就是消息接收。等待接收消息的程序就是一个消费者：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/consumer.png" alt="image" /></p>
+<p>Note that the producer, consumer, and broker do not have to reside on the same host; indeed in most applications they don’t.</p>
+<p>注意，生产者，消费者和代理不一定都在同一个主机里；实际上，在大多数应用中，这三者都不是在同一个主机里。</p>
+<h2 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> “Hello World”</h2>
+<p>In this part of the tutorial we’ll write two programs using the spring-amqp library; a producer that sends a single message, and a consumer that receives messages and prints them out. We’ll gloss over some of the detail in the Spring-amqp API, concentrating on this very simple thing just to get started. It’s a “Hello World” of messaging.</p>
+<p>在本教程里，我们将写两个基于spring-amqp类库的程序，其中一个是发送单条消息的生产者，另一个是消费者，它接收消息并将它们打印出来。我们将省略Spring-amqp API的一些细节，专注于即将开始的东西。它是消息队列版本的“Hello World”程序。</p>
+<p>In the diagram below, “P” is our producer and “C” is our consumer. The box in the middle is a queue - a message buffer that RabbitMQ keeps on behalf of the consumer.</p>
+<p>在下面的图中，“P”是我们的生产者，“C”是我们的消费者。图中间的箱子是一个队列，也就是RabbitMQ给消费者用的的消息缓存：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-one.png" alt="image" /></p>
+<blockquote>
+<h4 id="the-spring-amqp-frameworkspring-amqp框架"><a class="markdownIt-Anchor" href="#the-spring-amqp-frameworkspring-amqp框架"></a> The Spring AMQP Framework（Spring AMQP框架）</h4>
+<p>RabbitMQ speaks multiple protocols. This tutorial uses AMQP 0-9-1, which is an open, general-purpose protocol for messaging. There are a number of clients for RabbitMQ in many different languages.</p>
+<p>RabbitMQ支持多种协议。本教程使用AMQP 0-9-1协议，它是一个开放，通用的消息队列协议。很多编程语言都提供了RabbitMQ客户端。</p>
+</blockquote>
+<p>Spring AMQP leverages Spring Boot for configuration and dependency management. Spring supports maven or gradle but for this tutorial we’ll select maven with Spring Boot 1.5.2. Open the <a href="http://start.spring.io/">Spring Initializr</a> and provide: the group id (e.g. org.springframework.amqp.tutorials) the artifact id (e.g. rabbitmq-amqp-tutorials). Search for the amqp dependency and select the AMQP dependency.</p>
+<p>Spring AMQP利用Spring Boot来进行配置和依赖管理。Spring同时支持maven或者gradle，但在本教程里我们选择用maven，同时采用Spring Boot 1.5.2版本。我们打开<a href="http://start.spring.io/">Spring Initializr</a>并提供group id（如org.springframework.amqp.tutorials）和artifact id（如rabbitmq-amqp-tutorials）。查找amqp依赖并选择AMQP依赖。（译者注：应该是搜索rabbitmq）</p>
+<p>Generate the project and unzip the generated project into the location of your choice. This can now be imported into your favorite IDE. Alternatively you can work on it from your favorite editor.</p>
+<p>点击Generate Project生成项目，下载并将其解压到你想存放的目录。现在你可以在你喜欢的IDE里面导入这个项目。你也可以在你喜欢的编辑器上进行下一步编辑。</p>
+<h3 id="configuring-the-project配置项目"><a class="markdownIt-Anchor" href="#configuring-the-project配置项目"></a> Configuring the project（配置项目）</h3>
+<p>Spring Boot offers numerous features but we will only highlight a few here. First, Spring Boot applications have the option of providing their properties through either an application.properties or application.yml file (there are many more options as well but this will get us going). You’ll find an application.properties file in the generated project with nothing in it. Rename application.properties to application.yml file with the following properties:</p>
+<p>Spring Boot提供了很多特性，但在这里我们只显示几个需要用到的。首先，Spring Boot应用的配置可以写在application.properties文件或者application.yml文件里（还有许多其它的方式，但对于我们，用这两种文件就足够了）。你在生成的项目里将会找到一个空的application.properties文件。将这个文件重命名为application.yml，并写上这些属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">    profiles:</span><br><span class="line">        active: usage_message</span><br><span class="line"></span><br><span class="line">logging:</span><br><span class="line">    level:</span><br><span class="line">        org: ERROR</span><br><span class="line"></span><br><span class="line">tutorial:</span><br><span class="line">    client:</span><br><span class="line">        duration: 10000</span><br></pre></td></tr></table></figure>
+<p>Create a new directory (package - tut1) where we can put the tutorial code. We’ll now create a JavaConfig file (Tut1Config.java) to describe our beans in the following manner:</p>
+<p>创建一个新的目录（package - tut1）用来放我们的教程代码。现在我们将通过以下方式创建一个Java配置文件（Tut1Config.java）来描述我们的Bean：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut1&quot;,&quot;hello-world&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Config</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Tut1Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut1Receiver</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Tut1Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut1Sender</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Note that we’ve defined the 1st tutorial profile as either tut1, the package name, or hello-world. We use the @Configuration to let Spring know that this is a Java Configuration and in it we create the definition for our Queue (“hello”) and define our Sender and Receiver beans.</p>
+<p>注意，我们已经将教程的第一个配置组定义为tu1（即报名），或者hello-world。我们用@Configuration注解来让Spring知道这是个Java配置，并且在配置里我们定义了队列Queue(“hello”)，而且也定义了我们的发送者和接收者。</p>
+<p>We will run all of our tutorials through the Boot Application now by simply passing in which profiles we are using. To enable this we will modify the generated RabbitAmqpTutorialsApplication.java with the following:</p>
+<p>现在我们将传入需要用到配置组，通过Boot Application来运行我们的教程。为了做到这一点，我们将修改生成的RabbitAmqpTutorialsApplication.java文件，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableScheduling;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitAmqpTutorialsApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;usage_message&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CommandLineRunner <span class="title function_">usage</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CommandLineRunner</span>() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... arg0)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;This app uses Spring Profiles to control its behavior.\n&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;Sample usage: java -jar rabbit-tutorials.jar --spring.profiles.active=helloworld,sender&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;!usage_message&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CommandLineRunner <span class="title function_">tutorial</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RabbitAmqpTutorialsRunner</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        SpringApplication.run(RabbitAmqpTutorialsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>and add the RabbitAmqpTutorialsRunner.java code as follows:</p>
+<p>然后像下面那样添加RabbitAmqpTutorialsRunner.java代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ConfigurableApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitAmqpTutorialsRunner</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;tutorial.client.duration:0&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> duration;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ConfigurableApplicationContext ctx;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... arg0)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Ready ... running for &quot;</span> + duration + <span class="string">&quot;ms&quot;</span>);</span><br><span class="line">        Thread.sleep(duration);</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="sending发送"><a class="markdownIt-Anchor" href="#sending发送"></a> Sending（发送）</h3>
+<p><img src="https://www.rabbitmq.com/img/tutorials/sending.png" alt="image" /></p>
+<p>Now there is very little code that needs to go into the sender and receiver classes. Let’s call them Tut1Receiver and Tut1Sender. The Sender leverages our config and the RabbitTemplate to send the message.</p>
+<p>现在发送者类和接收者类需要写的代码很少。我们把接收者的类名叫做Tut1Receiver，把发送者的类名叫做Tut1Sender。发送者类利用我们的配置和RabbitTemplate类来发送消息。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Sender</span></span><br><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Queue queue;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">        <span class="built_in">this</span>.template.convertAndSend(queue.getName(), message);</span><br><span class="line">        System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You’ll notice that spring-amqp removes the boiler plate code leaving you with only the logic of the messaging to be concerned about. We autowire in the queue that was configured in our bean definition in the Tut1Config class and like many spring connection abstractions, we wrap the boilerplate rabbitmq client classes with a RabbitTemplate that can be autowired into the sender. All that is left is to create a message and invoke the template’s convertAndSend method passing in the queue name from the bean we defined and the message we just created.</p>
+<p>你会发觉，spring-amqp移除了样板化代码，让你只专注于消息发送逻辑。我们自动注入了队列queue，它已经在前面的Tut1Config类里做了配置。就像大多数Spring连接抽象，我们用RabbitTemplate包装了样板化的rabbitmq客户端类，并将它自动注入到发送者类里。我们要做的就是创建一条信息，并调用template的convertAndSend方法，传入我们定义的队列bean的名字以及我们刚创建的信息。</p>
+<blockquote>
+<h4 id="sending-doesnt-work无法发送"><a class="markdownIt-Anchor" href="#sending-doesnt-work无法发送"></a> Sending doesn’t work!（无法发送！）</h4>
+<p>If this is your first time using RabbitMQ and you don’t see the “Sent” message then you may be left scratching your head wondering what could be wrong. Maybe the broker was started without enough free disk space (by default it needs at least 200 MB free) and is therefore refusing to accept messages. Check the broker logfile to confirm and reduce the limit if necessary. The configuration file documentation will show you how to set disk_free_limit.</p>
+<p>如果这是你第一次使用RabbitMQ并且你看不到打印出来的“Sent”消息，你可能会在那里苦恼着哪里出错了。也许消息代理在启动时不够磁盘空间（默认它需要200MB的空间），由此导致拒绝接收信息。如有必要，检查代理的日志文件来确认并减少所需最小磁盘空间的限制。配置文件文档里会告诉你如何设置disk_free_limit（最小所需磁盘空间）参数</p>
+</blockquote>
+<h3 id="receiving接收"><a class="markdownIt-Anchor" href="#receiving接收"></a> Receiving（接收）</h3>
+<p>The receiver is equally simple. We annotate our Receiver class with @RabbitListener and pass in the name of the queue. We then annotate our receive method with @RabbitHandler passing in the payload that has been pushed to the queue.</p>
+<p>接收者类很简单。我们用@RabbitListener来注解我们的接收者类，并往注解里传入队列的名字。然后我们用@RabbitHandler来注解我们的接收方法，接收的参数为推入队列里的负载。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitHandler</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h3>
+<p>The app uses Spring Profiles to control what tutorial it’s running, and whether it’s a Sender or Receiver. Choose which tutorial to run by using the profile. For example:</p>
+<p>程序通过使用Spring配置组来控制正在运行的是哪个教程代码，以及控制正在运行的是发送者还是接收者。我们选择使用不同的配置组来运行不同的教程代码。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- &#123;tut1|hello-world&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut2|work-queues&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut3|pub-sub|publish-subscribe&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut4|routing&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut5|topics&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut6|rpc&#125;,&#123;client|server&#125;</span><br></pre></td></tr></table></figure>
+<p>We’ll come back to this list as we progress through the other five tutorials. After building with maven, run the app however you like to run boot apps (e.g. from the ide, or command line). We’ll show how to run from the command line.</p>
+<p>涉及到其它五个教程时我们还会回来参照这个列表。用maven构建完后，你可以用你喜欢的方式来运行程序（例如，通过ide或通过命令行）。我们将展示如何通过命令行来运行。</p>
+<p>For example（例如）:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># publisher</span><br><span class="line">java -jar rabbitmq-tutorials.jar --spring.profiles.active=hello-world,sender</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># consumer</span><br><span class="line">java -jar rabbitmq-tutorials.jar --spring.profiles.active=hello-world,receiver</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h4 id="listing-queues列出队列"><a class="markdownIt-Anchor" href="#listing-queues列出队列"></a> Listing queues（列出队列）</h4>
+<p>You may wish to see what queues RabbitMQ has and how many messages are in them. You can do it (as a privileged user) using the rabbitmqctl tool:</p>
+<p>你可能希望看一下RabbitMQ有哪些队列，这些队列里有多少消息。你可以通过使用rabbitmqctl工具来查看（但你必须是个授权用户）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues</span><br></pre></td></tr></table></figure>
+<p>On Windows, omit the sudo:</p>
+<p>在Windows系统上，输入命令时要去掉sudo：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Time to move on to part 2 and build a simple <em>work queue</em>.</p>
+<p>接下来我们开始教程的第2部份，并构建一个简单的工作队列。</p>
 ]]></content>
       <categories>
         <category>RabbitMQ Spring-AMQP官方教程</category>
@@ -659,104 +800,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（一）--Hello World</title>
-    <url>/posts/53264/</url>
-    <content><![CDATA[<h1 id="1-hello-world"><a class="markdownIt-Anchor" href="#1-hello-world"></a> 1 “Hello World!”</h1>
-<h2 id="introduction简介"><a class="markdownIt-Anchor" href="#introduction简介"></a> Introduction（简介）</h2>
-<p>RabbitMQ is a message broker: it accepts and forwards messages. You can think about it as a post office: when you put the mail that you want posting in a post box, you can be sure that Mr. Postman will eventually deliver the mail to your recipient. In this analogy, RabbitMQ is a post box, a post office and a postman.</p>
-<p>RabbitMQ是一个消息代理：它接受并转发消息。你可以将它看成是一个邮局：当你将想发送的邮件丢进邮箱时，你就可以确定邮差最终会把这封邮件送到收件人手上。通过这个类比来看，RabbitMQ既是邮箱，又是邮局，而且还是邮差。</p>
-<span id="more"></span>
-<p>The major difference between RabbitMQ and the post office is that it doesn’t deal with paper, instead it accepts, stores and forwards binary blobs of data ‒ <em>messages</em>.</p>
-<p>RabbitMQ和邮局之间的主要不同点是，RabbitMQ不跟纸打交道，它只接收，存储并转发二进制的数据包—消息。</p>
-<p>RabbitMQ, and messaging in general, uses some jargon.</p>
-<p>RabbitMQ，一般称它为消息队列，它使用了一些术语。</p>
-<p><em>Producing</em> means nothing more than sending. A program that sends messages is a producer:</p>
-<p>消息生产其实就是消息发送。发送消息的程序就是生产者：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/producer.png" alt="image" /></p>
-<p>A <em>queue</em> is the name for a post box which lives inside RabbitMQ. Although messages flow through RabbitMQ and your applications, they can only be stored inside a <em>queue</em>. A queue is only bound by the host’s memory &amp; disk limits, it’s essentially a large message buffer. Many producers can send messages that go to one queue, and many consumers can try to receive data from one <em>queue</em>. This is how we represent a queue:</p>
-<p>队列就是相当于RabbitMQ内部的邮箱。虽然消息在传递时是流经RabbitMQ和你的应用，但它们只能被存储在某个队列里。队列大小只受限于主机内存和硬盘容量，它本质上就是个大的消息缓存。多个生产者可以往一个队列里发送消息，多个消费者可以从一个队列里获取数据。以下是我们表示一个队列的方式：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/queue.png" alt="image" /></p>
-<p><em>Consuming</em> has a similar meaning to receiving. A <em>consumer</em> is a program that mostly waits to receive messages:</p>
-<p>消息消费其实就是消息接收。等待接收消息的程序就是一个消费者：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/consumer.png" alt="image" /></p>
-<p>Note that the producer, consumer, and broker do not have to reside on the same host; indeed in most applications they don’t.</p>
-<p>注意，生产者，消费者和代理不一定都在同一个主机里；实际上，在大多数应用中，这三者都不是在同一个主机里。</p>
-<h2 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> “Hello World”</h2>
-<p>In this part of the tutorial we’ll write two programs using the spring-amqp library; a producer that sends a single message, and a consumer that receives messages and prints them out. We’ll gloss over some of the detail in the Spring-amqp API, concentrating on this very simple thing just to get started. It’s a “Hello World” of messaging.</p>
-<p>在本教程里，我们将写两个基于spring-amqp类库的程序，其中一个是发送单条消息的生产者，另一个是消费者，它接收消息并将它们打印出来。我们将省略Spring-amqp API的一些细节，专注于即将开始的东西。它是消息队列版本的“Hello World”程序。</p>
-<p>In the diagram below, “P” is our producer and “C” is our consumer. The box in the middle is a queue - a message buffer that RabbitMQ keeps on behalf of the consumer.</p>
-<p>在下面的图中，“P”是我们的生产者，“C”是我们的消费者。图中间的箱子是一个队列，也就是RabbitMQ给消费者用的的消息缓存：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-one.png" alt="image" /></p>
-<blockquote>
-<h4 id="the-spring-amqp-frameworkspring-amqp框架"><a class="markdownIt-Anchor" href="#the-spring-amqp-frameworkspring-amqp框架"></a> The Spring AMQP Framework（Spring AMQP框架）</h4>
-<p>RabbitMQ speaks multiple protocols. This tutorial uses AMQP 0-9-1, which is an open, general-purpose protocol for messaging. There are a number of clients for RabbitMQ in many different languages.</p>
-<p>RabbitMQ支持多种协议。本教程使用AMQP 0-9-1协议，它是一个开放，通用的消息队列协议。很多编程语言都提供了RabbitMQ客户端。</p>
-</blockquote>
-<p>Spring AMQP leverages Spring Boot for configuration and dependency management. Spring supports maven or gradle but for this tutorial we’ll select maven with Spring Boot 1.5.2. Open the <a href="http://start.spring.io/">Spring Initializr</a> and provide: the group id (e.g. org.springframework.amqp.tutorials) the artifact id (e.g. rabbitmq-amqp-tutorials). Search for the amqp dependency and select the AMQP dependency.</p>
-<p>Spring AMQP利用Spring Boot来进行配置和依赖管理。Spring同时支持maven或者gradle，但在本教程里我们选择用maven，同时采用Spring Boot 1.5.2版本。我们打开<a href="http://start.spring.io/">Spring Initializr</a>并提供group id（如org.springframework.amqp.tutorials）和artifact id（如rabbitmq-amqp-tutorials）。查找amqp依赖并选择AMQP依赖。（译者注：应该是搜索rabbitmq）</p>
-<p>Generate the project and unzip the generated project into the location of your choice. This can now be imported into your favorite IDE. Alternatively you can work on it from your favorite editor.</p>
-<p>点击Generate Project生成项目，下载并将其解压到你想存放的目录。现在你可以在你喜欢的IDE里面导入这个项目。你也可以在你喜欢的编辑器上进行下一步编辑。</p>
-<h3 id="configuring-the-project配置项目"><a class="markdownIt-Anchor" href="#configuring-the-project配置项目"></a> Configuring the project（配置项目）</h3>
-<p>Spring Boot offers numerous features but we will only highlight a few here. First, Spring Boot applications have the option of providing their properties through either an application.properties or application.yml file (there are many more options as well but this will get us going). You’ll find an application.properties file in the generated project with nothing in it. Rename application.properties to application.yml file with the following properties:</p>
-<p>Spring Boot提供了很多特性，但在这里我们只显示几个需要用到的。首先，Spring Boot应用的配置可以写在application.properties文件或者application.yml文件里（还有许多其它的方式，但对于我们，用这两种文件就足够了）。你在生成的项目里将会找到一个空的application.properties文件。将这个文件重命名为application.yml，并写上这些属性：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">    profiles:</span><br><span class="line">        active: usage_message</span><br><span class="line"></span><br><span class="line">logging:</span><br><span class="line">    level:</span><br><span class="line">        org: ERROR</span><br><span class="line"></span><br><span class="line">tutorial:</span><br><span class="line">    client:</span><br><span class="line">        duration: 10000</span><br></pre></td></tr></table></figure>
-<p>Create a new directory (package - tut1) where we can put the tutorial code. We’ll now create a JavaConfig file (Tut1Config.java) to describe our beans in the following manner:</p>
-<p>创建一个新的目录（package - tut1）用来放我们的教程代码。现在我们将通过以下方式创建一个Java配置文件（Tut1Config.java）来描述我们的Bean：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut1&quot;,&quot;hello-world&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Config</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Tut1Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut1Receiver</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Tut1Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut1Sender</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Note that we’ve defined the 1st tutorial profile as either tut1, the package name, or hello-world. We use the @Configuration to let Spring know that this is a Java Configuration and in it we create the definition for our Queue (“hello”) and define our Sender and Receiver beans.</p>
-<p>注意，我们已经将教程的第一个配置组定义为tu1（即报名），或者hello-world。我们用@Configuration注解来让Spring知道这是个Java配置，并且在配置里我们定义了队列Queue(“hello”)，而且也定义了我们的发送者和接收者。</p>
-<p>We will run all of our tutorials through the Boot Application now by simply passing in which profiles we are using. To enable this we will modify the generated RabbitAmqpTutorialsApplication.java with the following:</p>
-<p>现在我们将传入需要用到配置组，通过Boot Application来运行我们的教程。为了做到这一点，我们将修改生成的RabbitAmqpTutorialsApplication.java文件，如下所示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableScheduling;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitAmqpTutorialsApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;usage_message&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CommandLineRunner <span class="title function_">usage</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CommandLineRunner</span>() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... arg0)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;This app uses Spring Profiles to control its behavior.\n&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;Sample usage: java -jar rabbit-tutorials.jar --spring.profiles.active=helloworld,sender&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Profile(&quot;!usage_message&quot;)</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CommandLineRunner <span class="title function_">tutorial</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RabbitAmqpTutorialsRunner</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        SpringApplication.run(RabbitAmqpTutorialsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>and add the RabbitAmqpTutorialsRunner.java code as follows:</p>
-<p>然后像下面那样添加RabbitAmqpTutorialsRunner.java代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ConfigurableApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitAmqpTutorialsRunner</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;tutorial.client.duration:0&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> duration;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ConfigurableApplicationContext ctx;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... arg0)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Ready ... running for &quot;</span> + duration + <span class="string">&quot;ms&quot;</span>);</span><br><span class="line">        Thread.sleep(duration);</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="sending发送"><a class="markdownIt-Anchor" href="#sending发送"></a> Sending（发送）</h3>
-<p><img src="https://www.rabbitmq.com/img/tutorials/sending.png" alt="image" /></p>
-<p>Now there is very little code that needs to go into the sender and receiver classes. Let’s call them Tut1Receiver and Tut1Sender. The Sender leverages our config and the RabbitTemplate to send the message.</p>
-<p>现在发送者类和接收者类需要写的代码很少。我们把接收者的类名叫做Tut1Receiver，把发送者的类名叫做Tut1Sender。发送者类利用我们的配置和RabbitTemplate类来发送消息。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Sender</span></span><br><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Queue queue;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">        <span class="built_in">this</span>.template.convertAndSend(queue.getName(), message);</span><br><span class="line">        System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>You’ll notice that spring-amqp removes the boiler plate code leaving you with only the logic of the messaging to be concerned about. We autowire in the queue that was configured in our bean definition in the Tut1Config class and like many spring connection abstractions, we wrap the boilerplate rabbitmq client classes with a RabbitTemplate that can be autowired into the sender. All that is left is to create a message and invoke the template’s convertAndSend method passing in the queue name from the bean we defined and the message we just created.</p>
-<p>你会发觉，spring-amqp移除了样板化代码，让你只专注于消息发送逻辑。我们自动注入了队列queue，它已经在前面的Tut1Config类里做了配置。就像大多数Spring连接抽象，我们用RabbitTemplate包装了样板化的rabbitmq客户端类，并将它自动注入到发送者类里。我们要做的就是创建一条信息，并调用template的convertAndSend方法，传入我们定义的队列bean的名字以及我们刚创建的信息。</p>
-<blockquote>
-<h4 id="sending-doesnt-work无法发送"><a class="markdownIt-Anchor" href="#sending-doesnt-work无法发送"></a> Sending doesn’t work!（无法发送！）</h4>
-<p>If this is your first time using RabbitMQ and you don’t see the “Sent” message then you may be left scratching your head wondering what could be wrong. Maybe the broker was started without enough free disk space (by default it needs at least 200 MB free) and is therefore refusing to accept messages. Check the broker logfile to confirm and reduce the limit if necessary. The configuration file documentation will show you how to set disk_free_limit.</p>
-<p>如果这是你第一次使用RabbitMQ并且你看不到打印出来的“Sent”消息，你可能会在那里苦恼着哪里出错了。也许消息代理在启动时不够磁盘空间（默认它需要200MB的空间），由此导致拒绝接收信息。如有必要，检查代理的日志文件来确认并减少所需最小磁盘空间的限制。配置文件文档里会告诉你如何设置disk_free_limit（最小所需磁盘空间）参数</p>
-</blockquote>
-<h3 id="receiving接收"><a class="markdownIt-Anchor" href="#receiving接收"></a> Receiving（接收）</h3>
-<p>The receiver is equally simple. We annotate our Receiver class with @RabbitListener and pass in the name of the queue. We then annotate our receive method with @RabbitHandler passing in the payload that has been pushed to the queue.</p>
-<p>接收者类很简单。我们用@RabbitListener来注解我们的接收者类，并往注解里传入队列的名字。然后我们用@RabbitHandler来注解我们的接收方法，接收的参数为推入队列里的负载。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut1Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitHandler</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h3>
-<p>The app uses Spring Profiles to control what tutorial it’s running, and whether it’s a Sender or Receiver. Choose which tutorial to run by using the profile. For example:</p>
-<p>程序通过使用Spring配置组来控制正在运行的是哪个教程代码，以及控制正在运行的是发送者还是接收者。我们选择使用不同的配置组来运行不同的教程代码。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- &#123;tut1|hello-world&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut2|work-queues&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut3|pub-sub|publish-subscribe&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut4|routing&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut5|topics&#125;,&#123;sender|receiver&#125;</span><br><span class="line">- &#123;tut6|rpc&#125;,&#123;client|server&#125;</span><br></pre></td></tr></table></figure>
-<p>We’ll come back to this list as we progress through the other five tutorials. After building with maven, run the app however you like to run boot apps (e.g. from the ide, or command line). We’ll show how to run from the command line.</p>
-<p>涉及到其它五个教程时我们还会回来参照这个列表。用maven构建完后，你可以用你喜欢的方式来运行程序（例如，通过ide或通过命令行）。我们将展示如何通过命令行来运行。</p>
-<p>For example（例如）:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># publisher</span><br><span class="line">java -jar rabbitmq-tutorials.jar --spring.profiles.active=hello-world,sender</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># consumer</span><br><span class="line">java -jar rabbitmq-tutorials.jar --spring.profiles.active=hello-world,receiver</span><br></pre></td></tr></table></figure>
-<blockquote>
-<h4 id="listing-queues列出队列"><a class="markdownIt-Anchor" href="#listing-queues列出队列"></a> Listing queues（列出队列）</h4>
-<p>You may wish to see what queues RabbitMQ has and how many messages are in them. You can do it (as a privileged user) using the rabbitmqctl tool:</p>
-<p>你可能希望看一下RabbitMQ有哪些队列，这些队列里有多少消息。你可以通过使用rabbitmqctl工具来查看（但你必须是个授权用户）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues</span><br></pre></td></tr></table></figure>
-<p>On Windows, omit the sudo:</p>
-<p>在Windows系统上，输入命令时要去掉sudo：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>Time to move on to part 2 and build a simple <em>work queue</em>.</p>
-<p>接下来我们开始教程的第2部份，并构建一个简单的工作队列。</p>
-]]></content>
-      <categories>
-        <category>RabbitMQ Spring-AMQP官方教程</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>RabbitMQ</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
     <url>/posts/13955/</url>
     <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
@@ -872,6 +915,36 @@
       <tags>
         <tag>Translation</tag>
         <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>175. 组合两个表</title>
+    <url>/posts/55850/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+编写一个SQL查询来报告 Person 表中每个人的姓、名、城市和州。如果 personId 的地址不在 Address 表中，则报告为空  null 。<br />
+以<strong>任意顺序</strong>返回结果表。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (personId <span class="type">int</span>, firstName <span class="type">varchar</span>(<span class="number">255</span>), lastName <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Address (addressId <span class="type">int</span>, personId <span class="type">int</span>, city <span class="type">varchar</span>(<span class="number">255</span>), state <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Wang&#x27;</span>, <span class="string">&#x27;Allen&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Alice&#x27;</span>, <span class="string">&#x27;Bob&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Address</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;New York City&#x27;</span>, <span class="string">&#x27;New York&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Leetcode&#x27;</span>, <span class="string">&#x27;California&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表: Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> FirstName   <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> LastName    <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">personId 是该表的主键列。</span><br><span class="line">该表包含一些人的 ID 和他们的姓和名的信息。</span><br></pre></td></tr></table></figure>
+<p>表: Address</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> AddressId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> City        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> State       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">addressId 是该表的主键列。</span><br><span class="line">该表的每一行都包含一个 ID <span class="operator">=</span> PersonId 的人的城市和州的信息。</span><br></pre></td></tr></table></figure>
+<p>查询结果格式如下所示。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> personId <span class="operator">|</span> lastName <span class="operator">|</span> firstName <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> Wang     <span class="operator">|</span> Allen     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Alice    <span class="operator">|</span> Bob       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line">Address表:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> addressId <span class="operator">|</span> personId <span class="operator">|</span> city          <span class="operator">|</span> state      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Leetcode      <span class="operator">|</span> California <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> firstName <span class="operator">|</span> lastName <span class="operator">|</span> city          <span class="operator">|</span> state    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> Allen     <span class="operator">|</span> Wang     <span class="operator">|</span> <span class="keyword">Null</span>          <span class="operator">|</span> <span class="keyword">Null</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bob       <span class="operator">|</span> Alice    <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId <span class="operator">=</span> <span class="number">1</span> 的地址，所以它们的城市和州返回 <span class="keyword">null</span>。</span><br><span class="line">addressId <span class="operator">=</span> <span class="number">1</span> 包含了 personId <span class="operator">=</span> <span class="number">2</span> 的地址信息。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.FirstName, a.LastName, b.City, b.State</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.PersonId <span class="operator">=</span> b.PersonId</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/combine-two-tables">https://leetcode.cn/problems/combine-two-tables</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
       </tags>
   </entry>
   <entry>

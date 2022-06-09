@@ -21,29 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="如何进行代码审查 The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separat">
+    <meta name="description" content="How to write code review comments  如何写代码审查评论  Summary  总结   Be kind.   Explain your reasoning.   Balance giving explicit directions with just pointing out problems and letting the developer decide.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何进行代码审查">
-<meta property="og:url" content="https://jiapengcai.github.io/posts/41083/index.html">
+<meta property="og:title" content="how to write code review comments">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/12266/index.html">
 <meta property="og:site_name" content="PENG">
-<meta property="og:description" content="如何进行代码审查 The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separat">
+<meta property="og:description" content="How to write code review comments  如何写代码审查评论  Summary  总结   Be kind.   Explain your reasoning.   Balance giving explicit directions with just pointing out problems and letting the developer decide.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-31T09:41:06.000Z">
-<meta property="article:modified_time" content="2022-05-31T09:43:45.401Z">
+<meta property="article:published_time" content="2022-06-09T03:46:12.000Z">
+<meta property="article:modified_time" content="2022-06-09T03:46:47.801Z">
 <meta property="article:author" content="Jiapeng Cai">
 <meta property="article:tag" content="Translation">
 <meta property="article:tag" content="Code Review">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jiapengcai.github.io/posts/41083/">
+<link rel="canonical" href="https://jiapengcai.github.io/posts/12266/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/41083/","path":"posts/41083/","title":"如何进行代码审查"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/12266/","path":"posts/12266/","title":"how to write code review comments"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>如何进行代码审查 | PENG</title>
+<title>how to write code review comments | PENG</title>
   
 
 
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text"> 如何进行代码审查</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-write-code-review-comments"><span class="nav-number">1.</span> <span class="nav-text"> How to write code review comments</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%86%99%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%E8%AF%84%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text"> 如何写代码审查评论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">2.1.</span> <span class="nav-text"> Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.2.</span> <span class="nav-text"> 总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#courtesy"><span class="nav-number">2.3.</span> <span class="nav-text"> Courtesy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BC%E8%B2%8C"><span class="nav-number">2.4.</span> <span class="nav-text"> 礼貌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explain-why"><span class="nav-number">2.5.</span> <span class="nav-text"> Explain Why</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-number">2.6.</span> <span class="nav-text"> 解释为什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#giving-guidance"><span class="nav-number">2.7.</span> <span class="nav-text"> Giving Guidance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%99%E4%BA%88%E6%8C%87%E5%AF%BC"><span class="nav-number">2.8.</span> <span class="nav-text"> 给予指导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accepting-explanations"><span class="nav-number">2.9.</span> <span class="nav-text"> Accepting Explanations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%97%E8%A7%A3%E9%87%8A"><span class="nav-number">2.10.</span> <span class="nav-text"> 接受解释</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -221,7 +221,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/41083/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/12266/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -234,12 +234,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="如何进行代码审查 | PENG">
+      <meta itemprop="name" content="how to write code review comments | PENG">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何进行代码审查
+          how to write code review comments
         </h1>
 
         <div class="post-meta-container">
@@ -251,7 +251,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-05-31 17:41:06 / 修改时间：17:43:45" itemprop="dateCreated datePublished" datetime="2022-05-31T17:41:06+08:00">2022-05-31</time>
+      <time title="创建时间：2022-06-09 11:46:12 / 修改时间：11:46:47" itemprop="dateCreated datePublished" datetime="2022-06-09T11:46:12+08:00">2022-06-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,8 +272,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/posts/41083/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/posts/41083/" itemprop="commentCount"></span>
+    <a title="waline" href="/posts/12266/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/12266/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -287,48 +287,67 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
-<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
-<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
-<span id="more"></span>
+        <h1 id="how-to-write-code-review-comments"><a class="markdownIt-Anchor" href="#how-to-write-code-review-comments"></a> How to write code review comments</h1>
+<h1 id="如何写代码审查评论"><a class="markdownIt-Anchor" href="#如何写代码审查评论"></a> 如何写代码审查评论</h1>
+<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
 <ul>
 <li>
-<p><a href="standard.md">The Standard of Code Review</a></p>
+<p>Be kind.</p>
 </li>
 <li>
-<p>What to Look For In a Code Review</p>
+<p>Explain your reasoning.</p>
 </li>
 <li>
-<p>Navigating a CL in Review</p>
+<p>Balance giving explicit directions with just pointing out problems and letting the developer decide.</p>
 </li>
 <li>
-<p>Speed of Code Reviews</p>
+<p>Encourage developers to simplify code or add code comments instead of just explaining the complexity to you.</p>
 </li>
 <li>
-<p>How to Write Code Review Comments</p>
+<p>语气要和善；</p>
 </li>
 <li>
-<p>Handling Pushback in Code Reviews</p>
+<p>解释这么评论的原因；</p>
 </li>
 <li>
-<p><a href="standard.md">代码审查的标准</a></p>
+<p>在明确指示与指出问题之间做好平衡，并让开发人员自己决定；</p>
 </li>
 <li>
-<p>代码审查要做什么</p>
-</li>
-<li>
-<p>在审查里定向变更记录</p>
-</li>
-<li>
-<p>代码审查的速度</p>
-</li>
-<li>
-<p>如何编写代码审查评论</p>
-</li>
-<li>
-<p>处理代码审查中的退回</p>
+<p>鼓励开发人员简化代码或者增加注释，而不是让他们向你就代码的复杂性进行说明。</p>
 </li>
 </ul>
+<h2 id="courtesy"><a class="markdownIt-Anchor" href="#courtesy"></a> Courtesy</h2>
+<h2 id="礼貌"><a class="markdownIt-Anchor" href="#礼貌"></a> 礼貌</h2>
+<p>In general, it is important to be <a target="_blank" rel="noopener" href="https://chromium.googlesource.com/chromium/src/+/master/docs/cr_respect.md">courteous and respectful</a> while also being very clear and helpful to the developer whose code you are reviewing. One way to do this is to be sure that you are always making comments about the <em>code</em> and never making comments about the <em>developer</em>. You don’t always have to follow this practice, but you should definitely use it when<br />
+saying something that might otherwise be upsetting or contentious. For example:<br />
+通常情况下，礼貌和尊重是很重要的，做到这两点对于其代码正在被审查的开发人员也是有帮助的。要做到这点的一个做法是，确保你只是对<em>代码</em>做评论，而不是<em>开发人员</em>本身。虽然你不用每次都这么做，但在说一些可能会令人不安或者有争议的话时，就一定要这么做。例如：</p>
+<p>Bad: “Why did <strong>you</strong> use threads here when there’s obviously no benefit to be gained from concurrency?”<br />
+反例：“为什么这里<strong>你</strong>要使用线程？很明显这里使用并发是没有好处的。”</p>
+<p>Good: “The concurrency model here is adding complexity to the system without any actual performance benefit that I can see. Because there’s no performance benefit, it’s best for this code to be single-threaded instead of using multiple threads.”<br />
+正例：“这里使用并发模型增加了系统复杂度，我从中看不到实际的性能优势。由于没有性能优势，这里最好使用单线程来替代多线程。”</p>
+<h2 id="explain-why"><a class="markdownIt-Anchor" href="#explain-why"></a> Explain Why</h2>
+<h2 id="解释为什么"><a class="markdownIt-Anchor" href="#解释为什么"></a> 解释为什么</h2>
+<p>One thing you’ll notice about the “good” example from above is that it helps the developer understand <em>why</em> you are making your comment. You don’t always need to include this information in your review comments, but sometimes it’s appropriate to give a bit more explanation around your intent, the best practice you’re following, or how your suggestion improves code health.<br />
+从上面的正例你会看到，那样子说明能帮助开发人员理解你的意见。虽然你不用每次都用这种形式来写评论意见，但有时应当适当地对你的意图、你所遵循的最佳实践，或者你的意见如何提高代码质量做多点解释。</p>
+<h2 id="giving-guidance"><a class="markdownIt-Anchor" href="#giving-guidance"></a> Giving Guidance</h2>
+<h2 id="给予指导"><a class="markdownIt-Anchor" href="#给予指导"></a> 给予指导</h2>
+<p><strong>In general it is the developer’s responsibility to fix a CL, not the reviewer’s.</strong> You are not required to do detailed design of a solution or write code for the developer.<br />
+<strong>一般情况下，修复CL是开发人员的责任，而不是审核人员的。</strong> 你无需为开发人员做具体的解决方案设计或者写代码。</p>
+<p>This doesn’t mean the reviewer should be unhelpful, though. In general you should strike an appropriate balance between pointing out problems and providing direct guidance. Pointing out problems and letting the developer make a decision often helps the developer learn, and makes it easier to do code reviews. It also<br />
+can result in a better solution, because the developer is closer to the code than the reviewer is.<br />
+但这不意味着审查人员就不用提供帮助。通常，你应该在指出问题和提供指导之间取一个平衡。指出问题并且让开发人员做出决定通常能帮助开发人员学习，并且使得代码审查变得更容易。这么做同时还能产生更好的解决方案，毕竟开发人员才是更接近代码的。</p>
+<p>However, sometimes direct instructions, suggestions, or even code are more helpful. The primary goal of code review is to get the best CL possible. A secondary goal is improving the skills of developers so that they require less and less review over time.<br />
+然而，有时一些明确的指示，提示甚至是代码会更有用些。代码审查的主要目的是尽可能地获得最好的CL。第二个目的是为了提高开发人员的技能，以便随着时间的推移他们需要越来越少的代码审查。</p>
+<p>Remember that people learn from reinforcement of what they are doing well and not just what they could do better. If you see things you like in the CL, comment on those too! Examples: developer cleaned up a messy algorithm, added exemplary test coverage, or you as the reviewer learned something from the CL.<br />
+Just as with all comments, include <a href="#why">why</a> you liked something, further encouraging the developer to continue good practices.</p>
+<h2 id="accepting-explanations"><a class="markdownIt-Anchor" href="#accepting-explanations"></a> Accepting Explanations</h2>
+<h2 id="接受解释"><a class="markdownIt-Anchor" href="#接受解释"></a> 接受解释</h2>
+<p>If you ask a developer to explain a piece of code that you don’t understand, that should usually result in them <strong>rewriting the code more clearly</strong>. Occasionally, adding a comment in the code is also an appropriate response, as long as it’s not just explaining overly complex code.<br />
+如果你让开发人员解释一段你不理解的代码，这通常会使得他们<strong>重新把代码写得更清晰一点。</strong> 偶尔，在代码里添加一段注释也是个恰当的回应，前提是这段注释不仅仅只是为了解释过于复杂的代码。</p>
+<p><strong>Explanations written only in the code review tool are not helpful to future code readers.</strong> They are acceptable only in a few circumstances, such as when you are reviewing an area you are not very familiar with and the developer explains something that normal readers of the code would have already known.<br />
+<strong>只在code review工具里做解释对于以后的代码读者是没有好处的。</strong> 只有少数情况下才会这么做，例如当你在审查一个你不熟悉的功能模块，开发人员就可以解释一下一般读者已经理解的代码。</p>
+<p>Next: <a href="pushback.md">Handling Pushback in Code Reviews</a></p>
 
     </div>
 
@@ -346,7 +365,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiapengcai.github.io/posts/41083/" title="如何进行代码审查">https://jiapengcai.github.io/posts/41083/</a>
+      <a href="https://jiapengcai.github.io/posts/12266/" title="how to write code review comments">https://jiapengcai.github.io/posts/12266/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -363,14 +382,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/35152/" rel="prev" title="代码评审指南">
-                  <i class="fa fa-chevron-left"></i> 代码评审指南
+                <a href="/posts/55850/" rel="prev" title="175. 组合两个表">
+                  <i class="fa fa-chevron-left"></i> 175. 组合两个表
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/16518/" rel="next" title="代码审查内容">
-                  代码审查内容 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -427,7 +443,7 @@
   <script src="/js/third-party/math/katex.js"></script>
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/41083/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/12266/"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
