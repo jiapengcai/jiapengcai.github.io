@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general. 有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6、处理代码评审过程产生的抵触问题">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/45937/index.html">
+<meta property="og:site_name" content="PENG">
+<meta property="og:description" content="Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general. 有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-12T01:50:46.000Z">
+<meta property="article:modified_time" content="2022-06-12T02:06:28.966Z">
+<meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="Code Review">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiapengcai.github.io/posts/45937/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/45937/","path":"posts/45937/","title":"6、处理代码评审过程产生的抵触问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>6、处理代码评审过程产生的抵触问题 | PENG</title>
+  
+
+
+
+
+<link rel="dns-prefetch" href="https://blog-comment-36okv5pgb-jiapengcai.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">PENG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#who-is-right"><span class="nav-number">1.</span> <span class="nav-text"> Who is right?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%81%E6%98%AF%E5%AF%B9%E7%9A%84"><span class="nav-number">2.</span> <span class="nav-text"> 谁是对的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#upsetting-developers"><span class="nav-number">3.</span> <span class="nav-text"> Upsetting Developers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cleaning-it-up-later"><span class="nav-number">5.</span> <span class="nav-text"> Cleaning It Up Later</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="nav-number">6.</span> <span class="nav-text"> 后续优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#general-complaints-about-strictness"><span class="nav-number">7.</span> <span class="nav-text"> General Complaints About Strictness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">8.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#resolving-conflicts"><span class="nav-number">9.</span> <span class="nav-text"> Resolving Conflicts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">10.</span> <span class="nav-text"> 解决冲突</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiapeng Cai"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiapeng Cai</p>
+  <div class="site-description" itemprop="description">Life can be programmed.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jiapengcai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jiapengcai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:635793@gmail.com" title="E-Mail → mailto:635793@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/45937/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="6、处理代码评审过程产生的抵触问题 | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          6、处理代码评审过程产生的抵触问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-06-12 09:50:46 / 修改时间：10:06:28" itemprop="dateCreated datePublished" datetime="2022-06-12T09:50:46+08:00">2022-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/" itemprop="url" rel="index"><span itemprop="name">Google代码评审规约</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/45937/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/45937/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general.<br />
+有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建议，要么就是抱怨你太严格了。</p>
+<span id="more"></span>
+<h2 id="who-is-right"><a class="markdownIt-Anchor" href="#who-is-right"></a> Who is right?</h2>
+<h2 id="谁是对的"><a class="markdownIt-Anchor" href="#谁是对的"></a> 谁是对的？</h2>
+<p>When a developer disagrees with your suggestion, first take a moment to consider if they are correct. Often, they are closer to the code than you are, and so they might really have a better insight about certain aspects of it. Does their argument make sense? Does it make sense from a code health perspective? If so, let them know that they are right and let the issue drop.<br />
+当开发人员不同意你的建议时，可以先花点时间考虑下他们是不是对的。通常，他们比你更接近代码，因此他们可能会对代码的某些方面有更好的了解。他们的异议是否有意义？从代码质量的角度来看这些争议是否有意义？如果是的话，那就让他们知道他们是对的，然后关闭问题。</p>
+<p>However, developers are not always right. In this case the reviewer should further explain why they believe that their suggestion is correct. A good explanation demonstrates both an understanding of the developer’s reply, and additional information about why the change is being requested.<br />
+然而，开发人员并不总是对的。在这种情况下，审查人员应该进一步解释为什么相信他们的建议是对的。一个好的解释不仅表明了对开发人员的回复的理解，也深入阐述了为什么要这么改。</p>
+<p>In particular, when the reviewer believes their suggestion will improve code health, they should continue to advocate for the change, if they believe the resulting code quality improvement justifies the additional work requested. <strong>Improving code health tends to happen in small steps.</strong><br />
+尤其是，当审查人员认为他们的建议会改善代码质量并且觉得由此带来的额外工作量是合理时，他们应该继续倡导修改。<strong>改善代码质量总是在小步中进行的。</strong></p>
+<p>Sometimes it takes a few rounds of explaining a suggestion before it really sinks in. Just make sure to always stay <a href="comments.md#courtesy">polite</a> and let the developer know that you <em>hear</em> what they’re saying, you just don’t <em>agree</em>.<br />
+有时需要来回对建议解释个几轮才能让开发人员真正理解。在这过程中，也要记得保证礼貌并且让开发人员知道你<em>知道</em>他们在说什么，只是不<em>同意</em>而已</p>
+<h2 id="upsetting-developers"><a class="markdownIt-Anchor" href="#upsetting-developers"></a> Upsetting Developers</h2>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+<p>Reviewers sometimes believe that the developer will be upset if the reviewer insists on an improvement. Sometimes developers do become upset, but it is usually brief and they become very thankful later that you helped them improve the quality of their code. Usually, if you are <a href="comments.md#courtesy">polite</a> in your comments, developers actually don’t become upset at all, and the worry is just in the reviewer’s mind. Upsets are usually more about <a href="comments.md#courtesy">the way comments are written</a> than about the reviewer’s insistence on code quality.<br />
+审查人员有时会觉得如果审查人员坚持代码改进会让开发人员感到沮丧。开发人员有时也确实会感到沮丧，但这种感觉通常是短暂的，并且后续还会感激你帮助他们改善代码质量。通常情况下，如果你在评注里保持着礼貌，开发人员实际上是不会感到抗拒的，这个担心只是审查人员自身觉得的而已。比起审查人员坚持代码改善，反而是审查意见的编写方式更容易让开发人员感到不快。</p>
+<h2 id="cleaning-it-up-later"><a class="markdownIt-Anchor" href="#cleaning-it-up-later"></a> Cleaning It Up Later</h2>
+<h2 id="后续优化"><a class="markdownIt-Anchor" href="#后续优化"></a> 后续优化</h2>
+<p>A common source of push back is that developers (understandably) want to get things done. They don’t want to go through another round of review just to get this CL in. So they say they will clean something up in a later CL, and thus you should LGTM <em>this</em> CL now. Some developers are very good about this, and will immediately write a follow-up CL that fixes the issue. However, experience shows that as more time passes after a developer writes the original CL, the less likely this clean up is to happen. In fact, usually unless the developer does the clean up <em>immediately</em> after the present CL, it never happens. This isn’t because developers are irresponsible, but because they have a lot of work to do and the cleanup gets lost or forgotten in the press of other work. Thus, it is usually best to insist that the developer clean up their CL <em>now</em>, before the code is in the codebase and “done.” Letting people “clean things up later” is a common way for codebases to degenerate.<br />
+发生抵触的一个常见原因是开发人员想完成任务，这是可以理解的。他们不想为了让这个CL通过而进行新一轮的审查。因此他们会说他们会在后续的CL里进行优化，现在你应该先让我通过<em>这个</em>CL。一些开发人员很擅长做这个，还会立即写一个跟进事项。然而，经验表明，开发人员在写下原本的CL之后，随着时间推移，这些跟进事项会越来越难以得到实施。实际上多数情况是，除非开发人员<em>立马</em>处理这些问题，否则以后都不会处理。这不是因为开发人员没有责任心，而是因为他们有很多工作要做，从而这些跟进事项在其它工作的压力下被搁置或者遗忘。因此，最好坚持在代码入库前就让开发人员就处理好这些问题。让人们“稍后跟进”是代码质量下降的常见原因。</p>
+<p>If a CL introduces new complexity, it must be cleaned up before submission unless it is an <a href="../emergencies.md">emergency</a>. If the CL exposes surrounding problems and they can’t be addressed right now, the developer should file a bug for the cleanup and assign it to themselves so that it doesn’t get lost. They can optionally also write a TODO comment in the code that references the filed bug.<br />
+如果一个CL引入了新的复杂性，那么在提交到代码库前必须进行优化除非这是个紧急任务。如果这个CL暴露了一些别的问题而且无法立马解决，那么开发人员应该提交一个待跟进的bug并把它指派给自己，以此来让它不会被遗忘。开发人员也可以选择在代码里下一个TODO注释来提醒这个被记录下来的bug。</p>
+<h2 id="general-complaints-about-strictness"><a class="markdownIt-Anchor" href="#general-complaints-about-strictness"></a> General Complaints About Strictness</h2>
+<h2 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> </h2>
+<p>If you previously had fairly lax code reviews and you switch to having strict reviews, some developers will complain very loudly. Improving the <a href="speed.md">speed</a> of your code reviews usually causes these complaints to fade away.<br />
+如果你之前做代码审核比较宽松，然后（突然）转向严格的审查，一些开发人员会可能意见会比较大。提高你的代码审查<a href="speed.md">速度</a>通常能让这些抱怨消失。</p>
+<p>Sometimes it can take months for these complaints to fade away, but eventually developers tend to see the value of strict code reviews as they see what great code they help generate. Sometimes the loudest protesters even become your strongest supporters once something happens that causes them to really see the value you’re adding by being strict.<br />
+有时需要花几个月的时间来让这些抵触情绪消失，但最终开发人员会发现严格代码审查所带来的价值，因为他们看到了在审查人员的帮助下写出了出色的代码。一旦意见最大的那几个抗议者看到了你严格审查产生的价值，有时他们甚至会成为你的最坚定的支持者。</p>
+<h2 id="resolving-conflicts"><a class="markdownIt-Anchor" href="#resolving-conflicts"></a> Resolving Conflicts</h2>
+<h2 id="解决冲突"><a class="markdownIt-Anchor" href="#解决冲突"></a> 解决冲突</h2>
+<p>If you are following all of the above but you still encounter a conflict between yourself and a developer that can’t be resolved, see <a href="../51044">The Standard of Code Review</a> for guidelines and principles that can help resolve the conflict.<br />
+如果你遵从了上述几点但仍然和开发人员产生了难以解决的意见冲突，那么请参阅<a href="../51044">代码审查标准</a>章节，里面的指南和原则有助于解决冲突。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/45937/" title="6、处理代码评审过程产生的抵触问题">https://jiapengcai.github.io/posts/45937/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"><i class="fa fa-tag"></i> Translation</a>
+              <a href="/tags/Code-Review/" rel="tag"><i class="fa fa-tag"></i> Code Review</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/51044/" rel="prev" title="3、代码审查标准">
+                  <i class="fa fa-chevron-left"></i> 3、代码审查标准
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-blog"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiapeng Cai</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/45937/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

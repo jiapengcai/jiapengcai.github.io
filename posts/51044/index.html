@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="The primary purpose of code review is to make sure that the overall code health of Google’s code base is improving over time. All of the tools and processes of code review are designed to this end. 代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3、代码审查标准">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/51044/index.html">
+<meta property="og:site_name" content="PENG">
+<meta property="og:description" content="The primary purpose of code review is to make sure that the overall code health of Google’s code base is improving over time. All of the tools and processes of code review are designed to this end. 代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-10T03:38:06.000Z">
+<meta property="article:modified_time" content="2022-06-12T03:06:52.427Z">
+<meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="Code Review">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiapengcai.github.io/posts/51044/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/51044/","path":"posts/51044/","title":"3、代码审查标准"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>3、代码审查标准 | PENG</title>
+  
+
+
+
+
+<link rel="dns-prefetch" href="https://blog-comment-36okv5pgb-jiapengcai.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">PENG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mentoring%E6%8C%87%E5%AF%BC"><span class="nav-number">1.</span> <span class="nav-text"> Mentoring（指导）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#principles%E5%8E%9F%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text"> Principles（原则）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#resolving-conflicts%E5%A4%84%E7%90%86%E5%86%B2%E7%AA%81%E8%AF%91%E6%B3%A8%E6%8C%87%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E5%92%8C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%E4%BA%BA%E5%91%98%E7%9A%84%E6%84%8F%E8%A7%81%E5%86%B2%E7%AA%81"><span class="nav-number">3.</span> <span class="nav-text"> Resolving Conflicts（处理冲突，译注：指开发人员和代码审查人员的意见冲突）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiapeng Cai"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiapeng Cai</p>
+  <div class="site-description" itemprop="description">Life can be programmed.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jiapengcai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jiapengcai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:635793@gmail.com" title="E-Mail → mailto:635793@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/51044/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="3、代码审查标准 | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3、代码审查标准
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-10 11:38:06" itemprop="dateCreated datePublished" datetime="2022-06-10T11:38:06+08:00">2022-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-12 11:06:52" itemprop="dateModified" datetime="2022-06-12T11:06:52+08:00">2022-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/" itemprop="url" rel="index"><span itemprop="name">Google代码评审规约</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/51044/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/51044/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>The primary purpose of code review is to make sure that the overall code health of Google’s code base is improving over time. All of the tools and processes of code review are designed to this end.<br />
+代码审查（code review）主要是为了确保Google代码库的整体代码质量能随着时间的推移而不断得到改善。代码审查的所有工具和步骤都是为了这个目的而设计的。</p>
+<p>In order to accomplish this, a series of trade-offs have to be balanced.<br />
+为了达到这个目的，我们必须做一系列的权衡折中。</p>
+<span id="more"></span>
+<p>First, developers must be able to make progress on their tasks. If you never submit an improvement to the codebase, then the codebase never improves. Also, if a reviewer makes it very difficult for any change to go in, then developers are disincentivized to make improvements in the future.<br />
+首先，开发人员必须能够在他们自己的（开发）任务上取得进展。如果你从未向代码库提交过代码，那么代码库也不会产生变更。同样，如果评审人的评审标准过于苛刻，那么开发人员也会缺乏足够的动力去提交代码。</p>
+<p>On the other hand, it is the duty of the reviewer to make sure that each CL is of such a quality that the overall code health of their codebase is not decreasing as time goes on. This can be tricky, because often, codebases degrade through small decreases in code health over time, especially when a team is under significant time constraints and they feel that they have to take shortcuts in order to accomplish their goals.<br />
+另一方面，评审人应确保每次的代码变更都能达到这么一个质量：随着时间推移，代码库的整体质量不会下降。要做到这点可能会有点棘手，因为很多时候，代码库的质量会随着提交上来的代码的小幅质量下降而下降，尤其是当团队在处于时间很紧迫的情况下，为了完成任务，团队成员会觉得他们必须走一些捷径。</p>
+<p>Also, a reviewer has ownership and responsibility over the code they are reviewing. They want to ensure that the codebase stays consistent, maintainable, and all of the other things mentioned in <a href="../16518">“What to look for in a code review.”</a><br />
+同时，评审人对于他们在审核的代码拥有所有权和相应的责任。他们保证代码库的一致性，可维护性，以及<a href="../16518">《代码审查内容》</a>章节里提到的所以内容。</p>
+<p>Thus, we get the following rule as the standard we expect in code reviews:<br />
+因此，我们制定了以下规则作为代码审查的标准：</p>
+<p><strong>In general, reviewers should favor approving a CL once it is in a state where it definitely improves the overall code health of the system being worked on, even if the CL isn’t perfect.</strong><br />
+<strong>一般情况下，即使某次代码提交并不是很完美，但是它确实提高了系统的整体代码健康状态，那么评审人就应该通过它。</strong></p>
+<p>That is the senior principle among all of the code review guidelines.<br />
+这是代码审查指南的最高原则。</p>
+<p>There are limitations to this, of course. For example, if a CL adds a feature that the reviewer doesn’t want in their system, then the reviewer can certainly deny approval even if the code is well-designed.<br />
+当然，这条原则也有一些局限性。例如，如果某次代码提交添加了一个特性（feature），而该特性却不是评审人所想要加到系统里的，那么毋庸置疑，即使该次代码提交设计得再好，评审人也不会让其通过。</p>
+<p>A key point here is that there is no such thing as “perfect” code—there is only better code. Reviewers should not require the author to polish every tiny piece of a CL before granting approval. Rather, the reviewer should balance out the need to make forward progress compared to the importance of the changes they are suggesting. Instead of seeking perfection, what a reviewer should seek is continuous improvement. A CL that, as a whole, improves the maintainability, readability, and understandability of the system shouldn’t be delayed for days or weeks because it isn’t “perfect.”<br />
+这里有个比较关键的点，那就是，没有完美的代码，只有更好的代码。评审人不应该要求代码作者在代码评审通过前要对每次代码提交都进行“抛光打蜡”。相反，评审人应该在任务进度和代码建议的重要性之间取得平衡。评审人要追求的是持续改进，而不是一次性的完美。如果某次代码提交提高了系统的可维护性，可读性以及可理解性，那么它就不应该因为不够“完美”而被延迟几天或者几周才通过。</p>
+<p>Reviewers should always feel free to leave comments expressing that something could be better, but if it’s not very important, prefix it with something like “Nit: “ to let the author know that it’s just a point of polish that they could choose to ignore.<br />
+评审人在认为某些代码可以写得更好时，可以随时发表评论，但如果提出的点并不是非常重要，可以在评论前加个前缀“Nit: ”（Not Important的缩写），通过这个方式让代码作者知道：此处的评论只是一个更好的建议而已，如果选择了忽略，那也是可以的。</p>
+<p>Note: Nothing in this document justifies checking in CLs that definitely worsen the overall code health of the system. The only time you would do that would be in an emergency.<br />
+注意：本文档中虽然没有内容会证明检查代码提交会使整个系统的代码质量变差。但如果评审人在紧迫的情况下，这种现象也是会出现的。</p>
+<h2 id="mentoring指导"><a class="markdownIt-Anchor" href="#mentoring指导"></a> Mentoring（指导）</h2>
+<p>Code review can have an important function of teaching developers something new about a language, a framework, or general software design principles. It’s always fine to leave comments that help a developer learn something new. Sharing knowledge is part of improving the code health of a system over time. Just keep in mind that if your comment is purely educational, but not critical to meeting the standards described in this document, prefix it with &quot;Nit: &quot; or otherwise indicate that it’s not mandatory for the author to resolve it in this CL.<br />
+代码审查有个很重要的作用，那就是可以传授开发人员有关语言、框架或者通用的软件设计原则方面的一些新东西。审查人员可以随时留下能帮助开发人员学到新东西的评论。分享知识也是提高系统代码质量的方式之一。不过要记住一点，就是，如果你的评论只是纯粹的指导性的，但对于满足本文档里所描述的标准这件事本身来说不重要，那么就应该在评论前面加上“Nit：”或者用别的方式标明，并非强制代码作者去解决该次代码变更的评论里提到的问题。</p>
+<h2 id="principles原则"><a class="markdownIt-Anchor" href="#principles原则"></a> Principles（原则）</h2>
+<ul>
+<li>
+<p>Technical facts and data overrule opinions and personal preferences.</p>
+</li>
+<li>
+<p>技术事实和数据优先于观点和个人偏好。(译注：技术事实是需要一些实践、贸易或科学专业知识才能发现、验证、解释和理解的事实。技术事实和数据一般由公司沉淀而成。此处可以简单理解为做代码审查时产生的观点或者审查人的个人喜欢，应先遵从于公司既有的技术事实和数据。)</p>
+</li>
+<li>
+<p>On matters of style, the <a target="_blank" rel="noopener" href="http://google.github.io/styleguide/">style guide</a> is the absolute authority. Any purely style point (whitespace, etc.) that is not in the style guide is a matter of personal preference. The style should be consistent with what is there. If there is no previous style, accept the author’s.</p>
+</li>
+<li>
+<p>在代码规范问题上，<a target="_blank" rel="noopener" href="http://google.github.io/styleguide/">规范规约</a>是绝对权威。 任何不在样式指南中的规范风格（例如空格等）都是个人喜好问题。 代码规范应与现有的规范规约一致。 如果还没有规约，则接受作者的。</p>
+</li>
+<li>
+<p><strong>Aspects of software design are almost never a pure style issue or just a personal preference.</strong> They are based on underlying principles and should be weighed on those principles, not simply by personal opinion. Sometimes there are a few valid options. If the author can demonstrate (either through data or based on solid engineering principles) that several approaches are equally valid, then the reviewer should accept the preference of the author. Otherwise the choice is dictated by standard principles of software design.</p>
+</li>
+<li>
+<p><strong>软件设计的方方面面几乎从来都不是纯粹的规范问题或者只是个人偏好。</strong> 它们（指软件设计的各个方面）都基于一些基本原则，应根据这些原则进行权衡，而不仅仅只是个人意见。有时可能会有好几个可行的方案。如果作者能通过数据或者基于可靠的工程设计原则证明这些方案都行之有效，那么审查人员应该接受作者偏向的方案，否则就得给予软件设计的标准原则来做出决定。</p>
+</li>
+<li>
+<p>If no other rule applies, then the reviewer may ask the author to be consistent with what is in the current codebase, as long as that doesn’t worsen the overall code health of the system.</p>
+</li>
+<li>
+<p>如果没有其它适用的规则，那么审查人员需要要求作者于现有代码库的规则保持一致，因为这有才不会损坏系统的整体代码质量。</p>
+</li>
+</ul>
+<h2 id="resolving-conflicts处理冲突译注指开发人员和代码审查人员的意见冲突"><a class="markdownIt-Anchor" href="#resolving-conflicts处理冲突译注指开发人员和代码审查人员的意见冲突"></a> Resolving Conflicts（处理冲突，译注：指开发人员和代码审查人员的意见冲突）</h2>
+<p>In any conflict on a code review, the first step should always be for the developer and reviewer to try to come to consensus, based on the contents of this document and the other documents in <a href="../developer/index.md">The CL Author’s Guide</a> and this <a href="index.md">Reviewer Guide</a>.<br />
+对于代码审查过程中产生的任何意见冲突，开发人员和审查人员第一步应该是尝试基于本文档的内容、变更列表作者指南以及审核人员指南达成一致意见。</p>
+<p>When coming to consensus becomes especially difficult, it can help to have a face-to-face meeting or a video conference between the reviewer and the author, instead of just trying to resolve the conflict through code review comments. (If you do this, though, make sure to record the results of the discussion as a comment on the CL, for future readers.)<br />
+当很难达成共识时，审查人员和代码作者可以进行面对面沟通或者是视频会议沟通，而不是只是仅通过审查评论来去解决冲突。（但如果确实是这么做的，那么要保证将讨论结果记录到代码变更的评论里，供后面的读者参考。）</p>
+<p>If that doesn’t resolve the situation, the most common way to resolve it would be to escalate. Often the escalation path is to a broader team discussion, having a Technical Lead weigh in, asking for a decision from a maintainer of the code, or asking an Eng Manager to help out. <strong>Don’t let a CL sit around because the author and the reviewer can’t come to an agreement.</strong><br />
+如果通过上述方式还没解决问题，则通常的做法是上升。通常情况下是上升到范围更广的小组讨论，技术leader参与进来，通过询问代码的维护人员来做出决定，或者是让工程经理提供帮助。<strong>不要让（有意见冲突的）代码变更放任不管，因为代码作者和审查人员无法达成统一意见。</strong></p>
+<p>Next: <a href="../16518">What to look for in a code review</a><br />
+下一章：<a href="../16518">代码审查内容</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/51044/" title="3、代码审查标准">https://jiapengcai.github.io/posts/51044/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"><i class="fa fa-tag"></i> Translation</a>
+              <a href="/tags/Code-Review/" rel="tag"><i class="fa fa-tag"></i> Code Review</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/32225/" rel="prev" title="Gerrit合并分支报“no new changes”问题解决">
+                  <i class="fa fa-chevron-left"></i> Gerrit合并分支报“no new changes”问题解决
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/45937/" rel="next" title="6、处理代码评审过程产生的抵触问题">
+                  6、处理代码评审过程产生的抵触问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-blog"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiapeng Cai</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/51044/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

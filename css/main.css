@@ -1852,12 +1852,12 @@ pre code {
 }
 @media (min-width: 992px) {
   .post-body {
-    text-align: justify;
+    text-align: left;
   }
 }
 @media (max-width: 991px) {
   .post-body {
-    text-align: justify;
+    text-align: left;
   }
 }
 .post-body h1 .header-anchor,
