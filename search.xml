@@ -36,6 +36,35 @@
       </tags>
   </entry>
   <entry>
+    <title>176. 第二高的薪水</title>
+    <url>/posts/23560/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表: Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>175. 组合两个表</title>
     <url>/posts/55850/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
@@ -54,35 +83,6 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.FirstName, a.LastName, b.City, b.State</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.PersonId <span class="operator">=</span> b.PersonId</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/combine-two-tables">https://leetcode.cn/problems/combine-two-tables</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>176. 第二高的薪水</title>
-    <url>/posts/23560/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表: Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -172,6 +172,36 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>182. 查找重复的电子邮箱</title>
+    <url>/posts/13020/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+编写一个 SQL 查询，查找**<em>Person<em><strong>表中所有重复的电子邮箱。<br />
+返回的结果表中的数据可以按</strong>任意顺序</em></em>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -280,8 +310,8 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -356,8 +386,8 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -369,8 +399,8 @@
         <category>随笔备忘</category>
       </categories>
       <tags>
-        <tag>Code Review</tag>
         <tag>Gerrit</tag>
+        <tag>Code Review</tag>
       </tags>
   </entry>
   <entry>
@@ -414,8 +444,8 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -468,8 +498,82 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>5、如何写代码审查评论</title>
+    <url>/posts/12266/</url>
+    <content><![CDATA[<h1 id="how-to-write-code-review-comments"><a class="markdownIt-Anchor" href="#how-to-write-code-review-comments"></a> How to write code review comments</h1>
+<h1 id="如何写代码审查评论"><a class="markdownIt-Anchor" href="#如何写代码审查评论"></a> 如何写代码审查评论</h1>
+<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<ul>
+<li>
+<p>Be kind.</p>
+</li>
+<li>
+<p>Explain your reasoning.</p>
+</li>
+<li>
+<p>Balance giving explicit directions with just pointing out problems and letting the developer decide.</p>
+</li>
+<li>
+<p>Encourage developers to simplify code or add code comments instead of just explaining the complexity to you.</p>
+</li>
+<li>
+<p>语气要和善；</p>
+</li>
+<li>
+<p>解释这么评论的原因；</p>
+</li>
+<li>
+<p>在明确指示与指出问题之间做好平衡，并让开发人员自己决定；</p>
+</li>
+<li>
+<p>鼓励开发人员简化代码或者增加注释，而不只是让他们向你就代码的复杂性进行说明。</p>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="courtesy"><a class="markdownIt-Anchor" href="#courtesy"></a> Courtesy</h2>
+<h2 id="礼貌"><a class="markdownIt-Anchor" href="#礼貌"></a> 礼貌</h2>
+<p>In general, it is important to be <a href="https://chromium.googlesource.com/chromium/src/+/master/docs/cr_respect.md">courteous and respectful</a> while also being very clear and helpful to the developer whose code you are reviewing. One way to do this is to be sure that you are always making comments about the <em>code</em> and never making comments about the <em>developer</em>. You don’t always have to follow this practice, but you should definitely use it when<br />
+saying something that might otherwise be upsetting or contentious. For example:<br />
+通常情况下，<a href="https://chromium.googlesource.com/chromium/src/+/master/docs/cr_respect.md">礼貌和尊重</a>是很重要的，做到这两点对于其代码正在被审查的开发人员也是有帮助的。要做到这点的一个做法是，确保你只是对<em>代码</em>做评论，而不是<em>开发人员</em>本身。虽然你不用每次都这么做，但在说一些可能会令人不安或者有争议的话时，就一定要这么做。例如：</p>
+<p>Bad: “Why did <strong>you</strong> use threads here when there’s obviously no benefit to be gained from concurrency?”<br />
+反例：“为什么这里<strong>你</strong>要使用线程？很明显这里使用并发是没有好处的。”</p>
+<p>Good: “The concurrency model here is adding complexity to the system without any actual performance benefit that I can see. Because there’s no performance benefit, it’s best for this code to be single-threaded instead of using multiple threads.”<br />
+正例：“这里使用并发模型增加了系统复杂度，我从中看不到实际的性能优势。由于没有性能优势，这里最好使用单线程来替代多线程。”</p>
+<h2 id="explain-why"><a class="markdownIt-Anchor" href="#explain-why"></a> Explain Why</h2>
+<h2 id="解释为什么"><a class="markdownIt-Anchor" href="#解释为什么"></a> 解释为什么</h2>
+<p>One thing you’ll notice about the “good” example from above is that it helps the developer understand <em>why</em> you are making your comment. You don’t always need to include this information in your review comments, but sometimes it’s appropriate to give a bit more explanation around your intent, the best practice you’re following, or how your suggestion improves code health.<br />
+从上面的正例你会看到，那样子说明能帮助开发人员理解你的意见。虽然你不用每次都用这种形式来写评论意见，但有时应当适当地对你的意图、你所遵循的最佳实践，或者你的意见如何提高代码质量做多点解释。</p>
+<h2 id="giving-guidance"><a class="markdownIt-Anchor" href="#giving-guidance"></a> Giving Guidance</h2>
+<h2 id="给予指导"><a class="markdownIt-Anchor" href="#给予指导"></a> 给予指导</h2>
+<p><strong>In general it is the developer’s responsibility to fix a CL, not the reviewer’s.</strong> You are not required to do detailed design of a solution or write code for the developer.<br />
+<strong>一般情况下，修复CL是开发人员的责任，而不是审核人员的。</strong> 你无需为开发人员做具体的解决方案设计或者写代码。</p>
+<p>This doesn’t mean the reviewer should be unhelpful, though. In general you should strike an appropriate balance between pointing out problems and providing direct guidance. Pointing out problems and letting the developer make a decision often helps the developer learn, and makes it easier to do code reviews. It also<br />
+can result in a better solution, because the developer is closer to the code than the reviewer is.<br />
+但这不意味着审查人员就不用提供帮助。通常，你应该在指出问题和提供指导之间取一个平衡。指出问题并且让开发人员做出决定通常能帮助开发人员学习，并且使得代码审查变得更容易。这么做同时还能产生更好的解决方案，毕竟开发人员才是更接近代码的。</p>
+<p>However, sometimes direct instructions, suggestions, or even code are more helpful. The primary goal of code review is to get the best CL possible. A secondary goal is improving the skills of developers so that they require less and less review over time.<br />
+然而，有时一些明确的指示，提示甚至是代码会更有用些。代码审查的主要目的是尽可能地获得最好的CL。第二个目的是为了提高开发人员的技能，以便随着时间的推移他们需要越来越少的代码审查。</p>
+<p>Remember that people learn from reinforcement of what they are doing well and not just what they could do better. If you see things you like in the CL, comment on those too! Examples: developer cleaned up a messy algorithm, added exemplary test coverage, or you as the reviewer learned something from the CL. Just as with all comments, include <a href="#explain-why">why</a> you liked something, further encouraging the developer to continue good practices.<br />
+请记住，当对人们做的好的地方（而不是能做得更好的地方）进行加强（译注：也就是鼓励）时，人们总是能从中得到学习。如果你在CL里看到了你喜欢的点，例如：开发人员清理了混乱的算法，添加了示例性的覆盖测试，或者你作为审查人员从CL里学到的东西，那么也请评注起来！同时，正如其它评注一样，这里的评注也要包含<a href="#explain-why">解释为什么</a>你喜欢这个地方，以此进一步鼓励开发人员继续这些好的实践。</p>
+<h2 id="accepting-explanations"><a class="markdownIt-Anchor" href="#accepting-explanations"></a> Accepting Explanations</h2>
+<h2 id="接受解释"><a class="markdownIt-Anchor" href="#接受解释"></a> 接受解释</h2>
+<p>If you ask a developer to explain a piece of code that you don’t understand, that should usually result in them <strong>rewriting the code more clearly</strong>. Occasionally, adding a comment in the code is also an appropriate response, as long as it’s not just explaining overly complex code.<br />
+如果你让开发人员解释一段你不理解的代码，这通常会使得他们<strong>重新把代码写得更清晰一点。</strong> 偶尔，在代码里添加一段注释也是个恰当的回应，前提是这段注释不仅仅只是为了解释过于复杂的代码。</p>
+<p><strong>Explanations written only in the code review tool are not helpful to future code readers.</strong> They are acceptable only in a few circumstances, such as when you are reviewing an area you are not very familiar with and the developer explains something that normal readers of the code would have already known.<br />
+<strong>只在code review工具里做解释对于以后的代码读者是没有好处的。</strong> 只有少数情况下才会这么做，例如当你在审查一个你不熟悉的功能模块，开发人员就可以解释一下一般读者已经理解的代码。</p>
+<p>Next: <a href="pushback.md">Handling Pushback in Code Reviews</a></p>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Code Review</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -1225,82 +1329,8 @@ don’t know they need now.</li>
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>5、如何写代码审查评论</title>
-    <url>/posts/12266/</url>
-    <content><![CDATA[<h1 id="how-to-write-code-review-comments"><a class="markdownIt-Anchor" href="#how-to-write-code-review-comments"></a> How to write code review comments</h1>
-<h1 id="如何写代码审查评论"><a class="markdownIt-Anchor" href="#如何写代码审查评论"></a> 如何写代码审查评论</h1>
-<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
-<ul>
-<li>
-<p>Be kind.</p>
-</li>
-<li>
-<p>Explain your reasoning.</p>
-</li>
-<li>
-<p>Balance giving explicit directions with just pointing out problems and letting the developer decide.</p>
-</li>
-<li>
-<p>Encourage developers to simplify code or add code comments instead of just explaining the complexity to you.</p>
-</li>
-<li>
-<p>语气要和善；</p>
-</li>
-<li>
-<p>解释这么评论的原因；</p>
-</li>
-<li>
-<p>在明确指示与指出问题之间做好平衡，并让开发人员自己决定；</p>
-</li>
-<li>
-<p>鼓励开发人员简化代码或者增加注释，而不只是让他们向你就代码的复杂性进行说明。</p>
-</li>
-</ul>
-<span id="more"></span>
-<h2 id="courtesy"><a class="markdownIt-Anchor" href="#courtesy"></a> Courtesy</h2>
-<h2 id="礼貌"><a class="markdownIt-Anchor" href="#礼貌"></a> 礼貌</h2>
-<p>In general, it is important to be <a href="https://chromium.googlesource.com/chromium/src/+/master/docs/cr_respect.md">courteous and respectful</a> while also being very clear and helpful to the developer whose code you are reviewing. One way to do this is to be sure that you are always making comments about the <em>code</em> and never making comments about the <em>developer</em>. You don’t always have to follow this practice, but you should definitely use it when<br />
-saying something that might otherwise be upsetting or contentious. For example:<br />
-通常情况下，<a href="https://chromium.googlesource.com/chromium/src/+/master/docs/cr_respect.md">礼貌和尊重</a>是很重要的，做到这两点对于其代码正在被审查的开发人员也是有帮助的。要做到这点的一个做法是，确保你只是对<em>代码</em>做评论，而不是<em>开发人员</em>本身。虽然你不用每次都这么做，但在说一些可能会令人不安或者有争议的话时，就一定要这么做。例如：</p>
-<p>Bad: “Why did <strong>you</strong> use threads here when there’s obviously no benefit to be gained from concurrency?”<br />
-反例：“为什么这里<strong>你</strong>要使用线程？很明显这里使用并发是没有好处的。”</p>
-<p>Good: “The concurrency model here is adding complexity to the system without any actual performance benefit that I can see. Because there’s no performance benefit, it’s best for this code to be single-threaded instead of using multiple threads.”<br />
-正例：“这里使用并发模型增加了系统复杂度，我从中看不到实际的性能优势。由于没有性能优势，这里最好使用单线程来替代多线程。”</p>
-<h2 id="explain-why"><a class="markdownIt-Anchor" href="#explain-why"></a> Explain Why</h2>
-<h2 id="解释为什么"><a class="markdownIt-Anchor" href="#解释为什么"></a> 解释为什么</h2>
-<p>One thing you’ll notice about the “good” example from above is that it helps the developer understand <em>why</em> you are making your comment. You don’t always need to include this information in your review comments, but sometimes it’s appropriate to give a bit more explanation around your intent, the best practice you’re following, or how your suggestion improves code health.<br />
-从上面的正例你会看到，那样子说明能帮助开发人员理解你的意见。虽然你不用每次都用这种形式来写评论意见，但有时应当适当地对你的意图、你所遵循的最佳实践，或者你的意见如何提高代码质量做多点解释。</p>
-<h2 id="giving-guidance"><a class="markdownIt-Anchor" href="#giving-guidance"></a> Giving Guidance</h2>
-<h2 id="给予指导"><a class="markdownIt-Anchor" href="#给予指导"></a> 给予指导</h2>
-<p><strong>In general it is the developer’s responsibility to fix a CL, not the reviewer’s.</strong> You are not required to do detailed design of a solution or write code for the developer.<br />
-<strong>一般情况下，修复CL是开发人员的责任，而不是审核人员的。</strong> 你无需为开发人员做具体的解决方案设计或者写代码。</p>
-<p>This doesn’t mean the reviewer should be unhelpful, though. In general you should strike an appropriate balance between pointing out problems and providing direct guidance. Pointing out problems and letting the developer make a decision often helps the developer learn, and makes it easier to do code reviews. It also<br />
-can result in a better solution, because the developer is closer to the code than the reviewer is.<br />
-但这不意味着审查人员就不用提供帮助。通常，你应该在指出问题和提供指导之间取一个平衡。指出问题并且让开发人员做出决定通常能帮助开发人员学习，并且使得代码审查变得更容易。这么做同时还能产生更好的解决方案，毕竟开发人员才是更接近代码的。</p>
-<p>However, sometimes direct instructions, suggestions, or even code are more helpful. The primary goal of code review is to get the best CL possible. A secondary goal is improving the skills of developers so that they require less and less review over time.<br />
-然而，有时一些明确的指示，提示甚至是代码会更有用些。代码审查的主要目的是尽可能地获得最好的CL。第二个目的是为了提高开发人员的技能，以便随着时间的推移他们需要越来越少的代码审查。</p>
-<p>Remember that people learn from reinforcement of what they are doing well and not just what they could do better. If you see things you like in the CL, comment on those too! Examples: developer cleaned up a messy algorithm, added exemplary test coverage, or you as the reviewer learned something from the CL. Just as with all comments, include <a href="#explain-why">why</a> you liked something, further encouraging the developer to continue good practices.<br />
-请记住，当对人们做的好的地方（而不是能做得更好的地方）进行加强（译注：也就是鼓励）时，人们总是能从中得到学习。如果你在CL里看到了你喜欢的点，例如：开发人员清理了混乱的算法，添加了示例性的覆盖测试，或者你作为审查人员从CL里学到的东西，那么也请评注起来！同时，正如其它评注一样，这里的评注也要包含<a href="#explain-why">解释为什么</a>你喜欢这个地方，以此进一步鼓励开发人员继续这些好的实践。</p>
-<h2 id="accepting-explanations"><a class="markdownIt-Anchor" href="#accepting-explanations"></a> Accepting Explanations</h2>
-<h2 id="接受解释"><a class="markdownIt-Anchor" href="#接受解释"></a> 接受解释</h2>
-<p>If you ask a developer to explain a piece of code that you don’t understand, that should usually result in them <strong>rewriting the code more clearly</strong>. Occasionally, adding a comment in the code is also an appropriate response, as long as it’s not just explaining overly complex code.<br />
-如果你让开发人员解释一段你不理解的代码，这通常会使得他们<strong>重新把代码写得更清晰一点。</strong> 偶尔，在代码里添加一段注释也是个恰当的回应，前提是这段注释不仅仅只是为了解释过于复杂的代码。</p>
-<p><strong>Explanations written only in the code review tool are not helpful to future code readers.</strong> They are acceptable only in a few circumstances, such as when you are reviewing an area you are not very familiar with and the developer explains something that normal readers of the code would have already known.<br />
-<strong>只在code review工具里做解释对于以后的代码读者是没有好处的。</strong> 只有少数情况下才会这么做，例如当你在审查一个你不熟悉的功能模块，开发人员就可以解释一下一般读者已经理解的代码。</p>
-<p>Next: <a href="pushback.md">Handling Pushback in Code Reviews</a></p>
-]]></content>
-      <categories>
-        <category>Google代码评审规约</category>
-      </categories>
-      <tags>
         <tag>Translation</tag>
-        <tag>Code Review</tag>
       </tags>
   </entry>
 </search>
