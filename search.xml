@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>178. 分数排名</title>
+    <url>/posts/32576/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
+<ul>
+<li>分数应按从高到低排列。</li>
+<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
+<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
+按 <em><strong>score</strong></em> 降序返回结果表。</li>
+</ul>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Scores</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>136. 只出现一次的数字</title>
     <url>/posts/63105/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
@@ -66,6 +99,34 @@
       </tags>
   </entry>
   <entry>
+    <title>180. 连续出现的数字</title>
+    <url>/posts/41601/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Logs</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>176. 第二高的薪水</title>
     <url>/posts/23560/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
@@ -83,67 +144,6 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>178. 分数排名</title>
-    <url>/posts/32576/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
-<ul>
-<li>分数应按从高到低排列。</li>
-<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
-<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
-按 <em><strong>score</strong></em> 降序返回结果表。</li>
-</ul>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Scores</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>180. 连续出现的数字</title>
-    <url>/posts/41601/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Logs</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -184,24 +184,22 @@
       </tags>
   </entry>
   <entry>
-    <title>182. 查找重复的电子邮箱</title>
-    <url>/posts/13020/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+    <title>196. 删除重复的电子邮箱</title>
+    <url>/posts/59823/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
+<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
+<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
+<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
 <span id="more"></span>
 <p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Person</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
-<p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
+<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -244,26 +242,24 @@
       </tags>
   </entry>
   <entry>
-    <title>183. 从不订购的客户</title>
-    <url>/posts/44608/</url>
+    <title>182. 查找重复的电子邮箱</title>
+    <url>/posts/13020/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。<br />
+编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
 返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
 <span id="more"></span>
 <p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Customers (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (id <span class="type">int</span>, customerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Customers</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Customers</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行表示一个用户的ID和名字</span><br></pre></td></tr></table></figure>
-<p>表：Orders</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customerId  <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">customerId是来自Customers表的外键</span><br><span class="line">表的每一行表示一个订单的ID以及下订单的用户的ID</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Customers 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> customerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Customers <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Henry     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Max       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
 <p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.Name <span class="keyword">AS</span> Customers </span><br><span class="line"><span class="keyword">FROM</span> Customers c <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders o </span><br><span class="line"><span class="keyword">ON</span> c.Id<span class="operator">=</span>o.CustomerId </span><br><span class="line"><span class="keyword">WHERE</span> o.CustomerId <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> Orders <span class="keyword">AS</span> b</span><br><span class="line">  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/customers-who-never-order">https://leetcode.cn/problems/customers-who-never-order</a></p>
+<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -273,128 +269,6 @@
       <tags>
         <tag>Leetcode</tag>
         <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>196. 删除重复的电子邮箱</title>
-    <url>/posts/59823/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
-<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
-<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
-<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9. 回文数</title>
-    <url>/posts/35052/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
-回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
-例如，121 是回文，而 123 不是。</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>约束条件</strong></p>
-<ul>
-<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
-</ul>
-<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1、代码评审开发者指南</title>
-    <url>/posts/35152/</url>
-    <content><![CDATA[<h2 id="introduction介绍"><a class="markdownIt-Anchor" href="#introduction介绍"></a> Introduction（介绍）</h2>
-<p>A code review is a process where someone other than the author(s) of a piece of code examines that code.<br />
-所谓的代码审查（code review）就是指让别人来审查自己的代码的过程。</p>
-<p>At Google, we use code review to maintain the quality of our code and products.<br />
-在Google内部，我们会通过代码审查来保证代码和产品的质量。</p>
-<p>This documentation is the canonical description of Google’s code review processes and policies.<br />
-本文档详述了Google是如何进行代码审查的以及所采用的策略。</p>
-<span id="more"></span>
-<p>This page is an overview of our code review process. There are two other large documents that are a part of this guide:</p>
-<ul>
-<li><strong><a href="../41083">How To Do A Code Review</a>:</strong> A detailed guide for code reviewers.</li>
-<li><strong>The CL Author’s Guide:</strong> A detailed guide for developers whose CLs are going through review.</li>
-</ul>
-<p>本页内容大体介绍了下代码审查的过程是怎样的。代码审查指南包含了两大部分：</p>
-<ul>
-<li><strong><a href="../41083">如何进行代码审查</a>：</strong> 详述了代码评审人应该如何进行代码审查。</li>
-<li><strong>变更列表作者指南：</strong> 详述了提交待审核变更列表的开发人员应该如何做。</li>
-</ul>
-<h2 id="what-do-code-reviewers-look-for代码审查应该关注哪些内容"><a class="markdownIt-Anchor" href="#what-do-code-reviewers-look-for代码审查应该关注哪些内容"></a> What Do Code Reviewers Look For?（代码审查应该关注哪些内容？）</h2>
-<p>Code reviews should look at:</p>
-<ul>
-<li><strong>Design:</strong> Is the code well-designed and appropriate for your system?</li>
-<li><strong>Functionality:</strong> Does the code behave as the author likely intended? Is the way the code behaves good for its users?</li>
-<li><strong>Complexity:</strong> Could the code be made simpler? Would another developer be able to easily understand and use this code when they come across it in the future?</li>
-<li><strong>Tests:</strong> Does the code have correct and well-designed automated tests?</li>
-<li><strong>Naming:</strong> Did the developer choose clear names for variables, classes, methods, etc.?</li>
-<li><strong>Comments:</strong> Are the comments clear and useful?</li>
-<li><strong>Style:</strong> Does the code follow our <a href="http://google.github.io/styleguide/">style guides</a>?</li>
-<li><strong>Documentation:</strong> Did the developer also update relevant documentation?</li>
-</ul>
-<p>代码审查内容应该关注以下几点：</p>
-<ul>
-<li><strong>设计：</strong> 代码是否设计良好且对于系统而言是否适合？</li>
-<li><strong>功能：</strong> 代码实现的行为是否达到了作者想要的效果？代码实现的行为对于用户是否友好？</li>
-<li><strong>复杂性：</strong> 代码能否写得更简单点吗？是否能让别的开发人员易于理解而且易于使用？</li>
-<li><strong>测试：</strong> 代码是否包含了正确的，设计良好的自动化测试？</li>
-<li><strong>命名：</strong> 开发人员是否为变量、类、方法等选取了清晰的名字？</li>
-<li><strong>注释：</strong> 注释是否含义清晰并且有用？</li>
-<li><strong>代码规范：</strong> 代码是否遵循了<a href="http://google.github.io/styleguide/">归约规范</a>？</li>
-<li><strong>文档：</strong> 开发人员是否同步更新了相关文档？</li>
-</ul>
-<p>See <a href="../41083">How To Do A Code Review</a> for more information.<br />
-具体内容详见<a href="../41083">《如何进行代码审查》</a>。</p>
-<h3 id="picking-the-best-reviewers挑选最好的评审人"><a class="markdownIt-Anchor" href="#picking-the-best-reviewers挑选最好的评审人"></a> Picking the Best Reviewers（挑选最好的评审人）</h3>
-<p>In general, you want to find the <em>best</em> reviewers you can who are capable of responding to your review within a reasonable period of time.<br />
-通常情况下，你会倾向于寻找你所能找到的最好的评审人，以保证你的代码能尽快得到审查。</p>
-<p>The best reviewer is the person who will be able to give you the most thorough and correct review for the piece of code you are writing. This usually means the owner(s) of the code, who may or may not be the people in the OWNERS file. Sometimes this means asking different people to review different parts of the CL.<br />
-好的评审人能够给予你编写的代码较为彻底和正确的审查。这意味着，相关代码的所有者（owner）可能在所有者文件里也可能不在所有者文件里。有时可能需要让不同的人来去审查变更列表的不同部分。</p>
-<p>If you find an ideal reviewer but they are not available, you should at least CC them on your change.<br />
-如果你找到了理想的评审人但他们却因为某些原因无法为你审查时，你至少需要将你的变更内容抄送给他们。</p>
-<h3 id="in-person-reviews-and-pair-programming面对面审查以及结对编程"><a class="markdownIt-Anchor" href="#in-person-reviews-and-pair-programming面对面审查以及结对编程"></a> In-Person Reviews (and Pair Programming)（面对面审查（以及结对编程））</h3>
-<p>If you pair-programmed a piece of code with somebody who was qualified to do a good code review on it, then that code is considered reviewed.<br />
-如果某部分代码你是与小伙伴结对编程写出来的，同时这个小伙伴被认为能进行合格的代码审查，那么这部分代码也可以被认为是进行过了代码审查。</p>
-<p>You can also do in-person code reviews where the reviewer asks questions and the developer of the change speaks only when spoken to.<br />
-你也可以采用面对面的代码审查方式，在这种方式下，评审人提出问题，被问的开发人员进行描述答复。</p>
-]]></content>
-      <categories>
-        <category>Google代码评审规约</category>
-      </categories>
-      <tags>
-        <tag>Code Review</tag>
-        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -474,6 +348,105 @@
       </tags>
   </entry>
   <entry>
+    <title>183. 从不订购的客户</title>
+    <url>/posts/44608/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Customers (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (id <span class="type">int</span>, customerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Customers</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Customers</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行表示一个用户的ID和名字</span><br></pre></td></tr></table></figure>
+<p>表：Orders</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customerId  <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">customerId是来自Customers表的外键</span><br><span class="line">表的每一行表示一个订单的ID以及下订单的用户的ID</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Customers 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> customerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Customers <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Henry     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Max       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.Name <span class="keyword">AS</span> Customers </span><br><span class="line"><span class="keyword">FROM</span> Customers c <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders o </span><br><span class="line"><span class="keyword">ON</span> c.Id<span class="operator">=</span>o.CustomerId </span><br><span class="line"><span class="keyword">WHERE</span> o.CustomerId <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> Orders <span class="keyword">AS</span> b</span><br><span class="line">  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/customers-who-never-order">https://leetcode.cn/problems/customers-who-never-order</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1、代码评审开发者指南</title>
+    <url>/posts/35152/</url>
+    <content><![CDATA[<h2 id="introduction介绍"><a class="markdownIt-Anchor" href="#introduction介绍"></a> Introduction（介绍）</h2>
+<p>A code review is a process where someone other than the author(s) of a piece of code examines that code.<br />
+所谓的代码审查（code review）就是指让别人来审查自己的代码的过程。</p>
+<p>At Google, we use code review to maintain the quality of our code and products.<br />
+在Google内部，我们会通过代码审查来保证代码和产品的质量。</p>
+<p>This documentation is the canonical description of Google’s code review processes and policies.<br />
+本文档详述了Google是如何进行代码审查的以及所采用的策略。</p>
+<span id="more"></span>
+<p>This page is an overview of our code review process. There are two other large documents that are a part of this guide:</p>
+<ul>
+<li><strong><a href="../41083">How To Do A Code Review</a>:</strong> A detailed guide for code reviewers.</li>
+<li><strong>The CL Author’s Guide:</strong> A detailed guide for developers whose CLs are going through review.</li>
+</ul>
+<p>本页内容大体介绍了下代码审查的过程是怎样的。代码审查指南包含了两大部分：</p>
+<ul>
+<li><strong><a href="../41083">如何进行代码审查</a>：</strong> 详述了代码评审人应该如何进行代码审查。</li>
+<li><strong>变更列表作者指南：</strong> 详述了提交待审核变更列表的开发人员应该如何做。</li>
+</ul>
+<h2 id="what-do-code-reviewers-look-for代码审查应该关注哪些内容"><a class="markdownIt-Anchor" href="#what-do-code-reviewers-look-for代码审查应该关注哪些内容"></a> What Do Code Reviewers Look For?（代码审查应该关注哪些内容？）</h2>
+<p>Code reviews should look at:</p>
+<ul>
+<li><strong>Design:</strong> Is the code well-designed and appropriate for your system?</li>
+<li><strong>Functionality:</strong> Does the code behave as the author likely intended? Is the way the code behaves good for its users?</li>
+<li><strong>Complexity:</strong> Could the code be made simpler? Would another developer be able to easily understand and use this code when they come across it in the future?</li>
+<li><strong>Tests:</strong> Does the code have correct and well-designed automated tests?</li>
+<li><strong>Naming:</strong> Did the developer choose clear names for variables, classes, methods, etc.?</li>
+<li><strong>Comments:</strong> Are the comments clear and useful?</li>
+<li><strong>Style:</strong> Does the code follow our <a href="http://google.github.io/styleguide/">style guides</a>?</li>
+<li><strong>Documentation:</strong> Did the developer also update relevant documentation?</li>
+</ul>
+<p>代码审查内容应该关注以下几点：</p>
+<ul>
+<li><strong>设计：</strong> 代码是否设计良好且对于系统而言是否适合？</li>
+<li><strong>功能：</strong> 代码实现的行为是否达到了作者想要的效果？代码实现的行为对于用户是否友好？</li>
+<li><strong>复杂性：</strong> 代码能否写得更简单点吗？是否能让别的开发人员易于理解而且易于使用？</li>
+<li><strong>测试：</strong> 代码是否包含了正确的，设计良好的自动化测试？</li>
+<li><strong>命名：</strong> 开发人员是否为变量、类、方法等选取了清晰的名字？</li>
+<li><strong>注释：</strong> 注释是否含义清晰并且有用？</li>
+<li><strong>代码规范：</strong> 代码是否遵循了<a href="http://google.github.io/styleguide/">归约规范</a>？</li>
+<li><strong>文档：</strong> 开发人员是否同步更新了相关文档？</li>
+</ul>
+<p>See <a href="../41083">How To Do A Code Review</a> for more information.<br />
+具体内容详见<a href="../41083">《如何进行代码审查》</a>。</p>
+<h3 id="picking-the-best-reviewers挑选最好的评审人"><a class="markdownIt-Anchor" href="#picking-the-best-reviewers挑选最好的评审人"></a> Picking the Best Reviewers（挑选最好的评审人）</h3>
+<p>In general, you want to find the <em>best</em> reviewers you can who are capable of responding to your review within a reasonable period of time.<br />
+通常情况下，你会倾向于寻找你所能找到的最好的评审人，以保证你的代码能尽快得到审查。</p>
+<p>The best reviewer is the person who will be able to give you the most thorough and correct review for the piece of code you are writing. This usually means the owner(s) of the code, who may or may not be the people in the OWNERS file. Sometimes this means asking different people to review different parts of the CL.<br />
+好的评审人能够给予你编写的代码较为彻底和正确的审查。这意味着，相关代码的所有者（owner）可能在所有者文件里也可能不在所有者文件里。有时可能需要让不同的人来去审查变更列表的不同部分。</p>
+<p>If you find an ideal reviewer but they are not available, you should at least CC them on your change.<br />
+如果你找到了理想的评审人但他们却因为某些原因无法为你审查时，你至少需要将你的变更内容抄送给他们。</p>
+<h3 id="in-person-reviews-and-pair-programming面对面审查以及结对编程"><a class="markdownIt-Anchor" href="#in-person-reviews-and-pair-programming面对面审查以及结对编程"></a> In-Person Reviews (and Pair Programming)（面对面审查（以及结对编程））</h3>
+<p>If you pair-programmed a piece of code with somebody who was qualified to do a good code review on it, then that code is considered reviewed.<br />
+如果某部分代码你是与小伙伴结对编程写出来的，同时这个小伙伴被认为能进行合格的代码审查，那么这部分代码也可以被认为是进行过了代码审查。</p>
+<p>You can also do in-person code reviews where the reviewer asks questions and the developer of the change speaks only when spoken to.<br />
+你也可以采用面对面的代码审查方式，在这种方式下，评审人提出问题，被问的开发人员进行描述答复。</p>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Gerrit没有出现Verify按钮问题解决</title>
     <url>/posts/18923/</url>
     <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
@@ -487,48 +460,37 @@
       </tags>
   </entry>
   <entry>
-    <title>6、处理代码评审过程产生的抵触问题</title>
-    <url>/posts/45937/</url>
-    <content><![CDATA[<p>Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general.<br />
-有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建议，要么就是抱怨你太严格了。</p>
+    <title>9. 回文数</title>
+    <url>/posts/35052/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
+例如，121 是回文，而 123 不是。</p>
 <span id="more"></span>
-<h2 id="who-is-right"><a class="markdownIt-Anchor" href="#who-is-right"></a> Who is right?</h2>
-<h2 id="谁是对的"><a class="markdownIt-Anchor" href="#谁是对的"></a> 谁是对的？</h2>
-<p>When a developer disagrees with your suggestion, first take a moment to consider if they are correct. Often, they are closer to the code than you are, and so they might really have a better insight about certain aspects of it. Does their argument make sense? Does it make sense from a code health perspective? If so, let them know that they are right and let the issue drop.<br />
-当开发人员不同意你的建议时，可以先花点时间考虑下他们是不是对的。通常，他们比你更接近代码，因此他们可能会对代码的某些方面有更好的了解。他们的异议是否有意义？从代码质量的角度来看这些争议是否有意义？如果是的话，那就让他们知道他们是对的，然后关闭问题。</p>
-<p>However, developers are not always right. In this case the reviewer should further explain why they believe that their suggestion is correct. A good explanation demonstrates both an understanding of the developer’s reply, and additional information about why the change is being requested.<br />
-然而，开发人员并不总是对的。在这种情况下，审查人员应该进一步解释为什么相信他们的建议是对的。一个好的解释不仅表明了对开发人员的回复的理解，也深入阐述了为什么要这么改。</p>
-<p>In particular, when the reviewer believes their suggestion will improve code health, they should continue to advocate for the change, if they believe the resulting code quality improvement justifies the additional work requested. <strong>Improving code health tends to happen in small steps.</strong><br />
-尤其是，当审查人员认为他们的建议会改善代码质量并且觉得由此带来的额外工作量是合理时，他们应该继续倡导修改。<strong>改善代码质量总是在小步中进行的。</strong></p>
-<p>Sometimes it takes a few rounds of explaining a suggestion before it really sinks in. Just make sure to always stay <a href="comments.md#courtesy">polite</a> and let the developer know that you <em>hear</em> what they’re saying, you just don’t <em>agree</em>.<br />
-有时需要来回对建议解释个几轮才能让开发人员真正理解。在这过程中，也要记得保证礼貌并且让开发人员知道你<em>知道</em>他们在说什么，只是不<em>同意</em>而已</p>
-<h2 id="upsetting-developers"><a class="markdownIt-Anchor" href="#upsetting-developers"></a> Upsetting Developers</h2>
-<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
-<p>Reviewers sometimes believe that the developer will be upset if the reviewer insists on an improvement. Sometimes developers do become upset, but it is usually brief and they become very thankful later that you helped them improve the quality of their code. Usually, if you are <a href="comments.md#courtesy">polite</a> in your comments, developers actually don’t become upset at all, and the worry is just in the reviewer’s mind. Upsets are usually more about <a href="comments.md#courtesy">the way comments are written</a> than about the reviewer’s insistence on code quality.<br />
-审查人员有时会觉得如果审查人员坚持代码改进会让开发人员感到沮丧。开发人员有时也确实会感到沮丧，但这种感觉通常是短暂的，并且后续还会感激你帮助他们改善代码质量。通常情况下，如果你在评注里保持着礼貌，开发人员实际上是不会感到抗拒的，这个担心只是审查人员自身觉得的而已。比起审查人员坚持代码改善，反而是审查意见的编写方式更容易让开发人员感到不快。</p>
-<h2 id="cleaning-it-up-later"><a class="markdownIt-Anchor" href="#cleaning-it-up-later"></a> Cleaning It Up Later</h2>
-<h2 id="后续优化"><a class="markdownIt-Anchor" href="#后续优化"></a> 后续优化</h2>
-<p>A common source of push back is that developers (understandably) want to get things done. They don’t want to go through another round of review just to get this CL in. So they say they will clean something up in a later CL, and thus you should LGTM <em>this</em> CL now. Some developers are very good about this, and will immediately write a follow-up CL that fixes the issue. However, experience shows that as more time passes after a developer writes the original CL, the less likely this clean up is to happen. In fact, usually unless the developer does the clean up <em>immediately</em> after the present CL, it never happens. This isn’t because developers are irresponsible, but because they have a lot of work to do and the cleanup gets lost or forgotten in the press of other work. Thus, it is usually best to insist that the developer clean up their CL <em>now</em>, before the code is in the codebase and “done.” Letting people “clean things up later” is a common way for codebases to degenerate.<br />
-发生抵触的一个常见原因是开发人员想完成任务，这是可以理解的。他们不想为了让这个CL通过而进行新一轮的审查。因此他们会说他们会在后续的CL里进行优化，现在你应该先让我通过<em>这个</em>CL。一些开发人员很擅长做这个，还会立即写一个跟进事项。然而，经验表明，开发人员在写下原本的CL之后，随着时间推移，这些跟进事项会越来越难以得到实施。实际上多数情况是，除非开发人员<em>立马</em>处理这些问题，否则以后都不会处理。这不是因为开发人员没有责任心，而是因为他们有很多工作要做，从而这些跟进事项在其它工作的压力下被搁置或者遗忘。因此，最好坚持在代码入库前就让开发人员就处理好这些问题。让人们“稍后跟进”是代码质量下降的常见原因。</p>
-<p>If a CL introduces new complexity, it must be cleaned up before submission unless it is an <a href="../emergencies.md">emergency</a>. If the CL exposes surrounding problems and they can’t be addressed right now, the developer should file a bug for the cleanup and assign it to themselves so that it doesn’t get lost. They can optionally also write a TODO comment in the code that references the filed bug.<br />
-如果一个CL引入了新的复杂性，那么在提交到代码库前必须进行优化除非这是个紧急任务。如果这个CL暴露了一些别的问题而且无法立马解决，那么开发人员应该提交一个待跟进的bug并把它指派给自己，以此来让它不会被遗忘。开发人员也可以选择在代码里下一个TODO注释来提醒这个被记录下来的bug。</p>
-<h2 id="general-complaints-about-strictness"><a class="markdownIt-Anchor" href="#general-complaints-about-strictness"></a> General Complaints About Strictness</h2>
-<h2 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> </h2>
-<p>If you previously had fairly lax code reviews and you switch to having strict reviews, some developers will complain very loudly. Improving the <a href="speed.md">speed</a> of your code reviews usually causes these complaints to fade away.<br />
-如果你之前做代码审核比较宽松，然后（突然）转向严格的审查，一些开发人员会可能意见会比较大。提高你的代码审查<a href="speed.md">速度</a>通常能让这些抱怨消失。</p>
-<p>Sometimes it can take months for these complaints to fade away, but eventually developers tend to see the value of strict code reviews as they see what great code they help generate. Sometimes the loudest protesters even become your strongest supporters once something happens that causes them to really see the value you’re adding by being strict.<br />
-有时需要花几个月的时间来让这些抵触情绪消失，但最终开发人员会发现严格代码审查所带来的价值，因为他们看到了在审查人员的帮助下写出了出色的代码。一旦意见最大的那几个抗议者看到了你严格审查产生的价值，有时他们甚至会成为你的最坚定的支持者。</p>
-<h2 id="resolving-conflicts"><a class="markdownIt-Anchor" href="#resolving-conflicts"></a> Resolving Conflicts</h2>
-<h2 id="解决冲突"><a class="markdownIt-Anchor" href="#解决冲突"></a> 解决冲突</h2>
-<p>If you are following all of the above but you still encounter a conflict between yourself and a developer that can’t be resolved, see <a href="../51044">The Standard of Code Review</a> for guidelines and principles that can help resolve the conflict.<br />
-如果你遵从了上述几点但仍然和开发人员产生了难以解决的意见冲突，那么请参阅<a href="../51044">代码审查标准</a>章节，里面的指南和原则有助于解决冲突。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>约束条件</strong></p>
+<ul>
+<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
+</ul>
+<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>Google代码评审规约</category>
+        <category>Leetcode题解</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>Code Review</tag>
-        <tag>Translation</tag>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -810,6 +772,60 @@
       </tags>
   </entry>
   <entry>
+    <title>2、如何进行代码审查</title>
+    <url>/posts/41083/</url>
+    <content><![CDATA[<h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
+<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
+<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
+<span id="more"></span>
+<ul>
+<li>
+<p><a href="../51044">The Standard of Code Review</a></p>
+</li>
+<li>
+<p><a href="../16518">What to Look For In a Code Review</a></p>
+</li>
+<li>
+<p>Navigating a CL in Review</p>
+</li>
+<li>
+<p>Speed of Code Reviews</p>
+</li>
+<li>
+<p><a href="../12266">How to Write Code Review Comments</a></p>
+</li>
+<li>
+<p><a href="../45937">Handling Pushback in Code Reviews</a></p>
+</li>
+<li>
+<p><a href="../51044">代码审查的标准</a></p>
+</li>
+<li>
+<p><a href="../16518">代码审查要做什么</a></p>
+</li>
+<li>
+<p>在审查里定向变更记录</p>
+</li>
+<li>
+<p>代码审查的速度</p>
+</li>
+<li>
+<p><a href="../12266">如何编写代码审查评论</a></p>
+</li>
+<li>
+<p><a href="../45937">处理代码评审过程产生的抵触问题</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（六）--RPC</title>
     <url>/posts/40514/</url>
     <content><![CDATA[<h1 id="remote-procedure-call-rpc远程过程调用"><a class="markdownIt-Anchor" href="#remote-procedure-call-rpc远程过程调用"></a> Remote procedure call (RPC，远程过程调用)</h1>
@@ -1062,6 +1078,135 @@
       </tags>
   </entry>
   <entry>
+    <title>4、代码审查内容</title>
+    <url>/posts/16518/</url>
+    <content><![CDATA[<p>Note: Always make sure to take into account <a href="../51044">The Standard of Code Review</a> when considering each of these points.<br />
+注意：在考虑下面这几点时，请确保也将<a href="../51044">代码审查标准</a>考虑了进去。</p>
+<span id="more"></span>
+<h2 id="design设计"><a class="markdownIt-Anchor" href="#design设计"></a> Design（设计）</h2>
+<p>The most important thing to cover in a review is the overall design of the CL. Do the interactions of various pieces of code in the CL make sense? Does this change belong in your codebase, or in a library? Does it integrate well with the rest of your system? Is now a good time to add this functionality?<br />
+代码评审时最重要的一个地方就是该次代码变更的整体设计。该次代码变更的不同代码片段之间的交互是否有意义？该次变更是属于代码库的变更还是属于使用的库的变更？提审的代码是否能与系统很好的集成起来？现在是否适合添加这个功能？</p>
+<h2 id="functionality功能"><a class="markdownIt-Anchor" href="#functionality功能"></a> Functionality（功能）</h2>
+<p>Does this CL do what the developer intended? Is what the developer intended good for the users of this code? The “users” are usually both end-users (when they are affected by the change) and developers (who will have to “use” this code in the future).<br />
+该次代码变更是否达到了开发人员想要的效果？开发人员想要达到的效果是否能满足用户？注意，此处的“用户”不仅是指受本次变更影响的终端用户，也指后面会使用这段代码的开发人员。</p>
+<p>Mostly, we expect developers to test CLs well-enough that they work correctly by the time they get to code review. However, as the reviewer you should still be thinking about edge cases, looking for concurrency problems, trying to think like a user, and making sure that there are no bugs that you see just by reading the code.<br />
+多数情况下，我们希望开发人员在提交代码审核前能对要代码做足够的测试。然而，作为评审人，你仍需考虑边界情况、看下是否有并发问题、试着从用户的角度去思考，以此来确保不会存在那种仅通过阅读代码就能发现的bug。</p>
+<p>You <em>can</em> validate the CL if you want—the time when it’s most important for a reviewer to check a CL’s behavior is when it has a user-facing impact, such as a <strong>UI change</strong>. It’s hard to understand how some changes will impact a user when you’re just reading the code. For changes like that, you can have the developer give you a demo of the functionality if it’s too inconvenient to patch in the CL and try it yourself.<br />
+如果有需要，评审人也可以去验证提交上来的代码变更的正确性，如果某次提审的代码变更涉及到影响用户的直观体验（例如UI变了），那么此时评审人去检查该部分的代码是很重要的。如果只是去阅读这些代码，评审人很难想象这些变更会对用户造成什么样的影响。对于这类变更，如果评审人不方便在提审的代码变更里自己做测试，可以让开发人员给一个该功能的样例。</p>
+<p>Another time when it’s particularly important to think about functionality during a code review is if there is some sort of <strong>parallel programming</strong> going on in the CL that could theoretically cause deadlocks or race conditions. These sorts of issues are very hard to detect by just running the code and usually need somebody (both the developer and the reviewer) to think through them carefully to be sure that problems aren’t being introduced. (Note that this is also a good reason not to use concurrency models where race conditions or deadlocks are possible—it can make it very complex to do code reviews or understand the code.)<br />
+另一个在代码评审时需要重点关注的地方是，提审的代码里包含着并发编程，理论上会引发死锁或者资源竞争问题。这类问题很难通过运行代码被发现，通常需要开发人员和评审人员一起仔细甄别来防止这些问题的出现。（这也是不使用可能引发资源竞争或者死锁问题的并发模型的一个好理由，毕竟这部分代码审核起来比较麻烦而且不容易理解。）</p>
+<h2 id="complexity复杂性"><a class="markdownIt-Anchor" href="#complexity复杂性"></a> Complexity（复杂性）</h2>
+<p>Is the CL more complex than it should be? Check this at every level of the CL—are individual lines too complex? Are functions too complex? Are classes too complex? “Too complex” usually means <strong>“can’t be understood quickly by code readers.”</strong> It can also mean <strong>&quot;developers are likely to introduce bugs when they try to call or modify this code.&quot;</strong><br />
+该次代码变更是否过于复杂了？可以从不同层面去对其进行检查-某些代码行是不是太复杂了？某些函数是不是太复杂了？某些类是不是太复杂了？这里的“太复杂”的定义通常是：**无法被阅读代码的人快速理解。**它也可以定义为：<strong>开发人员如果尝试调用或者修改该代码，将很容易引入bug。</strong></p>
+<p>A particular type of complexity is <strong>over-engineering</strong>, where developers have made the code more generic than it needs to be, or added functionality that isn’t presently needed by the system. Reviewers should be especially vigilant about over-engineering. Encourage developers to solve the problem they know needs to be solved <em>now</em>, not the problem that the developer speculates <em>might</em><br />
+need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe.<br />
+有个比较特殊的复杂场景，那就是<strong>过度设计</strong>，意思是开发人员写的代码过于通用化了，或者为系统添加了当前不需要的功能。评审人员应该要特别警惕过度设计。鼓励开发人员解决他们<strong>当前</strong>需要解决的问题，而不是去解决那些推测未来<strong>可能</strong>需要解决的问题。只有当这些未来的问题到来了，并且能看到具体的内容及需求了，我们才应该立马去解决。</p>
+<h2 id="tests测试"><a class="markdownIt-Anchor" href="#tests测试"></a> Tests（测试）</h2>
+<p>Ask for unit, integration, or end-to-end<br />
+tests as appropriate for the change. In general, tests should be added in the same CL as the production code unless the CL is handling an <a href="../emergencies.md">emergency</a>.<br />
+询问是否已为该次变更做了单元测试、集成测试或者端到端测试。通常情况下，测试应该被加入到变更记录里作为产品代码的一部分，除非这个变更是为了处理某次<a href="../">紧急情况</a></p>
+<p>Make sure that the tests in the CL are correct, sensible, and useful. Tests do not test themselves, and we rarely write tests for our tests—a human must ensure that tests are valid.<br />
+确保代码变更里的的测试是正确的，有意义的，而且是有用的。测试不会测试自己，而且我们也几乎不为测试去编写测试代码，所以我们需要保证测试是有效的。</p>
+<p>Will the tests actually fail when the code is broken? If the code changes beneath them, will they start producing false positives? Does each test make simple and useful assertions? Are the tests separated appropriately between different test methods?<br />
+当代码被破坏时，这些测试是否真的会失败？这些测试里的代码发生变更时，是否会产生误报？每个测试是否都做了简单但有用的断言（assertions）？测试是否恰当地分开在不同的方法里了？</p>
+<p>Remember that tests are also code that has to be maintained. Don’t accept complexity in tests just because they aren’t part of the main binary.<br />
+记住，测试也是必须要维护的代码，不能因为它们不属于最终的运行程序包一部分而允许测试代码写的很复杂。</p>
+<h2 id="naming命名"><a class="markdownIt-Anchor" href="#naming命名"></a> Naming（命名）</h2>
+<p>Did the developer pick good names for everything? A good name is long enough to fully communicate what the item is or does, without being so long that it becomes hard to read.<br />
+开发人员是否为每一处需要命名的地方都选取了好的命名？一个好的命名会足够长，来充分表达该条目是什么或者是做什么的，但不会因为过长而变得难以阅读。</p>
+<h2 id="comments注释"><a class="markdownIt-Anchor" href="#comments注释"></a> Comments（注释）</h2>
+<p>Did the developer write clear comments in understandable English? Are all of the comments actually necessary? Usually comments are useful when they <strong>explain why</strong> some code exists, and should not be explaining <em>what</em> some code is doing. If the code isn’t clear enough to explain itself, then the code should be made simpler. There are some exceptions (regular expressions and complex algorithms often benefit greatly from comments that explain what they’re doing, for example) but mostly comments are for information that the code itself can’t possibly contain, like the reasoning behind a decision.<br />
+开发人员是否用可理解的英文写了清晰的注释？是否所有的注释都是必须的？通常情况下，当一段注释是来<strong>解释为什么</strong>这部分代码需要存在时，那么这段注释就是有用的，而且不应该去解释这部分代码在<em>做什么</em>。如果某段代码无法足够清晰的去进行自解释，那么这段代码就应该写得更简单点。也有些例外的情况（例如，对于正则表达式和复杂的算法，如果有注释来说明这些代码在做什么，将会很有用），但多数情况下，注释是用来标注代码本身无法包含的东西，譬如代码决定这么写的原因。</p>
+<p>It can also be helpful to look at comments that were there before this CL. Maybe there is a TODO that can be removed now, a comment advising against this change being made, etc.<br />
+看回该次变更之前的注释也很有用。可能有个现在可以移除的TODO，有条建议不要进行此变更的注释，等等。</p>
+<p>Note that comments are different from <em>documentation</em> of classes, modules, or functions, which should instead express the purpose of a piece of code, how it should be used, and how it behaves when used.<br />
+注意，注释不同于类、模块或者函数的<em>文档</em>，文档应该表述某个代码片段的目的，该代码片段如何使用，以及使用该代码片段时会有什么样的行为。</p>
+<h2 id="style代码规范"><a class="markdownIt-Anchor" href="#style代码规范"></a> Style（代码规范）</h2>
+<p>We have <a href="http://google.github.io/styleguide/">style guides</a> at Google for all of our major languages, and even for most of the minor languages. Make sure the CL follows the appropriate style guides.<br />
+在Google，我们为所用到的所有主流语言甚至是多数非主流语言都制定了相应的<a href="http://google.github.io/styleguide/">规范规约</a>。要确保该次代码变更遵从了恰当的代码规范规约。</p>
+<p>If you want to improve some style point that isn’t in the style guide, prefix your comment with “Nit:” to let the developer know that it’s a nitpick that you think would improve the code but isn’t mandatory. Don’t block CLs from being submitted based only on personal style preferences.<br />
+如果你想改善某些不在规约规范里的点，那么在留言评论时可以在前面加上“Nit：”，以此来让开发人员知道这个只是你个人认为的可以改进的地方，而不是强制性的。不能仅因为个人的规范风格喜好的原因而阻断了代码变更的提交通过。</p>
+<p>The author of the CL should not include major style changes combined with other changes. It makes it hard to see what is being changed in the CL, makes merges and rollbacks more complex, and causes other problems. For example, if the author wants to reformat the whole file, have them send you just the reformatting as one CL, and then send another CL with their functional changes after that.<br />
+代码变更的作者不应将主要内容为规范变更的代码与其他变更代码混合在一起。这么做会让人难以看出该次代码变更的变更内容是什么，还会使合并和回滚变得复杂，并且引发别的问题。举个例子，如果作者想格式化整个文件，那么应该把格式化作为一次变更提交，然后再将功能性的变更作为一次变更提交。</p>
+<h2 id="consistency一致性"><a class="markdownIt-Anchor" href="#consistency一致性"></a> Consistency（一致性）</h2>
+<p>What if the existing code is inconsistent with the style guide? Per our <a href="../51044#principles">code review principles</a>, the style guide is the absolute authority: if something is required by the style guide, the CL should follow the guidelines.<br />
+如果现有的代码与规范规约不一致怎么办？根据我们的<a href="../51044#principles">代码审查原则</a>，规范规约是绝对的权威：如果是规范规约所要求的，那么代码变更就应该遵从。</p>
+<p>In some cases, the style guide makes recommendations rather than declaring requirements. In these cases, it’s a judgment call whether the new code should be consistent with the recommendations or the surrounding code. Bias towards following the style guide unless the local inconsistency would be too confusing.<br />
+在某些情况下，规范规约只是做出了推荐做法而不是做强制要求。在这些情况下，需要判断新代码是否要与推荐做法或者现有其它代码保持一致。如果这个不一致性太令人疑惑，则应该遵从规范规约。</p>
+<p>If no other rule applies, the author should maintain consistency with the existing code. Either way, encourage the author to file a bug and add a TODO for cleaning up existing code.<br />
+如果没有其它适用规则，那么作者应该与现有代码保持一致。无论是哪种方式，都应鼓励作者记录下问题并添加一个TODO，以此来清理现有代码。</p>
+<h2 id="documentation文档"><a class="markdownIt-Anchor" href="#documentation文档"></a> Documentation（文档）</h2>
+<p>If a CL changes how users build, test, interact with, or release code, check to see that it also updates associated documentation, including READMEs, g3doc pages, and any generated reference docs. If the CL deletes or deprecates code, consider whether the documentation should also be deleted. If documentation is missing, ask for it.<br />
+如果某次代码变更改变了用户构建、测试、交互或者发布代码的方式，那么审查人员也要检查是否同步更新了相关的文档，包括README文档、g3doc页面（g3doc为google内部的文档管理平台）以及任何生成的参考文档。如果该次代码变更删除或者弃用了某些代码，则还要看对应的文档是否也删除了。如果缺失了文档，要去进行索取。</p>
+<h2 id="every-line每一行"><a class="markdownIt-Anchor" href="#every-line每一行"></a> Every Line（每一行）</h2>
+<p>In the general case, look at <em>every</em> line of code that you have been assigned to review. Some things like data files, generated code, or large data structures you can scan over sometimes, but don’t scan over a human-written class, function, or block of code and assume that what’s inside of it is okay. Obviously some code deserves more careful scrutiny than other code—that’s a judgment call that you have to make—but you should at least be sure that you <em>understand</em> what all the code is doing.<br />
+一般情况下，审查人员需要审视<em>每</em>一行提交上来的代码。对于诸如数据文件、自动生成的代码，或者大的数据结构审查人员可以另外找个时间再来进行扫视，但对于手写的类、函数或者代码块，则不能假设这里面是没问题然后只是简单的一扫而过。（对于要审查的代码）有些代码比其它代码更值得审阅，这是审查人员必须要做的判断，但是审查人员至少要确保<em>理解</em>这些代码都实现了什么功能行为。</p>
+<p>If it’s too hard for you to read the code and this is slowing down the review, then you should let the developer know that and wait for them to clarify it before you try to review it. At Google, we hire great software engineers, and you are one of them. If you can’t understand the code, it’s very likely that other developers won’t either. So you’re also helping future developers understand this code, when you ask the developer to clarify it.<br />
+审查人员在审查过程中如果发觉阅读这些代码很困难，并且拖慢了审查进度，那么审查人员应该让开发人员知道这点，等开发人员解释说明清楚后再去审查。在Google，我们雇佣了很多很棒的软件工程师，而审查人员也是他们中的一员。如果审查人员无法理解某段代码，那么其他的工程师也很可能无法理解。所以，当审查人员在让开发人员解释说明某段代码时，也是在帮助以后的开发人员理解这段代码。</p>
+<p>If you understand the code but you don’t feel qualified to do some part of the review, <a href="#exceptions-every-line-exceptions">make sure there is a reviewer</a> on the CL who is qualified, particularly for complex issues such as privacy, security, concurrency, accessibility, internationalization, etc.<br />
+如果你理解该部分代码但是又觉得好像不够资格来去做这部分代码，那么要确保能有个足够资格的人来去审核它，尤其是面对诸如隐私，安全，并发，可访问性，国际化等复杂问题时。</p>
+<h3 id="exceptions例外"><a class="markdownIt-Anchor" href="#exceptions例外"></a> Exceptions（例外）</h3>
+<p>What if it doesn’t make sense for you to review every line? For example, you are one of multiple reviewers on a CL and may be asked:<br />
+如果复习每一行对你来说没有意义怎么办？例如，你是评审人之一然后可能会被要求：</p>
+<ul>
+<li>To review only certain files that are part of a larger change.</li>
+<li>只审核某次大的变更提交里的某些文件。</li>
+<li>To review only certain aspects of the CL, such as the high-level design, privacy or security implications, etc.</li>
+<li>只审核改次变更提交的某些层面，例如高层次的设计，隐私或者安全问题等。</li>
+</ul>
+<p>In these cases, note in a comment which parts you reviewed. Prefer giving <a href="speed.md#lgtm-with-comments">LGTM with comments</a>.<br />
+在这些场景下，在评论里标注你审核了哪些内容。建议可以在评论里给一个“LGTM”（对应到Gerrit就是+1）。</p>
+<p>If you instead wish to grant LGTM after confirming that other reviewers have reviewed other parts of the CL, note this explicitly in a comment to set expectations. Aim to <a href="speed.md#responses">respond quickly</a> once the CL has reached the desired state.</p>
+<h2 id="context上下文"><a class="markdownIt-Anchor" href="#context上下文"></a> Context（上下文）</h2>
+<p>It is often helpful to look at the CL in a broad context. Usually the code review tool will only show you a few lines of code around the parts that are being changed. Sometimes you have to look at the whole file to be sure that the change actually makes sense. For example, you might see only four new lines being added, but when you look at the whole file, you see those four lines are in a 50-line method that now really needs to be broken up into smaller methods.</p>
+<p>It’s also useful to think about the CL in the context of the system as a whole. Is this CL improving the code health of the system or is it making the whole system more complex, less tested, etc.? <strong>Don’t accept CLs that degrade the code health of the system.</strong> Most systems become complex through many small changes that add up, so it’s important to prevent even small complexities in new changes.</p>
+<h2 id="good-things好的地方"><a class="markdownIt-Anchor" href="#good-things好的地方"></a> Good Things（好的地方）</h2>
+<p>If you see something nice in the CL, tell the developer, especially when they addressed one of your comments in a great way. Code reviews often just focus on mistakes, but they should offer encouragement and appreciation for good practices, as well. It’s sometimes even more valuable, in terms of mentoring, to tell a developer what they did right than to tell them what they did wrong.<br />
+如果你在变更集里看到了好的实践，那么请告诉相应的开发人员，特别是当他们针对你的评注以不错的方式进行了处理。代码评审通常会专注于错误的提出，但同时也应该鼓励和赞美好的实践。有时告诉开发人员做对了什么比告诉他们做错了什么更有指导意义。</p>
+<h2 id="summary总结"><a class="markdownIt-Anchor" href="#summary总结"></a> Summary（总结）</h2>
+<p>In doing a code review, you should make sure that:</p>
+<ul>
+<li>The code is well-designed.</li>
+<li>The functionality is good for the users of the code.</li>
+<li>Any UI changes are sensible and look good.</li>
+<li>Any parallel programming is done safely.</li>
+<li>The code isn’t more complex than it needs to be.</li>
+<li>The developer isn’t implementing things they <em>might</em> need in the future but don’t know they need now.</li>
+<li>Code has appropriate unit tests.</li>
+<li>Tests are well-designed.</li>
+<li>The developer used clear names for everything.</li>
+<li>Comments are clear and useful, and mostly explain <em>why</em> instead of <em>what</em>.</li>
+<li>Code is appropriately documented (generally in g3doc).</li>
+<li>The code conforms to our style guides.</li>
+</ul>
+<p>在做代码审查时，应该确保代码实现了以下几点：</p>
+<ul>
+<li>代码是设计良好的。</li>
+<li>调用方是可以放心使用这部分功能的。</li>
+<li>任何UI上的改动都是有意义的并且看起来还不错。</li>
+<li>所有的多线程编程都应该是安全的。</li>
+<li>代码已经足够简洁。</li>
+<li>不会过度设计。</li>
+<li>代码里包含着恰当的单元测试。</li>
+<li>测试也是设计良好的。</li>
+<li>代码里所有用到的命名都做到了见名知意。</li>
+<li>注释是清晰而且有用的，同时主要是解释了“为什么”而不是“什么”。</li>
+<li>代码有恰当的文档。</li>
+<li>代码符合我们的开发规范。</li>
+</ul>
+<p>Make sure to review <strong>every line</strong> of code you’ve been asked to review, look at the <strong>context</strong>, make sure you’re <strong>improving code health</strong>, and compliment developers on <strong>good things</strong> that they do.<br />
+当你被指定去审核代码时，要切实审查了每一行代码，看看<strong>上下文</strong>，确保你是在帮助<strong>提高代码质量</strong>，同时对于开发人员做得好的地方，还要对其进行表扬。</p>
+<p>Next: <a href="navigate.md">Navigating a CL in Review</a></p>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
     <url>/posts/13955/</url>
     <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
@@ -1180,110 +1325,41 @@
       </tags>
   </entry>
   <entry>
-    <title>4、代码审查内容</title>
-    <url>/posts/16518/</url>
-    <content><![CDATA[<p>Note: Always make sure to take into account <a href="../51044">The Standard of Code Review</a> when considering each of these points.<br />
-注意：在考虑下面这几点时，请确保也将<a href="../51044">代码审查标准</a>考虑了进去。</p>
+    <title>6、处理代码评审过程产生的抵触问题</title>
+    <url>/posts/45937/</url>
+    <content><![CDATA[<p>Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general.<br />
+有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建议，要么就是抱怨你太严格了。</p>
 <span id="more"></span>
-<h2 id="design设计"><a class="markdownIt-Anchor" href="#design设计"></a> Design（设计）</h2>
-<p>The most important thing to cover in a review is the overall design of the CL. Do the interactions of various pieces of code in the CL make sense? Does this change belong in your codebase, or in a library? Does it integrate well with the rest of your system? Is now a good time to add this functionality?<br />
-代码评审时最重要的一个地方就是该次代码变更的整体设计。该次代码变更的不同代码片段之间的交互是否有意义？该次变更是属于代码库的变更还是属于使用的库的变更？提审的代码是否能与系统很好的集成起来？现在是否适合添加这个功能？</p>
-<h2 id="functionality功能"><a class="markdownIt-Anchor" href="#functionality功能"></a> Functionality（功能）</h2>
-<p>Does this CL do what the developer intended? Is what the developer intended good for the users of this code? The “users” are usually both end-users (when they are affected by the change) and developers (who will have to “use” this code in the future).<br />
-该次代码变更是否达到了开发人员想要的效果？开发人员想要达到的效果是否能满足用户？注意，此处的“用户”不仅是指受本次变更影响的终端用户，也指后面会使用这段代码的开发人员。</p>
-<p>Mostly, we expect developers to test CLs well-enough that they work correctly by the time they get to code review. However, as the reviewer you should still be thinking about edge cases, looking for concurrency problems, trying to think like a user, and making sure that there are no bugs that you see just by reading the code.<br />
-多数情况下，我们希望开发人员在提交代码审核前能对要代码做足够的测试。然而，作为评审人，你仍需考虑边界情况、看下是否有并发问题、试着从用户的角度去思考，以此来确保不会存在那种仅通过阅读代码就能发现的bug。</p>
-<p>You <em>can</em> validate the CL if you want—the time when it’s most important for a reviewer to check a CL’s behavior is when it has a user-facing impact, such as a <strong>UI change</strong>. It’s hard to understand how some changes will impact a user when you’re just reading the code. For changes like that, you can have the developer give you a demo of the functionality if it’s too inconvenient to patch in the CL and try it yourself.<br />
-如果有需要，评审人也可以去验证提交上来的代码变更的正确性，如果某次提审的代码变更涉及到影响用户的直观体验（例如UI变了），那么此时评审人去检查该部分的代码是很重要的。如果只是去阅读这些代码，评审人很难想象这些变更会对用户造成什么样的影响。对于这类变更，如果评审人不方便在提审的代码变更里自己做测试，可以让开发人员给一个该功能的样例。</p>
-<p>Another time when it’s particularly important to think about functionality during a code review is if there is some sort of <strong>parallel programming</strong> going on in the CL that could theoretically cause deadlocks or race conditions. These sorts of issues are very hard to detect by just running the code and usually need somebody (both the developer and the reviewer) to think through them carefully to be sure that problems aren’t being introduced. (Note that this is also a good reason not to use concurrency models where race conditions or deadlocks are possible—it can make it very complex to do code reviews or understand the code.)<br />
-另一个在代码评审时需要重点关注的地方是，提审的代码里包含着并发编程，理论上会引发死锁或者资源竞争问题。这类问题很难通过运行代码被发现，通常需要开发人员和评审人员一起仔细甄别来防止这些问题的出现。（这也是不使用可能引发资源竞争或者死锁问题的并发模型的一个好理由，毕竟这部分代码审核起来比较麻烦而且不容易理解。）</p>
-<h2 id="complexity复杂性"><a class="markdownIt-Anchor" href="#complexity复杂性"></a> Complexity（复杂性）</h2>
-<p>Is the CL more complex than it should be? Check this at every level of the CL—are individual lines too complex? Are functions too complex? Are classes too complex? “Too complex” usually means <strong>“can’t be understood quickly by code readers.”</strong> It can also mean <strong>&quot;developers are likely to introduce bugs when they try to call or modify this code.&quot;</strong><br />
-该次代码变更是否过于复杂了？可以从不同层面去对其进行检查-某些代码行是不是太复杂了？某些函数是不是太复杂了？某些类是不是太复杂了？这里的“太复杂”的定义通常是：**无法被阅读代码的人快速理解。**它也可以定义为：<strong>开发人员如果尝试调用或者修改该代码，将很容易引入bug。</strong></p>
-<p>A particular type of complexity is <strong>over-engineering</strong>, where developers have made the code more generic than it needs to be, or added functionality that isn’t presently needed by the system. Reviewers should be especially vigilant about over-engineering. Encourage developers to solve the problem they know needs to be solved <em>now</em>, not the problem that the developer speculates <em>might</em><br />
-need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe.<br />
-有个比较特殊的复杂场景，那就是<strong>过度设计</strong>，意思是开发人员写的代码过于通用化了，或者为系统添加了当前不需要的功能。评审人员应该要特别警惕过度设计。鼓励开发人员解决他们<strong>当前</strong>需要解决的问题，而不是去解决那些推测未来<strong>可能</strong>需要解决的问题。只有当这些未来的问题到来了，并且能看到具体的内容及需求了，我们才应该立马去解决。</p>
-<h2 id="tests测试"><a class="markdownIt-Anchor" href="#tests测试"></a> Tests（测试）</h2>
-<p>Ask for unit, integration, or end-to-end<br />
-tests as appropriate for the change. In general, tests should be added in the same CL as the production code unless the CL is handling an <a href="../emergencies.md">emergency</a>.<br />
-询问是否已为该次变更做了单元测试、集成测试或者端到端测试。通常情况下，测试应该被加入到变更记录里作为产品代码的一部分，除非这个变更是为了处理某次<a href="../">紧急情况</a></p>
-<p>Make sure that the tests in the CL are correct, sensible, and useful. Tests do not test themselves, and we rarely write tests for our tests—a human must ensure that tests are valid.<br />
-确保代码变更里的的测试是正确的，有意义的，而且是有用的。测试不会测试自己，而且我们也几乎不为测试去编写测试代码，所以我们需要保证测试是有效的。</p>
-<p>Will the tests actually fail when the code is broken? If the code changes beneath them, will they start producing false positives? Does each test make simple and useful assertions? Are the tests separated appropriately between different test methods?<br />
-当代码被破坏时，这些测试是否真的会失败？这些测试里的代码发生变更时，是否会产生误报？每个测试是否都做了简单但有用的断言（assertions）？测试是否恰当地分开在不同的方法里了？</p>
-<p>Remember that tests are also code that has to be maintained. Don’t accept complexity in tests just because they aren’t part of the main binary.<br />
-记住，测试也是必须要维护的代码，不能因为它们不属于最终的运行程序包一部分而允许测试代码写的很复杂。</p>
-<h2 id="naming命名"><a class="markdownIt-Anchor" href="#naming命名"></a> Naming（命名）</h2>
-<p>Did the developer pick good names for everything? A good name is long enough to fully communicate what the item is or does, without being so long that it becomes hard to read.<br />
-开发人员是否为每一处需要命名的地方都选取了好的命名？一个好的命名会足够长，来充分表达该条目是什么或者是做什么的，但不会因为过长而变得难以阅读。</p>
-<h2 id="comments注释"><a class="markdownIt-Anchor" href="#comments注释"></a> Comments（注释）</h2>
-<p>Did the developer write clear comments in understandable English? Are all of the comments actually necessary? Usually comments are useful when they <strong>explain why</strong> some code exists, and should not be explaining <em>what</em> some code is doing. If the code isn’t clear enough to explain itself, then the code should be made simpler. There are some exceptions (regular expressions and complex algorithms often benefit greatly from comments that explain what they’re doing, for example) but mostly comments are for information that the code itself can’t possibly contain, like the reasoning behind a decision.<br />
-开发人员是否用可理解的英文写了清晰的注释？是否所有的注释都是必须的？通常情况下，当一段注释是来<strong>解释为什么</strong>这部分代码需要存在时，那么这段注释就是有用的，而且不应该去解释这部分代码在<em>做什么</em>。如果某段代码无法足够清晰的去进行自解释，那么这段代码就应该写得更简单点。也有些例外的情况（例如，对于正则表达式和复杂的算法，如果有注释来说明这些代码在做什么，将会很有用），但多数情况下，注释是用来标注代码本身无法包含的东西，譬如代码决定这么写的原因。</p>
-<p>It can also be helpful to look at comments that were there before this CL. Maybe there is a TODO that can be removed now, a comment advising against this change being made, etc.<br />
-看回该次变更之前的注释也很有用。可能有个现在可以移除的TODO，有条建议不要进行此变更的注释，等等。</p>
-<p>Note that comments are different from <em>documentation</em> of classes, modules, or functions, which should instead express the purpose of a piece of code, how it should be used, and how it behaves when used.<br />
-注意，注释不同于类、模块或者函数的<em>文档</em>，文档应该表述某个代码片段的目的，该代码片段如何使用，以及使用该代码片段时会有什么样的行为。</p>
-<h2 id="style代码规范"><a class="markdownIt-Anchor" href="#style代码规范"></a> Style（代码规范）</h2>
-<p>We have <a href="http://google.github.io/styleguide/">style guides</a> at Google for all of our major languages, and even for most of the minor languages. Make sure the CL follows the appropriate style guides.<br />
-在Google，我们为所用到的所有主流语言甚至是多数非主流语言都制定了相应的<a href="http://google.github.io/styleguide/">规范规约</a>。要确保该次代码变更遵从了恰当的代码规范规约。</p>
-<p>If you want to improve some style point that isn’t in the style guide, prefix your comment with “Nit:” to let the developer know that it’s a nitpick that you think would improve the code but isn’t mandatory. Don’t block CLs from being submitted based only on personal style preferences.<br />
-如果你想改善某些不在规约规范里的点，那么在留言评论时可以在前面加上“Nit：”，以此来让开发人员知道这个只是你个人认为的可以改进的地方，而不是强制性的。不能仅因为个人的规范风格喜好的原因而阻断了代码变更的提交通过。</p>
-<p>The author of the CL should not include major style changes combined with other changes. It makes it hard to see what is being changed in the CL, makes merges and rollbacks more complex, and causes other problems. For example, if the author wants to reformat the whole file, have them send you just the reformatting as one CL, and then send another CL with their functional changes after that.<br />
-代码变更的作者不应将主要内容为规范变更的代码与其他变更代码混合在一起。这么做会让人难以看出该次代码变更的变更内容是什么，还会使合并和回滚变得复杂，并且引发别的问题。举个例子，如果作者想格式化整个文件，那么应该把格式化作为一次变更提交，然后再将功能性的变更作为一次变更提交。</p>
-<h2 id="consistency一致性"><a class="markdownIt-Anchor" href="#consistency一致性"></a> Consistency（一致性）</h2>
-<p>What if the existing code is inconsistent with the style guide? Per our <a href="../51044#principles">code review principles</a>, the style guide is the absolute authority: if something is required by the style guide, the CL should follow the guidelines.<br />
-如果现有的代码与规范规约不一致怎么办？根据我们的<a href="../51044#principles">代码审查原则</a>，规范规约是绝对的权威：如果是规范规约所要求的，那么代码变更就应该遵从。</p>
-<p>In some cases, the style guide makes recommendations rather than declaring requirements. In these cases, it’s a judgment call whether the new code should be consistent with the recommendations or the surrounding code. Bias towards following the style guide unless the local inconsistency would be too confusing.<br />
-在某些情况下，规范规约只是做出了推荐做法而不是做强制要求。在这些情况下，需要判断新代码是否要与推荐做法或者现有其它代码保持一致。如果这个不一致性太令人疑惑，则应该遵从规范规约。</p>
-<p>If no other rule applies, the author should maintain consistency with the existing code. Either way, encourage the author to file a bug and add a TODO for cleaning up existing code.<br />
-如果没有其它适用规则，那么作者应该与现有代码保持一致。无论是哪种方式，都应鼓励作者记录下问题并添加一个TODO，以此来清理现有代码。</p>
-<h2 id="documentation文档"><a class="markdownIt-Anchor" href="#documentation文档"></a> Documentation（文档）</h2>
-<p>If a CL changes how users build, test, interact with, or release code, check to see that it also updates associated documentation, including READMEs, g3doc pages, and any generated reference docs. If the CL deletes or deprecates code, consider whether the documentation should also be deleted. If documentation is missing, ask for it.<br />
-如果某次代码变更改变了用户构建、测试、交互或者发布代码的方式，那么审查人员也要检查是否同步更新了相关的文档，包括README文档、g3doc页面（g3doc为google内部的文档管理平台）以及任何生成的参考文档。如果该次代码变更删除或者弃用了某些代码，则还要看对应的文档是否也删除了。如果缺失了文档，要去进行索取。</p>
-<h2 id="every-line每一行"><a class="markdownIt-Anchor" href="#every-line每一行"></a> Every Line（每一行）</h2>
-<p>In the general case, look at <em>every</em> line of code that you have been assigned to review. Some things like data files, generated code, or large data structures you can scan over sometimes, but don’t scan over a human-written class, function, or block of code and assume that what’s inside of it is okay. Obviously some code deserves more careful scrutiny than other code—that’s a judgment call that you have to make—but you should at least be sure that you <em>understand</em> what all the code is doing.<br />
-一般情况下，审查人员需要审视<em>每</em>一行提交上来的代码。对于诸如数据文件、自动生成的代码，或者大的数据结构审查人员可以另外找个时间再来进行扫视，但对于手写的类、函数或者代码块，则不能假设这里面是没问题然后只是简单的一扫而过。（对于要审查的代码）有些代码比其它代码更值得审阅，这是审查人员必须要做的判断，但是审查人员至少要确保<em>理解</em>这些代码都实现了什么功能行为。</p>
-<p>If it’s too hard for you to read the code and this is slowing down the review, then you should let the developer know that and wait for them to clarify it before you try to review it. At Google, we hire great software engineers, and you are one of them. If you can’t understand the code, it’s very likely that other developers won’t either. So you’re also helping future developers understand this code, when you ask the developer to clarify it.<br />
-审查人员在审查过程中如果发觉阅读这些代码很困难，并且拖慢了审查进度，那么审查人员应该让开发人员知道这点，等开发人员解释说明清楚后再去审查。在Google，我们雇佣了很多很棒的软件工程师，而审查人员也是他们中的一员。如果审查人员无法理解某段代码，那么其他的工程师也很可能无法理解。所以，当审查人员在让开发人员解释说明某段代码时，也是在帮助以后的开发人员理解这段代码。</p>
-<p>If you understand the code but you don’t feel qualified to do some part of the review, <a href="#exceptions-every-line-exceptions">make sure there is a reviewer</a> on the CL who is qualified, particularly for complex issues such as privacy, security, concurrency, accessibility, internationalization, etc.<br />
-如果你理解该部分代码但是又觉得好像不够资格来去做这部分代码，那么要确保能有个足够资格的人来去审核它，尤其是面对诸如隐私，安全，并发，可访问性，国际化等复杂问题时。</p>
-<h3 id="exceptions例外"><a class="markdownIt-Anchor" href="#exceptions例外"></a> Exceptions（例外）</h3>
-<p>What if it doesn’t make sense for you to review every line? For example, you are one of multiple reviewers on a CL and may be asked:<br />
-如果复习每一行对你来说没有意义怎么办？例如，你是评审人之一然后可能会被要求：</p>
-<ul>
-<li>To review only certain files that are part of a larger change.</li>
-<li>只审核某次大的变更提交里的某些文件。</li>
-<li>To review only certain aspects of the CL, such as the high-level design, privacy or security implications, etc.</li>
-<li>只审核改次变更提交的某些层面，例如高层次的设计，隐私或者安全问题等。</li>
-</ul>
-<p>In these cases, note in a comment which parts you reviewed. Prefer giving <a href="speed.md#lgtm-with-comments">LGTM with comments</a>.<br />
-在这些场景下，在评论里标注你审核了哪些内容。建议可以在评论里给一个“LGTM”（对应到Gerrit就是+1）。</p>
-<p>If you instead wish to grant LGTM after confirming that other reviewers have reviewed other parts of the CL, note this explicitly in a comment to set expectations. Aim to <a href="speed.md#responses">respond quickly</a> once the CL has reached the desired state.</p>
-<h2 id="context"><a class="markdownIt-Anchor" href="#context"></a> Context</h2>
-<p>It is often helpful to look at the CL in a broad context. Usually the code review tool will only show you a few lines of code around the parts that are being changed. Sometimes you have to look at the whole file to be sure that the change actually makes sense. For example, you might see only four new lines being added, but when you look at the whole file, you see those four lines are in a 50-line method that now really needs to be broken up into smaller methods.</p>
-<p>It’s also useful to think about the CL in the context of the system as a whole. Is this CL improving the code health of the system or is it making the whole system more complex, less tested, etc.? <strong>Don’t accept CLs that degrade the code health of the system.</strong> Most systems become complex through many small changes that add up, so it’s important to prevent even small complexities in new changes.</p>
-<h2 id="good-things好的地方"><a class="markdownIt-Anchor" href="#good-things好的地方"></a> Good Things（好的地方）</h2>
-<p>If you see something nice in the CL, tell the developer, especially when they addressed one of your comments in a great way. Code reviews often just focus on mistakes, but they should offer encouragement and appreciation for good practices, as well. It’s sometimes even more valuable, in terms of mentoring, to tell a developer what they did right than to tell them what they did wrong.<br />
-如果你在变更集里看到了好的实践，那么请告诉相应的开发人员，特别是当他们针对你的评注以不错的方式进行了处理。代码评审通常会专注于错误的提出，但同时也应该鼓励和赞美好的实践。有时告诉开发人员做对了什么比告诉他们做错了什么更有指导意义。</p>
-<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
-<p>In doing a code review, you should make sure that:</p>
-<ul>
-<li>The code is well-designed.</li>
-<li>The functionality is good for the users of the code.</li>
-<li>Any UI changes are sensible and look good.</li>
-<li>Any parallel programming is done safely.</li>
-<li>The code isn’t more complex than it needs to be.</li>
-<li>The developer isn’t implementing things they <em>might</em> need in the future but<br />
-don’t know they need now.</li>
-<li>Code has appropriate unit tests.</li>
-<li>Tests are well-designed.</li>
-<li>The developer used clear names for everything.</li>
-<li>Comments are clear and useful, and mostly explain <em>why</em> instead of <em>what</em>.</li>
-<li>Code is appropriately documented (generally in g3doc).</li>
-<li>The code conforms to our style guides.</li>
-</ul>
-<p>Make sure to review <strong>every line</strong> of code you’ve been asked to review, look at the <strong>context</strong>, make sure you’re <strong>improving code health</strong>, and compliment developers on <strong>good things</strong> that they do.</p>
-<p>Next: <a href="navigate.md">Navigating a CL in Review</a></p>
+<h2 id="who-is-right"><a class="markdownIt-Anchor" href="#who-is-right"></a> Who is right?</h2>
+<h2 id="谁是对的"><a class="markdownIt-Anchor" href="#谁是对的"></a> 谁是对的？</h2>
+<p>When a developer disagrees with your suggestion, first take a moment to consider if they are correct. Often, they are closer to the code than you are, and so they might really have a better insight about certain aspects of it. Does their argument make sense? Does it make sense from a code health perspective? If so, let them know that they are right and let the issue drop.<br />
+当开发人员不同意你的建议时，可以先花点时间考虑下他们是不是对的。通常，他们比你更接近代码，因此他们可能会对代码的某些方面有更好的了解。他们的异议是否有意义？从代码质量的角度来看这些争议是否有意义？如果是的话，那就让他们知道他们是对的，然后关闭问题。</p>
+<p>However, developers are not always right. In this case the reviewer should further explain why they believe that their suggestion is correct. A good explanation demonstrates both an understanding of the developer’s reply, and additional information about why the change is being requested.<br />
+然而，开发人员并不总是对的。在这种情况下，审查人员应该进一步解释为什么相信他们的建议是对的。一个好的解释不仅表明了对开发人员的回复的理解，也深入阐述了为什么要这么改。</p>
+<p>In particular, when the reviewer believes their suggestion will improve code health, they should continue to advocate for the change, if they believe the resulting code quality improvement justifies the additional work requested. <strong>Improving code health tends to happen in small steps.</strong><br />
+尤其是，当审查人员认为他们的建议会改善代码质量并且觉得由此带来的额外工作量是合理时，他们应该继续倡导修改。<strong>改善代码质量总是在小步中进行的。</strong></p>
+<p>Sometimes it takes a few rounds of explaining a suggestion before it really sinks in. Just make sure to always stay <a href="comments.md#courtesy">polite</a> and let the developer know that you <em>hear</em> what they’re saying, you just don’t <em>agree</em>.<br />
+有时需要来回对建议解释个几轮才能让开发人员真正理解。在这过程中，也要记得保证礼貌并且让开发人员知道你<em>知道</em>他们在说什么，只是不<em>同意</em>而已</p>
+<h2 id="upsetting-developers"><a class="markdownIt-Anchor" href="#upsetting-developers"></a> Upsetting Developers</h2>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+<p>Reviewers sometimes believe that the developer will be upset if the reviewer insists on an improvement. Sometimes developers do become upset, but it is usually brief and they become very thankful later that you helped them improve the quality of their code. Usually, if you are <a href="comments.md#courtesy">polite</a> in your comments, developers actually don’t become upset at all, and the worry is just in the reviewer’s mind. Upsets are usually more about <a href="comments.md#courtesy">the way comments are written</a> than about the reviewer’s insistence on code quality.<br />
+审查人员有时会觉得如果审查人员坚持代码改进会让开发人员感到沮丧。开发人员有时也确实会感到沮丧，但这种感觉通常是短暂的，并且后续还会感激你帮助他们改善代码质量。通常情况下，如果你在评注里保持着礼貌，开发人员实际上是不会感到抗拒的，这个担心只是审查人员自身觉得的而已。比起审查人员坚持代码改善，反而是审查意见的编写方式更容易让开发人员感到不快。</p>
+<h2 id="cleaning-it-up-later"><a class="markdownIt-Anchor" href="#cleaning-it-up-later"></a> Cleaning It Up Later</h2>
+<h2 id="后续优化"><a class="markdownIt-Anchor" href="#后续优化"></a> 后续优化</h2>
+<p>A common source of push back is that developers (understandably) want to get things done. They don’t want to go through another round of review just to get this CL in. So they say they will clean something up in a later CL, and thus you should LGTM <em>this</em> CL now. Some developers are very good about this, and will immediately write a follow-up CL that fixes the issue. However, experience shows that as more time passes after a developer writes the original CL, the less likely this clean up is to happen. In fact, usually unless the developer does the clean up <em>immediately</em> after the present CL, it never happens. This isn’t because developers are irresponsible, but because they have a lot of work to do and the cleanup gets lost or forgotten in the press of other work. Thus, it is usually best to insist that the developer clean up their CL <em>now</em>, before the code is in the codebase and “done.” Letting people “clean things up later” is a common way for codebases to degenerate.<br />
+发生抵触的一个常见原因是开发人员想完成任务，这是可以理解的。他们不想为了让这个CL通过而进行新一轮的审查。因此他们会说他们会在后续的CL里进行优化，现在你应该先让我通过<em>这个</em>CL。一些开发人员很擅长做这个，还会立即写一个跟进事项。然而，经验表明，开发人员在写下原本的CL之后，随着时间推移，这些跟进事项会越来越难以得到实施。实际上多数情况是，除非开发人员<em>立马</em>处理这些问题，否则以后都不会处理。这不是因为开发人员没有责任心，而是因为他们有很多工作要做，从而这些跟进事项在其它工作的压力下被搁置或者遗忘。因此，最好坚持在代码入库前就让开发人员就处理好这些问题。让人们“稍后跟进”是代码质量下降的常见原因。</p>
+<p>If a CL introduces new complexity, it must be cleaned up before submission unless it is an <a href="../emergencies.md">emergency</a>. If the CL exposes surrounding problems and they can’t be addressed right now, the developer should file a bug for the cleanup and assign it to themselves so that it doesn’t get lost. They can optionally also write a TODO comment in the code that references the filed bug.<br />
+如果一个CL引入了新的复杂性，那么在提交到代码库前必须进行优化除非这是个紧急任务。如果这个CL暴露了一些别的问题而且无法立马解决，那么开发人员应该提交一个待跟进的bug并把它指派给自己，以此来让它不会被遗忘。开发人员也可以选择在代码里下一个TODO注释来提醒这个被记录下来的bug。</p>
+<h2 id="general-complaints-about-strictness"><a class="markdownIt-Anchor" href="#general-complaints-about-strictness"></a> General Complaints About Strictness</h2>
+<h2 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> </h2>
+<p>If you previously had fairly lax code reviews and you switch to having strict reviews, some developers will complain very loudly. Improving the <a href="speed.md">speed</a> of your code reviews usually causes these complaints to fade away.<br />
+如果你之前做代码审核比较宽松，然后（突然）转向严格的审查，一些开发人员会可能意见会比较大。提高你的代码审查<a href="speed.md">速度</a>通常能让这些抱怨消失。</p>
+<p>Sometimes it can take months for these complaints to fade away, but eventually developers tend to see the value of strict code reviews as they see what great code they help generate. Sometimes the loudest protesters even become your strongest supporters once something happens that causes them to really see the value you’re adding by being strict.<br />
+有时需要花几个月的时间来让这些抵触情绪消失，但最终开发人员会发现严格代码审查所带来的价值，因为他们看到了在审查人员的帮助下写出了出色的代码。一旦意见最大的那几个抗议者看到了你严格审查产生的价值，有时他们甚至会成为你的最坚定的支持者。</p>
+<h2 id="resolving-conflicts"><a class="markdownIt-Anchor" href="#resolving-conflicts"></a> Resolving Conflicts</h2>
+<h2 id="解决冲突"><a class="markdownIt-Anchor" href="#解决冲突"></a> 解决冲突</h2>
+<p>If you are following all of the above but you still encounter a conflict between yourself and a developer that can’t be resolved, see <a href="../51044">The Standard of Code Review</a> for guidelines and principles that can help resolve the conflict.<br />
+如果你遵从了上述几点但仍然和开发人员产生了难以解决的意见冲突，那么请参阅<a href="../51044">代码审查标准</a>章节，里面的指南和原则有助于解决冲突。</p>
 ]]></content>
       <categories>
         <category>Google代码评审规约</category>
@@ -1358,60 +1434,6 @@ can result in a better solution, because the developer is closer to the code tha
 <p><strong>Explanations written only in the code review tool are not helpful to future code readers.</strong> They are acceptable only in a few circumstances, such as when you are reviewing an area you are not very familiar with and the developer explains something that normal readers of the code would have already known.<br />
 <strong>只在code review工具里做解释对于以后的代码读者是没有好处的。</strong> 只有少数情况下才会这么做，例如当你在审查一个你不熟悉的功能模块，开发人员就可以解释一下一般读者已经理解的代码。</p>
 <p>Next: <a href="pushback.md">Handling Pushback in Code Reviews</a></p>
-]]></content>
-      <categories>
-        <category>Google代码评审规约</category>
-      </categories>
-      <tags>
-        <tag>Code Review</tag>
-        <tag>Translation</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2、如何进行代码审查</title>
-    <url>/posts/41083/</url>
-    <content><![CDATA[<h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
-<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
-<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
-<span id="more"></span>
-<ul>
-<li>
-<p><a href="../51044">The Standard of Code Review</a></p>
-</li>
-<li>
-<p><a href="../16518">What to Look For In a Code Review</a></p>
-</li>
-<li>
-<p>Navigating a CL in Review</p>
-</li>
-<li>
-<p>Speed of Code Reviews</p>
-</li>
-<li>
-<p><a href="../12266">How to Write Code Review Comments</a></p>
-</li>
-<li>
-<p><a href="../45937">Handling Pushback in Code Reviews</a></p>
-</li>
-<li>
-<p><a href="../51044">代码审查的标准</a></p>
-</li>
-<li>
-<p><a href="../16518">代码审查要做什么</a></p>
-</li>
-<li>
-<p>在审查里定向变更记录</p>
-</li>
-<li>
-<p>代码审查的速度</p>
-</li>
-<li>
-<p><a href="../12266">如何编写代码审查评论</a></p>
-</li>
-<li>
-<p><a href="../45937">处理代码评审过程产生的抵触问题</a></p>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Google代码评审规约</category>

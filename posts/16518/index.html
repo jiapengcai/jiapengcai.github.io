@@ -29,7 +29,7 @@
 <meta property="og:description" content="Note: Always make sure to take into account The Standard of Code Review when considering each of these points. 注意：在考虑下面这几点时，请确保也将代码审查标准考虑了进去。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-31T09:48:21.000Z">
-<meta property="article:modified_time" content="2022-08-02T06:16:40.067Z">
+<meta property="article:modified_time" content="2022-08-03T11:56:05.961Z">
 <meta property="article:author" content="Jiapeng Cai">
 <meta property="article:tag" content="Code Review">
 <meta property="article:tag" content="Translation">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#design%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text"> Design（设计）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#functionality%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text"> Functionality（功能）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#complexity%E5%A4%8D%E6%9D%82%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text"> Complexity（复杂性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tests%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text"> Tests（测试）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#naming%E5%91%BD%E5%90%8D"><span class="nav-number">5.</span> <span class="nav-text"> Naming（命名）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comments%E6%B3%A8%E9%87%8A"><span class="nav-number">6.</span> <span class="nav-text"> Comments（注释）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#style%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="nav-number">7.</span> <span class="nav-text"> Style（代码规范）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consistency%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text"> Consistency（一致性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#documentation%E6%96%87%E6%A1%A3"><span class="nav-number">9.</span> <span class="nav-text"> Documentation（文档）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#every-line%E6%AF%8F%E4%B8%80%E8%A1%8C"><span class="nav-number">10.</span> <span class="nav-text"> Every Line（每一行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exceptions%E4%BE%8B%E5%A4%96"><span class="nav-number">10.1.</span> <span class="nav-text"> Exceptions（例外）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#context"><span class="nav-number">11.</span> <span class="nav-text"> Context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#good-things%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="nav-number">12.</span> <span class="nav-text"> Good Things（好的地方）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">13.</span> <span class="nav-text"> Summary</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#design%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text"> Design（设计）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#functionality%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text"> Functionality（功能）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#complexity%E5%A4%8D%E6%9D%82%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text"> Complexity（复杂性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tests%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text"> Tests（测试）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#naming%E5%91%BD%E5%90%8D"><span class="nav-number">5.</span> <span class="nav-text"> Naming（命名）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comments%E6%B3%A8%E9%87%8A"><span class="nav-number">6.</span> <span class="nav-text"> Comments（注释）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#style%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="nav-number">7.</span> <span class="nav-text"> Style（代码规范）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consistency%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text"> Consistency（一致性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#documentation%E6%96%87%E6%A1%A3"><span class="nav-number">9.</span> <span class="nav-text"> Documentation（文档）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#every-line%E6%AF%8F%E4%B8%80%E8%A1%8C"><span class="nav-number">10.</span> <span class="nav-text"> Every Line（每一行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exceptions%E4%BE%8B%E5%A4%96"><span class="nav-number">10.1.</span> <span class="nav-text"> Exceptions（例外）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#context%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">11.</span> <span class="nav-text"> Context（上下文）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#good-things%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="nav-number">12.</span> <span class="nav-text"> Good Things（好的地方）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary%E6%80%BB%E7%BB%93"><span class="nav-number">13.</span> <span class="nav-text"> Summary（总结）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,7 +257,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-08-02 14:16:40" itemprop="dateModified" datetime="2022-08-02T14:16:40+08:00">2022-08-02</time>
+      <time title="修改时间：2022-08-03 19:56:05" itemprop="dateModified" datetime="2022-08-03T19:56:05+08:00">2022-08-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -370,13 +370,13 @@ tests as appropriate for the change. In general, tests should be added in the sa
 <p>In these cases, note in a comment which parts you reviewed. Prefer giving <a href="speed.md#lgtm-with-comments">LGTM with comments</a>.<br />
 在这些场景下，在评论里标注你审核了哪些内容。建议可以在评论里给一个“LGTM”（对应到Gerrit就是+1）。</p>
 <p>If you instead wish to grant LGTM after confirming that other reviewers have reviewed other parts of the CL, note this explicitly in a comment to set expectations. Aim to <a href="speed.md#responses">respond quickly</a> once the CL has reached the desired state.</p>
-<h2 id="context"><a class="markdownIt-Anchor" href="#context"></a> Context</h2>
+<h2 id="context上下文"><a class="markdownIt-Anchor" href="#context上下文"></a> Context（上下文）</h2>
 <p>It is often helpful to look at the CL in a broad context. Usually the code review tool will only show you a few lines of code around the parts that are being changed. Sometimes you have to look at the whole file to be sure that the change actually makes sense. For example, you might see only four new lines being added, but when you look at the whole file, you see those four lines are in a 50-line method that now really needs to be broken up into smaller methods.</p>
 <p>It’s also useful to think about the CL in the context of the system as a whole. Is this CL improving the code health of the system or is it making the whole system more complex, less tested, etc.? <strong>Don’t accept CLs that degrade the code health of the system.</strong> Most systems become complex through many small changes that add up, so it’s important to prevent even small complexities in new changes.</p>
 <h2 id="good-things好的地方"><a class="markdownIt-Anchor" href="#good-things好的地方"></a> Good Things（好的地方）</h2>
 <p>If you see something nice in the CL, tell the developer, especially when they addressed one of your comments in a great way. Code reviews often just focus on mistakes, but they should offer encouragement and appreciation for good practices, as well. It’s sometimes even more valuable, in terms of mentoring, to tell a developer what they did right than to tell them what they did wrong.<br />
 如果你在变更集里看到了好的实践，那么请告诉相应的开发人员，特别是当他们针对你的评注以不错的方式进行了处理。代码评审通常会专注于错误的提出，但同时也应该鼓励和赞美好的实践。有时告诉开发人员做对了什么比告诉他们做错了什么更有指导意义。</p>
-<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
+<h2 id="summary总结"><a class="markdownIt-Anchor" href="#summary总结"></a> Summary（总结）</h2>
 <p>In doing a code review, you should make sure that:</p>
 <ul>
 <li>The code is well-designed.</li>
@@ -384,8 +384,7 @@ tests as appropriate for the change. In general, tests should be added in the sa
 <li>Any UI changes are sensible and look good.</li>
 <li>Any parallel programming is done safely.</li>
 <li>The code isn’t more complex than it needs to be.</li>
-<li>The developer isn’t implementing things they <em>might</em> need in the future but<br />
-don’t know they need now.</li>
+<li>The developer isn’t implementing things they <em>might</em> need in the future but don’t know they need now.</li>
 <li>Code has appropriate unit tests.</li>
 <li>Tests are well-designed.</li>
 <li>The developer used clear names for everything.</li>
@@ -393,7 +392,23 @@ don’t know they need now.</li>
 <li>Code is appropriately documented (generally in g3doc).</li>
 <li>The code conforms to our style guides.</li>
 </ul>
-<p>Make sure to review <strong>every line</strong> of code you’ve been asked to review, look at the <strong>context</strong>, make sure you’re <strong>improving code health</strong>, and compliment developers on <strong>good things</strong> that they do.</p>
+<p>在做代码审查时，应该确保代码实现了以下几点：</p>
+<ul>
+<li>代码是设计良好的。</li>
+<li>调用方是可以放心使用这部分功能的。</li>
+<li>任何UI上的改动都是有意义的并且看起来还不错。</li>
+<li>所有的多线程编程都应该是安全的。</li>
+<li>代码已经足够简洁。</li>
+<li>不会过度设计。</li>
+<li>代码里包含着恰当的单元测试。</li>
+<li>测试也是设计良好的。</li>
+<li>代码里所有用到的命名都做到了见名知意。</li>
+<li>注释是清晰而且有用的，同时主要是解释了“为什么”而不是“什么”。</li>
+<li>代码有恰当的文档。</li>
+<li>代码符合我们的开发规范。</li>
+</ul>
+<p>Make sure to review <strong>every line</strong> of code you’ve been asked to review, look at the <strong>context</strong>, make sure you’re <strong>improving code health</strong>, and compliment developers on <strong>good things</strong> that they do.<br />
+当你被指定去审核代码时，要切实审查了每一行代码，看看<strong>上下文</strong>，确保你是在帮助<strong>提高代码质量</strong>，同时对于开发人员做得好的地方，还要对其进行表扬。</p>
 <p>Next: <a href="navigate.md">Navigating a CL in Review</a></p>
 
     </div>
