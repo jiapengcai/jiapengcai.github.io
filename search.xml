@@ -123,36 +123,6 @@
       </tags>
   </entry>
   <entry>
-    <title>182. 查找重复的电子邮箱</title>
-    <url>/posts/13020/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Person</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
-<p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>178. 分数排名</title>
     <url>/posts/32576/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
@@ -202,6 +172,36 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>182. 查找重复的电子邮箱</title>
+    <url>/posts/13020/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -276,34 +276,6 @@
       </tags>
   </entry>
   <entry>
-    <title>196. 删除重复的电子邮箱</title>
-    <url>/posts/59823/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
-<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
-<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
-<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>9. 回文数</title>
     <url>/posts/35052/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
@@ -335,6 +307,34 @@
       <tags>
         <tag>Leetcode</tag>
         <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>196. 删除重复的电子邮箱</title>
+    <url>/posts/59823/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
+<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
+<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
+<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
       </tags>
   </entry>
   <entry>
@@ -667,6 +667,23 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
+    <title>《人类简史》读后感</title>
+    <url>/posts/34897/</url>
+    <content><![CDATA[<p>花了两周的地铁通勤时间二刷完了《人类简史》。书中不是完全按照时间轴来进行叙事性描述，加入了作者很多天马行空的思考与见解，具体事实或者推论是否真的会像作者说的那样历史学的不深也不好说。只是整本书下来，有两个观点很有意思：</p>
+<ol>
+<li>人类能大规模合作靠的是对想象出来的同一个故事的信任；</li>
+<li>人类发展出来的信用体系使得近500年人类发展进程得以快速发展。感觉书中最后几章的讨论也给我们留下了个思考，我们到底快不快乐，快乐是主观的还是客观的。<br />
+人类一思考，上帝就发笑。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《动物庄园》读后感</title>
     <url>/posts/60962/</url>
     <content><![CDATA[<p>前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
@@ -714,6 +731,89 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       </categories>
       <tags>
         <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
+    <url>/posts/48556/</url>
+    <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
+<p>In the previous tutorial we built a simple fanout exchange. We were able to broadcast messages to many receivers.</p>
+<p>在上一个教程里，我们构建了一个简单的广播交换器。通过它我们能将消息广播到多个接收者。</p>
+<p>In this tutorial we’re going to add a feature to it - we’re going to make it possible to subscribe only to a subset of the messages. For example, we will be able to direct only messages to the certain colors of interest (“orange”, “black”, “green”), while still being able to print all of the messages on the console.</p>
+<p>在本教程里，我们将往里添加一个功能——我们准备让接收者可以只订阅部分消息。例如，我们将只要某些我们感兴趣的颜色（“橙色”，“黑色”，“绿色”）的消息，但仍能在控制台里打印出所有的信息。</p>
+<span id="more"></span>
+<h2 id="bindings绑定"><a class="markdownIt-Anchor" href="#bindings绑定"></a> Bindings（绑定）</h2>
+<p>In previous examples we were already creating bindings. You may recall code like this in our Tut3Config file:</p>
+<p>在之前的例子当中，我们创建了绑定器。通过下面的代码片段回顾下我们的Tut3Config配置文件：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.</p>
+<p>交换器和队列是通过绑定器连结在一起的。这种关系可以读作：这个队列对这个交换器里的消息感兴趣。</p>
+<p>Bindings can take an extra routingKey parameter. Spring-amqp uses a fluent API to make this relationship very clear. We pass in the exchange and queue into the BindingBuilder and simply bind the queue “to” the exchange “with a routing key” as follows:</p>
+<p>可以再传一个路由键（routingKey）参数给绑定。在这点上，Spring-amqp使用了流式API，使得队列，交换器和路由键之间的关系变得很清晰。我们将某个交换器和某个队列传给BindingBuilder，将传入的队列用某个路由键绑定到传入的交换器上，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The meaning of a binding key depends on the exchange type. The fanout exchanges, which we used previously, simply ignored its value.</p>
+<p>绑定键的含义取决与交换器的类型。我们之前使用的广播交换器就忽略了这个值。</p>
+<h2 id="direct-exchange直接交换器"><a class="markdownIt-Anchor" href="#direct-exchange直接交换器"></a> Direct exchange（直接交换器）</h2>
+<p>Our messaging system from the previous tutorial broadcasts all messages to all consumers. We want to extend that to allow filtering messages based on their color type. For example, we may want a program which writes log messages to the disk to only receive critical errors, and not waste disk space on warning or info log messages.</p>
+<p>在上一个教程里，我们的消息队列系统将所有消息广播给所有的消费者。现在我们需要让消息队列系统可以基于消息的颜色类型进行消息过滤。例如，对于一个将日志消息写入磁盘的程序，我们可能只想让它接收严重错误类型的日志消息，而不是警告或者信息级别的日志消息，从而不致于浪费磁盘空间。</p>
+<p>We were using a fanout exchange, which doesn’t give us much flexibility - it’s only capable of mindless broadcasting.</p>
+<p>在上一个教程里，我们用到的广播交换器不能给我们这个灵活性，因为它只会做机械广播。</p>
+<p>We will use a direct exchange instead. The routing algorithm behind a direct exchange is simple - a message goes to the queues whose binding key exactly matches the routing key of the message.</p>
+<p>我们将使用直连交换器来替换它。直连交换器背后的路由算法很简单——当消息被推入到某个队列时，这个队列绑定的键要与消息的路由键完全匹配。</p>
+<p>To illustrate that, consider the following setup:</p>
+<p>为了说明这一点，考虑下面的情况：</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange.png" alt="image" /></p>
+<p>In this setup, we can see the direct exchange X with two queues bound to it. The first queue is bound with binding key orange, and the second has two bindings, one with binding key black and the other one with green.</p>
+<p>从图中我们可以看到，有两个队列绑定了直连交换器X。第一个队列绑定时用了orange键，第二个队列用了两个，一个是black键，另一个是green键。</p>
+<p>In such a setup a message published to the exchange with a routing key orange will be routed to queue Q1. Messages with a routing key of black or green will go to Q2. All other messages will be discarded.</p>
+<p>在这种情况下，带有orange路由键的消息被发布到交换器时，会被路由到队列Q1。带有black键或green键的消息将被推入到队列Q2。所有其它的消息将被丢弃。</p>
+<h2 id="multiple-bindings多绑定"><a class="markdownIt-Anchor" href="#multiple-bindings多绑定"></a> Multiple bindings（多绑定）</h2>
+<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange-multiple.png" alt="image" /></p>
+<p>It is perfectly legal to bind multiple queues with the same binding key. In our example we could add a binding between X and Q1 with binding key black. In that case, the direct exchange will behave like fanout and will broadcast the message to all the matching queues. A message with routing key black will be delivered to both Q1 and Q2.</p>
+<p>多个队列用同个键绑定到同个交换器是完全合法的。在我们的例子当中，我们可以用键black在交换器X和队列Q1之间添加绑定。在这种情况下，直接交换器的行为将和广播交换器一样，将消息广播给所有匹配的队列。带有路由键black的消息将被发送给队列Q1和队列Q2。</p>
+<h2 id="publishing-messages发布消息"><a class="markdownIt-Anchor" href="#publishing-messages发布消息"></a> Publishing messages（发布消息）</h2>
+<p>We’ll use this model for our routing system. Instead of fanout we’ll send messages to a direct exchange. We will supply the color as a routing key. That way the receiving program will be able to select the color it wants to receive (or subscribe to). Let’s focus on sending messages first.</p>
+<p>我们将在我们的路由系统中使用这种模型。我们将发送消息给直连交换器，而不是广播交换器。我们将使用颜色作为路由键。这么做的话接收者程序就可以选择它想接收（或者说订阅）的颜色。让我们先看看如何发送消息。</p>
+<p>As always, we do some spring boot configuration in Tut4Config:</p>
+<p>照例，我们在Tut4Config配置文件里做些spring boot配置：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> FanoutExchange <span class="title function_">fanout</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;tut.fanout&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>And we’re ready to send a message. Colors, as in the diagram, can be one of ‘orange’, ‘black’, or ‘green’.</p>
+<p>现在我们准备发送一条消息。如图所示，颜色可以是&quot;orange&quot;，“black”，或者“green”</p>
+<h2 id="subscribing订阅"><a class="markdownIt-Anchor" href="#subscribing订阅"></a> Subscribing（订阅）</h2>
+<p>Receiving messages will work just like in the previous tutorial, with one exception - we’re going to create a new binding for each color we’re interested in. This also goes into the Tut4Config.</p>
+<p>接收消息将会像上一个教程那样，除了有一点不同——我们将为每一个我们感兴趣的颜色创建一个新的绑定器。这一点也将在Tut4Config里体现。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="putting-it-all-together整合代码"><a class="markdownIt-Anchor" href="#putting-it-all-together整合代码"></a> Putting it all together（整合代码）</h2>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-four.png" alt="image" /></p>
+<p>As in the previous tutorials, create a new package for this tutorial called “tut4” and create the Tut4Config class. The code for Tut4Config.java class:</p>
+<p>像之前的教程那样，为本教程创建一个新的包目录“tut4”，并创建Tut4Config类。以下为TutConfig.java的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut4&quot;,&quot;routing&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;green&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut4Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Receiver</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut4Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code for our sender class is:</p>
+<p>我们的发送者类是这样的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DirectExchange direct;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> index;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String[] keys = &#123;<span class="string">&quot;orange&quot;</span>, <span class="string">&quot;black&quot;</span>, <span class="string">&quot;green&quot;</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello to &quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (++<span class="built_in">this</span>.index == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="built_in">this</span>.index = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keys[<span class="built_in">this</span>.index];</span><br><span class="line">		builder.append(key).append(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">		builder.append(Integer.toString(++<span class="built_in">this</span>.count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(direct.getName(), key, message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code for Tut4Receiver.java is:</p>
+<p>然后下面为Tut4Receiver.java的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue1.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive1</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue2.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive2</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in, <span class="type">int</span> receiver)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Compile as usual (see tutorial one for maven compilation and executing the options from the jar).</p>
+<p>像之前那样去编译（对于如何用maven进行编译以及如何通过参数来运行jar包，请见教程1）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+<p>In one terminal window you can run:</p>
+<p>打开一个终端窗口，运行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,receiver</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
+<p>and in the other temrinal window run the sender：</p>
+<p>打开另一个终端窗口，输入以下命令来运行发送者：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,sender</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
+<p>Full source code for <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java source</a> and <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java source</a>. The configuration is in<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java source</a>.</p>
+<p>完整的源代码可以参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java源码</a>和<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java源码</a>。配置类请参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java源码</a></p>
+<p>Move on to tutorial 5 to find out how to listen for messages based on a pattern.</p>
+<p>下面开始教程5，看看如何基于主题来监听消息。</p>
+]]></content>
+      <categories>
+        <category>RabbitMQ Spring-AMQP官方教程</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>RabbitMQ</tag>
       </tags>
   </entry>
   <entry>
@@ -814,89 +914,6 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       </tags>
   </entry>
   <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
-    <url>/posts/48556/</url>
-    <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
-<p>In the previous tutorial we built a simple fanout exchange. We were able to broadcast messages to many receivers.</p>
-<p>在上一个教程里，我们构建了一个简单的广播交换器。通过它我们能将消息广播到多个接收者。</p>
-<p>In this tutorial we’re going to add a feature to it - we’re going to make it possible to subscribe only to a subset of the messages. For example, we will be able to direct only messages to the certain colors of interest (“orange”, “black”, “green”), while still being able to print all of the messages on the console.</p>
-<p>在本教程里，我们将往里添加一个功能——我们准备让接收者可以只订阅部分消息。例如，我们将只要某些我们感兴趣的颜色（“橙色”，“黑色”，“绿色”）的消息，但仍能在控制台里打印出所有的信息。</p>
-<span id="more"></span>
-<h2 id="bindings绑定"><a class="markdownIt-Anchor" href="#bindings绑定"></a> Bindings（绑定）</h2>
-<p>In previous examples we were already creating bindings. You may recall code like this in our Tut3Config file:</p>
-<p>在之前的例子当中，我们创建了绑定器。通过下面的代码片段回顾下我们的Tut3Config配置文件：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.</p>
-<p>交换器和队列是通过绑定器连结在一起的。这种关系可以读作：这个队列对这个交换器里的消息感兴趣。</p>
-<p>Bindings can take an extra routingKey parameter. Spring-amqp uses a fluent API to make this relationship very clear. We pass in the exchange and queue into the BindingBuilder and simply bind the queue “to” the exchange “with a routing key” as follows:</p>
-<p>可以再传一个路由键（routingKey）参数给绑定。在这点上，Spring-amqp使用了流式API，使得队列，交换器和路由键之间的关系变得很清晰。我们将某个交换器和某个队列传给BindingBuilder，将传入的队列用某个路由键绑定到传入的交换器上，如下所示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The meaning of a binding key depends on the exchange type. The fanout exchanges, which we used previously, simply ignored its value.</p>
-<p>绑定键的含义取决与交换器的类型。我们之前使用的广播交换器就忽略了这个值。</p>
-<h2 id="direct-exchange直接交换器"><a class="markdownIt-Anchor" href="#direct-exchange直接交换器"></a> Direct exchange（直接交换器）</h2>
-<p>Our messaging system from the previous tutorial broadcasts all messages to all consumers. We want to extend that to allow filtering messages based on their color type. For example, we may want a program which writes log messages to the disk to only receive critical errors, and not waste disk space on warning or info log messages.</p>
-<p>在上一个教程里，我们的消息队列系统将所有消息广播给所有的消费者。现在我们需要让消息队列系统可以基于消息的颜色类型进行消息过滤。例如，对于一个将日志消息写入磁盘的程序，我们可能只想让它接收严重错误类型的日志消息，而不是警告或者信息级别的日志消息，从而不致于浪费磁盘空间。</p>
-<p>We were using a fanout exchange, which doesn’t give us much flexibility - it’s only capable of mindless broadcasting.</p>
-<p>在上一个教程里，我们用到的广播交换器不能给我们这个灵活性，因为它只会做机械广播。</p>
-<p>We will use a direct exchange instead. The routing algorithm behind a direct exchange is simple - a message goes to the queues whose binding key exactly matches the routing key of the message.</p>
-<p>我们将使用直连交换器来替换它。直连交换器背后的路由算法很简单——当消息被推入到某个队列时，这个队列绑定的键要与消息的路由键完全匹配。</p>
-<p>To illustrate that, consider the following setup:</p>
-<p>为了说明这一点，考虑下面的情况：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange.png" alt="image" /></p>
-<p>In this setup, we can see the direct exchange X with two queues bound to it. The first queue is bound with binding key orange, and the second has two bindings, one with binding key black and the other one with green.</p>
-<p>从图中我们可以看到，有两个队列绑定了直连交换器X。第一个队列绑定时用了orange键，第二个队列用了两个，一个是black键，另一个是green键。</p>
-<p>In such a setup a message published to the exchange with a routing key orange will be routed to queue Q1. Messages with a routing key of black or green will go to Q2. All other messages will be discarded.</p>
-<p>在这种情况下，带有orange路由键的消息被发布到交换器时，会被路由到队列Q1。带有black键或green键的消息将被推入到队列Q2。所有其它的消息将被丢弃。</p>
-<h2 id="multiple-bindings多绑定"><a class="markdownIt-Anchor" href="#multiple-bindings多绑定"></a> Multiple bindings（多绑定）</h2>
-<p><img src="https://www.rabbitmq.com/img/tutorials/direct-exchange-multiple.png" alt="image" /></p>
-<p>It is perfectly legal to bind multiple queues with the same binding key. In our example we could add a binding between X and Q1 with binding key black. In that case, the direct exchange will behave like fanout and will broadcast the message to all the matching queues. A message with routing key black will be delivered to both Q1 and Q2.</p>
-<p>多个队列用同个键绑定到同个交换器是完全合法的。在我们的例子当中，我们可以用键black在交换器X和队列Q1之间添加绑定。在这种情况下，直接交换器的行为将和广播交换器一样，将消息广播给所有匹配的队列。带有路由键black的消息将被发送给队列Q1和队列Q2。</p>
-<h2 id="publishing-messages发布消息"><a class="markdownIt-Anchor" href="#publishing-messages发布消息"></a> Publishing messages（发布消息）</h2>
-<p>We’ll use this model for our routing system. Instead of fanout we’ll send messages to a direct exchange. We will supply the color as a routing key. That way the receiving program will be able to select the color it wants to receive (or subscribe to). Let’s focus on sending messages first.</p>
-<p>我们将在我们的路由系统中使用这种模型。我们将发送消息给直连交换器，而不是广播交换器。我们将使用颜色作为路由键。这么做的话接收者程序就可以选择它想接收（或者说订阅）的颜色。让我们先看看如何发送消息。</p>
-<p>As always, we do some spring boot configuration in Tut4Config:</p>
-<p>照例，我们在Tut4Config配置文件里做些spring boot配置：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> FanoutExchange <span class="title function_">fanout</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;tut.fanout&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>And we’re ready to send a message. Colors, as in the diagram, can be one of ‘orange’, ‘black’, or ‘green’.</p>
-<p>现在我们准备发送一条消息。如图所示，颜色可以是&quot;orange&quot;，“black”，或者“green”</p>
-<h2 id="subscribing订阅"><a class="markdownIt-Anchor" href="#subscribing订阅"></a> Subscribing（订阅）</h2>
-<p>Receiving messages will work just like in the previous tutorial, with one exception - we’re going to create a new binding for each color we’re interested in. This also goes into the Tut4Config.</p>
-<p>接收消息将会像上一个教程那样，除了有一点不同——我们将为每一个我们感兴趣的颜色创建一个新的绑定器。这一点也将在Tut4Config里体现。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="putting-it-all-together整合代码"><a class="markdownIt-Anchor" href="#putting-it-all-together整合代码"></a> Putting it all together（整合代码）</h2>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-four.png" alt="image" /></p>
-<p>As in the previous tutorials, create a new package for this tutorial called “tut4” and create the Tut4Config class. The code for Tut4Config.java class:</p>
-<p>像之前的教程那样，为本教程创建一个新的包目录“tut4”，并创建Tut4Config类。以下为TutConfig.java的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut4&quot;,&quot;routing&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> DirectExchange <span class="title function_">direct</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.direct&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2a</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;green&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2b</span><span class="params">(DirectExchange direct, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(direct).with(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut4Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Receiver</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut4Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut4Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code for our sender class is:</p>
-<p>我们的发送者类是这样的：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DirectExchange direct;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> index;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String[] keys = &#123;<span class="string">&quot;orange&quot;</span>, <span class="string">&quot;black&quot;</span>, <span class="string">&quot;green&quot;</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello to &quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (++<span class="built_in">this</span>.index == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="built_in">this</span>.index = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keys[<span class="built_in">this</span>.index];</span><br><span class="line">		builder.append(key).append(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">		builder.append(Integer.toString(++<span class="built_in">this</span>.count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(direct.getName(), key, message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code for Tut4Receiver.java is:</p>
-<p>然后下面为Tut4Receiver.java的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut4Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue1.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive1</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue2.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive2</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in, <span class="type">int</span> receiver)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Compile as usual (see tutorial one for maven compilation and executing the options from the jar).</p>
-<p>像之前那样去编译（对于如何用maven进行编译以及如何通过参数来运行jar包，请见教程1）。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
-<p>In one terminal window you can run:</p>
-<p>打开一个终端窗口，运行以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,receiver</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
-<p>and in the other temrinal window run the sender：</p>
-<p>打开另一个终端窗口，输入以下命令来运行发送者：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=routing,sender</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
-<p>Full source code for <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java source</a> and <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java source</a>. The configuration is in<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java source</a>.</p>
-<p>完整的源代码可以参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Receiver.java">Tut4Receiver.java源码</a>和<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Sender.java">Tut4Sender.java源码</a>。配置类请参考<a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut4/Tut4Config.java">Tut4Config.java源码</a></p>
-<p>Move on to tutorial 5 to find out how to listen for messages based on a pattern.</p>
-<p>下面开始教程5，看看如何基于主题来监听消息。</p>
-]]></content>
-      <categories>
-        <category>RabbitMQ Spring-AMQP官方教程</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>RabbitMQ</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（一）--Hello World</title>
     <url>/posts/53264/</url>
     <content><![CDATA[<h1 id="1-hello-world"><a class="markdownIt-Anchor" href="#1-hello-world"></a> 1 “Hello World!”</h1>
@@ -985,6 +1002,145 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
 </blockquote>
 <p>Time to move on to part 2 and build a simple <em>work queue</em>.</p>
 <p>接下来我们开始教程的第2部份，并构建一个简单的工作队列。</p>
+]]></content>
+      <categories>
+        <category>RabbitMQ Spring-AMQP官方教程</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ Spring-AMQP官方教程（六）--RPC</title>
+    <url>/posts/40514/</url>
+    <content><![CDATA[<h1 id="remote-procedure-call-rpc远程过程调用"><a class="markdownIt-Anchor" href="#remote-procedure-call-rpc远程过程调用"></a> Remote procedure call (RPC，远程过程调用)</h1>
+<p>In the second tutorial we learned how to use <em>Work Queues</em> to distribute time-consuming tasks among multiple workers.</p>
+<p>在教程2里我们学习了如何使用工作队列在多个工作者之间分发耗时任务。</p>
+<p>But what if we need to run a function on a remote computer and wait for the result? Well, that’s a different story. This pattern is commonly known as <em>Remote Procedure Call or RPC</em>.</p>
+<p>但如果我们需要在一个远程电脑上运行一个函数并且等待运行结果的话要怎么办呢？这就变成另一个问题了。这种模式通常被称为远程过程调用（Remote Procedure Call），或者简称RPC。</p>
+<p>In this tutorial we’re going to use RabbitMQ to build an RPC system: a client and a scalable RPC server. As we don’t have any time-consuming tasks that are worth distributing, we’re going to create a dummy RPC service that returns Fibonacci numbers.</p>
+<p>在本节教程里，我们将用RabbitMQ来构建一个RPC系统，这个系统包括一个客户端和一个可伸缩的RPC服务端。由于我们没有什么耗时任务值得分发，所以我们准备创建一个假的RPC服务，这个服务返回斐波那契（Fibonacci）数值。</p>
+<span id="more"></span>
+<h3 id="client-interface客户端接口"><a class="markdownIt-Anchor" href="#client-interface客户端接口"></a> Client interface（客户端接口）</h3>
+<p>To illustrate how an RPC service could be used we’re going to change the names of our profiles from “Sender” and &quot;Receiver” to “Client” and “Server”. When we call the server we will get back the fibonacci of the argument we call with.</p>
+<p>为了说明RPC服务可以如何被使用，我们准备修改我们的配置组，将名称从“Sender”和“Receiver”换成“Client”和“Server”。当我们调用服务端时，我们将会获得我们传入的参数所对应的斐波那契数值。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">response</span> <span class="operator">=</span> (Integer) template.convertSendAndReceive</span><br><span class="line">(exchange.getName(), <span class="string">&quot;rpc&quot;</span>, start++);</span><br><span class="line">System.out.println(<span class="string">&quot; [.] Got &#x27;&quot;</span> + response + <span class="string">&quot;&#x27;&quot;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h4 id="a-note-on-rpcrpc的注意点"><a class="markdownIt-Anchor" href="#a-note-on-rpcrpc的注意点"></a> A note on RPC（RPC的注意点）</h4>
+<p>Although RPC is a pretty common pattern in computing, it’s often criticised. The problems arise when a programmer is not aware whether a function call is local or if it’s a slow RPC. Confusions like that result in an unpredictable system and adds unnecessary complexity to debugging. Instead of simplifying software, misused RPC can result in unmaintainable spaghetti code.</p>
+<p>虽然RPC在计算领域是很常见的模式，但它通常也是受争议的。但程序员不知道一个函数调用是本地的还是慢速的RPC时就会出现一些问题。像这样的混乱会导致不可预知的系统，而且会给调试增加不必要的复杂性。不恰当地使用RPC不仅不会简化程序，还会导致代码变得很难维护。</p>
+<p>Bearing that in mind, consider the following advice:</p>
+<p>记住这一点，然后考虑一下几点建议：</p>
+<ul>
+<li>Make sure it’s obvious which function call is local and which is remote.（确保哪个函数调用是本地的，哪个是远程的。）</li>
+<li>Document your system. Make the dependencies between components clear.（为你的系统做好文档。清晰化组件间的依赖。）</li>
+<li>Handle error cases. How should the client react when the RPC server is down for a long time?（处理好会发生错误的场景。但RPC服务端长时间挂掉时，客户端应该做出什么反应？）</li>
+</ul>
+<p>When in doubt avoid RPC. If you can, you should use an asynchronous pipeline - instead of RPC-like blocking, results are asynchronously pushed to a next computation stage.</p>
+<p>当你无法对这些问题无法做出明确回答时，就不要使用RPC。如果可以的话，你应该使用异步pipeline，而不是类似于阻塞的RPC。使用异步pipeline，计算结果可以异步推入到下一个计算阶段。</p>
+</blockquote>
+<h3 id="callback-queue回调队列"><a class="markdownIt-Anchor" href="#callback-queue回调队列"></a> Callback queue（回调队列）</h3>
+<p>In general doing RPC over RabbitMQ is easy. A client sends a request message and a server replies with a response message. In order to receive a response we need to send a ‘callback’ queue address with the request. Spring-amqp’s RabbitTemplate handles the callback queue for us when we use the above ‘convertSendAndReceive()’ method. There is no need to do any other setup when using the RabbitTemplate. For a thorough explanation please see <a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#request-reply">Request/Reply Message</a>.</p>
+<p>一般情况下，在RabbitMQ上实现RPC挺简单的。客户端发送请求消息然后服务端返回一个响应消息。为了接收响应消息，我们必须传送一个用于处理请求的回调队列。在我们使用“convertSendAndReceive()”方法时，Spring-amqp框架的RabbitTemplate类为我们做好了回调队列的处理工作。使用RabbitTemplate类时无需在做其它配置。若想看完整的文档，请参阅<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">请求/发送消息</a>。</p>
+<blockquote>
+<h4 id="message-properties消息属性"><a class="markdownIt-Anchor" href="#message-properties消息属性"></a> Message properties（消息属性）</h4>
+<p>The AMQP 0-9-1 protocol predefines a set of 14 properties that go with a message. Most of the properties are rarely used, with the exception of the following:</p>
+<p>AMQP 0-9-1协议预定义了14个消息属性。大部分的属性都很少用到，除了以下几个：</p>
+<ul>
+<li>deliveryMode: Marks a message as persistent (with a value of 2) or transient (any other value). You may remember this property from the second tutorial.</li>
+<li>deliveryMode：将消息标记为要持久化（此时属性值为2）或者瞬态（此时属性值为2以外的其它数字）。教程2里提到过这<br />
+个属性，你应该还记得。</li>
+<li>contentType: Used to describe the mime-type of the encoding. For example for the often used JSON encoding it is a good practice to set this property to: application/json.</li>
+<li>contentType：用来描述编码的mime类型。例如，对于常用的JSON格式，最好将这个属性值设为application/json。</li>
+<li>replyTo: Commonly used to name a callback queue.</li>
+<li>replayTo：通常用来命名一个回调队列。</li>
+<li>correlationId: Useful to correlate RPC responses with requests.</li>
+<li>correlationId：该属性用来将RPC响应与请求进行关联。</li>
+</ul>
+</blockquote>
+<h3 id="correlation-id关联id"><a class="markdownIt-Anchor" href="#correlation-id关联id"></a> Correlation Id（关联Id）</h3>
+<p>Spring-amqp allows you to focus on the message style you’re working with and hide the details of message plumbing required to support this style. For example, typically the native client would create a callback queue for every RPC request. That’s pretty inefficient so an alternative is to create a single callback queue per client.</p>
+<p>Spring-amqp能让你专注于正在处理的消息类型，并隐藏了支持该类型的消息所需的消息管道的实现细节。例如，通常情况下，本地客户端会为每个RPC请求都创建一个回调队列。这种做法效率很低，所以替换方案是每个客户端只创建一个回调队列。</p>
+<p>That raises a new issue, having received a response in that queue it’s not clear to which request the response belongs. That’s when the correlationId property is used. Spring-amqp automatically sets a unique value for every request. In addition it handles the details of matching the response with the correct correlationId.</p>
+<p>但这会导致一个新的问题，那就是，对于从这个队列里接收的响应，我们无法知道它对应的是哪个请求。这时候，correlationId就派上用场了。spring-amqp自动帮我们为每一个请求设好了唯一的correlationId值。而且，它还帮我们做好了将响应与correlationId进行匹配的细节。</p>
+<p>One reason that spring-amqp makes rpc style easier is that sometimes you may want to ignore unknown messages in the callback queue, rather than failing with an error. It’s due to a possibility of a race condition on the server side. Although unlikely, it is possible that the RPC server will die just after sending us the answer, but before sending an acknowledgment message for the request. If that happens, the restarted RPC server will process the request again. The spring-amqp client handles the duplicate responses gracefully, and the RPC should ideally be idempotent.</p>
+<p>spring-amqp使得rpc模式变得简单的一个原因是，有时你可能会想忽略回调队列里的一些未知消息，而不是抛出错误。这是因为服务端可能会出现竞争的情况。有可能RPC服务端在给我们发送完响应但却还没来得及发送确认消息时，它就挂了，虽然看起来不大像会这样。如果发生了这种情况，重启RPC服务端会继续再去处理这条请求。spring-amqp客户端会优雅地处理重复的响应，这种情况下，RPC应该是完美幂等的。</p>
+<h3 id="summary总结"><a class="markdownIt-Anchor" href="#summary总结"></a> Summary（总结）</h3>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-six.png" alt="image" /></p>
+<p>Our RPC will work like this:</p>
+<p>我们的RPC系统</p>
+<p>1.The Tut6Config will setup a new DirectExchange and a client</p>
+<p>在Tut6Config文件里将建立一个新的DirectExchange和一个客户端。</p>
+<p>2.The client will leverage the convertSendAndReceive passing the exchange name, the routingKey, and the message.</p>
+<p>客户端将使用convertSendAndReceive，并传入交换器名字，路由键和消息。</p>
+<p>3.The request is sent to an rpc_queue(“tut.rpc”) queue.</p>
+<p>请求被发送到用于rpc的队列里（“tut.rpc”）。</p>
+<p>4.The RPC worker (aka: server) is waiting for requests on that queue. When a request appears, it performs the task and sends a message with the result back to the Client, using the queue from the replyTo field.</p>
+<p>RPC工作者（也就是服务器）等待发送到队列里的请求。但一个请求出现时，它就执行任务，然后通过使用replyTo域里配置的队列将带有结果的消息发回给客户端。</p>
+<p>5.The client waits for data on the callback queue. When a message appears, it checks the correlationId property. If it matches the value from the request it returns the response to the application. Again, this is done automagically via the RabbitTemplate.</p>
+<p>客户端等待回调队列里的数据。当一条消息出现时，它会校验correlationId属性。如果属性值与请求匹配，它就将响应返回给应用。这个工作RabbitTemplate自动帮我们完成了。</p>
+<h2 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h2>
+<p>The Fibonacci task is a @RabbitListener and is defined as:</p>
+<p>计算斐波那契的任务用@RabbitListener进行标注，任务内容的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">	<span class="type">return</span> <span class="variable">n</span> <span class="operator">=</span>= <span class="number">0</span> ? <span class="number">0</span> : n == <span class="number">1</span> ? <span class="number">1</span> : (fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We declare our fibonacci function. It assumes only valid positive integer input. (Don’t expect this one to work for big numbers, and it’s probably the slowest recursive implementation possible).</p>
+<p>我们声明了斐波那契函数。它假定输入的参数是有效的正整数。（不要期望它能用于大数的场景，而且这种方式是最低效的递归实现）。</p>
+<p>The code for our <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut6/Tut6Config.java">Tut6Config</a> looks like this:</p>
+<p><a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">Tut6Config</a>的代码看起来是如下这样子的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Binding;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.BindingBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut6&quot;,&quot;rpc&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut6Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;client&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ClientConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> DirectExchange <span class="title function_">exchange</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.rpc&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut6Client <span class="title function_">client</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut6Client</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;server&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ServerConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">queue</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;tut.rpc.requests&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> DirectExchange <span class="title function_">exchange</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.rpc&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding</span><span class="params">(DirectExchange exchange, Queue queue)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(queue).to(exchange).with(<span class="string">&quot;rpc&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut6Server <span class="title function_">server</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut6Server</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>It setups up our profiles as “tut6” or “rpc”. It also setups a “client” profile with two beans; 1) the DirectExchange we are using and 2) the Tut6Client itself. We also configure the “server” profile with three beans, the “tut.rpc.requests” queue, the DirectExchange, which matches the client’s exchange, and the binding from the queue to the exchange with the “rpc” routing-key.</p>
+<p>它建立了我们的配置组，叫“tut6”或者“rpc”。同时，还建立了一个“client”配置组，这个组里配置了两个bean：一个是我们将要用到的DirectExchange类型的交换器，一个是Tut6Client本身。我们还建立了一个“server”配置组，这个组里配置了三个bean：一个名为“tut.rpc.requests”的队列，一个与客户端交换器相匹配的DirectExchange类型的交换器，以及用名为“rpc”的路由键将队列和交换器的绑定器。</p>
+<p>The server code is rather straightforward:</p>
+<p>服务端代码更直观点：</p>
+<p><a href="http://1.As">1.As</a> usual we start annotating our receiver method with a @RabbitListener and defining the queue its listening on.</p>
+<p>像之前那样，我们先用@RabbitListener来注解我们的接收者方法，然后定义它要监听的队列。</p>
+<p>2.Our fibanacci method calls fib() with the payload parameter and returns the result.</p>
+<p>我们的斐波那契方法被命名为fib()，接收有效参数并返回结果。</p>
+<p>The code for our RPC server <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut6/Tut6Server.java">Tut6Server.java</a>:</p>
+<p>以下为我们的RPC服务端代码<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">Tut6Server.java</a>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut6;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut6Server</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;tut.rpc.requests&quot;)</span></span><br><span class="line">	<span class="comment">// @SendTo(&quot;tut.rpc.replies&quot;) used when the</span></span><br><span class="line">	<span class="comment">// client doesn&#x27;t set replyTo.</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fibonacci</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Received request for &quot;</span> + n);</span><br><span class="line">		<span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> fib(n);</span><br><span class="line">		System.out.println(<span class="string">&quot; [.] Returned &quot;</span> + result);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">		<span class="type">return</span> <span class="variable">n</span> <span class="operator">=</span>= <span class="number">0</span> ? <span class="number">0</span> : n == <span class="number">1</span> ? <span class="number">1</span> : (fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The client code <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut6/Tut6Client.java">Tut6Client</a> is as easy as the server:</p>
+<p>客户端代码<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">Tut6Client</a>与服务端代码一样简单：</p>
+<p>1.We autowire the RabbitTemplate and the DirectExchange bean as defined in the Tut6Config.</p>
+<p>我们自动注入Tut6Config里定义的类型为RabbitTemplate和DirectExchange的bean。</p>
+<p>2.We invoke template.convertSendAndReceive with the parameters exchange name, routing key and message.</p>
+<p>我们调用template.convertSendAndReceive，传入的参数为交换器名字，路由键以及消息。</p>
+<p>3.We print the result.</p>
+<p>打印出结果。</p>
+<p>Making the Client request is simply:</p>
+<p>发起客户端请求也很简单：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut6Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DirectExchange exchange;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Requesting fib(&quot;</span> + start + <span class="string">&quot;)&quot;</span>);</span><br><span class="line">		<span class="type">Integer</span> <span class="variable">response</span> <span class="operator">=</span> (Integer) template.convertSendAndReceive(exchange.getName(), <span class="string">&quot;rpc&quot;</span>, start++);</span><br><span class="line">		System.out.println(<span class="string">&quot; [.] Got &#x27;&quot;</span> + response + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Using the project setup as defined in (see tutorial one) with <a href="http://start.spring.io">start.spring.io</a> and SpringInitialzr the preparing the runtime is the same as the other tutorials:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+<p>We can start the server with:</p>
+<p>我们可以用以下命令来启动服务端：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=rpc,server</span><br><span class="line">--tutorial.client.duration=6000</span><br></pre></td></tr></table></figure>
+<p>To request a fibonacci number run the client:</p>
+<p>若要请求斐波那契数值，可以用以下命令来启动客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=rpc,server</span><br><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=rpc,client</span><br></pre></td></tr></table></figure>
+<p>The design presented here is not the only possible implementation of a RPC service, but it has some important advantages:</p>
+<p>以上展示的设计不仅仅是实现RPC服务的一种方式，而且还有一些重要的优点：</p>
+<p>1.If the RPC server is too slow, you can scale up by just running another one. Try running a second RPC Server in a new console.</p>
+<p>如果RPC服务端太慢，你可以仅仅通过额外再运行一个服务端来增大其规模。可以尝试着在新的控制台里运行第二个RPC服务端。</p>
+<p>2.On the client side, the RPC requires sending and receiving only one message with one method. No synchronous calls like queueDeclare are required. As a result the RPC client needs only one network round trip for a single RPC request.</p>
+<p>在客户端这一边，RPC要求只能一个方法里发送和接收一条消息。不需要像queueDelare那样的同步调用。于是，对于一个RPC请求，RPC客户端只需一个网络回路。</p>
+<p>Our code is still pretty simplistic and doesn’t try to solve more complex (but important) problems, like:</p>
+<p>我们的代码仍然很简单，而且没有处理很多复杂（但重要）的问题，像：</p>
+<p>1.How should the client react if there are no servers running?</p>
+<p>如果没有服务端正在运行，客户端应该做出什么反应？</p>
+<p>2.Should a client have some kind of timeout for the RPC?</p>
+<p>客户端需要为RPC做超时处理吗？</p>
+<p>3.If the server malfunctions and raises an exception, should it be forwarded to the client?</p>
+<p>如果服务端出现故障并引起了异常，它是否应该告知客户端？</p>
+<p>4.Protecting against invalid incoming messages (eg checking bounds, type) before processing.</p>
+<p>在处理进来的消息之前先处理掉无效的消息（如校验边界，类型）。</p>
+<blockquote>
+<p>If you want to experiment, you may find the <a href="https://www.rabbitmq.com/management.html">management UI</a> useful for viewing the queues.</p>
+<p>如果你想做些实验，可以通过<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">管理界面</a>来查看队列，你会发现它很有用的。</p>
+</blockquote>
+<p>There is one other nice feature of RabbitMQ. It is featured as a supported tile on Pivotal Cloud Foundry (PCF) as a service.</p>
+<p>RabbitMQ还有另一个很棒的特性。它作为服务在Pivotal Cloud Foundry（PCF）上被支持。</p>
 ]]></content>
       <categories>
         <category>RabbitMQ Spring-AMQP官方教程</category>
@@ -1352,145 +1508,6 @@ tests as appropriate for the change. In general, tests should be added in the sa
       <tags>
         <tag>Code Review</tag>
         <tag>Translation</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（六）--RPC</title>
-    <url>/posts/40514/</url>
-    <content><![CDATA[<h1 id="remote-procedure-call-rpc远程过程调用"><a class="markdownIt-Anchor" href="#remote-procedure-call-rpc远程过程调用"></a> Remote procedure call (RPC，远程过程调用)</h1>
-<p>In the second tutorial we learned how to use <em>Work Queues</em> to distribute time-consuming tasks among multiple workers.</p>
-<p>在教程2里我们学习了如何使用工作队列在多个工作者之间分发耗时任务。</p>
-<p>But what if we need to run a function on a remote computer and wait for the result? Well, that’s a different story. This pattern is commonly known as <em>Remote Procedure Call or RPC</em>.</p>
-<p>但如果我们需要在一个远程电脑上运行一个函数并且等待运行结果的话要怎么办呢？这就变成另一个问题了。这种模式通常被称为远程过程调用（Remote Procedure Call），或者简称RPC。</p>
-<p>In this tutorial we’re going to use RabbitMQ to build an RPC system: a client and a scalable RPC server. As we don’t have any time-consuming tasks that are worth distributing, we’re going to create a dummy RPC service that returns Fibonacci numbers.</p>
-<p>在本节教程里，我们将用RabbitMQ来构建一个RPC系统，这个系统包括一个客户端和一个可伸缩的RPC服务端。由于我们没有什么耗时任务值得分发，所以我们准备创建一个假的RPC服务，这个服务返回斐波那契（Fibonacci）数值。</p>
-<span id="more"></span>
-<h3 id="client-interface客户端接口"><a class="markdownIt-Anchor" href="#client-interface客户端接口"></a> Client interface（客户端接口）</h3>
-<p>To illustrate how an RPC service could be used we’re going to change the names of our profiles from “Sender” and &quot;Receiver” to “Client” and “Server”. When we call the server we will get back the fibonacci of the argument we call with.</p>
-<p>为了说明RPC服务可以如何被使用，我们准备修改我们的配置组，将名称从“Sender”和“Receiver”换成“Client”和“Server”。当我们调用服务端时，我们将会获得我们传入的参数所对应的斐波那契数值。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">response</span> <span class="operator">=</span> (Integer) template.convertSendAndReceive</span><br><span class="line">(exchange.getName(), <span class="string">&quot;rpc&quot;</span>, start++);</span><br><span class="line">System.out.println(<span class="string">&quot; [.] Got &#x27;&quot;</span> + response + <span class="string">&quot;&#x27;&quot;</span>);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<h4 id="a-note-on-rpcrpc的注意点"><a class="markdownIt-Anchor" href="#a-note-on-rpcrpc的注意点"></a> A note on RPC（RPC的注意点）</h4>
-<p>Although RPC is a pretty common pattern in computing, it’s often criticised. The problems arise when a programmer is not aware whether a function call is local or if it’s a slow RPC. Confusions like that result in an unpredictable system and adds unnecessary complexity to debugging. Instead of simplifying software, misused RPC can result in unmaintainable spaghetti code.</p>
-<p>虽然RPC在计算领域是很常见的模式，但它通常也是受争议的。但程序员不知道一个函数调用是本地的还是慢速的RPC时就会出现一些问题。像这样的混乱会导致不可预知的系统，而且会给调试增加不必要的复杂性。不恰当地使用RPC不仅不会简化程序，还会导致代码变得很难维护。</p>
-<p>Bearing that in mind, consider the following advice:</p>
-<p>记住这一点，然后考虑一下几点建议：</p>
-<ul>
-<li>Make sure it’s obvious which function call is local and which is remote.（确保哪个函数调用是本地的，哪个是远程的。）</li>
-<li>Document your system. Make the dependencies between components clear.（为你的系统做好文档。清晰化组件间的依赖。）</li>
-<li>Handle error cases. How should the client react when the RPC server is down for a long time?（处理好会发生错误的场景。但RPC服务端长时间挂掉时，客户端应该做出什么反应？）</li>
-</ul>
-<p>When in doubt avoid RPC. If you can, you should use an asynchronous pipeline - instead of RPC-like blocking, results are asynchronously pushed to a next computation stage.</p>
-<p>当你无法对这些问题无法做出明确回答时，就不要使用RPC。如果可以的话，你应该使用异步pipeline，而不是类似于阻塞的RPC。使用异步pipeline，计算结果可以异步推入到下一个计算阶段。</p>
-</blockquote>
-<h3 id="callback-queue回调队列"><a class="markdownIt-Anchor" href="#callback-queue回调队列"></a> Callback queue（回调队列）</h3>
-<p>In general doing RPC over RabbitMQ is easy. A client sends a request message and a server replies with a response message. In order to receive a response we need to send a ‘callback’ queue address with the request. Spring-amqp’s RabbitTemplate handles the callback queue for us when we use the above ‘convertSendAndReceive()’ method. There is no need to do any other setup when using the RabbitTemplate. For a thorough explanation please see <a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#request-reply">Request/Reply Message</a>.</p>
-<p>一般情况下，在RabbitMQ上实现RPC挺简单的。客户端发送请求消息然后服务端返回一个响应消息。为了接收响应消息，我们必须传送一个用于处理请求的回调队列。在我们使用“convertSendAndReceive()”方法时，Spring-amqp框架的RabbitTemplate类为我们做好了回调队列的处理工作。使用RabbitTemplate类时无需在做其它配置。若想看完整的文档，请参阅<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">请求/发送消息</a>。</p>
-<blockquote>
-<h4 id="message-properties消息属性"><a class="markdownIt-Anchor" href="#message-properties消息属性"></a> Message properties（消息属性）</h4>
-<p>The AMQP 0-9-1 protocol predefines a set of 14 properties that go with a message. Most of the properties are rarely used, with the exception of the following:</p>
-<p>AMQP 0-9-1协议预定义了14个消息属性。大部分的属性都很少用到，除了以下几个：</p>
-<ul>
-<li>deliveryMode: Marks a message as persistent (with a value of 2) or transient (any other value). You may remember this property from the second tutorial.</li>
-<li>deliveryMode：将消息标记为要持久化（此时属性值为2）或者瞬态（此时属性值为2以外的其它数字）。教程2里提到过这<br />
-个属性，你应该还记得。</li>
-<li>contentType: Used to describe the mime-type of the encoding. For example for the often used JSON encoding it is a good practice to set this property to: application/json.</li>
-<li>contentType：用来描述编码的mime类型。例如，对于常用的JSON格式，最好将这个属性值设为application/json。</li>
-<li>replyTo: Commonly used to name a callback queue.</li>
-<li>replayTo：通常用来命名一个回调队列。</li>
-<li>correlationId: Useful to correlate RPC responses with requests.</li>
-<li>correlationId：该属性用来将RPC响应与请求进行关联。</li>
-</ul>
-</blockquote>
-<h3 id="correlation-id关联id"><a class="markdownIt-Anchor" href="#correlation-id关联id"></a> Correlation Id（关联Id）</h3>
-<p>Spring-amqp allows you to focus on the message style you’re working with and hide the details of message plumbing required to support this style. For example, typically the native client would create a callback queue for every RPC request. That’s pretty inefficient so an alternative is to create a single callback queue per client.</p>
-<p>Spring-amqp能让你专注于正在处理的消息类型，并隐藏了支持该类型的消息所需的消息管道的实现细节。例如，通常情况下，本地客户端会为每个RPC请求都创建一个回调队列。这种做法效率很低，所以替换方案是每个客户端只创建一个回调队列。</p>
-<p>That raises a new issue, having received a response in that queue it’s not clear to which request the response belongs. That’s when the correlationId property is used. Spring-amqp automatically sets a unique value for every request. In addition it handles the details of matching the response with the correct correlationId.</p>
-<p>但这会导致一个新的问题，那就是，对于从这个队列里接收的响应，我们无法知道它对应的是哪个请求。这时候，correlationId就派上用场了。spring-amqp自动帮我们为每一个请求设好了唯一的correlationId值。而且，它还帮我们做好了将响应与correlationId进行匹配的细节。</p>
-<p>One reason that spring-amqp makes rpc style easier is that sometimes you may want to ignore unknown messages in the callback queue, rather than failing with an error. It’s due to a possibility of a race condition on the server side. Although unlikely, it is possible that the RPC server will die just after sending us the answer, but before sending an acknowledgment message for the request. If that happens, the restarted RPC server will process the request again. The spring-amqp client handles the duplicate responses gracefully, and the RPC should ideally be idempotent.</p>
-<p>spring-amqp使得rpc模式变得简单的一个原因是，有时你可能会想忽略回调队列里的一些未知消息，而不是抛出错误。这是因为服务端可能会出现竞争的情况。有可能RPC服务端在给我们发送完响应但却还没来得及发送确认消息时，它就挂了，虽然看起来不大像会这样。如果发生了这种情况，重启RPC服务端会继续再去处理这条请求。spring-amqp客户端会优雅地处理重复的响应，这种情况下，RPC应该是完美幂等的。</p>
-<h3 id="summary总结"><a class="markdownIt-Anchor" href="#summary总结"></a> Summary（总结）</h3>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-six.png" alt="image" /></p>
-<p>Our RPC will work like this:</p>
-<p>我们的RPC系统</p>
-<p>1.The Tut6Config will setup a new DirectExchange and a client</p>
-<p>在Tut6Config文件里将建立一个新的DirectExchange和一个客户端。</p>
-<p>2.The client will leverage the convertSendAndReceive passing the exchange name, the routingKey, and the message.</p>
-<p>客户端将使用convertSendAndReceive，并传入交换器名字，路由键和消息。</p>
-<p>3.The request is sent to an rpc_queue(“tut.rpc”) queue.</p>
-<p>请求被发送到用于rpc的队列里（“tut.rpc”）。</p>
-<p>4.The RPC worker (aka: server) is waiting for requests on that queue. When a request appears, it performs the task and sends a message with the result back to the Client, using the queue from the replyTo field.</p>
-<p>RPC工作者（也就是服务器）等待发送到队列里的请求。但一个请求出现时，它就执行任务，然后通过使用replyTo域里配置的队列将带有结果的消息发回给客户端。</p>
-<p>5.The client waits for data on the callback queue. When a message appears, it checks the correlationId property. If it matches the value from the request it returns the response to the application. Again, this is done automagically via the RabbitTemplate.</p>
-<p>客户端等待回调队列里的数据。当一条消息出现时，它会校验correlationId属性。如果属性值与请求匹配，它就将响应返回给应用。这个工作RabbitTemplate自动帮我们完成了。</p>
-<h2 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h2>
-<p>The Fibonacci task is a @RabbitListener and is defined as:</p>
-<p>计算斐波那契的任务用@RabbitListener进行标注，任务内容的定义如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">	<span class="type">return</span> <span class="variable">n</span> <span class="operator">=</span>= <span class="number">0</span> ? <span class="number">0</span> : n == <span class="number">1</span> ? <span class="number">1</span> : (fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We declare our fibonacci function. It assumes only valid positive integer input. (Don’t expect this one to work for big numbers, and it’s probably the slowest recursive implementation possible).</p>
-<p>我们声明了斐波那契函数。它假定输入的参数是有效的正整数。（不要期望它能用于大数的场景，而且这种方式是最低效的递归实现）。</p>
-<p>The code for our <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut6/Tut6Config.java">Tut6Config</a> looks like this:</p>
-<p><a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">Tut6Config</a>的代码看起来是如下这样子的：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Binding;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.BindingBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut6&quot;,&quot;rpc&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut6Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;client&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ClientConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> DirectExchange <span class="title function_">exchange</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.rpc&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut6Client <span class="title function_">client</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut6Client</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;server&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ServerConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">queue</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;tut.rpc.requests&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> DirectExchange <span class="title function_">exchange</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(<span class="string">&quot;tut.rpc&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding</span><span class="params">(DirectExchange exchange, Queue queue)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(queue).to(exchange).with(<span class="string">&quot;rpc&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut6Server <span class="title function_">server</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut6Server</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>It setups up our profiles as “tut6” or “rpc”. It also setups a “client” profile with two beans; 1) the DirectExchange we are using and 2) the Tut6Client itself. We also configure the “server” profile with three beans, the “tut.rpc.requests” queue, the DirectExchange, which matches the client’s exchange, and the binding from the queue to the exchange with the “rpc” routing-key.</p>
-<p>它建立了我们的配置组，叫“tut6”或者“rpc”。同时，还建立了一个“client”配置组，这个组里配置了两个bean：一个是我们将要用到的DirectExchange类型的交换器，一个是Tut6Client本身。我们还建立了一个“server”配置组，这个组里配置了三个bean：一个名为“tut.rpc.requests”的队列，一个与客户端交换器相匹配的DirectExchange类型的交换器，以及用名为“rpc”的路由键将队列和交换器的绑定器。</p>
-<p>The server code is rather straightforward:</p>
-<p>服务端代码更直观点：</p>
-<p><a href="http://1.As">1.As</a> usual we start annotating our receiver method with a @RabbitListener and defining the queue its listening on.</p>
-<p>像之前那样，我们先用@RabbitListener来注解我们的接收者方法，然后定义它要监听的队列。</p>
-<p>2.Our fibanacci method calls fib() with the payload parameter and returns the result.</p>
-<p>我们的斐波那契方法被命名为fib()，接收有效参数并返回结果。</p>
-<p>The code for our RPC server <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut6/Tut6Server.java">Tut6Server.java</a>:</p>
-<p>以下为我们的RPC服务端代码<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">Tut6Server.java</a>:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.amqp.tutorials.tut6;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut6Server</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;tut.rpc.requests&quot;)</span></span><br><span class="line">	<span class="comment">// @SendTo(&quot;tut.rpc.replies&quot;) used when the</span></span><br><span class="line">	<span class="comment">// client doesn&#x27;t set replyTo.</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fibonacci</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Received request for &quot;</span> + n);</span><br><span class="line">		<span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> fib(n);</span><br><span class="line">		System.out.println(<span class="string">&quot; [.] Returned &quot;</span> + result);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">		<span class="type">return</span> <span class="variable">n</span> <span class="operator">=</span>= <span class="number">0</span> ? <span class="number">0</span> : n == <span class="number">1</span> ? <span class="number">1</span> : (fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The client code <a href="https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/spring-amqp/src/main/java/org/springframework/amqp/tutorials/tut6/Tut6Client.java">Tut6Client</a> is as easy as the server:</p>
-<p>客户端代码<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">Tut6Client</a>与服务端代码一样简单：</p>
-<p>1.We autowire the RabbitTemplate and the DirectExchange bean as defined in the Tut6Config.</p>
-<p>我们自动注入Tut6Config里定义的类型为RabbitTemplate和DirectExchange的bean。</p>
-<p>2.We invoke template.convertSendAndReceive with the parameters exchange name, routing key and message.</p>
-<p>我们调用template.convertSendAndReceive，传入的参数为交换器名字，路由键以及消息。</p>
-<p>3.We print the result.</p>
-<p>打印出结果。</p>
-<p>Making the Client request is simply:</p>
-<p>发起客户端请求也很简单：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.DirectExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut6Client</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DirectExchange exchange;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Requesting fib(&quot;</span> + start + <span class="string">&quot;)&quot;</span>);</span><br><span class="line">		<span class="type">Integer</span> <span class="variable">response</span> <span class="operator">=</span> (Integer) template.convertSendAndReceive(exchange.getName(), <span class="string">&quot;rpc&quot;</span>, start++);</span><br><span class="line">		System.out.println(<span class="string">&quot; [.] Got &#x27;&quot;</span> + response + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Using the project setup as defined in (see tutorial one) with <a href="http://start.spring.io">start.spring.io</a> and SpringInitialzr the preparing the runtime is the same as the other tutorials:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
-<p>We can start the server with:</p>
-<p>我们可以用以下命令来启动服务端：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=rpc,server</span><br><span class="line">--tutorial.client.duration=6000</span><br></pre></td></tr></table></figure>
-<p>To request a fibonacci number run the client:</p>
-<p>若要请求斐波那契数值，可以用以下命令来启动客户端：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=rpc,server</span><br><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar</span><br><span class="line">--spring.profiles.active=rpc,client</span><br></pre></td></tr></table></figure>
-<p>The design presented here is not the only possible implementation of a RPC service, but it has some important advantages:</p>
-<p>以上展示的设计不仅仅是实现RPC服务的一种方式，而且还有一些重要的优点：</p>
-<p>1.If the RPC server is too slow, you can scale up by just running another one. Try running a second RPC Server in a new console.</p>
-<p>如果RPC服务端太慢，你可以仅仅通过额外再运行一个服务端来增大其规模。可以尝试着在新的控制台里运行第二个RPC服务端。</p>
-<p>2.On the client side, the RPC requires sending and receiving only one message with one method. No synchronous calls like queueDeclare are required. As a result the RPC client needs only one network round trip for a single RPC request.</p>
-<p>在客户端这一边，RPC要求只能一个方法里发送和接收一条消息。不需要像queueDelare那样的同步调用。于是，对于一个RPC请求，RPC客户端只需一个网络回路。</p>
-<p>Our code is still pretty simplistic and doesn’t try to solve more complex (but important) problems, like:</p>
-<p>我们的代码仍然很简单，而且没有处理很多复杂（但重要）的问题，像：</p>
-<p>1.How should the client react if there are no servers running?</p>
-<p>如果没有服务端正在运行，客户端应该做出什么反应？</p>
-<p>2.Should a client have some kind of timeout for the RPC?</p>
-<p>客户端需要为RPC做超时处理吗？</p>
-<p>3.If the server malfunctions and raises an exception, should it be forwarded to the client?</p>
-<p>如果服务端出现故障并引起了异常，它是否应该告知客户端？</p>
-<p>4.Protecting against invalid incoming messages (eg checking bounds, type) before processing.</p>
-<p>在处理进来的消息之前先处理掉无效的消息（如校验边界，类型）。</p>
-<blockquote>
-<p>If you want to experiment, you may find the <a href="https://www.rabbitmq.com/management.html">management UI</a> useful for viewing the queues.</p>
-<p>如果你想做些实验，可以通过<a href="https://legacy.gitbook.com/book/jiapengcai/rabbitmq/edit#">管理界面</a>来查看队列，你会发现它很有用的。</p>
-</blockquote>
-<p>There is one other nice feature of RabbitMQ. It is featured as a supported tile on Pivotal Cloud Foundry (PCF) as a service.</p>
-<p>RabbitMQ还有另一个很棒的特性。它作为服务在Pivotal Cloud Foundry（PCF）上被支持。</p>
-]]></content>
-      <categories>
-        <category>RabbitMQ Spring-AMQP官方教程</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>RabbitMQ</tag>
       </tags>
   </entry>
 </search>
