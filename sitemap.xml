@@ -335,6 +335,20 @@
 
   
   <url>
+    <loc>https://jiapengcai.github.io/tags/Gerrit/</loc>
+    <lastmod>2022-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiapengcai.github.io/tags/Code-Review/</loc>
+    <lastmod>2022-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/tags/Leetcode/</loc>
     <lastmod>2022-08-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -349,20 +363,6 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Translation/</loc>
-    <lastmod>2022-08-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiapengcai.github.io/tags/Code-Review/</loc>
-    <lastmod>2022-08-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jiapengcai.github.io/tags/Algorithm/</loc>
     <lastmod>2022-08-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -370,7 +370,7 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Gerrit/</loc>
+    <loc>https://jiapengcai.github.io/tags/Translation/</loc>
     <lastmod>2022-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -393,6 +393,13 @@
 
   
   <url>
+    <loc>https://jiapengcai.github.io/categories/%E9%9A%8F%E7%AC%94%E5%A4%87%E5%BF%98/</loc>
+    <lastmod>2022-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/</loc>
     <lastmod>2022-08-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -407,13 +414,6 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/</loc>
-    <lastmod>2022-08-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-08-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -421,7 +421,7 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E9%9A%8F%E7%AC%94%E5%A4%87%E5%BF%98/</loc>
+    <loc>https://jiapengcai.github.io/categories/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/</loc>
     <lastmod>2022-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
