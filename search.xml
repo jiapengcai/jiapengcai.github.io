@@ -68,6 +68,64 @@
       </tags>
   </entry>
   <entry>
+    <title>Gerrit没有出现Verify按钮问题解决</title>
+    <url>/posts/18923/</url>
+    <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
+]]></content>
+      <categories>
+        <category>随笔备忘</category>
+      </categories>
+      <tags>
+        <tag>Gerrit</tag>
+        <tag>Code Review</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>6、处理代码评审过程产生的抵触问题</title>
+    <url>/posts/45937/</url>
+    <content><![CDATA[<p>Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general.<br />
+有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建议，要么就是抱怨你太严格了。</p>
+<span id="more"></span>
+<h2 id="who-is-right"><a class="markdownIt-Anchor" href="#who-is-right"></a> Who is right?</h2>
+<h2 id="谁是对的"><a class="markdownIt-Anchor" href="#谁是对的"></a> 谁是对的？</h2>
+<p>When a developer disagrees with your suggestion, first take a moment to consider if they are correct. Often, they are closer to the code than you are, and so they might really have a better insight about certain aspects of it. Does their argument make sense? Does it make sense from a code health perspective? If so, let them know that they are right and let the issue drop.<br />
+当开发人员不同意你的建议时，可以先花点时间考虑下他们是不是对的。通常，他们比你更接近代码，因此他们可能会对代码的某些方面有更好的了解。他们的异议是否有意义？从代码质量的角度来看这些争议是否有意义？如果是的话，那就让他们知道他们是对的，然后关闭问题。</p>
+<p>However, developers are not always right. In this case the reviewer should further explain why they believe that their suggestion is correct. A good explanation demonstrates both an understanding of the developer’s reply, and additional information about why the change is being requested.<br />
+然而，开发人员并不总是对的。在这种情况下，审查人员应该进一步解释为什么相信他们的建议是对的。一个好的解释不仅表明了对开发人员的回复的理解，也深入阐述了为什么要这么改。</p>
+<p>In particular, when the reviewer believes their suggestion will improve code health, they should continue to advocate for the change, if they believe the resulting code quality improvement justifies the additional work requested. <strong>Improving code health tends to happen in small steps.</strong><br />
+尤其是，当审查人员认为他们的建议会改善代码质量并且觉得由此带来的额外工作量是合理时，他们应该继续倡导修改。<strong>改善代码质量总是在小步中进行的。</strong></p>
+<p>Sometimes it takes a few rounds of explaining a suggestion before it really sinks in. Just make sure to always stay <a href="comments.md#courtesy">polite</a> and let the developer know that you <em>hear</em> what they’re saying, you just don’t <em>agree</em>.<br />
+有时需要来回对建议解释个几轮才能让开发人员真正理解。在这过程中，也要记得保证礼貌并且让开发人员知道你<em>知道</em>他们在说什么，只是不<em>同意</em>而已</p>
+<h2 id="upsetting-developers"><a class="markdownIt-Anchor" href="#upsetting-developers"></a> Upsetting Developers</h2>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+<p>Reviewers sometimes believe that the developer will be upset if the reviewer insists on an improvement. Sometimes developers do become upset, but it is usually brief and they become very thankful later that you helped them improve the quality of their code. Usually, if you are <a href="comments.md#courtesy">polite</a> in your comments, developers actually don’t become upset at all, and the worry is just in the reviewer’s mind. Upsets are usually more about <a href="comments.md#courtesy">the way comments are written</a> than about the reviewer’s insistence on code quality.<br />
+审查人员有时会觉得如果审查人员坚持代码改进会让开发人员感到沮丧。开发人员有时也确实会感到沮丧，但这种感觉通常是短暂的，并且后续还会感激你帮助他们改善代码质量。通常情况下，如果你在评注里保持着礼貌，开发人员实际上是不会感到抗拒的，这个担心只是审查人员自身觉得的而已。比起审查人员坚持代码改善，反而是审查意见的编写方式更容易让开发人员感到不快。</p>
+<h2 id="cleaning-it-up-later"><a class="markdownIt-Anchor" href="#cleaning-it-up-later"></a> Cleaning It Up Later</h2>
+<h2 id="后续优化"><a class="markdownIt-Anchor" href="#后续优化"></a> 后续优化</h2>
+<p>A common source of push back is that developers (understandably) want to get things done. They don’t want to go through another round of review just to get this CL in. So they say they will clean something up in a later CL, and thus you should LGTM <em>this</em> CL now. Some developers are very good about this, and will immediately write a follow-up CL that fixes the issue. However, experience shows that as more time passes after a developer writes the original CL, the less likely this clean up is to happen. In fact, usually unless the developer does the clean up <em>immediately</em> after the present CL, it never happens. This isn’t because developers are irresponsible, but because they have a lot of work to do and the cleanup gets lost or forgotten in the press of other work. Thus, it is usually best to insist that the developer clean up their CL <em>now</em>, before the code is in the codebase and “done.” Letting people “clean things up later” is a common way for codebases to degenerate.<br />
+发生抵触的一个常见原因是开发人员想完成任务，这是可以理解的。他们不想为了让这个CL通过而进行新一轮的审查。因此他们会说他们会在后续的CL里进行优化，现在你应该先让我通过<em>这个</em>CL。一些开发人员很擅长做这个，还会立即写一个跟进事项。然而，经验表明，开发人员在写下原本的CL之后，随着时间推移，这些跟进事项会越来越难以得到实施。实际上多数情况是，除非开发人员<em>立马</em>处理这些问题，否则以后都不会处理。这不是因为开发人员没有责任心，而是因为他们有很多工作要做，从而这些跟进事项在其它工作的压力下被搁置或者遗忘。因此，最好坚持在代码入库前就让开发人员就处理好这些问题。让人们“稍后跟进”是代码质量下降的常见原因。</p>
+<p>If a CL introduces new complexity, it must be cleaned up before submission unless it is an <a href="../emergencies.md">emergency</a>. If the CL exposes surrounding problems and they can’t be addressed right now, the developer should file a bug for the cleanup and assign it to themselves so that it doesn’t get lost. They can optionally also write a TODO comment in the code that references the filed bug.<br />
+如果一个CL引入了新的复杂性，那么在提交到代码库前必须进行优化除非这是个紧急任务。如果这个CL暴露了一些别的问题而且无法立马解决，那么开发人员应该提交一个待跟进的bug并把它指派给自己，以此来让它不会被遗忘。开发人员也可以选择在代码里下一个TODO注释来提醒这个被记录下来的bug。</p>
+<h2 id="general-complaints-about-strictness"><a class="markdownIt-Anchor" href="#general-complaints-about-strictness"></a> General Complaints About Strictness</h2>
+<h2 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> </h2>
+<p>If you previously had fairly lax code reviews and you switch to having strict reviews, some developers will complain very loudly. Improving the <a href="speed.md">speed</a> of your code reviews usually causes these complaints to fade away.<br />
+如果你之前做代码审核比较宽松，然后（突然）转向严格的审查，一些开发人员会可能意见会比较大。提高你的代码审查<a href="speed.md">速度</a>通常能让这些抱怨消失。</p>
+<p>Sometimes it can take months for these complaints to fade away, but eventually developers tend to see the value of strict code reviews as they see what great code they help generate. Sometimes the loudest protesters even become your strongest supporters once something happens that causes them to really see the value you’re adding by being strict.<br />
+有时需要花几个月的时间来让这些抵触情绪消失，但最终开发人员会发现严格代码审查所带来的价值，因为他们看到了在审查人员的帮助下写出了出色的代码。一旦意见最大的那几个抗议者看到了你严格审查产生的价值，有时他们甚至会成为你的最坚定的支持者。</p>
+<h2 id="resolving-conflicts"><a class="markdownIt-Anchor" href="#resolving-conflicts"></a> Resolving Conflicts</h2>
+<h2 id="解决冲突"><a class="markdownIt-Anchor" href="#解决冲突"></a> 解决冲突</h2>
+<p>If you are following all of the above but you still encounter a conflict between yourself and a developer that can’t be resolved, see <a href="../51044">The Standard of Code Review</a> for guidelines and principles that can help resolve the conflict.<br />
+如果你遵从了上述几点但仍然和开发人员产生了难以解决的意见冲突，那么请参阅<a href="../51044">代码审查标准</a>章节，里面的指南和原则有助于解决冲突。</p>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>3、代码审查标准</title>
     <url>/posts/51044/</url>
     <content><![CDATA[<p>The primary purpose of code review is to make sure that the overall code health of Google’s code base is improving over time. All of the tools and processes of code review are designed to this end.<br />
@@ -144,64 +202,6 @@
       </tags>
   </entry>
   <entry>
-    <title>6、处理代码评审过程产生的抵触问题</title>
-    <url>/posts/45937/</url>
-    <content><![CDATA[<p>Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general.<br />
-有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建议，要么就是抱怨你太严格了。</p>
-<span id="more"></span>
-<h2 id="who-is-right"><a class="markdownIt-Anchor" href="#who-is-right"></a> Who is right?</h2>
-<h2 id="谁是对的"><a class="markdownIt-Anchor" href="#谁是对的"></a> 谁是对的？</h2>
-<p>When a developer disagrees with your suggestion, first take a moment to consider if they are correct. Often, they are closer to the code than you are, and so they might really have a better insight about certain aspects of it. Does their argument make sense? Does it make sense from a code health perspective? If so, let them know that they are right and let the issue drop.<br />
-当开发人员不同意你的建议时，可以先花点时间考虑下他们是不是对的。通常，他们比你更接近代码，因此他们可能会对代码的某些方面有更好的了解。他们的异议是否有意义？从代码质量的角度来看这些争议是否有意义？如果是的话，那就让他们知道他们是对的，然后关闭问题。</p>
-<p>However, developers are not always right. In this case the reviewer should further explain why they believe that their suggestion is correct. A good explanation demonstrates both an understanding of the developer’s reply, and additional information about why the change is being requested.<br />
-然而，开发人员并不总是对的。在这种情况下，审查人员应该进一步解释为什么相信他们的建议是对的。一个好的解释不仅表明了对开发人员的回复的理解，也深入阐述了为什么要这么改。</p>
-<p>In particular, when the reviewer believes their suggestion will improve code health, they should continue to advocate for the change, if they believe the resulting code quality improvement justifies the additional work requested. <strong>Improving code health tends to happen in small steps.</strong><br />
-尤其是，当审查人员认为他们的建议会改善代码质量并且觉得由此带来的额外工作量是合理时，他们应该继续倡导修改。<strong>改善代码质量总是在小步中进行的。</strong></p>
-<p>Sometimes it takes a few rounds of explaining a suggestion before it really sinks in. Just make sure to always stay <a href="comments.md#courtesy">polite</a> and let the developer know that you <em>hear</em> what they’re saying, you just don’t <em>agree</em>.<br />
-有时需要来回对建议解释个几轮才能让开发人员真正理解。在这过程中，也要记得保证礼貌并且让开发人员知道你<em>知道</em>他们在说什么，只是不<em>同意</em>而已</p>
-<h2 id="upsetting-developers"><a class="markdownIt-Anchor" href="#upsetting-developers"></a> Upsetting Developers</h2>
-<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
-<p>Reviewers sometimes believe that the developer will be upset if the reviewer insists on an improvement. Sometimes developers do become upset, but it is usually brief and they become very thankful later that you helped them improve the quality of their code. Usually, if you are <a href="comments.md#courtesy">polite</a> in your comments, developers actually don’t become upset at all, and the worry is just in the reviewer’s mind. Upsets are usually more about <a href="comments.md#courtesy">the way comments are written</a> than about the reviewer’s insistence on code quality.<br />
-审查人员有时会觉得如果审查人员坚持代码改进会让开发人员感到沮丧。开发人员有时也确实会感到沮丧，但这种感觉通常是短暂的，并且后续还会感激你帮助他们改善代码质量。通常情况下，如果你在评注里保持着礼貌，开发人员实际上是不会感到抗拒的，这个担心只是审查人员自身觉得的而已。比起审查人员坚持代码改善，反而是审查意见的编写方式更容易让开发人员感到不快。</p>
-<h2 id="cleaning-it-up-later"><a class="markdownIt-Anchor" href="#cleaning-it-up-later"></a> Cleaning It Up Later</h2>
-<h2 id="后续优化"><a class="markdownIt-Anchor" href="#后续优化"></a> 后续优化</h2>
-<p>A common source of push back is that developers (understandably) want to get things done. They don’t want to go through another round of review just to get this CL in. So they say they will clean something up in a later CL, and thus you should LGTM <em>this</em> CL now. Some developers are very good about this, and will immediately write a follow-up CL that fixes the issue. However, experience shows that as more time passes after a developer writes the original CL, the less likely this clean up is to happen. In fact, usually unless the developer does the clean up <em>immediately</em> after the present CL, it never happens. This isn’t because developers are irresponsible, but because they have a lot of work to do and the cleanup gets lost or forgotten in the press of other work. Thus, it is usually best to insist that the developer clean up their CL <em>now</em>, before the code is in the codebase and “done.” Letting people “clean things up later” is a common way for codebases to degenerate.<br />
-发生抵触的一个常见原因是开发人员想完成任务，这是可以理解的。他们不想为了让这个CL通过而进行新一轮的审查。因此他们会说他们会在后续的CL里进行优化，现在你应该先让我通过<em>这个</em>CL。一些开发人员很擅长做这个，还会立即写一个跟进事项。然而，经验表明，开发人员在写下原本的CL之后，随着时间推移，这些跟进事项会越来越难以得到实施。实际上多数情况是，除非开发人员<em>立马</em>处理这些问题，否则以后都不会处理。这不是因为开发人员没有责任心，而是因为他们有很多工作要做，从而这些跟进事项在其它工作的压力下被搁置或者遗忘。因此，最好坚持在代码入库前就让开发人员就处理好这些问题。让人们“稍后跟进”是代码质量下降的常见原因。</p>
-<p>If a CL introduces new complexity, it must be cleaned up before submission unless it is an <a href="../emergencies.md">emergency</a>. If the CL exposes surrounding problems and they can’t be addressed right now, the developer should file a bug for the cleanup and assign it to themselves so that it doesn’t get lost. They can optionally also write a TODO comment in the code that references the filed bug.<br />
-如果一个CL引入了新的复杂性，那么在提交到代码库前必须进行优化除非这是个紧急任务。如果这个CL暴露了一些别的问题而且无法立马解决，那么开发人员应该提交一个待跟进的bug并把它指派给自己，以此来让它不会被遗忘。开发人员也可以选择在代码里下一个TODO注释来提醒这个被记录下来的bug。</p>
-<h2 id="general-complaints-about-strictness"><a class="markdownIt-Anchor" href="#general-complaints-about-strictness"></a> General Complaints About Strictness</h2>
-<h2 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> </h2>
-<p>If you previously had fairly lax code reviews and you switch to having strict reviews, some developers will complain very loudly. Improving the <a href="speed.md">speed</a> of your code reviews usually causes these complaints to fade away.<br />
-如果你之前做代码审核比较宽松，然后（突然）转向严格的审查，一些开发人员会可能意见会比较大。提高你的代码审查<a href="speed.md">速度</a>通常能让这些抱怨消失。</p>
-<p>Sometimes it can take months for these complaints to fade away, but eventually developers tend to see the value of strict code reviews as they see what great code they help generate. Sometimes the loudest protesters even become your strongest supporters once something happens that causes them to really see the value you’re adding by being strict.<br />
-有时需要花几个月的时间来让这些抵触情绪消失，但最终开发人员会发现严格代码审查所带来的价值，因为他们看到了在审查人员的帮助下写出了出色的代码。一旦意见最大的那几个抗议者看到了你严格审查产生的价值，有时他们甚至会成为你的最坚定的支持者。</p>
-<h2 id="resolving-conflicts"><a class="markdownIt-Anchor" href="#resolving-conflicts"></a> Resolving Conflicts</h2>
-<h2 id="解决冲突"><a class="markdownIt-Anchor" href="#解决冲突"></a> 解决冲突</h2>
-<p>If you are following all of the above but you still encounter a conflict between yourself and a developer that can’t be resolved, see <a href="../51044">The Standard of Code Review</a> for guidelines and principles that can help resolve the conflict.<br />
-如果你遵从了上述几点但仍然和开发人员产生了难以解决的意见冲突，那么请参阅<a href="../51044">代码审查标准</a>章节，里面的指南和原则有助于解决冲突。</p>
-]]></content>
-      <categories>
-        <category>Google代码评审规约</category>
-      </categories>
-      <tags>
-        <tag>Code Review</tag>
-        <tag>Translation</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Gerrit没有出现Verify按钮问题解决</title>
-    <url>/posts/18923/</url>
-    <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
-]]></content>
-      <categories>
-        <category>随笔备忘</category>
-      </categories>
-      <tags>
-        <tag>Gerrit</tag>
-        <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2、如何进行代码审查</title>
     <url>/posts/41083/</url>
     <content><![CDATA[<h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
@@ -253,6 +253,35 @@
       <tags>
         <tag>Code Review</tag>
         <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>176. 第二高的薪水</title>
+    <url>/posts/23560/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表: Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
       </tags>
   </entry>
   <entry>
@@ -330,36 +359,6 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>175. 组合两个表</title>
-    <url>/posts/55850/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个SQL查询来报告 Person 表中每个人的姓、名、城市和州。如果 personId 的地址不在 Address 表中，则报告为空  null 。<br />
-以<strong>任意顺序</strong>返回结果表。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (personId <span class="type">int</span>, firstName <span class="type">varchar</span>(<span class="number">255</span>), lastName <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Address (addressId <span class="type">int</span>, personId <span class="type">int</span>, city <span class="type">varchar</span>(<span class="number">255</span>), state <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Wang&#x27;</span>, <span class="string">&#x27;Allen&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Alice&#x27;</span>, <span class="string">&#x27;Bob&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Address</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;New York City&#x27;</span>, <span class="string">&#x27;New York&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Leetcode&#x27;</span>, <span class="string">&#x27;California&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表: Person</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> FirstName   <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> LastName    <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">personId 是该表的主键列。</span><br><span class="line">该表包含一些人的 ID 和他们的姓和名的信息。</span><br></pre></td></tr></table></figure>
-<p>表: Address</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> AddressId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> City        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> State       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">addressId 是该表的主键列。</span><br><span class="line">该表的每一行都包含一个 ID <span class="operator">=</span> PersonId 的人的城市和州的信息。</span><br></pre></td></tr></table></figure>
-<p>查询结果格式如下所示。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> personId <span class="operator">|</span> lastName <span class="operator">|</span> firstName <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> Wang     <span class="operator">|</span> Allen     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Alice    <span class="operator">|</span> Bob       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line">Address表:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> addressId <span class="operator">|</span> personId <span class="operator">|</span> city          <span class="operator">|</span> state      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Leetcode      <span class="operator">|</span> California <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> firstName <span class="operator">|</span> lastName <span class="operator">|</span> city          <span class="operator">|</span> state    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> Allen     <span class="operator">|</span> Wang     <span class="operator">|</span> <span class="keyword">Null</span>          <span class="operator">|</span> <span class="keyword">Null</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bob       <span class="operator">|</span> Alice    <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId <span class="operator">=</span> <span class="number">1</span> 的地址，所以它们的城市和州返回 <span class="keyword">null</span>。</span><br><span class="line">addressId <span class="operator">=</span> <span class="number">1</span> 包含了 personId <span class="operator">=</span> <span class="number">2</span> 的地址信息。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.FirstName, a.LastName, b.City, b.State</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.PersonId <span class="operator">=</span> b.PersonId</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/combine-two-tables">https://leetcode.cn/problems/combine-two-tables</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>178. 分数排名</title>
     <url>/posts/32576/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
@@ -393,22 +392,114 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>181. 超过经理收入的员工</title>
-    <url>/posts/58200/</url>
+    <title>175. 组合两个表</title>
+    <url>/posts/55850/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个SQL查询来查找收入比经理高的员工。<br />
+编写一个SQL查询来报告 Person 表中每个人的姓、名、城市和州。如果 personId 的地址不在 Address 表中，则报告为空  null 。<br />
 以<strong>任意顺序</strong>返回结果表。</p>
 <span id="more"></span>
 <p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, managerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;70000&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>, <span class="string">&#x27;80000&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>, <span class="string">&#x27;60000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> managerId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Employee 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span> salary <span class="operator">|</span> managerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span> <span class="number">70000</span>  <span class="operator">|</span> <span class="number">3</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span> <span class="number">4</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span> <span class="number">60000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Employee <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Joe      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line">解释: Joe 是唯一挣得比经理多的雇员。</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (personId <span class="type">int</span>, firstName <span class="type">varchar</span>(<span class="number">255</span>), lastName <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Address (addressId <span class="type">int</span>, personId <span class="type">int</span>, city <span class="type">varchar</span>(<span class="number">255</span>), state <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Wang&#x27;</span>, <span class="string">&#x27;Allen&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (personId, lastName, firstName) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Alice&#x27;</span>, <span class="string">&#x27;Bob&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Address</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;New York City&#x27;</span>, <span class="string">&#x27;New York&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Address (addressId, personId, city, state) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Leetcode&#x27;</span>, <span class="string">&#x27;California&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表: Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> FirstName   <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> LastName    <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">personId 是该表的主键列。</span><br><span class="line">该表包含一些人的 ID 和他们的姓和名的信息。</span><br></pre></td></tr></table></figure>
+<p>表: Address</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> AddressId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> City        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> State       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">addressId 是该表的主键列。</span><br><span class="line">该表的每一行都包含一个 ID <span class="operator">=</span> PersonId 的人的城市和州的信息。</span><br></pre></td></tr></table></figure>
+<p>查询结果格式如下所示。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> personId <span class="operator">|</span> lastName <span class="operator">|</span> firstName <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> Wang     <span class="operator">|</span> Allen     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Alice    <span class="operator">|</span> Bob       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line">Address表:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> addressId <span class="operator">|</span> personId <span class="operator">|</span> city          <span class="operator">|</span> state      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Leetcode      <span class="operator">|</span> California <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> firstName <span class="operator">|</span> lastName <span class="operator">|</span> city          <span class="operator">|</span> state    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> Allen     <span class="operator">|</span> Wang     <span class="operator">|</span> <span class="keyword">Null</span>          <span class="operator">|</span> <span class="keyword">Null</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bob       <span class="operator">|</span> Alice    <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId <span class="operator">=</span> <span class="number">1</span> 的地址，所以它们的城市和州返回 <span class="keyword">null</span>。</span><br><span class="line">addressId <span class="operator">=</span> <span class="number">1</span> 包含了 personId <span class="operator">=</span> <span class="number">2</span> 的地址信息。</span><br></pre></td></tr></table></figure>
 <p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.FirstName, a.LastName, b.City, b.State</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.PersonId <span class="operator">=</span> b.PersonId</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
+<p>原题链接：<a href="https://leetcode.cn/problems/combine-two-tables">https://leetcode.cn/problems/combine-two-tables</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>180. 连续出现的数字</title>
+    <url>/posts/41601/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Logs</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>183. 从不订购的客户</title>
+    <url>/posts/44608/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Customers (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (id <span class="type">int</span>, customerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Customers</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Customers</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行表示一个用户的ID和名字</span><br></pre></td></tr></table></figure>
+<p>表：Orders</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customerId  <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">customerId是来自Customers表的外键</span><br><span class="line">表的每一行表示一个订单的ID以及下订单的用户的ID</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Customers 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> customerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Customers <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Henry     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Max       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.Name <span class="keyword">AS</span> Customers </span><br><span class="line"><span class="keyword">FROM</span> Customers c <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders o </span><br><span class="line"><span class="keyword">ON</span> c.Id<span class="operator">=</span>o.CustomerId </span><br><span class="line"><span class="keyword">WHERE</span> o.CustomerId <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> Orders <span class="keyword">AS</span> b</span><br><span class="line">  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/customers-who-never-order">https://leetcode.cn/problems/customers-who-never-order</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>182. 查找重复的电子邮箱</title>
+    <url>/posts/13020/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -456,81 +547,22 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>176. 第二高的薪水</title>
-    <url>/posts/23560/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表: Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>180. 连续出现的数字</title>
-    <url>/posts/41601/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Logs</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>182. 查找重复的电子邮箱</title>
-    <url>/posts/13020/</url>
+    <title>181. 超过经理收入的员工</title>
+    <url>/posts/58200/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+编写一个SQL查询来查找收入比经理高的员工。<br />
+以<strong>任意顺序</strong>返回结果表。</p>
 <span id="more"></span>
 <p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Person</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, managerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;70000&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>, <span class="string">&#x27;80000&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>, <span class="string">&#x27;60000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> managerId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</span><br></pre></td></tr></table></figure>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
-<p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Employee 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span> salary <span class="operator">|</span> managerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span> <span class="number">70000</span>  <span class="operator">|</span> <span class="number">3</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span> <span class="number">4</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span> <span class="number">60000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Employee <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Joe      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line">解释: Joe 是唯一挣得比经理多的雇员。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
+<p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -570,113 +602,6 @@ can result in a better solution, because the developer is closer to the code tha
       <tags>
         <tag>Leetcode</tag>
         <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>183. 从不订购的客户</title>
-    <url>/posts/44608/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Customers (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (id <span class="type">int</span>, customerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Customers</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Customers</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行表示一个用户的ID和名字</span><br></pre></td></tr></table></figure>
-<p>表：Orders</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customerId  <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">customerId是来自Customers表的外键</span><br><span class="line">表的每一行表示一个订单的ID以及下订单的用户的ID</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Customers 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> customerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Customers <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Henry     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Max       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.Name <span class="keyword">AS</span> Customers </span><br><span class="line"><span class="keyword">FROM</span> Customers c <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders o </span><br><span class="line"><span class="keyword">ON</span> c.Id<span class="operator">=</span>o.CustomerId </span><br><span class="line"><span class="keyword">WHERE</span> o.CustomerId <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> Orders <span class="keyword">AS</span> b</span><br><span class="line">  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/customers-who-never-order">https://leetcode.cn/problems/customers-who-never-order</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>196. 删除重复的电子邮箱</title>
-    <url>/posts/59823/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
-<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
-<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
-<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>704. 二分查找</title>
-    <url>/posts/54442/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">9</span></span><br><span class="line">输出: <span class="number">4</span></span><br><span class="line">解释: <span class="number">9</span> 出现在 nums 中并且下标为 <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">2</span></span><br><span class="line">输出: -<span class="number">1</span></span><br><span class="line">解释: <span class="number">2</span> 不存在 nums 中因此返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ol>
-<li>你可以假设 nums 中的所有元素是不重复的。</li>
-<li>n 将在 [1, 10000]之间。</li>
-<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
-</ol>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">low</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">high</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> low + nums.length / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[low] ==  target) &#123;</span><br><span class="line">                <span class="keyword">return</span> low;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[high] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> high;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                low = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                high = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = low + (high - low) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《动物庄园》读后感</title>
-    <url>/posts/60962/</url>
-    <content><![CDATA[<p>作者：乔治·奥威尔（George Orwell）<br />
-推荐系数：5/5<br />
-前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。<br />
-类似的书籍让我想起了《1984》<br />
-嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -733,6 +658,50 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
+    <title>196. 删除重复的电子邮箱</title>
+    <url>/posts/59823/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
+<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
+<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
+<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《动物庄园》读后感</title>
+    <url>/posts/60962/</url>
+    <content><![CDATA[<p>作者：乔治·奥威尔（George Orwell）<br />
+推荐系数：5/5<br />
+前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。<br />
+类似的书籍让我想起了《1984》<br />
+嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《这才是心理学》读后感</title>
     <url>/posts/25743/</url>
     <content><![CDATA[<p>作者：基思·斯坦诺维奇（Keith E. Stanovich）<br />
@@ -747,24 +716,43 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>《行之有效》读后感</title>
-    <url>/posts/24401/</url>
-    <content><![CDATA[<p>作者：蔡为东<br />
-推荐系数：3.5/5<br />
-上个月大老板推荐了《行之有效》这本书，说是讲技术基层管理的。通篇看下来，其实就是告诉我们，基层管理者要多思考，多观察，以对团队有益作为出发点和原则，同时也不能落下自己的专业技能和素养。精华的点有以下几个：</p>
+    <title>704. 二分查找</title>
+    <url>/posts/54442/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">9</span></span><br><span class="line">输出: <span class="number">4</span></span><br><span class="line">解释: <span class="number">9</span> 出现在 nums 中并且下标为 <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">2</span></span><br><span class="line">输出: -<span class="number">1</span></span><br><span class="line">解释: <span class="number">2</span> 不存在 nums 中因此返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
 <ol>
-<li>管理者负责。</li>
-<li>以身作则。</li>
-<li>公平和公开。</li>
-<li>尊重每一个人。</li>
-<li>提高员工参与度，让员工负责任。</li>
-<li>随时激励。</li>
-<li>提纲挈领，要事优先，管理优先。</li>
-<li>培养人才，创造机会。</li>
-<li>技术和管理一肩挑。</li>
-<li>保持危机感，持续学习。</li>
-<li>顺势而为。</li>
+<li>你可以假设 nums 中的所有元素是不重复的。</li>
+<li>n 将在 [1, 10000]之间。</li>
+<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
 </ol>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">low</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">high</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> low + nums.length / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[low] ==  target) &#123;</span><br><span class="line">                <span class="keyword">return</span> low;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[high] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> high;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                low = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                high = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = low + (high - low) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《镜子》读后感</title>
+    <url>/posts/39078/</url>
+    <content><![CDATA[<p>作者：刘慈欣<br />
+推荐系数：4.5/5<br />
+不得不说，刘慈欣脑洞真大，反腐和宇宙大爆炸都能结合起来。我只是在想，可能也不一定水至清则无鱼，人至察则无徒，这个世界可塑性那么强到最后进化出了另一种生存模式另一种玩法也说不定。<br />
+Anyway，真的是好看！而且我也是名软件工程师！</p>
 ]]></content>
       <categories>
         <category>读书笔记</category>
@@ -788,6 +776,50 @@ can result in a better solution, because the developer is closer to the code tha
       </categories>
       <tags>
         <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode-374-guess-number-higher-or-lower</title>
+    <url>/posts/60755/</url>
+    <content><![CDATA[<p>猜数字游戏的规则如下：</p>
+<ul>
+<li>每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。</li>
+<li>如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。</li>
+</ul>
+<p>你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：</p>
+<ul>
+<li>-1：我选出的数字比你猜的数字小 pick &lt; num</li>
+<li>1：我选出的数字比你猜的数字大 pick &gt; num</li>
+<li>0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num<br />
+返回我选出的数字。</li>
+</ul>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">10</span>, pick = <span class="number">6</span></span><br><span class="line">输出：<span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">1</span>, pick = <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">2</span>, pick = <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 4:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">2</span>, pick = <span class="number">2</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li>1 &lt;= n &lt;= 2^31 - 1</li>
+<li>1 &lt;= pick &lt;= n</li>
+</ul>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> n;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> <span class="number">1</span> + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (guess(left) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(right) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(middle) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(middle) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(middle) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                right = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/guess-number-higher-or-lower/">https://leetcode.cn/problems/guess-number-higher-or-lower/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -888,21 +920,6 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>《镜子》读后感</title>
-    <url>/posts/39078/</url>
-    <content><![CDATA[<p>作者：刘慈欣<br />
-推荐系数：4.5/5<br />
-不得不说，刘慈欣脑洞真大，反腐和宇宙大爆炸都能结合起来。我只是在想，可能也不一定水至清则无鱼，人至察则无徒，这个世界可塑性那么强到最后进化出了另一种生存模式另一种玩法也说不定。<br />
-Anyway，真的是好看！而且我也是名软件工程师！</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
     <url>/posts/48556/</url>
     <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
@@ -983,6 +1000,33 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       <tags>
         <tag>Translation</tag>
         <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《行之有效》读后感</title>
+    <url>/posts/24401/</url>
+    <content><![CDATA[<p>作者：蔡为东<br />
+推荐系数：3.5/5<br />
+上个月大老板推荐了《行之有效》这本书，说是讲技术基层管理的。通篇看下来，其实就是告诉我们，基层管理者要多思考，多观察，以对团队有益作为出发点和原则，同时也不能落下自己的专业技能和素养。精华的点有以下几个：</p>
+<ol>
+<li>管理者负责。</li>
+<li>以身作则。</li>
+<li>公平和公开。</li>
+<li>尊重每一个人。</li>
+<li>提高员工参与度，让员工负责任。</li>
+<li>随时激励。</li>
+<li>提纲挈领，要事优先，管理优先。</li>
+<li>培养人才，创造机会。</li>
+<li>技术和管理一肩挑。</li>
+<li>保持危机感，持续学习。</li>
+<li>顺势而为。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -1213,124 +1257,6 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
 </blockquote>
 <p>There is one other nice feature of RabbitMQ. It is featured as a supported tile on Pivotal Cloud Foundry (PCF) as a service.</p>
 <p>RabbitMQ还有另一个很棒的特性。它作为服务在Pivotal Cloud Foundry（PCF）上被支持。</p>
-]]></content>
-      <categories>
-        <category>RabbitMQ Spring-AMQP官方教程</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>RabbitMQ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
-    <url>/posts/13955/</url>
-    <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="image" /></p>
-<p>In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a <em>Work</em> <em>Queue</em> that will be used to distribute time-consuming tasks among multiple workers.</p>
-<p>在第一个教程中，我们编写了两个程序，一个用于往一个命名了的队列发送消息，另一个从这个队列里接收消息。在本教程里，我们将创建一个工作队列（Work Queue），它将被用来在多个工作者之间分发耗时任务。</p>
-<span id="more"></span>
-<p>The main idea behind Work Queues (aka: <em>Task Queues</em>) is to avoid doing a resource-intensive task immediately and having to wait for it to complete. Instead we schedule the task to be done later. We encapsulate a <em>task</em> as a message and send it to a queue. A worker process running in the background will pop the tasks and eventually execute the job. When you run many workers the tasks will be shared between them.</p>
-<p>工作队列（也叫做任务队列）背后的主要目的是为了避免立即执行资源密集型的任务以及避免必须等待任务完成的情况，相反，它计划着让这些任务可以留到后面去执行。我们将任务分装成消息，并将它发送到队列里。运行在后台的工作进程将取出任务并最终执行它。如果你运行了多个工作进程，那么所有的任务将被它们共享。</p>
-<p>This concept is especially useful in web applications where it’s impossible to handle a complex task during a short HTTP request window.</p>
-<p>对于web应用，这个概念特别有用，因为web应用无法在短短的HTTP请求窗口内处理复杂的任务。</p>
-<h3 id="preparation准备工作"><a class="markdownIt-Anchor" href="#preparation准备工作"></a> Preparation（准备工作）</h3>
-<p>In the previous part of this tutorial we sent a message containing “Hello World!”. Now we’ll be sending strings that stand for complex tasks. We don’t have a real-world task, like images to be resized or pdf files to be rendered, so let’s fake it by just pretending we’re busy - by using the Thread.sleep() function. We’ll take the number of dots in the string as its complexity; every dot will account for one second of “work”. For example, a fake task described by Hello… will take three seconds.</p>
-<p>在教程1里，我们实现了如何发送包含“Hello World!”的消息。现在，我们将发送表示复杂任务的字符串。由于我们没有真实的任务，如调整图片大小或者渲染pdf文件，所以我们通过使用Thread.sleep()函数来模拟繁忙的耗时任务。我们将在字符串中用点号的个数来表示复杂度，点号的个数表示整个任务执行秒的秒数。例如，Hello…表示模拟任务需要执行三秒。</p>
-<p>Please see the setup in first tutorial if you have not setup the project. We will follow the same pattern as in the first tutorial: create a package (tut2) and create a Tut2Config, Tut2Receiver, and Tut2Sender. Start by creating a new package (tut2) where we’ll place our three classes. In the configuration class we setup two profiles, the label for the tutorial (“tut2”) and the name of the pattern (“work-queues”). We leverage spring to expose the queue as a bean. We setup the receiver as a profile and define two beans to correspond to the workers in our diagram above： receiver1 and receiver2. Finally, we define a profile for the sender and define the sender bean. The configuration is now done.</p>
-<p>如果你还未建立配置好项目，请见教程1的配置过程。我们将采用与教程1相同的方式，新建一个包目录（tut2）并创建一个名为Tut2Config的配置类，一个名为Tut2Receiver的消息接收类，以及一个名为Tut2Sender的消息发送类。首先新建包目录（tut2），我们将在这个包下面放刚说到的那三个类。在配置类里，我们将配置两个配置组，一个作为当前教程的标签（“tut2”），一个作为当前RabbitMQ使用模式的名字（“work-queue”）。我们利用Spring框架将队列暴露为一个bean。我们设置一个接受者配置组，并定义两个bean来对应于上面图中的两个消费者：receiver1和receiver2。最后，我们会定义一个发送者配置组，并定义作为发送者的bean。这样配置就结束了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut2&quot;, &quot;work-queues&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut2Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="sender发送者"><a class="markdownIt-Anchor" href="#sender发送者"></a> Sender（发送者）</h3>
-<p>We will modify the sender to provide a means for identifying whether its a longer running task by appending a dot to the message in a very contrived fashion using the same method on the RabbitTemplate to publish the message, convertAndSend. The documentation defines this as, “Convert a Java object to an Amqp Message and send it to a default exchange with a default routing key.”</p>
-<p>我们将对发送者类进行修改，在发送方法中，通过人为地在消息后面添加点号来识别当前任务是否耗时，并依旧使用RabbitTemplate的convertAndSend方法来发布消息。文档把convertAndSend方法定义为，“将一个Java对象转换成一个Amqp消息，并用一个默认路由键（routing key）将其发送到一个默认的exchange里。”</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Queue queue;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(queue.getName(), message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="receiver接收者"><a class="markdownIt-Anchor" href="#receiver接收者"></a> Receiver（接收者）</h3>
-<p>Our receiver, Tut2Receiver, simulates an arbitary length for a fake task in the doWork() method where the number of dots translates into the number of seconds the work will take. Again, we leverage a @RabbitListener on the “hello” queue and a @RabbitHandler to receive the message. The instance that is consuming the message is added to our monitor to show which instance, the message and the length of time to process the message.</p>
-<p>我们的接收者类，Tut2Receiver，在doWork()方法里根据消息所带点号的个数，将其转换成任务所需消耗的秒数，以此模拟了任意任务的长度。同样地，我们对“hello”队列使用了@RabbitListener注解，并通过@RabbitHandler注解来接收消息。同时，用一个编号来标识正在消费消息的实例，并将它加入我们的监控中，最终打印出实例编号，消息内容以及处理消息所耗费的时长。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> instance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Tut2Receiver</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.instance = i;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitHandler</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">				<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h3>
-<p>Compile them using mvn package and run with the following options</p>
-<p>使用mvn package来编译上述代码，并在运行时添加下面的命令行参数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,receiver</span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,sender</span><br></pre></td></tr></table></figure>
-<p>The output of the sender should look something like:</p>
-<p>发送者类的输出看起来应该是类似于这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">[x] Sent &#x27;Hello.1&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..2&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...3&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.4&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..5&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...6&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.7&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..8&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...9&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.10&#x27;</span><br></pre></td></tr></table></figure>
-<p>And the output from the workers should look something like:</p>
-<p>而工作者类的输出看起来应该是类似于这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">instance 1 [x] Received &#x27;Hello.1&#x27;</span><br><span class="line">instance 2 [x] Received &#x27;Hello..2&#x27;</span><br><span class="line">instance 1 [x] Done in 1.001s</span><br><span class="line">instance 1 [x] Received &#x27;Hello...3&#x27;</span><br><span class="line">instance 2 [x] Done in 2.004s</span><br><span class="line">instance 2 [x] Received &#x27;Hello.4&#x27;</span><br><span class="line">instance 2 [x] Done in 1.0s</span><br><span class="line">instance 2 [x] Received &#x27;Hello..5&#x27;</span><br></pre></td></tr></table></figure>
-<h3 id="message-acknowledgment消息确认"><a class="markdownIt-Anchor" href="#message-acknowledgment消息确认"></a> Message acknowledgment（消息确认）</h3>
-<p>Doing a task can take a few seconds. You may wonder what happens if one of the consumers starts a long task and dies with it only partly done. Spring AMQP by default takes a conservative approach to <a href="https://www.rabbitmq.com/confirms.html">message acknowledgement</a>. If the listener throws an exception the container calls:</p>
-<p>完成一个任务需要耗费几秒。对于一个开始了长任务的消费者，你可能会想知道，当它只完成了部分任务就挂掉时发生了什么。Spring AMQP默认采用保守的方式来进行<a href="https://www.rabbitmq.com/confirms.html">消息确认</a>。如果监听器抛出了一个异常，那么容器会调用：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicReject(deliveryTag, requeue)</span><br></pre></td></tr></table></figure>
-<p>Requeue is true by default unless you explicitly set:</p>
-<p>requeue（重入队列）默认为true，除非你显示地将其设置为false：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">defaultRequeueRejected=false</span><br></pre></td></tr></table></figure>
-<p>or the listener throws an AmqpRejectAndDontRequeueException. This is typically the bahavior you want from your listener. In this mode there is no need to worry about a forgotten acknowledgement. After processing the message the listener calls:</p>
-<p>否则监听器抛出AmqpRejectAndDontRequeueException异常。这通常会是你想要监听器的行为。在这种模式下，无需担心一个被忘记了的确认。在处理完消息后，监听器会调用：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicAck()</span><br></pre></td></tr></table></figure>
-<p>Acknowledgement must be sent on the same channel the delivery it is for was received on. Attempts to acknowledge using a different channel will result in a channel-level protocol exception. See the <a href="https://www.rabbitmq.com/confirms.html">doc guide on confirmations</a> to learn more. Spring AMQP generally takes care of this but when used in combination with code that uses RabbitMQ Java client directly, this is something to keep in mind.</p>
-<p>消息确认必须在与接收信息相同的通道（channel）上进行发送。试图使用不同的通道来进行确认将导致通道级别的协议异常。若想更详细了解，可以参阅<a href="https://www.rabbitmq.com/confirms.html">关于消息确认的文档指南</a>。Spring AMQP一般都会处理好这种问题，但与直接使用RabbitMQ的Java客户端的代码结合使用时，这点要小心。</p>
-<blockquote>
-<h4 id="forgotten-acknowledgment被遗忘的确认"><a class="markdownIt-Anchor" href="#forgotten-acknowledgment被遗忘的确认"></a> Forgotten acknowledgment（被遗忘的确认）</h4>
-<p>It’s a common mistake to miss the basicAck and spring-amqp helps to avoid this through its default configuraiton. The consequences are serious. Messages will be redelivered when your client quits (which may look like random redelivery), but RabbitMQ will eat more and more memory as it won’t be able to release any unacked messages.</p>
-<p>忘记调用basciAck方法是常见的一个错误，spring-amqp通过它的默认配置来避免它。这个错误的后果是很严重的。当你的客户端退出后，消息会被重复发送（看起来就像是随机重发），但RabbitMQ将吃掉越来越多的内存，因为它无法释放任何未确认的消息。</p>
-<p>In order to debug this kind of mistake you can use rabbitmqctl to print the messages_unacknowledged field:</p>
-<p>为了调试这种错误，你可以使用rabbitmqctl来打印messages_unacknowledged域：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
-<p>On Windows, drop the sudo:</p>
-<p>在Windows环境下，去掉sudo：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="message-durability消息持久性"><a class="markdownIt-Anchor" href="#message-durability消息持久性"></a> Message durability（消息持久性）</h3>
-<p>With spring-amqp there are reasonable default values in the MessageProperties that account for message durability. In particular you can check the table for <a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">common properties</a>. You’ll see two relevant to our discussion here on durability:</p>
-<p>对于spring-amqp，消息属性配置里有很多合理的默认值，这些默认值共同决定了消息的持久性。你可以查阅<a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">常用属性表</a>。你将会看到与我们正在讨论的消息持久性相关的两个属性：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">durable</td>
-<td style="text-align:left">true</td>
-<td style="text-align:left">When declareExchange is true the durable flag is set to this value</td>
-</tr>
-<tr>
-<td style="text-align:left">deliveryMode</td>
-<td style="text-align:left">PERSISTENT</td>
-<td style="text-align:left">PERSISTENT or NON_PERSISTENT to determine whether or not RabbitMQ should persist the messages</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<h4 id="note-on-message-persistence关于消息持久化要注意的地方"><a class="markdownIt-Anchor" href="#note-on-message-persistence关于消息持久化要注意的地方"></a> Note on message persistence（关于消息持久化要注意的地方）</h4>
-<p>Marking messages as persistent doesn’t fully guarantee that a message won’t be lost. Although it tells RabbitMQ to save the message to disk, there is still a short time window when RabbitMQ has accepted a message and hasn’t saved it yet. Also, RabbitMQ doesn’t do fsync(2) for every message – it may be just saved to cache and not really written to the disk. The persistence guarantees aren’t strong, but it’s more than enough for our simple task queue. If you need a stronger guarantee then you can use publisher confirms.</p>
-<p>将消息标记为持久化并不能完全保证消息将不会丢失。虽然它告诉RabbitMQ要将消息保存到磁盘，但当RabbitMQ接收了某条消息并且还没有保存该消息时，仍有一个小的时间窗口。而且，RabbitMQ不会为每条消息都进行fsync操作——它可能仅仅只是将其缓存起来，但并没有真的将消息写入磁盘。这么做虽然无法完全保证持久化，但对于我们简单的任务队列来说，这已经很足够了。如果你需要完全保证持久化，那么你可以使用发布者确认。</p>
-</blockquote>
-<h3 id="fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"><a class="markdownIt-Anchor" href="#fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"></a> Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）</h3>
-<p>By default, RabbitMQ will send each message to the next consumer, in sequence. On average every consumer will get the same number of messages. This way of distributing messages is called round-robin. In this mode dispatching doesn’t necessarily work exactly as we want. For example in a situation with two workers, when all odd messages are heavy and even messages are light, one worker will be constantly busy and the other one will do hardly any work. Well, RabbitMQ doesn’t know anything about that and will still dispatch messages evenly.</p>
-<p>默认情况下，RabbitMQ将把每一条消息按顺序逐一发送给下一个消费者。每个消费者都将被平均分到相同的个数的消息。这种消息分派方式被称为循环调度。这种调度模式有时无法完全满足我们的需求。例如，假设有两个工作者，第奇数条消息是重任务，第偶数条消息是轻任务，那么其中一个工作者将会总是很繁忙，而另一个工作者则有可能没什么事做。然而，RabbitMQ并不知道这个状况，并且仍然会这么均匀地分发消息。</p>
-<p>This happens because RabbitMQ just dispatches a message when the message enters the queue. It doesn’t look at the number of unacknowledged messages for a consumer. It just blindly dispatches every n-th message to the n-th consumer.</p>
-<p>会发生这个情况是因为，当消息进入队列时，RabbitMQ仅仅是将消息分派出去。它不会去看某个消费者未确认的消息的数量。它只是盲目地将消息均匀分派给各个消费者。</p>
-<p>However, “Fair dispatch” is the default configuration for spring-amqp. The SimpleMessageListenerContainer defines the value for DEFAULT_PREFETCH_COUNT to be 1. If the DEFAULT_PREFECTH_COUNT were set to 0 the behavior would be round robin messaging as described above.</p>
-<p>然而，“公平调度”是spring-amqp的默认配置。SimpleMessageListenerContainer类将DEFAULT_PREFETCH_COUNT的值定义为1。如果DEFAULT_PREFETCH_COUNT的值被设置为0，那么调度方式将变成循环调用。</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/prefetch-count.png" alt="image" /></p>
-<p>However, with the prefetchCount set to 1 by default, this tells RabbitMQ not to give more than one message to a worker at a time. Or, in other words, don’t dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch it to the next worker that is not still busy.</p>
-<p>然而，prefetchCount的值默认设为1，这告诉RabbitMQ不要同时将多个消息分派给一个工作者。换句话说，在某个工作者处理完一条消息并确认它之前，RabbitMQ不会给该工作者分派新的消息，而是将新的消息分派给下一个不是很繁忙的工作者。</p>
-<blockquote>
-<h4 id="note-about-queue-size关于队列大小需要注意的地方"><a class="markdownIt-Anchor" href="#note-about-queue-size关于队列大小需要注意的地方"></a> Note about queue size（关于队列大小需要注意的地方）</h4>
-<p>If all the workers are busy, your queue can fill up. You will want to keep an eye on that, and maybe add more workers, or have some other strategy.</p>
-<p>如果所有的工作者都繁忙，那么你的队列会被填满。你需要注意这种情况，要么添加多几个工作者，要么就采用其它策略。</p>
-</blockquote>
-<p>By using spring-amqp you get reasonable values configured for message acknowledgments and fair dispatching. The default durability for queues and persistence for messages provided by spring-amqp allow let the messages to survive even if RabbitMQ is restarted.</p>
-<p>通过使用spring-amqp，你会发现，它已经为消息确认和公平调度配置好合理值。spring-amqp为队列和消息持久化提供的默认持久属性使得即使在RabbitMQ重启的情况下，消息还能保存下来。</p>
-<p>For more information on Channel methods and MessageProperties, you can browse the <a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">javadocs online</a>. For understanding the underlying foundation for spring-amqp you can find the <a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client</a>.</p>
-<p>关于channel方法和MessageProperties的更多信息，可以浏览<a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">在线的javadocs</a>。若要了解spring-amqp的底层机制，可以参阅<a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client文档</a>。</p>
-<p>Now we can move on to tutorial 3 and learn how to deliver the same message to many consumers.</p>
-<p>现在我们可以开始教程3，学习如何将相同的消息发送给多个消费者。</p>
 ]]></content>
       <categories>
         <category>RabbitMQ Spring-AMQP官方教程</category>
@@ -1583,6 +1509,124 @@ tests as appropriate for the change. In general, tests should be added in the sa
       <tags>
         <tag>Code Review</tag>
         <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
+    <url>/posts/13955/</url>
+    <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="image" /></p>
+<p>In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a <em>Work</em> <em>Queue</em> that will be used to distribute time-consuming tasks among multiple workers.</p>
+<p>在第一个教程中，我们编写了两个程序，一个用于往一个命名了的队列发送消息，另一个从这个队列里接收消息。在本教程里，我们将创建一个工作队列（Work Queue），它将被用来在多个工作者之间分发耗时任务。</p>
+<span id="more"></span>
+<p>The main idea behind Work Queues (aka: <em>Task Queues</em>) is to avoid doing a resource-intensive task immediately and having to wait for it to complete. Instead we schedule the task to be done later. We encapsulate a <em>task</em> as a message and send it to a queue. A worker process running in the background will pop the tasks and eventually execute the job. When you run many workers the tasks will be shared between them.</p>
+<p>工作队列（也叫做任务队列）背后的主要目的是为了避免立即执行资源密集型的任务以及避免必须等待任务完成的情况，相反，它计划着让这些任务可以留到后面去执行。我们将任务分装成消息，并将它发送到队列里。运行在后台的工作进程将取出任务并最终执行它。如果你运行了多个工作进程，那么所有的任务将被它们共享。</p>
+<p>This concept is especially useful in web applications where it’s impossible to handle a complex task during a short HTTP request window.</p>
+<p>对于web应用，这个概念特别有用，因为web应用无法在短短的HTTP请求窗口内处理复杂的任务。</p>
+<h3 id="preparation准备工作"><a class="markdownIt-Anchor" href="#preparation准备工作"></a> Preparation（准备工作）</h3>
+<p>In the previous part of this tutorial we sent a message containing “Hello World!”. Now we’ll be sending strings that stand for complex tasks. We don’t have a real-world task, like images to be resized or pdf files to be rendered, so let’s fake it by just pretending we’re busy - by using the Thread.sleep() function. We’ll take the number of dots in the string as its complexity; every dot will account for one second of “work”. For example, a fake task described by Hello… will take three seconds.</p>
+<p>在教程1里，我们实现了如何发送包含“Hello World!”的消息。现在，我们将发送表示复杂任务的字符串。由于我们没有真实的任务，如调整图片大小或者渲染pdf文件，所以我们通过使用Thread.sleep()函数来模拟繁忙的耗时任务。我们将在字符串中用点号的个数来表示复杂度，点号的个数表示整个任务执行秒的秒数。例如，Hello…表示模拟任务需要执行三秒。</p>
+<p>Please see the setup in first tutorial if you have not setup the project. We will follow the same pattern as in the first tutorial: create a package (tut2) and create a Tut2Config, Tut2Receiver, and Tut2Sender. Start by creating a new package (tut2) where we’ll place our three classes. In the configuration class we setup two profiles, the label for the tutorial (“tut2”) and the name of the pattern (“work-queues”). We leverage spring to expose the queue as a bean. We setup the receiver as a profile and define two beans to correspond to the workers in our diagram above： receiver1 and receiver2. Finally, we define a profile for the sender and define the sender bean. The configuration is now done.</p>
+<p>如果你还未建立配置好项目，请见教程1的配置过程。我们将采用与教程1相同的方式，新建一个包目录（tut2）并创建一个名为Tut2Config的配置类，一个名为Tut2Receiver的消息接收类，以及一个名为Tut2Sender的消息发送类。首先新建包目录（tut2），我们将在这个包下面放刚说到的那三个类。在配置类里，我们将配置两个配置组，一个作为当前教程的标签（“tut2”），一个作为当前RabbitMQ使用模式的名字（“work-queue”）。我们利用Spring框架将队列暴露为一个bean。我们设置一个接受者配置组，并定义两个bean来对应于上面图中的两个消费者：receiver1和receiver2。最后，我们会定义一个发送者配置组，并定义作为发送者的bean。这样配置就结束了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut2&quot;, &quot;work-queues&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut2Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="sender发送者"><a class="markdownIt-Anchor" href="#sender发送者"></a> Sender（发送者）</h3>
+<p>We will modify the sender to provide a means for identifying whether its a longer running task by appending a dot to the message in a very contrived fashion using the same method on the RabbitTemplate to publish the message, convertAndSend. The documentation defines this as, “Convert a Java object to an Amqp Message and send it to a default exchange with a default routing key.”</p>
+<p>我们将对发送者类进行修改，在发送方法中，通过人为地在消息后面添加点号来识别当前任务是否耗时，并依旧使用RabbitTemplate的convertAndSend方法来发布消息。文档把convertAndSend方法定义为，“将一个Java对象转换成一个Amqp消息，并用一个默认路由键（routing key）将其发送到一个默认的exchange里。”</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Queue queue;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(queue.getName(), message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="receiver接收者"><a class="markdownIt-Anchor" href="#receiver接收者"></a> Receiver（接收者）</h3>
+<p>Our receiver, Tut2Receiver, simulates an arbitary length for a fake task in the doWork() method where the number of dots translates into the number of seconds the work will take. Again, we leverage a @RabbitListener on the “hello” queue and a @RabbitHandler to receive the message. The instance that is consuming the message is added to our monitor to show which instance, the message and the length of time to process the message.</p>
+<p>我们的接收者类，Tut2Receiver，在doWork()方法里根据消息所带点号的个数，将其转换成任务所需消耗的秒数，以此模拟了任意任务的长度。同样地，我们对“hello”队列使用了@RabbitListener注解，并通过@RabbitHandler注解来接收消息。同时，用一个编号来标识正在消费消息的实例，并将它加入我们的监控中，最终打印出实例编号，消息内容以及处理消息所耗费的时长。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> instance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Tut2Receiver</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.instance = i;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitHandler</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">				<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h3>
+<p>Compile them using mvn package and run with the following options</p>
+<p>使用mvn package来编译上述代码，并在运行时添加下面的命令行参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,receiver</span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,sender</span><br></pre></td></tr></table></figure>
+<p>The output of the sender should look something like:</p>
+<p>发送者类的输出看起来应该是类似于这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">[x] Sent &#x27;Hello.1&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..2&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...3&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.4&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..5&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...6&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.7&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..8&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...9&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.10&#x27;</span><br></pre></td></tr></table></figure>
+<p>And the output from the workers should look something like:</p>
+<p>而工作者类的输出看起来应该是类似于这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">instance 1 [x] Received &#x27;Hello.1&#x27;</span><br><span class="line">instance 2 [x] Received &#x27;Hello..2&#x27;</span><br><span class="line">instance 1 [x] Done in 1.001s</span><br><span class="line">instance 1 [x] Received &#x27;Hello...3&#x27;</span><br><span class="line">instance 2 [x] Done in 2.004s</span><br><span class="line">instance 2 [x] Received &#x27;Hello.4&#x27;</span><br><span class="line">instance 2 [x] Done in 1.0s</span><br><span class="line">instance 2 [x] Received &#x27;Hello..5&#x27;</span><br></pre></td></tr></table></figure>
+<h3 id="message-acknowledgment消息确认"><a class="markdownIt-Anchor" href="#message-acknowledgment消息确认"></a> Message acknowledgment（消息确认）</h3>
+<p>Doing a task can take a few seconds. You may wonder what happens if one of the consumers starts a long task and dies with it only partly done. Spring AMQP by default takes a conservative approach to <a href="https://www.rabbitmq.com/confirms.html">message acknowledgement</a>. If the listener throws an exception the container calls:</p>
+<p>完成一个任务需要耗费几秒。对于一个开始了长任务的消费者，你可能会想知道，当它只完成了部分任务就挂掉时发生了什么。Spring AMQP默认采用保守的方式来进行<a href="https://www.rabbitmq.com/confirms.html">消息确认</a>。如果监听器抛出了一个异常，那么容器会调用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicReject(deliveryTag, requeue)</span><br></pre></td></tr></table></figure>
+<p>Requeue is true by default unless you explicitly set:</p>
+<p>requeue（重入队列）默认为true，除非你显示地将其设置为false：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">defaultRequeueRejected=false</span><br></pre></td></tr></table></figure>
+<p>or the listener throws an AmqpRejectAndDontRequeueException. This is typically the bahavior you want from your listener. In this mode there is no need to worry about a forgotten acknowledgement. After processing the message the listener calls:</p>
+<p>否则监听器抛出AmqpRejectAndDontRequeueException异常。这通常会是你想要监听器的行为。在这种模式下，无需担心一个被忘记了的确认。在处理完消息后，监听器会调用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicAck()</span><br></pre></td></tr></table></figure>
+<p>Acknowledgement must be sent on the same channel the delivery it is for was received on. Attempts to acknowledge using a different channel will result in a channel-level protocol exception. See the <a href="https://www.rabbitmq.com/confirms.html">doc guide on confirmations</a> to learn more. Spring AMQP generally takes care of this but when used in combination with code that uses RabbitMQ Java client directly, this is something to keep in mind.</p>
+<p>消息确认必须在与接收信息相同的通道（channel）上进行发送。试图使用不同的通道来进行确认将导致通道级别的协议异常。若想更详细了解，可以参阅<a href="https://www.rabbitmq.com/confirms.html">关于消息确认的文档指南</a>。Spring AMQP一般都会处理好这种问题，但与直接使用RabbitMQ的Java客户端的代码结合使用时，这点要小心。</p>
+<blockquote>
+<h4 id="forgotten-acknowledgment被遗忘的确认"><a class="markdownIt-Anchor" href="#forgotten-acknowledgment被遗忘的确认"></a> Forgotten acknowledgment（被遗忘的确认）</h4>
+<p>It’s a common mistake to miss the basicAck and spring-amqp helps to avoid this through its default configuraiton. The consequences are serious. Messages will be redelivered when your client quits (which may look like random redelivery), but RabbitMQ will eat more and more memory as it won’t be able to release any unacked messages.</p>
+<p>忘记调用basciAck方法是常见的一个错误，spring-amqp通过它的默认配置来避免它。这个错误的后果是很严重的。当你的客户端退出后，消息会被重复发送（看起来就像是随机重发），但RabbitMQ将吃掉越来越多的内存，因为它无法释放任何未确认的消息。</p>
+<p>In order to debug this kind of mistake you can use rabbitmqctl to print the messages_unacknowledged field:</p>
+<p>为了调试这种错误，你可以使用rabbitmqctl来打印messages_unacknowledged域：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
+<p>On Windows, drop the sudo:</p>
+<p>在Windows环境下，去掉sudo：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="message-durability消息持久性"><a class="markdownIt-Anchor" href="#message-durability消息持久性"></a> Message durability（消息持久性）</h3>
+<p>With spring-amqp there are reasonable default values in the MessageProperties that account for message durability. In particular you can check the table for <a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">common properties</a>. You’ll see two relevant to our discussion here on durability:</p>
+<p>对于spring-amqp，消息属性配置里有很多合理的默认值，这些默认值共同决定了消息的持久性。你可以查阅<a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">常用属性表</a>。你将会看到与我们正在讨论的消息持久性相关的两个属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">default</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">durable</td>
+<td style="text-align:left">true</td>
+<td style="text-align:left">When declareExchange is true the durable flag is set to this value</td>
+</tr>
+<tr>
+<td style="text-align:left">deliveryMode</td>
+<td style="text-align:left">PERSISTENT</td>
+<td style="text-align:left">PERSISTENT or NON_PERSISTENT to determine whether or not RabbitMQ should persist the messages</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h4 id="note-on-message-persistence关于消息持久化要注意的地方"><a class="markdownIt-Anchor" href="#note-on-message-persistence关于消息持久化要注意的地方"></a> Note on message persistence（关于消息持久化要注意的地方）</h4>
+<p>Marking messages as persistent doesn’t fully guarantee that a message won’t be lost. Although it tells RabbitMQ to save the message to disk, there is still a short time window when RabbitMQ has accepted a message and hasn’t saved it yet. Also, RabbitMQ doesn’t do fsync(2) for every message – it may be just saved to cache and not really written to the disk. The persistence guarantees aren’t strong, but it’s more than enough for our simple task queue. If you need a stronger guarantee then you can use publisher confirms.</p>
+<p>将消息标记为持久化并不能完全保证消息将不会丢失。虽然它告诉RabbitMQ要将消息保存到磁盘，但当RabbitMQ接收了某条消息并且还没有保存该消息时，仍有一个小的时间窗口。而且，RabbitMQ不会为每条消息都进行fsync操作——它可能仅仅只是将其缓存起来，但并没有真的将消息写入磁盘。这么做虽然无法完全保证持久化，但对于我们简单的任务队列来说，这已经很足够了。如果你需要完全保证持久化，那么你可以使用发布者确认。</p>
+</blockquote>
+<h3 id="fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"><a class="markdownIt-Anchor" href="#fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"></a> Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）</h3>
+<p>By default, RabbitMQ will send each message to the next consumer, in sequence. On average every consumer will get the same number of messages. This way of distributing messages is called round-robin. In this mode dispatching doesn’t necessarily work exactly as we want. For example in a situation with two workers, when all odd messages are heavy and even messages are light, one worker will be constantly busy and the other one will do hardly any work. Well, RabbitMQ doesn’t know anything about that and will still dispatch messages evenly.</p>
+<p>默认情况下，RabbitMQ将把每一条消息按顺序逐一发送给下一个消费者。每个消费者都将被平均分到相同的个数的消息。这种消息分派方式被称为循环调度。这种调度模式有时无法完全满足我们的需求。例如，假设有两个工作者，第奇数条消息是重任务，第偶数条消息是轻任务，那么其中一个工作者将会总是很繁忙，而另一个工作者则有可能没什么事做。然而，RabbitMQ并不知道这个状况，并且仍然会这么均匀地分发消息。</p>
+<p>This happens because RabbitMQ just dispatches a message when the message enters the queue. It doesn’t look at the number of unacknowledged messages for a consumer. It just blindly dispatches every n-th message to the n-th consumer.</p>
+<p>会发生这个情况是因为，当消息进入队列时，RabbitMQ仅仅是将消息分派出去。它不会去看某个消费者未确认的消息的数量。它只是盲目地将消息均匀分派给各个消费者。</p>
+<p>However, “Fair dispatch” is the default configuration for spring-amqp. The SimpleMessageListenerContainer defines the value for DEFAULT_PREFETCH_COUNT to be 1. If the DEFAULT_PREFECTH_COUNT were set to 0 the behavior would be round robin messaging as described above.</p>
+<p>然而，“公平调度”是spring-amqp的默认配置。SimpleMessageListenerContainer类将DEFAULT_PREFETCH_COUNT的值定义为1。如果DEFAULT_PREFETCH_COUNT的值被设置为0，那么调度方式将变成循环调用。</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/prefetch-count.png" alt="image" /></p>
+<p>However, with the prefetchCount set to 1 by default, this tells RabbitMQ not to give more than one message to a worker at a time. Or, in other words, don’t dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch it to the next worker that is not still busy.</p>
+<p>然而，prefetchCount的值默认设为1，这告诉RabbitMQ不要同时将多个消息分派给一个工作者。换句话说，在某个工作者处理完一条消息并确认它之前，RabbitMQ不会给该工作者分派新的消息，而是将新的消息分派给下一个不是很繁忙的工作者。</p>
+<blockquote>
+<h4 id="note-about-queue-size关于队列大小需要注意的地方"><a class="markdownIt-Anchor" href="#note-about-queue-size关于队列大小需要注意的地方"></a> Note about queue size（关于队列大小需要注意的地方）</h4>
+<p>If all the workers are busy, your queue can fill up. You will want to keep an eye on that, and maybe add more workers, or have some other strategy.</p>
+<p>如果所有的工作者都繁忙，那么你的队列会被填满。你需要注意这种情况，要么添加多几个工作者，要么就采用其它策略。</p>
+</blockquote>
+<p>By using spring-amqp you get reasonable values configured for message acknowledgments and fair dispatching. The default durability for queues and persistence for messages provided by spring-amqp allow let the messages to survive even if RabbitMQ is restarted.</p>
+<p>通过使用spring-amqp，你会发现，它已经为消息确认和公平调度配置好合理值。spring-amqp为队列和消息持久化提供的默认持久属性使得即使在RabbitMQ重启的情况下，消息还能保存下来。</p>
+<p>For more information on Channel methods and MessageProperties, you can browse the <a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">javadocs online</a>. For understanding the underlying foundation for spring-amqp you can find the <a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client</a>.</p>
+<p>关于channel方法和MessageProperties的更多信息，可以浏览<a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">在线的javadocs</a>。若要了解spring-amqp的底层机制，可以参阅<a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client文档</a>。</p>
+<p>Now we can move on to tutorial 3 and learn how to deliver the same message to many consumers.</p>
+<p>现在我们可以开始教程3，学习如何将相同的消息发送给多个消费者。</p>
+]]></content>
+      <categories>
+        <category>RabbitMQ Spring-AMQP官方教程</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>RabbitMQ</tag>
       </tags>
   </entry>
 </search>

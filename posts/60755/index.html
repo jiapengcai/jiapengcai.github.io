@@ -21,29 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="如何进行代码审查 The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separat">
+    <meta name="description" content="猜数字游戏的规则如下：  每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。 如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。  你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：  -1：我选出的数字比你猜的数字小 pick &lt; num 1：我选出的数字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2、如何进行代码审查">
-<meta property="og:url" content="https://jiapengcai.github.io/posts/41083/index.html">
+<meta property="og:title" content="leetcode-374-guess-number-higher-or-lower">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/60755/index.html">
 <meta property="og:site_name" content="PENG">
-<meta property="og:description" content="如何进行代码审查 The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separat">
+<meta property="og:description" content="猜数字游戏的规则如下：  每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。 如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。  你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：  -1：我选出的数字比你猜的数字小 pick &lt; num 1：我选出的数字">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-31T09:41:06.000Z">
-<meta property="article:modified_time" content="2022-06-12T02:08:21.153Z">
+<meta property="article:published_time" content="2022-08-22T03:40:37.000Z">
+<meta property="article:modified_time" content="2022-08-22T03:47:19.187Z">
 <meta property="article:author" content="Jiapeng Cai">
-<meta property="article:tag" content="Code Review">
-<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="Leetcode">
+<meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jiapengcai.github.io/posts/41083/">
+<link rel="canonical" href="https://jiapengcai.github.io/posts/60755/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/41083/","path":"posts/41083/","title":"2、如何进行代码审查"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/60755/","path":"posts/60755/","title":"leetcode-374-guess-number-higher-or-lower"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>2、如何进行代码审查 | PENG</title>
+<title>leetcode-374-guess-number-higher-or-lower | PENG</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78165446-2"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78165446-2","only_pageview":false}</script>
@@ -137,7 +137,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -150,7 +150,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text"> 如何进行代码审查</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -229,7 +228,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/41083/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/60755/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -242,12 +241,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="2、如何进行代码审查 | PENG">
+      <meta itemprop="name" content="leetcode-374-guess-number-higher-or-lower | PENG">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2、如何进行代码审查
+          leetcode-374-guess-number-higher-or-lower
         </h1>
 
         <div class="post-meta-container">
@@ -257,15 +256,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-05-31 17:41:06" itemprop="dateCreated datePublished" datetime="2022-05-31T17:41:06+08:00">2022-05-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-06-12 10:08:21" itemprop="dateModified" datetime="2022-06-12T10:08:21+08:00">2022-06-12</time>
+      <time title="创建时间：2022-08-22 11:40:37 / 修改时间：11:47:19" itemprop="dateCreated datePublished" datetime="2022-08-22T11:40:37+08:00">2022-08-22</time>
     </span>
 
   
@@ -277,8 +270,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/posts/41083/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/posts/41083/" itemprop="commentCount"></span>
+    <a title="waline" href="/posts/60755/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/60755/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -292,48 +285,37 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
-<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
-<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
-<span id="more"></span>
+        <p>猜数字游戏的规则如下：</p>
 <ul>
-<li>
-<p><a href="../51044">The Standard of Code Review</a></p>
-</li>
-<li>
-<p><a href="../16518">What to Look For In a Code Review</a></p>
-</li>
-<li>
-<p>Navigating a CL in Review</p>
-</li>
-<li>
-<p>Speed of Code Reviews</p>
-</li>
-<li>
-<p><a href="../12266">How to Write Code Review Comments</a></p>
-</li>
-<li>
-<p><a href="../45937">Handling Pushback in Code Reviews</a></p>
-</li>
-<li>
-<p><a href="../51044">代码审查的标准</a></p>
-</li>
-<li>
-<p><a href="../16518">代码审查要做什么</a></p>
-</li>
-<li>
-<p>在审查里定向变更记录</p>
-</li>
-<li>
-<p>代码审查的速度</p>
-</li>
-<li>
-<p><a href="../12266">如何编写代码审查评论</a></p>
-</li>
-<li>
-<p><a href="../45937">处理代码评审过程产生的抵触问题</a></p>
-</li>
+<li>每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。</li>
+<li>如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。</li>
 </ul>
+<p>你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：</p>
+<ul>
+<li>-1：我选出的数字比你猜的数字小 pick &lt; num</li>
+<li>1：我选出的数字比你猜的数字大 pick &gt; num</li>
+<li>0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num<br />
+返回我选出的数字。</li>
+</ul>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">10</span>, pick = <span class="number">6</span></span><br><span class="line">输出：<span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">1</span>, pick = <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">2</span>, pick = <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 4:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">2</span>, pick = <span class="number">2</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li>1 &lt;= n &lt;= 2^31 - 1</li>
+<li>1 &lt;= pick &lt;= n</li>
+</ul>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> n;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> <span class="number">1</span> + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (guess(left) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(right) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(middle) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(middle) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (guess(middle) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                right = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/guess-number-higher-or-lower/">https://leetcode.cn/problems/guess-number-higher-or-lower/</a></p>
+</blockquote>
 
     </div>
 
@@ -353,7 +335,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiapengcai.github.io/posts/41083/" title="2、如何进行代码审查">https://jiapengcai.github.io/posts/41083/</a>
+      <a href="https://jiapengcai.github.io/posts/60755/" title="leetcode-374-guess-number-higher-or-lower">https://jiapengcai.github.io/posts/60755/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -362,22 +344,19 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Code-Review/" rel="tag"><i class="fa fa-tag"></i> Code Review</a>
-              <a href="/tags/Translation/" rel="tag"><i class="fa fa-tag"></i> Translation</a>
+              <a href="/tags/Leetcode/" rel="tag"><i class="fa fa-tag"></i> Leetcode</a>
+              <a href="/tags/Algorithm/" rel="tag"><i class="fa fa-tag"></i> Algorithm</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/35152/" rel="prev" title="1、代码评审开发者指南">
-                  <i class="fa fa-chevron-left"></i> 1、代码评审开发者指南
+                <a href="/posts/54442/" rel="prev" title="704. 二分查找">
+                  <i class="fa fa-chevron-left"></i> 704. 二分查找
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/16518/" rel="next" title="4、代码审查内容">
-                  4、代码审查内容 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -452,7 +431,7 @@
   <script src="/js/third-party/math/katex.js"></script>
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/41083/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/60755/"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
