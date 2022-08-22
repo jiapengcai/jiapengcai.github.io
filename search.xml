@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>178. 分数排名</title>
+    <url>/posts/32576/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
+<ul>
+<li>分数应按从高到低排列。</li>
+<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
+<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
+按 <em><strong>score</strong></em> 降序返回结果表。</li>
+</ul>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Scores</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>175. 组合两个表</title>
     <url>/posts/55850/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
@@ -19,6 +52,123 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.FirstName, a.LastName, b.City, b.State</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.PersonId <span class="operator">=</span> b.PersonId</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/combine-two-tables">https://leetcode.cn/problems/combine-two-tables</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>176. 第二高的薪水</title>
+    <url>/posts/23560/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表: Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>181. 超过经理收入的员工</title>
+    <url>/posts/58200/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+编写一个SQL查询来查找收入比经理高的员工。<br />
+以<strong>任意顺序</strong>返回结果表。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, managerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;70000&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>, <span class="string">&#x27;80000&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>, <span class="string">&#x27;60000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> managerId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Employee 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span> salary <span class="operator">|</span> managerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span> <span class="number">70000</span>  <span class="operator">|</span> <span class="number">3</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span> <span class="number">4</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span> <span class="number">60000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Employee <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Joe      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line">解释: Joe 是唯一挣得比经理多的雇员。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>180. 连续出现的数字</title>
+    <url>/posts/41601/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Logs</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>183. 从不订购的客户</title>
+    <url>/posts/44608/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Customers (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (id <span class="type">int</span>, customerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Customers</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Customers</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行表示一个用户的ID和名字</span><br></pre></td></tr></table></figure>
+<p>表：Orders</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customerId  <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">customerId是来自Customers表的外键</span><br><span class="line">表的每一行表示一个订单的ID以及下订单的用户的ID</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Customers 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> customerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Customers <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Henry     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Max       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.Name <span class="keyword">AS</span> Customers </span><br><span class="line"><span class="keyword">FROM</span> Customers c <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders o </span><br><span class="line"><span class="keyword">ON</span> c.Id<span class="operator">=</span>o.CustomerId </span><br><span class="line"><span class="keyword">WHERE</span> o.CustomerId <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> Orders <span class="keyword">AS</span> b</span><br><span class="line">  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/customers-who-never-order">https://leetcode.cn/problems/customers-who-never-order</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -66,308 +216,37 @@
       </tags>
   </entry>
   <entry>
-    <title>176. 第二高的薪水</title>
-    <url>/posts/23560/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表: Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>178. 分数排名</title>
-    <url>/posts/32576/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
-<ul>
-<li>分数应按从高到低排列。</li>
-<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
-<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
-按 <em><strong>score</strong></em> 降序返回结果表。</li>
-</ul>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Scores</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>182. 查找重复的电子邮箱</title>
-    <url>/posts/13020/</url>
+    <title>9. 回文数</title>
+    <url>/posts/35052/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
+例如，121 是回文，而 123 不是。</p>
 <span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Person</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
-<p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>181. 超过经理收入的员工</title>
-    <url>/posts/58200/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-编写一个SQL查询来查找收入比经理高的员工。<br />
-以<strong>任意顺序</strong>返回结果表。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, managerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;70000&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>, <span class="string">&#x27;80000&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>, <span class="string">&#x27;60000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, managerId) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;None&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> managerId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Employee 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span> salary <span class="operator">|</span> managerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span> <span class="number">70000</span>  <span class="operator">|</span> <span class="number">3</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span> <span class="number">4</span>         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span> <span class="number">60000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="keyword">Null</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+-----------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Employee <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line"><span class="operator">|</span> Joe      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+</span></span><br><span class="line">解释: Joe 是唯一挣得比经理多的雇员。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>183. 从不订购的客户</title>
-    <url>/posts/44608/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Customers (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (id <span class="type">int</span>, customerId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Customers</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Customers (id, name) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (id, customerId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Customers</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行表示一个用户的ID和名字</span><br></pre></td></tr></table></figure>
-<p>表：Orders</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customerId  <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">customerId是来自Customers表的外键</span><br><span class="line">表的每一行表示一个订单的ID以及下订单的用户的ID</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Customers 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Henry <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Sam   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Max   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> customerId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------+</span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Customers <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br><span class="line"><span class="operator">|</span> Henry     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Max       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.Name <span class="keyword">AS</span> Customers </span><br><span class="line"><span class="keyword">FROM</span> Customers c <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders o </span><br><span class="line"><span class="keyword">ON</span> c.Id<span class="operator">=</span>o.CustomerId </span><br><span class="line"><span class="keyword">WHERE</span> o.CustomerId <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> Orders <span class="keyword">AS</span> b</span><br><span class="line">  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/customers-who-never-order">https://leetcode.cn/problems/customers-who-never-order</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>180. 连续出现的数字</title>
-    <url>/posts/41601/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Logs</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>196. 删除重复的电子邮箱</title>
-    <url>/posts/59823/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
-<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
-<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
-<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>184. 部门工资最高的员工</title>
-    <url>/posts/49748/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写SQL查询以查找每个部门中薪资最高的员工。<br />
-按<strong>任意顺序</strong>返回结果表。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, departmentId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Department (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;70000&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Jim&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>, <span class="string">&#x27;80000&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>, <span class="string">&#x27;60000&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Department</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Department (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;IT&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Department (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Sales&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表： Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名          <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id           <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary       <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> departmentId <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line">id是此表的主键列。</span><br><span class="line">departmentId是Department表中ID的外键。</span><br><span class="line">此表的每一行都表示员工的ID、姓名和工资。它还包含他们所在部门的ID。</span><br></pre></td></tr></table></figure>
-<p>表： Department</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id是此表的主键列。</span><br><span class="line">此表的每一行都表示一个部门的ID及其名称。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+--------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span> salary <span class="operator">|</span> departmentId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+--------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span> <span class="number">70000</span>  <span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Jim   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Henry <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span> <span class="number">2</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Sam   <span class="operator">|</span> <span class="number">60000</span>  <span class="operator">|</span> <span class="number">2</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> Max   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+--------------+</span></span><br><span class="line">Department 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> IT    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Sales <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> Department <span class="operator">|</span> Employee <span class="operator">|</span> Salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> IT         <span class="operator">|</span> Jim      <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Sales      <span class="operator">|</span> Henry    <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> IT         <span class="operator">|</span> Max      <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+</span></span><br><span class="line">解释：Max 和 Jim 在 IT 部门的工资都是最高的，Henry 在销售部的工资最高。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  department.Name <span class="keyword">AS</span> <span class="string">&#x27;Department&#x27;</span>,</span><br><span class="line">  employee.Name   <span class="keyword">AS</span> <span class="string">&#x27;Employee&#x27;</span>,</span><br><span class="line">  Salary</span><br><span class="line"><span class="keyword">FROM</span> employee</span><br><span class="line">  <span class="keyword">JOIN</span> department <span class="keyword">ON</span> employee.DepartmentId <span class="operator">=</span> department.Id</span><br><span class="line"><span class="keyword">WHERE</span> (employee.DepartmentId, Salary) <span class="keyword">IN</span> (</span><br><span class="line">  <span class="keyword">SELECT</span></span><br><span class="line">    DepartmentId,</span><br><span class="line">    <span class="built_in">max</span>(Salary)</span><br><span class="line">  <span class="keyword">FROM</span> employee</span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> DepartmentId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/department-highest-salary">https://leetcode.cn/problems/department-highest-salary</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1、代码评审开发者指南</title>
-    <url>/posts/35152/</url>
-    <content><![CDATA[<h2 id="introduction介绍"><a class="markdownIt-Anchor" href="#introduction介绍"></a> Introduction（介绍）</h2>
-<p>A code review is a process where someone other than the author(s) of a piece of code examines that code.<br />
-所谓的代码审查（code review）就是指让别人来审查自己的代码的过程。</p>
-<p>At Google, we use code review to maintain the quality of our code and products.<br />
-在Google内部，我们会通过代码审查来保证代码和产品的质量。</p>
-<p>This documentation is the canonical description of Google’s code review processes and policies.<br />
-本文档详述了Google是如何进行代码审查的以及所采用的策略。</p>
-<span id="more"></span>
-<p>This page is an overview of our code review process. There are two other large documents that are a part of this guide:</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>约束条件</strong></p>
 <ul>
-<li><strong><a href="../41083">How To Do A Code Review</a>:</strong> A detailed guide for code reviewers.</li>
-<li><strong>The CL Author’s Guide:</strong> A detailed guide for developers whose CLs are going through review.</li>
+<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
 </ul>
-<p>本页内容大体介绍了下代码审查的过程是怎样的。代码审查指南包含了两大部分：</p>
-<ul>
-<li><strong><a href="../41083">如何进行代码审查</a>：</strong> 详述了代码评审人应该如何进行代码审查。</li>
-<li><strong>变更列表作者指南：</strong> 详述了提交待审核变更列表的开发人员应该如何做。</li>
-</ul>
-<h2 id="what-do-code-reviewers-look-for代码审查应该关注哪些内容"><a class="markdownIt-Anchor" href="#what-do-code-reviewers-look-for代码审查应该关注哪些内容"></a> What Do Code Reviewers Look For?（代码审查应该关注哪些内容？）</h2>
-<p>Code reviews should look at:</p>
-<ul>
-<li><strong>Design:</strong> Is the code well-designed and appropriate for your system?</li>
-<li><strong>Functionality:</strong> Does the code behave as the author likely intended? Is the way the code behaves good for its users?</li>
-<li><strong>Complexity:</strong> Could the code be made simpler? Would another developer be able to easily understand and use this code when they come across it in the future?</li>
-<li><strong>Tests:</strong> Does the code have correct and well-designed automated tests?</li>
-<li><strong>Naming:</strong> Did the developer choose clear names for variables, classes, methods, etc.?</li>
-<li><strong>Comments:</strong> Are the comments clear and useful?</li>
-<li><strong>Style:</strong> Does the code follow our <a href="http://google.github.io/styleguide/">style guides</a>?</li>
-<li><strong>Documentation:</strong> Did the developer also update relevant documentation?</li>
-</ul>
-<p>代码审查内容应该关注以下几点：</p>
-<ul>
-<li><strong>设计：</strong> 代码是否设计良好且对于系统而言是否适合？</li>
-<li><strong>功能：</strong> 代码实现的行为是否达到了作者想要的效果？代码实现的行为对于用户是否友好？</li>
-<li><strong>复杂性：</strong> 代码能否写得更简单点吗？是否能让别的开发人员易于理解而且易于使用？</li>
-<li><strong>测试：</strong> 代码是否包含了正确的，设计良好的自动化测试？</li>
-<li><strong>命名：</strong> 开发人员是否为变量、类、方法等选取了清晰的名字？</li>
-<li><strong>注释：</strong> 注释是否含义清晰并且有用？</li>
-<li><strong>代码规范：</strong> 代码是否遵循了<a href="http://google.github.io/styleguide/">归约规范</a>？</li>
-<li><strong>文档：</strong> 开发人员是否同步更新了相关文档？</li>
-</ul>
-<p>See <a href="../41083">How To Do A Code Review</a> for more information.<br />
-具体内容详见<a href="../41083">《如何进行代码审查》</a>。</p>
-<h3 id="picking-the-best-reviewers挑选最好的评审人"><a class="markdownIt-Anchor" href="#picking-the-best-reviewers挑选最好的评审人"></a> Picking the Best Reviewers（挑选最好的评审人）</h3>
-<p>In general, you want to find the <em>best</em> reviewers you can who are capable of responding to your review within a reasonable period of time.<br />
-通常情况下，你会倾向于寻找你所能找到的最好的评审人，以保证你的代码能尽快得到审查。</p>
-<p>The best reviewer is the person who will be able to give you the most thorough and correct review for the piece of code you are writing. This usually means the owner(s) of the code, who may or may not be the people in the OWNERS file. Sometimes this means asking different people to review different parts of the CL.<br />
-好的评审人能够给予你编写的代码较为彻底和正确的审查。这意味着，相关代码的所有者（owner）可能在所有者文件里也可能不在所有者文件里。有时可能需要让不同的人来去审查变更列表的不同部分。</p>
-<p>If you find an ideal reviewer but they are not available, you should at least CC them on your change.<br />
-如果你找到了理想的评审人但他们却因为某些原因无法为你审查时，你至少需要将你的变更内容抄送给他们。</p>
-<h3 id="in-person-reviews-and-pair-programming面对面审查以及结对编程"><a class="markdownIt-Anchor" href="#in-person-reviews-and-pair-programming面对面审查以及结对编程"></a> In-Person Reviews (and Pair Programming)（面对面审查（以及结对编程））</h3>
-<p>If you pair-programmed a piece of code with somebody who was qualified to do a good code review on it, then that code is considered reviewed.<br />
-如果某部分代码你是与小伙伴结对编程写出来的，同时这个小伙伴被认为能进行合格的代码审查，那么这部分代码也可以被认为是进行过了代码审查。</p>
-<p>You can also do in-person code reviews where the reviewer asks questions and the developer of the change speaks only when spoken to.<br />
-你也可以采用面对面的代码审查方式，在这种方式下，评审人提出问题，被问的开发人员进行描述答复。</p>
+<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>Google代码评审规约</category>
+        <category>Leetcode题解</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>Code Review</tag>
-        <tag>Translation</tag>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -444,6 +323,221 @@
       <tags>
         <tag>Code Review</tag>
         <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>184. 部门工资最高的员工</title>
+    <url>/posts/49748/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写SQL查询以查找每个部门中薪资最高的员工。<br />
+按<strong>任意顺序</strong>返回结果表。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, departmentId <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Department (id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;70000&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Jim&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Henry&#x27;</span>, <span class="string">&#x27;80000&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Sam&#x27;</span>, <span class="string">&#x27;60000&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, name, salary, departmentId) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;Max&#x27;</span>, <span class="string">&#x27;90000&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Department</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Department (id, name) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;IT&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Department (id, name) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Sales&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表： Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名          <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id           <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary       <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> departmentId <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line">id是此表的主键列。</span><br><span class="line">departmentId是Department表中ID的外键。</span><br><span class="line">此表的每一行都表示员工的ID、姓名和工资。它还包含他们所在部门的ID。</span><br></pre></td></tr></table></figure>
+<p>表： Department</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id是此表的主键列。</span><br><span class="line">此表的每一行都表示一个部门的ID及其名称。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+--------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span> salary <span class="operator">|</span> departmentId <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+--------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> Joe   <span class="operator">|</span> <span class="number">70000</span>  <span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Jim   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> Henry <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span> <span class="number">2</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> Sam   <span class="operator">|</span> <span class="number">60000</span>  <span class="operator">|</span> <span class="number">2</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> Max   <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+--------+--------------+</span></span><br><span class="line">Department 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> IT    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> Sales <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> Department <span class="operator">|</span> Employee <span class="operator">|</span> Salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> IT         <span class="operator">|</span> Jim      <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Sales      <span class="operator">|</span> Henry    <span class="operator">|</span> <span class="number">80000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> IT         <span class="operator">|</span> Max      <span class="operator">|</span> <span class="number">90000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+----------+--------+</span></span><br><span class="line">解释：Max 和 Jim 在 IT 部门的工资都是最高的，Henry 在销售部的工资最高。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  department.Name <span class="keyword">AS</span> <span class="string">&#x27;Department&#x27;</span>,</span><br><span class="line">  employee.Name   <span class="keyword">AS</span> <span class="string">&#x27;Employee&#x27;</span>,</span><br><span class="line">  Salary</span><br><span class="line"><span class="keyword">FROM</span> employee</span><br><span class="line">  <span class="keyword">JOIN</span> department <span class="keyword">ON</span> employee.DepartmentId <span class="operator">=</span> department.Id</span><br><span class="line"><span class="keyword">WHERE</span> (employee.DepartmentId, Salary) <span class="keyword">IN</span> (</span><br><span class="line">  <span class="keyword">SELECT</span></span><br><span class="line">    DepartmentId,</span><br><span class="line">    <span class="built_in">max</span>(Salary)</span><br><span class="line">  <span class="keyword">FROM</span> employee</span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> DepartmentId</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/department-highest-salary">https://leetcode.cn/problems/department-highest-salary</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>182. 查找重复的电子邮箱</title>
+    <url>/posts/13020/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+编写一个 SQL 查询，查找 <em><strong>Person</strong></em> 表中所有重复的电子邮箱。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (id <span class="type">int</span>, email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;c@d.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;a@b.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Person</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。   </span><br><span class="line">表的每一行都包含一个邮箱地址。邮箱地址不包含大写字母。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Person 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> c<span class="variable">@d</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+---------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> Email   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line"><span class="operator">|</span> a<span class="variable">@b</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+</span></span><br><span class="line">解释：a<span class="variable">@b</span>.com重复了两次</span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email</span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> a.Email</span><br><span class="line"><span class="keyword">FROM</span> Person <span class="keyword">AS</span> a, Person <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.id <span class="operator">!=</span> b.id</span><br><span class="line"><span class="keyword">AND</span> a.Email<span class="operator">=</span>b.Email</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/duplicate-emails">https://leetcode.cn/problems/duplicate-emails</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gerrit没有出现Verify按钮问题解决</title>
+    <url>/posts/18923/</url>
+    <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
+]]></content>
+      <categories>
+        <category>随笔备忘</category>
+      </categories>
+      <tags>
+        <tag>Gerrit</tag>
+        <tag>Code Review</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>196. 删除重复的电子邮箱</title>
+    <url>/posts/59823/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>Write an SQL query to delete all the duplicate emails, keeping only one unique email with the smallest id. Note that you are supposed to write a DELETE statement and not a SELECT one.</p>
+<p>After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter.</p>
+<p>编写一个SQL删除语句来<strong>删除</strong>所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
+<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Person (Id <span class="type">int</span>, Email <span class="type">varchar</span>(<span class="number">255</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Person</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;bob@example.com&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Person (id, email) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1 <span class="keyword">FROM</span> person p1, person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email <span class="operator">=</span> p2.Email <span class="keyword">AND</span> p1.Id <span class="operator">&gt;</span> p2.Id</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/delete-duplicate-emails">https://leetcode.cn/problems/delete-duplicate-emails</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>704. 二分查找</title>
+    <url>/posts/54442/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">9</span></span><br><span class="line">输出: <span class="number">4</span></span><br><span class="line">解释: <span class="number">9</span> 出现在 nums 中并且下标为 <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">2</span></span><br><span class="line">输出: -<span class="number">1</span></span><br><span class="line">解释: <span class="number">2</span> 不存在 nums 中因此返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol>
+<li>你可以假设 nums 中的所有元素是不重复的。</li>
+<li>n 将在 [1, 10000]之间。</li>
+<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
+</ol>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">low</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">high</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> low + nums.length / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[low] ==  target) &#123;</span><br><span class="line">                <span class="keyword">return</span> low;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[high] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> high;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                low = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                high = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = low + (high - low) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1、代码评审开发者指南</title>
+    <url>/posts/35152/</url>
+    <content><![CDATA[<h2 id="introduction介绍"><a class="markdownIt-Anchor" href="#introduction介绍"></a> Introduction（介绍）</h2>
+<p>A code review is a process where someone other than the author(s) of a piece of code examines that code.<br />
+所谓的代码审查（code review）就是指让别人来审查自己的代码的过程。</p>
+<p>At Google, we use code review to maintain the quality of our code and products.<br />
+在Google内部，我们会通过代码审查来保证代码和产品的质量。</p>
+<p>This documentation is the canonical description of Google’s code review processes and policies.<br />
+本文档详述了Google是如何进行代码审查的以及所采用的策略。</p>
+<span id="more"></span>
+<p>This page is an overview of our code review process. There are two other large documents that are a part of this guide:</p>
+<ul>
+<li><strong><a href="../41083">How To Do A Code Review</a>:</strong> A detailed guide for code reviewers.</li>
+<li><strong>The CL Author’s Guide:</strong> A detailed guide for developers whose CLs are going through review.</li>
+</ul>
+<p>本页内容大体介绍了下代码审查的过程是怎样的。代码审查指南包含了两大部分：</p>
+<ul>
+<li><strong><a href="../41083">如何进行代码审查</a>：</strong> 详述了代码评审人应该如何进行代码审查。</li>
+<li><strong>变更列表作者指南：</strong> 详述了提交待审核变更列表的开发人员应该如何做。</li>
+</ul>
+<h2 id="what-do-code-reviewers-look-for代码审查应该关注哪些内容"><a class="markdownIt-Anchor" href="#what-do-code-reviewers-look-for代码审查应该关注哪些内容"></a> What Do Code Reviewers Look For?（代码审查应该关注哪些内容？）</h2>
+<p>Code reviews should look at:</p>
+<ul>
+<li><strong>Design:</strong> Is the code well-designed and appropriate for your system?</li>
+<li><strong>Functionality:</strong> Does the code behave as the author likely intended? Is the way the code behaves good for its users?</li>
+<li><strong>Complexity:</strong> Could the code be made simpler? Would another developer be able to easily understand and use this code when they come across it in the future?</li>
+<li><strong>Tests:</strong> Does the code have correct and well-designed automated tests?</li>
+<li><strong>Naming:</strong> Did the developer choose clear names for variables, classes, methods, etc.?</li>
+<li><strong>Comments:</strong> Are the comments clear and useful?</li>
+<li><strong>Style:</strong> Does the code follow our <a href="http://google.github.io/styleguide/">style guides</a>?</li>
+<li><strong>Documentation:</strong> Did the developer also update relevant documentation?</li>
+</ul>
+<p>代码审查内容应该关注以下几点：</p>
+<ul>
+<li><strong>设计：</strong> 代码是否设计良好且对于系统而言是否适合？</li>
+<li><strong>功能：</strong> 代码实现的行为是否达到了作者想要的效果？代码实现的行为对于用户是否友好？</li>
+<li><strong>复杂性：</strong> 代码能否写得更简单点吗？是否能让别的开发人员易于理解而且易于使用？</li>
+<li><strong>测试：</strong> 代码是否包含了正确的，设计良好的自动化测试？</li>
+<li><strong>命名：</strong> 开发人员是否为变量、类、方法等选取了清晰的名字？</li>
+<li><strong>注释：</strong> 注释是否含义清晰并且有用？</li>
+<li><strong>代码规范：</strong> 代码是否遵循了<a href="http://google.github.io/styleguide/">归约规范</a>？</li>
+<li><strong>文档：</strong> 开发人员是否同步更新了相关文档？</li>
+</ul>
+<p>See <a href="../41083">How To Do A Code Review</a> for more information.<br />
+具体内容详见<a href="../41083">《如何进行代码审查》</a>。</p>
+<h3 id="picking-the-best-reviewers挑选最好的评审人"><a class="markdownIt-Anchor" href="#picking-the-best-reviewers挑选最好的评审人"></a> Picking the Best Reviewers（挑选最好的评审人）</h3>
+<p>In general, you want to find the <em>best</em> reviewers you can who are capable of responding to your review within a reasonable period of time.<br />
+通常情况下，你会倾向于寻找你所能找到的最好的评审人，以保证你的代码能尽快得到审查。</p>
+<p>The best reviewer is the person who will be able to give you the most thorough and correct review for the piece of code you are writing. This usually means the owner(s) of the code, who may or may not be the people in the OWNERS file. Sometimes this means asking different people to review different parts of the CL.<br />
+好的评审人能够给予你编写的代码较为彻底和正确的审查。这意味着，相关代码的所有者（owner）可能在所有者文件里也可能不在所有者文件里。有时可能需要让不同的人来去审查变更列表的不同部分。</p>
+<p>If you find an ideal reviewer but they are not available, you should at least CC them on your change.<br />
+如果你找到了理想的评审人但他们却因为某些原因无法为你审查时，你至少需要将你的变更内容抄送给他们。</p>
+<h3 id="in-person-reviews-and-pair-programming面对面审查以及结对编程"><a class="markdownIt-Anchor" href="#in-person-reviews-and-pair-programming面对面审查以及结对编程"></a> In-Person Reviews (and Pair Programming)（面对面审查（以及结对编程））</h3>
+<p>If you pair-programmed a piece of code with somebody who was qualified to do a good code review on it, then that code is considered reviewed.<br />
+如果某部分代码你是与小伙伴结对编程写出来的，同时这个小伙伴被认为能进行合格的代码审查，那么这部分代码也可以被认为是进行过了代码审查。</p>
+<p>You can also do in-person code reviews where the reviewer asks questions and the developer of the change speaks only when spoken to.<br />
+你也可以采用面对面的代码审查方式，在这种方式下，评审人提出问题，被问的开发人员进行描述答复。</p>
+]]></content>
+      <categories>
+        <category>Google代码评审规约</category>
+      </categories>
+      <tags>
+        <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《动物庄园》读后感</title>
+    <url>/posts/60962/</url>
+    <content><![CDATA[<p>作者：乔治·奥威尔（George Orwell）<br />
+推荐系数：5/5<br />
+前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。<br />
+类似的书籍让我想起了《1984》<br />
+嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -546,37 +640,20 @@
       </tags>
   </entry>
   <entry>
-    <title>9. 回文数</title>
-    <url>/posts/35052/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
-回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
-例如，121 是回文，而 123 不是。</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>约束条件</strong></p>
-<ul>
-<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
-</ul>
-<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
-</blockquote>
+    <title>《小岛经济学》读后感</title>
+    <url>/posts/43131/</url>
+    <content><![CDATA[<p>作者： 彼得·希夫 / 安德鲁·希夫（Peter D. Schiff / Andrew J. Schiff）<br />
+推荐系数：3/5<br />
+1、《小岛经济学》以美国经济为原型，用充满故事趣味性的方式，配合大量的配图，描述了资本是如何积累的、货币的起源、政府是如何诞生、贸易是如何发展的，通货膨胀是如何发生的，最后对中美贸易战做出了预判。相比《经济学原理》，这本书更接地气。<br />
+2、可能我比较蠢，最后还是没看懂通货膨胀及货币超发的关系及经济环境演变的内在逻辑。看评论，很多人说是经济学的入门读物，但是我怎么觉得顶多算是科普。<br />
+3、看的过程总觉得，作者好像很推崇自由经济，政府插手就会坏事。上网Google了一下，原来这是典型奥地利学派，与之相对的是凯恩斯主义。不知作者是不是把人心想得太美好了，因为资本都是逐利的。市场经济会受“看不见的手”调整，但是任由其自由发展仿佛也不对，还是需要“看得见的手”进行约束，反过来也一样。人家政治体系都还会搞三权分立呢，因为人都是会利己的，自私的基因从我们诞生就已经存在了。<br />
+4、也不能一棒子打死吧，里面还是有些不错的，比如要直面错误，勤劳致富等。</p>
 ]]></content>
       <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
+        <category>读书笔记</category>
       </categories>
       <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
+        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -651,100 +728,6 @@ can result in a better solution, because the developer is closer to the code tha
       <tags>
         <tag>Code Review</tag>
         <tag>Translation</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Gerrit没有出现Verify按钮问题解决</title>
-    <url>/posts/18923/</url>
-    <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
-]]></content>
-      <categories>
-        <category>随笔备忘</category>
-      </categories>
-      <tags>
-        <tag>Gerrit</tag>
-        <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《动物庄园》读后感</title>
-    <url>/posts/60962/</url>
-    <content><![CDATA[<p>作者：乔治·奥威尔（George Orwell）<br />
-推荐系数：5/5<br />
-前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。<br />
-类似的书籍让我想起了《1984》<br />
-嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《这才是心理学》读后感</title>
-    <url>/posts/25743/</url>
-    <content><![CDATA[<p>作者：基思·斯坦诺维奇（Keith E. Stanovich）<br />
-推荐系数：4.5/5<br />
-一直想读一本介绍心理学方面的书籍。这本书就挺适合的。心理学是一门年轻的基于科学实验的可证伪的学科。虽然头两章读起来有点像高中的政治书，但是越往后越能产生共鸣，甚至有好几章内容不自觉和平时的工作联系了起来，比如两个变量的关联性，多个角度证明同一个变量等。只是工作又参杂了人际的因素，也许正是因为如此，科学才显得更纯粹吧。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《小岛经济学》读后感</title>
-    <url>/posts/43131/</url>
-    <content><![CDATA[<p>作者： 彼得·希夫 / 安德鲁·希夫（Peter D. Schiff / Andrew J. Schiff）<br />
-推荐系数：3/5<br />
-1、《小岛经济学》以美国经济为原型，用充满故事趣味性的方式，配合大量的配图，描述了资本是如何积累的、货币的起源、政府是如何诞生、贸易是如何发展的，通货膨胀是如何发生的，最后对中美贸易战做出了预判。相比《经济学原理》，这本书更接地气。<br />
-2、可能我比较蠢，最后还是没看懂通货膨胀及货币超发的关系及经济环境演变的内在逻辑。看评论，很多人说是经济学的入门读物，但是我怎么觉得顶多算是科普。<br />
-3、看的过程总觉得，作者好像很推崇自由经济，政府插手就会坏事。上网Google了一下，原来这是典型奥地利学派，与之相对的是凯恩斯主义。不知作者是不是把人心想得太美好了，因为资本都是逐利的。市场经济会受“看不见的手”调整，但是任由其自由发展仿佛也不对，还是需要“看得见的手”进行约束，反过来也一样。人家政治体系都还会搞三权分立呢，因为人都是会利己的，自私的基因从我们诞生就已经存在了。<br />
-4、也不能一棒子打死吧，里面还是有些不错的，比如要直面错误，勤劳致富等。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《人类简史》读后感</title>
-    <url>/posts/34897/</url>
-    <content><![CDATA[<p>作者：尤瓦尔·赫拉利（Yuval Noah Harari）<br />
-推荐系数：5/5<br />
-花了两周的地铁通勤时间二刷完了《人类简史》。书中不是完全按照时间轴来进行叙事性描述，加入了作者很多天马行空的思考与见解，具体事实或者推论是否真的会像作者说的那样历史学的不深也不好说。只是整本书下来，有两个观点很有意思：</p>
-<ol>
-<li>人类能大规模合作靠的是对想象出来的同一个故事的信任；</li>
-<li>人类发展出来的信用体系使得近500年人类发展进程得以快速发展。感觉书中最后几章的讨论也给我们留下了个思考，我们到底快不快乐，快乐是主观的还是客观的。</li>
-</ol>
-<p>人类一思考，上帝就发笑。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《镜子》读后感</title>
-    <url>/posts/39078/</url>
-    <content><![CDATA[<p>作者：刘慈欣<br />
-推荐系数：4.5/5<br />
-不得不说，刘慈欣脑洞真大，反腐和宇宙大爆炸都能结合起来。我只是在想，可能也不一定水至清则无鱼，人至察则无徒，这个世界可塑性那么强到最后进化出了另一种生存模式另一种玩法也说不定。<br />
-Anyway，真的是好看！而且我也是名软件工程师！</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -845,33 +828,6 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       </tags>
   </entry>
   <entry>
-    <title>《行之有效》读后感</title>
-    <url>/posts/24401/</url>
-    <content><![CDATA[<p>作者：蔡为东<br />
-推荐系数：3.5/5<br />
-上个月大老板推荐了《行之有效》这本书，说是讲技术基层管理的。通篇看下来，其实就是告诉我们，基层管理者要多思考，多观察，以对团队有益作为出发点和原则，同时也不能落下自己的专业技能和素养。精华的点有以下几个：</p>
-<ol>
-<li>管理者负责。</li>
-<li>以身作则。</li>
-<li>公平和公开。</li>
-<li>尊重每一个人。</li>
-<li>提高员工参与度，让员工负责任。</li>
-<li>随时激励。</li>
-<li>提纲挈领，要事优先，管理优先。</li>
-<li>培养人才，创造机会。</li>
-<li>技术和管理一肩挑。</li>
-<li>保持危机感，持续学习。</li>
-<li>顺势而为。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
     <url>/posts/48556/</url>
     <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
@@ -952,6 +908,25 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       <tags>
         <tag>Translation</tag>
         <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《人类简史》读后感</title>
+    <url>/posts/34897/</url>
+    <content><![CDATA[<p>作者：尤瓦尔·赫拉利（Yuval Noah Harari）<br />
+推荐系数：5/5<br />
+花了两周的地铁通勤时间二刷完了《人类简史》。书中不是完全按照时间轴来进行叙事性描述，加入了作者很多天马行空的思考与见解，具体事实或者推论是否真的会像作者说的那样历史学的不深也不好说。只是整本书下来，有两个观点很有意思：</p>
+<ol>
+<li>人类能大规模合作靠的是对想象出来的同一个故事的信任；</li>
+<li>人类发展出来的信用体系使得近500年人类发展进程得以快速发展。感觉书中最后几章的讨论也给我们留下了个思考，我们到底快不快乐，快乐是主观的还是客观的。</li>
+</ol>
+<p>人类一思考，上帝就发笑。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -1305,6 +1280,21 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       </tags>
   </entry>
   <entry>
+    <title>《镜子》读后感</title>
+    <url>/posts/39078/</url>
+    <content><![CDATA[<p>作者：刘慈欣<br />
+推荐系数：4.5/5<br />
+不得不说，刘慈欣脑洞真大，反腐和宇宙大爆炸都能结合起来。我只是在想，可能也不一定水至清则无鱼，人至察则无徒，这个世界可塑性那么强到最后进化出了另一种生存模式另一种玩法也说不定。<br />
+Anyway，真的是好看！而且我也是名软件工程师！</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
     <url>/posts/13955/</url>
     <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
@@ -1420,6 +1410,33 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       <tags>
         <tag>Translation</tag>
         <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《行之有效》读后感</title>
+    <url>/posts/24401/</url>
+    <content><![CDATA[<p>作者：蔡为东<br />
+推荐系数：3.5/5<br />
+上个月大老板推荐了《行之有效》这本书，说是讲技术基层管理的。通篇看下来，其实就是告诉我们，基层管理者要多思考，多观察，以对团队有益作为出发点和原则，同时也不能落下自己的专业技能和素养。精华的点有以下几个：</p>
+<ol>
+<li>管理者负责。</li>
+<li>以身作则。</li>
+<li>公平和公开。</li>
+<li>尊重每一个人。</li>
+<li>提高员工参与度，让员工负责任。</li>
+<li>随时激励。</li>
+<li>提纲挈领，要事优先，管理优先。</li>
+<li>培养人才，创造机会。</li>
+<li>技术和管理一肩挑。</li>
+<li>保持危机感，持续学习。</li>
+<li>顺势而为。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -1552,6 +1569,20 @@ tests as appropriate for the change. In general, tests should be added in the sa
       <tags>
         <tag>Code Review</tag>
         <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《这才是心理学》读后感</title>
+    <url>/posts/25743/</url>
+    <content><![CDATA[<p>作者：基思·斯坦诺维奇（Keith E. Stanovich）<br />
+推荐系数：4.5/5<br />
+一直想读一本介绍心理学方面的书籍。这本书就挺适合的。心理学是一门年轻的基于科学实验的可证伪的学科。虽然头两章读起来有点像高中的政治书，但是越往后越能产生共鸣，甚至有好几章内容不自觉和平时的工作联系了起来，比如两个变量的关联性，多个角度证明同一个变量等。只是工作又参杂了人际的因素，也许正是因为如此，科学才显得更纯粹吧。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
       </tags>
   </entry>
 </search>
