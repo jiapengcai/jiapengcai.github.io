@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="难度系数： 简单 表: SalesPerson 1234567891011+-----------------+---------+| Column Name     | Type    |+-----------------+---------+| sales_id        | int     || name            | varchar || salary">
+<meta property="og:type" content="article">
+<meta property="og:title" content="607. 销售员">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/268/index.html">
+<meta property="og:site_name" content="PENG">
+<meta property="og:description" content="难度系数： 简单 表: SalesPerson 1234567891011+-----------------+---------+| Column Name     | Type    |+-----------------+---------+| sales_id        | int     || name            | varchar || salary">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-24T07:11:57.000Z">
+<meta property="article:modified_time" content="2022-08-24T07:15:52.088Z">
+<meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="Leetcode">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiapengcai.github.io/posts/268/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/268/","path":"posts/268/","title":"607. 销售员"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>607. 销售员 | PENG</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78165446-2"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78165446-2","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?c2245210e9e4ae6d32a120a571efc6d6"></script>
+
+
+
+<link rel="dns-prefetch" href="https://blog-comment-36okv5pgb-jiapengcai.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">PENG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">38</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiapeng Cai"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiapeng Cai</p>
+  <div class="site-description" itemprop="description">Life can be programmed.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jiapengcai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jiapengcai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:635793@gmail.com" title="E-Mail → mailto:635793@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/1988393071" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;1988393071" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/268/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="607. 销售员 | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          607. 销售员
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-24 15:11:57 / 修改时间：15:15:52" itemprop="dateCreated datePublished" datetime="2022-08-24T15:11:57+08:00">2022-08-24</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/268/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/268/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>难度系数：</strong> 简单<br />
+表: SalesPerson</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-----------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name     <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+---------+</span></span><br><span class="line"><span class="operator">|</span> sales_id        <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name            <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> commission_rate <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> hire_date       <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+---------+</span></span><br><span class="line">sales_id 是该表的主键列。</span><br><span class="line">该表的每一行都显示了销售人员的姓名和 ID ，以及他们的工资、佣金率和雇佣日期。</span><br></pre></td></tr></table></figure>
+<p>表: Company</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> com_id      <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> city        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">com_id 是该表的主键列。</span><br><span class="line">该表的每一行都表示公司的名称和 ID ，以及公司所在的城市。</span><br></pre></td></tr></table></figure>
+<p>表: Orders</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> order_id    <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> order_date  <span class="operator">|</span> <span class="type">date</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> com_id      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> sales_id    <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> amount      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">order_id 是该表的主键列。</span><br><span class="line">com_id 是 Company 表中 com_id 的外键。</span><br><span class="line">sales_id 是来自销售员表 sales_id 的外键。</span><br><span class="line">该表的每一行包含一个订单的信息。这包括公司的 ID 、销售人员的 ID 、订单日期和支付的金额。</span><br></pre></td></tr></table></figure>
+<p>编写一个SQL查询，报告没有任何与名为 <strong>“RED”</strong> 的公司相关的订单的所有销售人员的姓名。</p>
+<p>以 <strong>任意顺序</strong> 返回结果表。</p>
+<span id="more"></span>
+<p>查询结果格式如下所示。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">SalesPerson 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------+--------+-----------------+------------+</span></span><br><span class="line"><span class="operator">|</span> sales_id <span class="operator">|</span> name <span class="operator">|</span> salary <span class="operator">|</span> commission_rate <span class="operator">|</span> hire_date  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------+--------+-----------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> John <span class="operator">|</span> <span class="number">100000</span> <span class="operator">|</span> <span class="number">6</span>               <span class="operator">|</span> <span class="number">4</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2006</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Amy  <span class="operator">|</span> <span class="number">12000</span>  <span class="operator">|</span> <span class="number">5</span>               <span class="operator">|</span> <span class="number">5</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2010</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Mark <span class="operator">|</span> <span class="number">65000</span>  <span class="operator">|</span> <span class="number">12</span>              <span class="operator">|</span> <span class="number">12</span><span class="operator">/</span><span class="number">25</span><span class="operator">/</span><span class="number">2008</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>        <span class="operator">|</span> Pam  <span class="operator">|</span> <span class="number">25000</span>  <span class="operator">|</span> <span class="number">25</span>              <span class="operator">|</span> <span class="number">1</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2005</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>        <span class="operator">|</span> Alex <span class="operator">|</span> <span class="number">5000</span>   <span class="operator">|</span> <span class="number">10</span>              <span class="operator">|</span> <span class="number">2</span><span class="operator">/</span><span class="number">3</span><span class="operator">/</span><span class="number">2007</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------+--------+-----------------+------------+</span></span><br><span class="line">Company 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">--------+--------+----------+</span></span><br><span class="line"><span class="operator">|</span> com_id <span class="operator">|</span> name   <span class="operator">|</span> city     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+--------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span> RED    <span class="operator">|</span> Boston   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>      <span class="operator">|</span> ORANGE <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>      <span class="operator">|</span> YELLOW <span class="operator">|</span> Boston   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>      <span class="operator">|</span> GREEN  <span class="operator">|</span> Austin   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+--------+----------+</span></span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------------+--------+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> order_id <span class="operator">|</span> order_date <span class="operator">|</span> com_id <span class="operator">|</span> sales_id <span class="operator">|</span> amount <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------------+--------+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> <span class="number">1</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2014</span>   <span class="operator">|</span> <span class="number">3</span>      <span class="operator">|</span> <span class="number">4</span>        <span class="operator">|</span> <span class="number">10000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="number">2</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2014</span>   <span class="operator">|</span> <span class="number">4</span>      <span class="operator">|</span> <span class="number">5</span>        <span class="operator">|</span> <span class="number">5000</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> <span class="number">3</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2014</span>   <span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> <span class="number">50000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>        <span class="operator">|</span> <span class="number">4</span><span class="operator">/</span><span class="number">1</span><span class="operator">/</span><span class="number">2014</span>   <span class="operator">|</span> <span class="number">1</span>      <span class="operator">|</span> <span class="number">4</span>        <span class="operator">|</span> <span class="number">25000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+------------+--------+----------+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line"><span class="operator">|</span> Amy  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Mark <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Alex <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line">解释：</span><br><span class="line">根据表 orders 中的订单 <span class="string">&#x27;3&#x27;</span> 和 <span class="string">&#x27;4&#x27;</span> ，容易看出只有 <span class="string">&#x27;John&#x27;</span> 和 <span class="string">&#x27;Pam&#x27;</span> 两个销售员曾经向公司 <span class="string">&#x27;RED&#x27;</span> 销售过。</span><br><span class="line">所以我们需要输出表 salesperson 中所有其他人的名字。</span><br></pre></td></tr></table></figure>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> SalesPerson (sales_id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), salary <span class="type">int</span>, commission_rate <span class="type">int</span>, hire_date <span class="type">date</span>);</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Company (com_id <span class="type">int</span>, name <span class="type">varchar</span>(<span class="number">255</span>), city <span class="type">varchar</span>(<span class="number">255</span>));</span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Orders (order_id <span class="type">int</span>, order_date <span class="type">date</span>, com_id <span class="type">int</span>, sales_id <span class="type">int</span>, amount <span class="type">int</span>);</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> SalesPerson;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> SalesPerson (sales_id, name, salary, commission_rate, hire_date) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;John&#x27;</span>, <span class="string">&#x27;100000&#x27;</span>, <span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2006-4-1&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> SalesPerson (sales_id, name, salary, commission_rate, hire_date) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;Amy&#x27;</span>, <span class="string">&#x27;12000&#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;2010-5-1&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> SalesPerson (sales_id, name, salary, commission_rate, hire_date) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;Mark&#x27;</span>, <span class="string">&#x27;65000&#x27;</span>, <span class="string">&#x27;12&#x27;</span>, <span class="string">&#x27;2008-12-25&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> SalesPerson (sales_id, name, salary, commission_rate, hire_date) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;Pam&#x27;</span>, <span class="string">&#x27;25000&#x27;</span>, <span class="string">&#x27;25&#x27;</span>, <span class="string">&#x27;2005-1-1&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> SalesPerson (sales_id, name, salary, commission_rate, hire_date) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;Alex&#x27;</span>, <span class="string">&#x27;5000&#x27;</span>, <span class="string">&#x27;10&#x27;</span>, <span class="string">&#x27;2007-2-3&#x27;</span>);</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Company;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Company (com_id, name, city) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;RED&#x27;</span>, <span class="string">&#x27;Boston&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Company (com_id, name, city) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;ORANGE&#x27;</span>, <span class="string">&#x27;New York&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Company (com_id, name, city) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;YELLOW&#x27;</span>, <span class="string">&#x27;Boston&#x27;</span>);;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Company (com_id, name, city) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;GREEN&#x27;</span>, <span class="string">&#x27;Austin&#x27;</span>);</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Orders;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (order_id, order_date, com_id, sales_id, amount) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2014-1-1&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;10000&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (order_id, order_date, com_id, sales_id, amount) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;2014-2-1&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;5000&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (order_id, order_date, com_id, sales_id, amount) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;2014-3-1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;50000&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Orders (order_id, order_date, com_id, sales_id, amount) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2014-4-1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;25000&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.name </span><br><span class="line"><span class="keyword">FROM</span> SalesPerson c</span><br><span class="line"><span class="keyword">WHERE</span> c.sales_id <span class="keyword">NOT</span> <span class="keyword">IN</span> (</span><br><span class="line"><span class="keyword">SELECT</span> a.sales_id</span><br><span class="line"><span class="keyword">FROM</span> Orders a, Company b</span><br><span class="line"><span class="keyword">WHERE</span> a.com_id <span class="operator">=</span> b.com_id </span><br><span class="line"><span class="keyword">AND</span> b.name <span class="operator">=</span> <span class="string">&#x27;RED&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sales-person/">https://leetcode.cn/problems/sales-person/</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/268/" title="607. 销售员">https://jiapengcai.github.io/posts/268/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Leetcode/" rel="tag"><i class="fa fa-tag"></i> Leetcode</a>
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/33847/" rel="prev" title="586. 订单最多的客户">
+                  <i class="fa fa-chevron-left"></i> 586. 订单最多的客户
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-blog"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiapeng Cai</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/268/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
