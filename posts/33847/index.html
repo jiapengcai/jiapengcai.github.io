@@ -21,28 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="作者： 彼得·希夫 &#x2F; 安德鲁·希夫（Peter D. Schiff &#x2F; Andrew J. Schiff） 推荐系数：3&#x2F;5 1、《小岛经济学》以美国经济为原型，用充满故事趣味性的方式，配合大量的配图，描述了资本是如何积累的、货币的起源、政府是如何诞生、贸易是如何发展的，通货膨胀是如何发生的，最后对中美贸易战做出了预判。相比《经济学原理》，这本书更接地气。 2、可能我比较蠢，最后还是没看懂通货膨">
+    <meta name="description" content="难度系数： 简单 表: Orders 12345678+-----------------+----------+| Column Name     | Type     |+-----------------+----------+| order_number    | int      || customer_number | int      |+-----------------+----">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《小岛经济学》读后感">
-<meta property="og:url" content="https://jiapengcai.github.io/posts/43131/index.html">
+<meta property="og:title" content="586. 订单最多的客户">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/33847/index.html">
 <meta property="og:site_name" content="PENG">
-<meta property="og:description" content="作者： 彼得·希夫 &#x2F; 安德鲁·希夫（Peter D. Schiff &#x2F; Andrew J. Schiff） 推荐系数：3&#x2F;5 1、《小岛经济学》以美国经济为原型，用充满故事趣味性的方式，配合大量的配图，描述了资本是如何积累的、货币的起源、政府是如何诞生、贸易是如何发展的，通货膨胀是如何发生的，最后对中美贸易战做出了预判。相比《经济学原理》，这本书更接地气。 2、可能我比较蠢，最后还是没看懂通货膨">
+<meta property="og:description" content="难度系数： 简单 表: Orders 12345678+-----------------+----------+| Column Name     | Type     |+-----------------+----------+| order_number    | int      || customer_number | int      |+-----------------+----">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-19T13:29:05.000Z">
-<meta property="article:modified_time" content="2022-08-19T13:34:22.296Z">
+<meta property="article:published_time" content="2022-08-24T03:47:16.000Z">
+<meta property="article:modified_time" content="2022-08-24T03:52:25.537Z">
 <meta property="article:author" content="Jiapeng Cai">
-<meta property="article:tag" content="Reading">
+<meta property="article:tag" content="Leetcode">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jiapengcai.github.io/posts/43131/">
+<link rel="canonical" href="https://jiapengcai.github.io/posts/33847/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/43131/","path":"posts/43131/","title":"《小岛经济学》读后感"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/33847/","path":"posts/33847/","title":"586. 订单最多的客户"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>《小岛经济学》读后感 | PENG</title>
+<title>586. 订单最多的客户 | PENG</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78165446-2"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78165446-2","only_pageview":false}</script>
@@ -227,7 +228,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/43131/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/33847/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -240,12 +241,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="《小岛经济学》读后感 | PENG">
+      <meta itemprop="name" content="586. 订单最多的客户 | PENG">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          《小岛经济学》读后感
+          586. 订单最多的客户
         </h1>
 
         <div class="post-meta-container">
@@ -257,7 +258,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-08-19 21:29:05 / 修改时间：21:34:22" itemprop="dateCreated datePublished" datetime="2022-08-19T21:29:05+08:00">2022-08-19</time>
+      <time title="创建时间：2022-08-24 11:47:16 / 修改时间：11:52:25" itemprop="dateCreated datePublished" datetime="2022-08-24T11:47:16+08:00">2022-08-24</time>
     </span>
 
   
@@ -269,8 +270,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/posts/43131/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/posts/43131/" itemprop="commentCount"></span>
+    <a title="waline" href="/posts/33847/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/33847/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -284,12 +285,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>作者： 彼得·希夫 / 安德鲁·希夫（Peter D. Schiff / Andrew J. Schiff）<br />
-推荐系数：3/5<br />
-1、《小岛经济学》以美国经济为原型，用充满故事趣味性的方式，配合大量的配图，描述了资本是如何积累的、货币的起源、政府是如何诞生、贸易是如何发展的，通货膨胀是如何发生的，最后对中美贸易战做出了预判。相比《经济学原理》，这本书更接地气。<br />
-2、可能我比较蠢，最后还是没看懂通货膨胀及货币超发的关系及经济环境演变的内在逻辑。看评论，很多人说是经济学的入门读物，但是我怎么觉得顶多算是科普。<br />
-3、看的过程总觉得，作者好像很推崇自由经济，政府插手就会坏事。上网Google了一下，原来这是典型奥地利学派，与之相对的是凯恩斯主义。不知作者是不是把人心想得太美好了，因为资本都是逐利的。市场经济会受“看不见的手”调整，但是任由其自由发展仿佛也不对，还是需要“看得见的手”进行约束，反过来也一样。人家政治体系都还会搞三权分立呢，因为人都是会利己的，自私的基因从我们诞生就已经存在了。<br />
-4、也不能一棒子打死吧，里面还是有些不错的，比如要直面错误，勤劳致富等。</p>
+        <p><strong>难度系数：</strong> 简单<br />
+表: Orders</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-----------------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name     <span class="operator">|</span> Type     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+----------+</span></span><br><span class="line"><span class="operator">|</span> order_number    <span class="operator">|</span> <span class="type">int</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> customer_number <span class="operator">|</span> <span class="type">int</span>      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+----------+</span></span><br><span class="line">Order_number是该表的主键。</span><br><span class="line">此表包含关于订单ID和客户ID的信息。</span><br></pre></td></tr></table></figure>
+<p>编写一个SQL查询，为下了 <strong>最多订单</strong> 的客户查找 customer_number 。</p>
+<p>测试用例生成后， <strong>恰好有一个客户</strong> 比任何其他客户下了更多的订单。</p>
+<span id="more"></span>
+<p>查询结果格式如下所示。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">Orders 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> order_number <span class="operator">|</span> customer_number <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>            <span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>            <span class="operator">|</span> <span class="number">2</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>            <span class="operator">|</span> <span class="number">3</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>            <span class="operator">|</span> <span class="number">3</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+-----------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> customer_number <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释: </span><br><span class="line">customer_number 为 <span class="string">&#x27;3&#x27;</span> 的顾客有两个订单，比顾客 <span class="string">&#x27;1&#x27;</span> 或者 <span class="string">&#x27;2&#x27;</span> 都要多，因为他们只有一个订单。</span><br><span class="line">所以结果是该顾客的 customer_number ，也就是 <span class="number">3</span> 。</span><br></pre></td></tr></table></figure>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> orders (order_number <span class="type">int</span>, customer_number <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> orders</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> orders (order_number, customer_number) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> orders (order_number, customer_number) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> orders (order_number, customer_number) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> orders (order_number, customer_number) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>解法1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.customer_number </span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line"><span class="keyword">SELECT</span> customer_number, <span class="built_in">COUNT</span>(customer_number) order_count</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_number) a</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a.order_count <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>官方解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_number</span><br><span class="line"><span class="keyword">FROM</span> orders </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_number </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="built_in">COUNT</span>(customer_number) <span class="keyword">DESC</span> </span><br><span class="line">LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/customer-placing-the-largest-number-of-orders/">https://leetcode.cn/problems/customer-placing-the-largest-number-of-orders/</a></p>
+</blockquote>
 
     </div>
 
@@ -309,7 +322,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiapengcai.github.io/posts/43131/" title="《小岛经济学》读后感">https://jiapengcai.github.io/posts/43131/</a>
+      <a href="https://jiapengcai.github.io/posts/33847/" title="586. 订单最多的客户">https://jiapengcai.github.io/posts/33847/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -318,21 +331,19 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Reading/" rel="tag"><i class="fa fa-tag"></i> Reading</a>
+              <a href="/tags/Leetcode/" rel="tag"><i class="fa fa-tag"></i> Leetcode</a>
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/25743/" rel="prev" title="《这才是心理学》读后感">
-                  <i class="fa fa-chevron-left"></i> 《这才是心理学》读后感
+                <a href="/posts/18881/" rel="prev" title="367. 有效的完全平方数">
+                  <i class="fa fa-chevron-left"></i> 367. 有效的完全平方数
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/54442/" rel="next" title="704. 二分查找">
-                  704. 二分查找 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -407,7 +418,7 @@
   <script src="/js/third-party/math/katex.js"></script>
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/43131/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://blog-comment-36okv5pgb-jiapengcai.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"Life can be programmed.","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/33847/"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
