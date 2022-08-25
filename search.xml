@@ -63,21 +63,8 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
+        <tag>Code Review</tag>
         <tag>Translation</tag>
-        <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Gerrit没有出现Verify按钮问题解决</title>
-    <url>/posts/18923/</url>
-    <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
-]]></content>
-      <categories>
-        <category>随笔备忘</category>
-      </categories>
-      <tags>
-        <tag>Code Review</tag>
-        <tag>Gerrit</tag>
       </tags>
   </entry>
   <entry>
@@ -152,7 +139,20 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
+        <tag>Code Review</tag>
         <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gerrit没有出现Verify按钮问题解决</title>
+    <url>/posts/18923/</url>
+    <content><![CDATA[<p>今天在本地修复了个小问题，然后提交到Gerrit。刚好老板看到了，提了点意见，给的分数为-2。对过意见后，做了点修改然后再一次提交到Gerrit，这时老板开会去了。找了另一个同事来review，但是发现即使给了+2分，也没有出现Verify按钮。鼓捣了老半天，才发现，原来，如果出现了-2，需要重新提交新的patch set，或者由给出-2分的成员批准才能Verify并入库。</p>
+]]></content>
+      <categories>
+        <category>随笔备忘</category>
+      </categories>
+      <tags>
+        <tag>Gerrit</tag>
         <tag>Code Review</tag>
       </tags>
   </entry>
@@ -197,8 +197,8 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -251,43 +251,8 @@
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>136. 只出现一次的数字</title>
-    <url>/posts/63105/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
-<p><strong>说明：</strong><br />
-你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">输出: <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>约束条件</strong></p>
-<ul>
-<li>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></li>
-<li>-3 * 10<sup>4</sup> &lt;= nums[i] &lt;= 3 * 10<sup>4</sup></li>
-<li>数组里每个元素除了那个只出现一次的元素，其它元素都会出现两次。</li>
-</ul>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">singleNumber</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            result ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/single-number">https://leetcode.cn/problems/single-number</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
@@ -360,8 +325,43 @@ can result in a better solution, because the developer is closer to the code tha
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>136. 只出现一次的数字</title>
+    <url>/posts/63105/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p><strong>说明：</strong><br />
+你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">输出: <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>约束条件</strong></p>
+<ul>
+<li>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></li>
+<li>-3 * 10<sup>4</sup> &lt;= nums[i] &lt;= 3 * 10<sup>4</sup></li>
+<li>数组里每个元素除了那个只出现一次的元素，其它元素都会出现两次。</li>
+</ul>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">singleNumber</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            result ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/single-number">https://leetcode.cn/problems/single-number</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -395,56 +395,22 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>176. 第二高的薪水</title>
-    <url>/posts/23560/</url>
+    <title>180. 连续出现的数字</title>
+    <url>/posts/41601/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
+编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
+返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
 <span id="more"></span>
 <p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表: Employee</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Logs</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
 <p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>178. 分数排名</title>
-    <url>/posts/32576/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
-<ul>
-<li>分数应按从高到低排列。</li>
-<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
-<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
-按 <em><strong>score</strong></em> 降序返回结果表。</li>
-</ul>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Scores</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
+<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -473,34 +439,6 @@ can result in a better solution, because the developer is closer to the code tha
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a, Employee <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">WHERE</span> a.Salary <span class="operator">&gt;</span> b.Salary</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="operator">=</span> b.Id</span><br><span class="line"><span class="keyword">AND</span> a.ManagerId <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers">https://leetcode.cn/problems/employees-earning-more-than-their-managers</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>180. 连续出现的数字</title>
-    <url>/posts/41601/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
-编写一个 SQL 查询，查找所有至少连续出现三次的数字。<br />
-返回的结果表中的数据可以按<strong>任意顺序</strong>排列。</p>
-<span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Logs (id <span class="type">int</span>, num <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Logs</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Logs (id, num) <span class="keyword">values</span> (<span class="string">&#x27;7&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Logs</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> num         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id 是这个表的主键。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Logs 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> Id <span class="operator">|</span> Num <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">1</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">7</span>  <span class="operator">|</span> <span class="number">2</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-----+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="keyword">Result</span> 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> ConsecutiveNums <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>               <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------+</span></span><br><span class="line">解释：<span class="number">1</span> 是唯一连续出现至少三次的数字。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> l1.Num <span class="keyword">AS</span> ConsecutiveNums</span><br><span class="line"><span class="keyword">FROM</span> logs l1, logs l2, logs l3</span><br><span class="line"><span class="keyword">WHERE</span> l1.Id <span class="operator">=</span> l2.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l2.Id <span class="operator">=</span> l3.Id <span class="operator">-</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">AND</span> l1.Num <span class="operator">=</span> l2.Num</span><br><span class="line">      <span class="keyword">AND</span> l2.Num <span class="operator">=</span> l3.Num;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/consecutive-numbers">https://leetcode.cn/problems/consecutive-numbers</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -633,6 +571,68 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
+    <title>176. 第二高的薪水</title>
+    <url>/posts/23560/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写一个 SQL 查询，获取并返回 Employee 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 null 。</p>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Employee (id <span class="type">int</span>, salary <span class="type">int</span>)</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Employee</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;100&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;200&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Employee (id, salary) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;300&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表: Employee</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> salary      <span class="operator">|</span> <span class="type">int</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">200</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">300</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">200</span>                 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employee 表：</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">100</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> SecondHighestSalary <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">null</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee</span><br><span class="line"><span class="keyword">WHERE</span> Salary <span class="operator">&lt;</span> (<span class="keyword">SELECT</span> <span class="built_in">max</span>(Salary) <span class="keyword">FROM</span> Employee)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/second-highest-salary">https://leetcode.cn/problems/second-highest-salary</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>178. 分数排名</title>
+    <url>/posts/32576/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 中等<br />
+编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
+<ul>
+<li>分数应按从高到低排列。</li>
+<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
+<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
+按 <em><strong>score</strong></em> 降序返回结果表。</li>
+</ul>
+<span id="more"></span>
+<p><strong>SQL结构</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>表：Scores</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>35. 搜索插入位置</title>
     <url>/posts/4972/</url>
     <content><![CDATA[<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
@@ -655,6 +655,36 @@ can result in a better solution, because the developer is closer to the code tha
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[left] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[right] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                right = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>原题链接：<a href="https://leetcode.cn/problems/search-insert-position/">https://leetcode.cn/problems/search-insert-position/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>367. 有效的完全平方数</title>
+    <url>/posts/18881/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>给定一个 <strong>正整数</strong> num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。</p>
+<p><strong>进阶：</strong> 不要 使用任何内置的库函数，如  sqrt 。</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：num = <span class="number">16</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：num = <span class="number">14</span></span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol>
+<li>1 &lt;= num &lt;= <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> - 1</li>
+</ol>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPerfectSquare</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">right</span> <span class="operator">=</span> num;</span><br><span class="line">        <span class="type">long</span> middle;</span><br><span class="line">        <span class="type">long</span> middleResult;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">            middle = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (left * left == num) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (right * right == num) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middleResult = middle * middle;</span><br><span class="line">            <span class="keyword">if</span> (middleResult == num) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (middleResult &lt; num) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (middleResult &gt; num) &#123;</span><br><span class="line">                right = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/valid-perfect-square/">https://leetcode.cn/problems/valid-perfect-square/</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -776,6 +806,68 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
+    <title>69. x 的平方根</title>
+    <url>/posts/63206/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>给你一个非负整数 x ，计算并返回 x 的 <strong>算术平方根</strong> 。</p>
+<p>由于返回类型是整数，结果只保留 <strong>整数部分</strong> ，小数部分将被 舍去 。</p>
+<p><strong>注意：</strong> 不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5 。</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">4</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">8</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">8</span> 的算术平方根是 <span class="number">2.82842</span>..., 由于返回类型是整数，小数部分将被舍去。</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li>0 &lt;= x &lt;= <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> - 1</li>
+</ul>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">mySqrt</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">right</span> <span class="operator">=</span> x;</span><br><span class="line">        <span class="type">long</span> <span class="variable">mid</span> <span class="operator">=</span> (left + right) / <span class="number">2</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mid == left) &#123;</span><br><span class="line">                result = mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (mid * mid &gt; x) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mid * mid &lt; x) &#123;</span><br><span class="line">                left = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result = mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (<span class="type">int</span>)result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/sqrtx/">https://leetcode.cn/problems/sqrtx/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>704. 二分查找</title>
+    <url>/posts/54442/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<span id="more"></span>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">9</span></span><br><span class="line">输出: <span class="number">4</span></span><br><span class="line">解释: <span class="number">9</span> 出现在 nums 中并且下标为 <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">2</span></span><br><span class="line">输出: -<span class="number">1</span></span><br><span class="line">解释: <span class="number">2</span> 不存在 nums 中因此返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol>
+<li>你可以假设 nums 中的所有元素是不重复的。</li>
+<li>n 将在 [1, 10000]之间。</li>
+<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
+</ol>
+<p><strong>解法：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">low</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">high</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> low + nums.length / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[low] ==  target) &#123;</span><br><span class="line">                <span class="keyword">return</span> low;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[high] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> high;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                low = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                high = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = low + (high - low) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原题链接：<a href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Leetcode题解</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>607. 销售员</title>
     <url>/posts/268/</url>
     <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
@@ -809,25 +901,28 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>704. 二分查找</title>
-    <url>/posts/54442/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+    <title>9. 回文数</title>
+    <url>/posts/35052/</url>
+    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
+给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
+例如，121 是回文，而 123 不是。</p>
 <span id="more"></span>
 <p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">9</span></span><br><span class="line">输出: <span class="number">4</span></span><br><span class="line">解释: <span class="number">9</span> 出现在 nums 中并且下标为 <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: nums = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">12</span>], target = <span class="number">2</span></span><br><span class="line">输出: -<span class="number">1</span></span><br><span class="line">解释: <span class="number">2</span> 不存在 nums 中因此返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ol>
-<li>你可以假设 nums 中的所有元素是不重复的。</li>
-<li>n 将在 [1, 10000]之间。</li>
-<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
-</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
+<p><strong>约束条件</strong></p>
+<ul>
+<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
+</ul>
+<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
 <p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">low</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">high</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">middle</span> <span class="operator">=</span> low + nums.length / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[low] ==  target) &#123;</span><br><span class="line">                <span class="keyword">return</span> low;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[high] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> high;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                low = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                high = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = low + (high - low) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -909,37 +1004,19 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>9. 回文数</title>
-    <url>/posts/35052/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单<br />
-给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。<br />
-回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br />
-例如，121 是回文，而 123 不是。</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">121</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = -<span class="number">121</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从左向右读, 为 -<span class="number">121</span> 。 从右向左读, 为 <span class="number">121</span>- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">10</span></span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：从右向左读, 为 <span class="number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><strong>约束条件</strong></p>
-<ul>
-<li>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</li>
-</ul>
-<p><strong>进阶：</strong> 你能不将整数转为字符串来解决这个问题吗？</p>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">original</span> <span class="operator">=</span> x;</span><br><span class="line">            <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">                result = result*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">                x = x/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(result == original)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/palindrome-number">https://leetcode.cn/problems/palindrome-number</a></p>
-</blockquote>
+    <title>《动物庄园》读后感</title>
+    <url>/posts/60962/</url>
+    <content><![CDATA[<p>作者：乔治·奥威尔（George Orwell）<br />
+推荐系数：5/5<br />
+前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。<br />
+类似的书籍让我想起了《1984》<br />
+嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
 ]]></content>
       <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
+        <category>读书笔记</category>
       </categories>
       <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
+        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -960,43 +1037,11 @@ can result in a better solution, because the developer is closer to the code tha
       </tags>
   </entry>
   <entry>
-    <title>367. 有效的完全平方数</title>
-    <url>/posts/18881/</url>
-    <content><![CDATA[<p><strong>难度系数：</strong> 简单</p>
-<p>给定一个 <strong>正整数</strong> num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。</p>
-<p><strong>进阶：</strong> 不要 使用任何内置的库函数，如  sqrt 。</p>
-<span id="more"></span>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：num = <span class="number">16</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：num = <span class="number">14</span></span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ol>
-<li>1 &lt;= num &lt;= <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> - 1</li>
-</ol>
-<p><strong>解法：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPerfectSquare</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">right</span> <span class="operator">=</span> num;</span><br><span class="line">        <span class="type">long</span> middle;</span><br><span class="line">        <span class="type">long</span> middleResult;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">            middle = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (left * left == num) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (right * right == num) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            middleResult = middle * middle;</span><br><span class="line">            <span class="keyword">if</span> (middleResult == num) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (middleResult &lt; num) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (middleResult &gt; num) &#123;</span><br><span class="line">                right = middle - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原题链接：<a href="https://leetcode.cn/problems/valid-perfect-square/">https://leetcode.cn/problems/valid-perfect-square/</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Leetcode题解</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《动物庄园》读后感</title>
-    <url>/posts/60962/</url>
-    <content><![CDATA[<p>作者：乔治·奥威尔（George Orwell）<br />
-推荐系数：5/5<br />
-前几天同事提起这本书，说我像书里头的snowball，但整本看下来越发觉得我不是，我可能会偏理想主义，介于出世与入世之间，但是我同样会“大不了就不跟你玩”。中间有挺长的篇幅可以概括为“你看到的只是你看到的，你想到的只是我想让你想到的”。也许真的人类天性自私或者“乌合之众”容易被带偏，但其实我们要的归根到底其实只是吃得饱，穿的暖然后住得舒服就更好了。<br />
-类似的书籍让我想起了《1984》<br />
-嗯，看来我还是喜欢纯粹的知识，起码在代码里我还是自由的上帝。</p>
+    <title>《这才是心理学》读后感</title>
+    <url>/posts/25743/</url>
+    <content><![CDATA[<p>作者：基思·斯坦诺维奇（Keith E. Stanovich）<br />
+推荐系数：4.5/5<br />
+一直想读一本介绍心理学方面的书籍。这本书就挺适合的。心理学是一门年轻的基于科学实验的可证伪的学科。虽然头两章读起来有点像高中的政治书，但是越往后越能产生共鸣，甚至有好几章内容不自觉和平时的工作联系了起来，比如两个变量的关联性，多个角度证明同一个变量等。只是工作又参杂了人际的因素，也许正是因为如此，科学才显得更纯粹吧。</p>
 ]]></content>
       <categories>
         <category>读书笔记</category>
@@ -1012,20 +1057,6 @@ can result in a better solution, because the developer is closer to the code tha
 推荐系数：4.5/5<br />
 不得不说，刘慈欣脑洞真大，反腐和宇宙大爆炸都能结合起来。我只是在想，可能也不一定水至清则无鱼，人至察则无徒，这个世界可塑性那么强到最后进化出了另一种生存模式另一种玩法也说不定。<br />
 Anyway，真的是好看！而且我也是名软件工程师！</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《这才是心理学》读后感</title>
-    <url>/posts/25743/</url>
-    <content><![CDATA[<p>作者：基思·斯坦诺维奇（Keith E. Stanovich）<br />
-推荐系数：4.5/5<br />
-一直想读一本介绍心理学方面的书籍。这本书就挺适合的。心理学是一门年轻的基于科学实验的可证伪的学科。虽然头两章读起来有点像高中的政治书，但是越往后越能产生共鸣，甚至有好几章内容不自觉和平时的工作联系了起来，比如两个变量的关联性，多个角度证明同一个变量等。只是工作又参杂了人际的因素，也许正是因为如此，科学才显得更纯粹吧。</p>
 ]]></content>
       <categories>
         <category>读书笔记</category>
@@ -1132,6 +1163,33 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       </tags>
   </entry>
   <entry>
+    <title>《行之有效》读后感</title>
+    <url>/posts/24401/</url>
+    <content><![CDATA[<p>作者：蔡为东<br />
+推荐系数：3.5/5<br />
+上个月大老板推荐了《行之有效》这本书，说是讲技术基层管理的。通篇看下来，其实就是告诉我们，基层管理者要多思考，多观察，以对团队有益作为出发点和原则，同时也不能落下自己的专业技能和素养。精华的点有以下几个：</p>
+<ol>
+<li>管理者负责。</li>
+<li>以身作则。</li>
+<li>公平和公开。</li>
+<li>尊重每一个人。</li>
+<li>提高员工参与度，让员工负责任。</li>
+<li>随时激励。</li>
+<li>提纲挈领，要事优先，管理优先。</li>
+<li>培养人才，创造机会。</li>
+<li>技术和管理一肩挑。</li>
+<li>保持危机感，持续学习。</li>
+<li>顺势而为。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RabbitMQ Spring-AMQP官方教程（四）--路由</title>
     <url>/posts/48556/</url>
     <content><![CDATA[<h1 id="routing路由"><a class="markdownIt-Anchor" href="#routing路由"></a> Routing（路由）</h1>
@@ -1212,33 +1270,6 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       <tags>
         <tag>Translation</tag>
         <tag>RabbitMQ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《行之有效》读后感</title>
-    <url>/posts/24401/</url>
-    <content><![CDATA[<p>作者：蔡为东<br />
-推荐系数：3.5/5<br />
-上个月大老板推荐了《行之有效》这本书，说是讲技术基层管理的。通篇看下来，其实就是告诉我们，基层管理者要多思考，多观察，以对团队有益作为出发点和原则，同时也不能落下自己的专业技能和素养。精华的点有以下几个：</p>
-<ol>
-<li>管理者负责。</li>
-<li>以身作则。</li>
-<li>公平和公开。</li>
-<li>尊重每一个人。</li>
-<li>提高员工参与度，让员工负责任。</li>
-<li>随时激励。</li>
-<li>提纲挈领，要事优先，管理优先。</li>
-<li>培养人才，创造机会。</li>
-<li>技术和管理一肩挑。</li>
-<li>保持危机感，持续学习。</li>
-<li>顺势而为。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Reading</tag>
       </tags>
   </entry>
   <entry>
@@ -1479,114 +1510,109 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
       </tags>
   </entry>
   <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
-    <url>/posts/13955/</url>
-    <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="image" /></p>
-<p>In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a <em>Work</em> <em>Queue</em> that will be used to distribute time-consuming tasks among multiple workers.</p>
-<p>在第一个教程中，我们编写了两个程序，一个用于往一个命名了的队列发送消息，另一个从这个队列里接收消息。在本教程里，我们将创建一个工作队列（Work Queue），它将被用来在多个工作者之间分发耗时任务。</p>
+    <title>RabbitMQ Spring-AMQP官方教程（三）--发布/订阅</title>
+    <url>/posts/14583/</url>
+    <content><![CDATA[<h1 id="publishsubscribe发布订阅"><a class="markdownIt-Anchor" href="#publishsubscribe发布订阅"></a> Publish/Subscribe（发布/订阅）</h1>
+<p>In the first tutorial we showed how to use <a href="http://start.spring.io">start.spring.io</a> to leverage Spring Initializr to create a project with the RabbitMQ starter dependency for create spring-amqp applications.</p>
+<p>在第一个教程中，我们展示了如何通过<a href="https://start.spring.io/">start.spring.io</a>上的Spring初始化手脚架来创建一个包含了RabbitMQ starter依赖的项目，并以此创建基于spring-amqp的应用。</p>
+<p>In the previous tutorial we created a new package (tut2) to place our config, sender and receiver and created a work queue with two consumers. The assumption behind a work queue is that each task is delivered to exactly one worker.</p>
+<p>在上一个教程当中，我们创建了一个新的包（tut2）来放置我们的配置类，发送者类和接收者类，并创建了一个对应着两个消费者的队列。工作队列背后的原理假设是，每个任务都发送给某个恰当的工作者。</p>
+<p>In this part we’ll implement the fanout pattern to deliver a message to multiple consumers. This pattern is known as “publish/subscribe” and is implementing by configuring a number of beans in our Tut3Config file.</p>
+<p>在这部分教程中，我们将实现广播模式（fanout pattern），从而将一条消息发送给多个消费者。这个模式被称为“发布/订阅”，我们将在Tut3Config文件里配置一系列bean来实现这个模式。</p>
 <span id="more"></span>
-<p>The main idea behind Work Queues (aka: <em>Task Queues</em>) is to avoid doing a resource-intensive task immediately and having to wait for it to complete. Instead we schedule the task to be done later. We encapsulate a <em>task</em> as a message and send it to a queue. A worker process running in the background will pop the tasks and eventually execute the job. When you run many workers the tasks will be shared between them.</p>
-<p>工作队列（也叫做任务队列）背后的主要目的是为了避免立即执行资源密集型的任务以及避免必须等待任务完成的情况，相反，它计划着让这些任务可以留到后面去执行。我们将任务分装成消息，并将它发送到队列里。运行在后台的工作进程将取出任务并最终执行它。如果你运行了多个工作进程，那么所有的任务将被它们共享。</p>
-<p>This concept is especially useful in web applications where it’s impossible to handle a complex task during a short HTTP request window.</p>
-<p>对于web应用，这个概念特别有用，因为web应用无法在短短的HTTP请求窗口内处理复杂的任务。</p>
-<h3 id="preparation准备工作"><a class="markdownIt-Anchor" href="#preparation准备工作"></a> Preparation（准备工作）</h3>
-<p>In the previous part of this tutorial we sent a message containing “Hello World!”. Now we’ll be sending strings that stand for complex tasks. We don’t have a real-world task, like images to be resized or pdf files to be rendered, so let’s fake it by just pretending we’re busy - by using the Thread.sleep() function. We’ll take the number of dots in the string as its complexity; every dot will account for one second of “work”. For example, a fake task described by Hello… will take three seconds.</p>
-<p>在教程1里，我们实现了如何发送包含“Hello World!”的消息。现在，我们将发送表示复杂任务的字符串。由于我们没有真实的任务，如调整图片大小或者渲染pdf文件，所以我们通过使用Thread.sleep()函数来模拟繁忙的耗时任务。我们将在字符串中用点号的个数来表示复杂度，点号的个数表示整个任务执行秒的秒数。例如，Hello…表示模拟任务需要执行三秒。</p>
-<p>Please see the setup in first tutorial if you have not setup the project. We will follow the same pattern as in the first tutorial: create a package (tut2) and create a Tut2Config, Tut2Receiver, and Tut2Sender. Start by creating a new package (tut2) where we’ll place our three classes. In the configuration class we setup two profiles, the label for the tutorial (“tut2”) and the name of the pattern (“work-queues”). We leverage spring to expose the queue as a bean. We setup the receiver as a profile and define two beans to correspond to the workers in our diagram above： receiver1 and receiver2. Finally, we define a profile for the sender and define the sender bean. The configuration is now done.</p>
-<p>如果你还未建立配置好项目，请见教程1的配置过程。我们将采用与教程1相同的方式，新建一个包目录（tut2）并创建一个名为Tut2Config的配置类，一个名为Tut2Receiver的消息接收类，以及一个名为Tut2Sender的消息发送类。首先新建包目录（tut2），我们将在这个包下面放刚说到的那三个类。在配置类里，我们将配置两个配置组，一个作为当前教程的标签（“tut2”），一个作为当前RabbitMQ使用模式的名字（“work-queue”）。我们利用Spring框架将队列暴露为一个bean。我们设置一个接受者配置组，并定义两个bean来对应于上面图中的两个消费者：receiver1和receiver2。最后，我们会定义一个发送者配置组，并定义作为发送者的bean。这样配置就结束了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut2&quot;, &quot;work-queues&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut2Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="sender发送者"><a class="markdownIt-Anchor" href="#sender发送者"></a> Sender（发送者）</h3>
-<p>We will modify the sender to provide a means for identifying whether its a longer running task by appending a dot to the message in a very contrived fashion using the same method on the RabbitTemplate to publish the message, convertAndSend. The documentation defines this as, “Convert a Java object to an Amqp Message and send it to a default exchange with a default routing key.”</p>
-<p>我们将对发送者类进行修改，在发送方法中，通过人为地在消息后面添加点号来识别当前任务是否耗时，并依旧使用RabbitTemplate的convertAndSend方法来发布消息。文档把convertAndSend方法定义为，“将一个Java对象转换成一个Amqp消息，并用一个默认路由键（routing key）将其发送到一个默认的exchange里。”</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Queue queue;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(queue.getName(), message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="receiver接收者"><a class="markdownIt-Anchor" href="#receiver接收者"></a> Receiver（接收者）</h3>
-<p>Our receiver, Tut2Receiver, simulates an arbitary length for a fake task in the doWork() method where the number of dots translates into the number of seconds the work will take. Again, we leverage a @RabbitListener on the “hello” queue and a @RabbitHandler to receive the message. The instance that is consuming the message is added to our monitor to show which instance, the message and the length of time to process the message.</p>
-<p>我们的接收者类，Tut2Receiver，在doWork()方法里根据消息所带点号的个数，将其转换成任务所需消耗的秒数，以此模拟了任意任务的长度。同样地，我们对“hello”队列使用了@RabbitListener注解，并通过@RabbitHandler注解来接收消息。同时，用一个编号来标识正在消费消息的实例，并将它加入我们的监控中，最终打印出实例编号，消息内容以及处理消息所耗费的时长。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> instance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Tut2Receiver</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.instance = i;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitHandler</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">				<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h3>
-<p>Compile them using mvn package and run with the following options</p>
-<p>使用mvn package来编译上述代码，并在运行时添加下面的命令行参数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,receiver</span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,sender</span><br></pre></td></tr></table></figure>
-<p>The output of the sender should look something like:</p>
-<p>发送者类的输出看起来应该是类似于这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">[x] Sent &#x27;Hello.1&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..2&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...3&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.4&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..5&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...6&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.7&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..8&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...9&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.10&#x27;</span><br></pre></td></tr></table></figure>
-<p>And the output from the workers should look something like:</p>
-<p>而工作者类的输出看起来应该是类似于这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">instance 1 [x] Received &#x27;Hello.1&#x27;</span><br><span class="line">instance 2 [x] Received &#x27;Hello..2&#x27;</span><br><span class="line">instance 1 [x] Done in 1.001s</span><br><span class="line">instance 1 [x] Received &#x27;Hello...3&#x27;</span><br><span class="line">instance 2 [x] Done in 2.004s</span><br><span class="line">instance 2 [x] Received &#x27;Hello.4&#x27;</span><br><span class="line">instance 2 [x] Done in 1.0s</span><br><span class="line">instance 2 [x] Received &#x27;Hello..5&#x27;</span><br></pre></td></tr></table></figure>
-<h3 id="message-acknowledgment消息确认"><a class="markdownIt-Anchor" href="#message-acknowledgment消息确认"></a> Message acknowledgment（消息确认）</h3>
-<p>Doing a task can take a few seconds. You may wonder what happens if one of the consumers starts a long task and dies with it only partly done. Spring AMQP by default takes a conservative approach to <a href="https://www.rabbitmq.com/confirms.html">message acknowledgement</a>. If the listener throws an exception the container calls:</p>
-<p>完成一个任务需要耗费几秒。对于一个开始了长任务的消费者，你可能会想知道，当它只完成了部分任务就挂掉时发生了什么。Spring AMQP默认采用保守的方式来进行<a href="https://www.rabbitmq.com/confirms.html">消息确认</a>。如果监听器抛出了一个异常，那么容器会调用：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicReject(deliveryTag, requeue)</span><br></pre></td></tr></table></figure>
-<p>Requeue is true by default unless you explicitly set:</p>
-<p>requeue（重入队列）默认为true，除非你显示地将其设置为false：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">defaultRequeueRejected=false</span><br></pre></td></tr></table></figure>
-<p>or the listener throws an AmqpRejectAndDontRequeueException. This is typically the bahavior you want from your listener. In this mode there is no need to worry about a forgotten acknowledgement. After processing the message the listener calls:</p>
-<p>否则监听器抛出AmqpRejectAndDontRequeueException异常。这通常会是你想要监听器的行为。在这种模式下，无需担心一个被忘记了的确认。在处理完消息后，监听器会调用：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicAck()</span><br></pre></td></tr></table></figure>
-<p>Acknowledgement must be sent on the same channel the delivery it is for was received on. Attempts to acknowledge using a different channel will result in a channel-level protocol exception. See the <a href="https://www.rabbitmq.com/confirms.html">doc guide on confirmations</a> to learn more. Spring AMQP generally takes care of this but when used in combination with code that uses RabbitMQ Java client directly, this is something to keep in mind.</p>
-<p>消息确认必须在与接收信息相同的通道（channel）上进行发送。试图使用不同的通道来进行确认将导致通道级别的协议异常。若想更详细了解，可以参阅<a href="https://www.rabbitmq.com/confirms.html">关于消息确认的文档指南</a>。Spring AMQP一般都会处理好这种问题，但与直接使用RabbitMQ的Java客户端的代码结合使用时，这点要小心。</p>
+<p>Essentially, published messages are going to be broadcast to all the receivers.</p>
+<p>本质上，发布的消息将被广播给所有的接收者。</p>
+<h2 id="exchanges交换器"><a class="markdownIt-Anchor" href="#exchanges交换器"></a> Exchanges（交换器）</h2>
+<p>In previous parts of the tutorial we sent and received messages to and from a queue. Now it’s time to introduce the full messaging model in Rabbit.</p>
+<p>在前面的教程里，我们通过一个队列来发送消息，并从这个队列里接收消息。接下来我们将介绍RabbitMQ完整的消息队列模型。</p>
+<p>Let’s quickly go over what we covered in the previous tutorials:</p>
+<p>我们先来快速过一遍前面的教程里涉及到的内容：</p>
+<p>A <em>producer</em> is a user application that sends messages.</p>
+<p>生产者是值发送消息的应用。</p>
+<p>A <em>queue</em> is a buffer that stores messages.</p>
+<p>队列是指存储消息的缓存。</p>
+<p>A <em>consumer</em> is a user application that receives messages.</p>
+<p>消费者是指接收消息的应用。</p>
+<p>The core idea in the messaging model in RabbitMQ is that the producer never sends any messages directly to a queue. Actually, quite often the producer doesn’t even know if a message will be delivered to any queue at all.</p>
+<p>RabbitMQ的消息队列模型的核心概念是：生产者从不直接往队列里发送任何消息。实际上，多数情况下生产者甚至不知道消息是否会被发送到队列里。</p>
+<p>Instead, the producer can only send messages to an <em>exchange</em>. An exchange is a very simple thing. On one side it receives messages from producers and the other side it pushes them to queues. The exchange must know exactly what to do with a message it receives. Should it be appended to a particular queue? Should it be appended to many queues? Or should it get discarded. The rules for that are defined by the <em>exchange type</em>.</p>
+<p>与此相反，生产者只能将消息发送到一个交换器里。交换器做的事情很简单。一方面它接收生产者发送过来的消息，另一方面它将收到的消息推入队列里。交换器必须明确对于收到的消息它该怎么处理。这条消息是否应该附加到某个特定的队列后面？这条消息是否应该附加到多个队列后面？这条消息是否应该被丢弃？这些规则都由交换器类型（exchange type）来定义。</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/exchanges.png" alt="image" /></p>
+<p>There are a few exchange types available: direct, topic, headers and fanout. We’ll focus on the last one – the fanout. Let’s configure a bean to describe an exchange of this type, and call it tut.fanout:</p>
+<p>有四种交换器类型可供我们选择：直连交换器（direct），主题交换器（topic），头部交换器（headers）和广播交换器（fanout）。我们将专注于最后一个——广播交换器。我们先配置一个bean来描述这种类型的交换器，并把这个交换器命名为tut.fanout：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut3&quot;, &quot;pub-sub&quot;, &quot;publish-subscribe&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut3Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> FanoutExchange <span class="title function_">fanout</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;tut.fanout&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(fanout);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut3Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut3Receiver</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut3Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut3Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We ollow the same approach as in the previous two tutorials. We create three profiles, the tutorial (“tut3”, “pub-sub”, or “publish-subscribe”). They are all synonyms for running the fanout profile tutorial. Next we configure the FanoutExchange as a bean. Within the “receiver” (Tut3Receiver) file we define four beans: two autoDeleteQueues or AnonymousQueues and two bindings to bind those queues to the exchange.</p>
+<p>我们采用了与前面两个教程相同的方式。我们创建了三个配置组，“tut3”，“pub-sub”，或者叫“publish-subscribe”。这三个配置在运行本教程时都是等效的。接下来我们会配置一个类型为FanoutExchange的bean。在“receiver”配置组里，我们定义了四个bean：两个AnonymousQueue类型的队列，即autoDeleteQueue1和autoDeleteQueue2，及两个将队列绑定到交换器的绑定器（binding）。</p>
+<p>The fanout exchange is very simple. As you can probably guess from the name, it just broadcasts all the messages it receives to all the queues it knows. And that’s exactly what we need for fanning out our messages.</p>
+<p>广播交换器很简单。你大概可以从名字上看出，它只是将所有它接收到的消息广播给它所知道的所有队列。广播消息这一点正是我们需要的。</p>
 <blockquote>
-<h4 id="forgotten-acknowledgment被遗忘的确认"><a class="markdownIt-Anchor" href="#forgotten-acknowledgment被遗忘的确认"></a> Forgotten acknowledgment（被遗忘的确认）</h4>
-<p>It’s a common mistake to miss the basicAck and spring-amqp helps to avoid this through its default configuraiton. The consequences are serious. Messages will be redelivered when your client quits (which may look like random redelivery), but RabbitMQ will eat more and more memory as it won’t be able to release any unacked messages.</p>
-<p>忘记调用basciAck方法是常见的一个错误，spring-amqp通过它的默认配置来避免它。这个错误的后果是很严重的。当你的客户端退出后，消息会被重复发送（看起来就像是随机重发），但RabbitMQ将吃掉越来越多的内存，因为它无法释放任何未确认的消息。</p>
-<p>In order to debug this kind of mistake you can use rabbitmqctl to print the messages_unacknowledged field:</p>
-<p>为了调试这种错误，你可以使用rabbitmqctl来打印messages_unacknowledged域：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
-<p>On Windows, drop the sudo:</p>
-<p>在Windows环境下，去掉sudo：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
+<h4 id="listing-exchanges列出所有的交换器"><a class="markdownIt-Anchor" href="#listing-exchanges列出所有的交换器"></a> Listing exchanges（列出所有的交换器）</h4>
+<p>To list the exchanges on the server you can run the ever useful rabbitmqctl:</p>
+<p>你可以通过运行强大的rabbitmqctl来列出服务器上所有的交换器：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_exchanges</span><br></pre></td></tr></table></figure>
+<p>In this list there will be some amq.* exchanges and the default (unnamed) exchange. These are created by default, but it is unlikely you’ll need to use them at the moment.</p>
+<p>在这个列表里，会出现一些类似于amq.开头的交换器，以及默认的（未命名）交换器。这些交换器都默认被创建，但这时你不一定会用到它们。</p>
+<h4 id="nameless-exchange匿名交换器"><a class="markdownIt-Anchor" href="#nameless-exchange匿名交换器"></a> Nameless exchange（匿名交换器）</h4>
+<p>In previous parts of the tutorial we knew nothing about exchanges, but still were able to send messages to queues. That was possible because we were using a default exchange, which we identify by the empty string (“”).</p>
+<p>在前面的教程里，我们虽然对交换器一无所知，但依旧能够将消息发送到队列里。之所以能这样是因为我们使用了一个默认的交换器，而这个默认的交换器则用空字符串（“”）来标识。</p>
+<p>Recall how we published a message before:</p>
+<p>回顾一下我们之前是如何发布消息的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">template.convertAndSend(fanout.getName(), &quot;&quot;, message);</span><br></pre></td></tr></table></figure>
+<p>The first parameter is the the name of the exchange that was autowired into the sender. The empty string denotes the default or <em>nameless</em> exchange: messages are routed to the queue with the name specified by routingKey, if it exists.</p>
+<p>第一个参数是被自动注入到发送者类的交换器的名字。空字符串表示该交换器是默认或者匿名的：如果路由键存在的话，消息则通过这个路由键名被路由到某个队列里：</p>
 </blockquote>
-<h3 id="message-durability消息持久性"><a class="markdownIt-Anchor" href="#message-durability消息持久性"></a> Message durability（消息持久性）</h3>
-<p>With spring-amqp there are reasonable default values in the MessageProperties that account for message durability. In particular you can check the table for <a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">common properties</a>. You’ll see two relevant to our discussion here on durability:</p>
-<p>对于spring-amqp，消息属性配置里有很多合理的默认值，这些默认值共同决定了消息的持久性。你可以查阅<a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">常用属性表</a>。你将会看到与我们正在讨论的消息持久性相关的两个属性：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">durable</td>
-<td style="text-align:left">true</td>
-<td style="text-align:left">When declareExchange is true the durable flag is set to this value</td>
-</tr>
-<tr>
-<td style="text-align:left">deliveryMode</td>
-<td style="text-align:left">PERSISTENT</td>
-<td style="text-align:left">PERSISTENT or NON_PERSISTENT to determine whether or not RabbitMQ should persist the messages</td>
-</tr>
-</tbody>
-</table>
+<p>Now, we can publish to our named exchange instead:</p>
+<p>现在，我们可以将信息发布到我们命名好的交换器里：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> FanoutExchange fanout; <span class="comment">// configured in Tut3Config above</span></span><br><span class="line"></span><br><span class="line">template.convertAndSend(fanout.getName(), <span class="string">&quot;&quot;</span>, message);</span><br></pre></td></tr></table></figure>
+<p>From now on the fanout exchange will append messages to our queue.</p>
+<p>从现在开始，广播交换器将会把信息附加到我们的队列里。</p>
+<h2 id="temporary-queues临时队列"><a class="markdownIt-Anchor" href="#temporary-queues临时队列"></a> Temporary queues（临时队列）</h2>
+<p>As you may remember previously we were using queues which had a specified name (remember hello). Being able to name a queue was crucial for us – we needed to point the workers to the same queue. Giving a queue a name is important when you want to share the queue between producers and consumers.</p>
+<p>就如你记住的那样，之前我们都是使用具有指定名字的队列（前面的教程里用的是hello）。命名一个队列对于我们是至关重要的——我们需要将工作者指到相同的队列上去。当你想要在生产者和消费者之间共享队列时，为队列指定一个名字是很重要的。</p>
+<p>But that’s not the case for our fanout example. We want to hear about all messages, not just a subset of them. We’re also interested only in currently flowing messages not in the old ones. To solve that we need two things.</p>
+<p>但在我们在用广播交换器时则不用这么做。我们需要收到所有的消息，而不仅仅是部分。我们也只关心当前的消息，而不是旧的那一部分。为了解决这些需求，我们需要做两件事。</p>
+<p>Firstly, whenever we connect to Rabbit we need a fresh, empty queue. To do this we could create a queue with a random name, or, even better - let the server choose a random queue name for us.</p>
+<p>首先，无论什么时候连接RabbitMQ，我们都需要一个新的而且是空的队列。为了做到这点，我们可以创建一个名字随机的队列，或者更好的做法是，让服务器为我们选一个随机的队列。</p>
+<p>Secondly, once we disconnect the consumer the queue should be automatically deleted. To do this with the spring-amqp client, we defined an <em>AnonymousQueue</em>, which creates a non-durable, exclusive, autodelete queue with a generated name:</p>
+<p>然后，一旦我们断开了消费者，队列应该被自动删除。我们可以通过spring-amqp客户端来做到这点，在配置里我们定义了一个AnonymousQueue类型的队列，它的名字是由客户端生成的，而且是非持久的，独占的，自动删除的队列：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>At this point our queue names contain a random queue names. For example it may look like amq.gen-JzTY20BRgKO-HjmUJj0wLg.</p>
+<p>此时我们的队列名字是随机的。例如，队列名字可能看起来是这样的：amq.gen-JzTY20BRgKO-HjmUJj0wLg。</p>
+<h2 id="bindings绑定器"><a class="markdownIt-Anchor" href="#bindings绑定器"></a> Bindings（绑定器）</h2>
+<p><img src="https://www.rabbitmq.com/img/tutorials/bindings.png" alt="image" /></p>
+<p>We’ve already created a fanout exchange and a queue. Now we need to tell the exchange to send messages to our queue. That relationship between exchange and a queue is called a <em>binding</em>. In the above Tut3Config you can see that we have two bindings, one for each AnonymousQueue.</p>
+<p>我们已经创建了一个广播交换器和一个队列。现在我们需要让交换器将消息发送到我们的队列里。用于连接交换器和队列的对象被称为绑定器（binding）。在上面的Tut3Config里，你会发现我们配置了两个绑定器，分别对应一个AnonymousQueue。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<h4 id="note-on-message-persistence关于消息持久化要注意的地方"><a class="markdownIt-Anchor" href="#note-on-message-persistence关于消息持久化要注意的地方"></a> Note on message persistence（关于消息持久化要注意的地方）</h4>
-<p>Marking messages as persistent doesn’t fully guarantee that a message won’t be lost. Although it tells RabbitMQ to save the message to disk, there is still a short time window when RabbitMQ has accepted a message and hasn’t saved it yet. Also, RabbitMQ doesn’t do fsync(2) for every message – it may be just saved to cache and not really written to the disk. The persistence guarantees aren’t strong, but it’s more than enough for our simple task queue. If you need a stronger guarantee then you can use publisher confirms.</p>
-<p>将消息标记为持久化并不能完全保证消息将不会丢失。虽然它告诉RabbitMQ要将消息保存到磁盘，但当RabbitMQ接收了某条消息并且还没有保存该消息时，仍有一个小的时间窗口。而且，RabbitMQ不会为每条消息都进行fsync操作——它可能仅仅只是将其缓存起来，但并没有真的将消息写入磁盘。这么做虽然无法完全保证持久化，但对于我们简单的任务队列来说，这已经很足够了。如果你需要完全保证持久化，那么你可以使用发布者确认。</p>
+<h4 id="listing-bindings列出所有的绑定"><a class="markdownIt-Anchor" href="#listing-bindings列出所有的绑定"></a> Listing bindings（列出所有的绑定）</h4>
+<p>You can list existing bindings using, you guessed it,</p>
+<p>你可以通过使用某个命令来列出所有的绑定，猜是哪个，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl list_bindings</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"><a class="markdownIt-Anchor" href="#fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"></a> Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）</h3>
-<p>By default, RabbitMQ will send each message to the next consumer, in sequence. On average every consumer will get the same number of messages. This way of distributing messages is called round-robin. In this mode dispatching doesn’t necessarily work exactly as we want. For example in a situation with two workers, when all odd messages are heavy and even messages are light, one worker will be constantly busy and the other one will do hardly any work. Well, RabbitMQ doesn’t know anything about that and will still dispatch messages evenly.</p>
-<p>默认情况下，RabbitMQ将把每一条消息按顺序逐一发送给下一个消费者。每个消费者都将被平均分到相同的个数的消息。这种消息分派方式被称为循环调度。这种调度模式有时无法完全满足我们的需求。例如，假设有两个工作者，第奇数条消息是重任务，第偶数条消息是轻任务，那么其中一个工作者将会总是很繁忙，而另一个工作者则有可能没什么事做。然而，RabbitMQ并不知道这个状况，并且仍然会这么均匀地分发消息。</p>
-<p>This happens because RabbitMQ just dispatches a message when the message enters the queue. It doesn’t look at the number of unacknowledged messages for a consumer. It just blindly dispatches every n-th message to the n-th consumer.</p>
-<p>会发生这个情况是因为，当消息进入队列时，RabbitMQ仅仅是将消息分派出去。它不会去看某个消费者未确认的消息的数量。它只是盲目地将消息均匀分派给各个消费者。</p>
-<p>However, “Fair dispatch” is the default configuration for spring-amqp. The SimpleMessageListenerContainer defines the value for DEFAULT_PREFETCH_COUNT to be 1. If the DEFAULT_PREFECTH_COUNT were set to 0 the behavior would be round robin messaging as described above.</p>
-<p>然而，“公平调度”是spring-amqp的默认配置。SimpleMessageListenerContainer类将DEFAULT_PREFETCH_COUNT的值定义为1。如果DEFAULT_PREFETCH_COUNT的值被设置为0，那么调度方式将变成循环调用。</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/prefetch-count.png" alt="image" /></p>
-<p>However, with the prefetchCount set to 1 by default, this tells RabbitMQ not to give more than one message to a worker at a time. Or, in other words, don’t dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch it to the next worker that is not still busy.</p>
-<p>然而，prefetchCount的值默认设为1，这告诉RabbitMQ不要同时将多个消息分派给一个工作者。换句话说，在某个工作者处理完一条消息并确认它之前，RabbitMQ不会给该工作者分派新的消息，而是将新的消息分派给下一个不是很繁忙的工作者。</p>
-<blockquote>
-<h4 id="note-about-queue-size关于队列大小需要注意的地方"><a class="markdownIt-Anchor" href="#note-about-queue-size关于队列大小需要注意的地方"></a> Note about queue size（关于队列大小需要注意的地方）</h4>
-<p>If all the workers are busy, your queue can fill up. You will want to keep an eye on that, and maybe add more workers, or have some other strategy.</p>
-<p>如果所有的工作者都繁忙，那么你的队列会被填满。你需要注意这种情况，要么添加多几个工作者，要么就采用其它策略。</p>
-</blockquote>
-<p>By using spring-amqp you get reasonable values configured for message acknowledgments and fair dispatching. The default durability for queues and persistence for messages provided by spring-amqp allow let the messages to survive even if RabbitMQ is restarted.</p>
-<p>通过使用spring-amqp，你会发现，它已经为消息确认和公平调度配置好合理值。spring-amqp为队列和消息持久化提供的默认持久属性使得即使在RabbitMQ重启的情况下，消息还能保存下来。</p>
-<p>For more information on Channel methods and MessageProperties, you can browse the <a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">javadocs online</a>. For understanding the underlying foundation for spring-amqp you can find the <a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client</a>.</p>
-<p>关于channel方法和MessageProperties的更多信息，可以浏览<a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">在线的javadocs</a>。若要了解spring-amqp的底层机制，可以参阅<a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client文档</a>。</p>
-<p>Now we can move on to tutorial 3 and learn how to deliver the same message to many consumers.</p>
-<p>现在我们可以开始教程3，学习如何将相同的消息发送给多个消费者。</p>
+<h2 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h2>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-three-overall.png" alt="image" /></p>
+<p>The producer program, which emits messages, doesn’t look much different from the previous tutorial. The most important change is that we now want to publish messages to our fanout exchange instead of the nameless one. We need to supply a routingKey when sending, but its value is ignored for fanout exchanges. Here goes the code for tut3.Sender.java program:</p>
+<p>本教程里用于生产消息的生产者程序看起来与前面教程里的生产者程序没什么区别。最大的变化是我们现在想把消息发布到广播交换器里去，而不是匿名交换器。发送消息时我们需要用到路由键（routingKey），但对于广播交换器，它的值是被忽略的。以下是本教程的发送者类代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.FanoutExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut3Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> FanoutExchange fanout;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(fanout.getName(), <span class="string">&quot;&quot;</span>, message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As you see, we leverage the beans from the Tut3Config file and autowire in the RabbitTemplate along with our configured FanoutExchange. This step is necessary as publishing to a non-existing exchange is forbidden.</p>
+<p>就如你所看到的那样，我们利用Tut3Config文件里配置好的bean，并自动注入RabbitTemplate和FanoutExchange。这一步是很有必要的，因为发布消息到不存在的交换器是不允许的。</p>
+<p>The messages will be lost if no queue is bound to the exchange yet, but that’s okay for us; if no consumer is listening yet we can safely discard the message.</p>
+<p>如果没有队列绑定到交换器，那么消息将会丢失，但这对于我们来说是可接受的；如果没有消费者在监听队列，那么即使消息丢失也是安全的。</p>
+<p>The code forTut3Receiver.java:</p>
+<p>以下是发送者类的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut3Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue1.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive1</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue2.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive2</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in, <span class="type">int</span> receiver)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Compile as before and we’re ready to execute the fanout sender and receiver.</p>
+<p>像之前那样编译，我们已经准备好要运行基于广播的发送者程序和接收者程序了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+<p>And of course, to execute the tutorial do the following:</p>
+<p>当然，若要运行示例代码，我们还要执行以下命令行语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar --spring.profiles.active=pub-sub,receiver</span><br><span class="line">--tutorial.client.duration=60000</span><br><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar --spring.profiles.active=pub-sub,sender</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
+<p>Using rabbitmqctl list_bindings you can verify that the code actually creates bindings and queues as we want. With two ReceiveLogs.java programs running you should see something like:</p>
+<p>使用rabbitmqctl list_bindings语句你可以验证上述代码的确按照我们所想的创建了绑定和队列。执行语句后你会看到类似于如下的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_bindings</span><br><span class="line">tut.fanout exchange 8b289c9c-a1eb-4a3a-b6a9-163c4fdcb6c2 queue []</span><br><span class="line">tut.fanout exchange d7e7d193-65b1-4128-a532-466a5256fd31 queue []</span><br></pre></td></tr></table></figure>
+<p>The interpretation of the result is straightforward: data from exchange logs goes to two queues with server-assigned names. And that’s exactly what we intended.</p>
+<p>打印结果的意思很明显：从交换器过来的消息进入了两个由服务器命名的队列。这正是我们想要的结果。</p>
+<p>To find out how to listen for a subset of messages, let’s move on to tutorial 4.</p>
 ]]></content>
       <categories>
         <category>RabbitMQ Spring-AMQP官方教程</category>
@@ -1724,114 +1750,119 @@ tests as appropriate for the change. In general, tests should be added in the sa
         <category>Google代码评审规约</category>
       </categories>
       <tags>
-        <tag>Translation</tag>
         <tag>Code Review</tag>
+        <tag>Translation</tag>
       </tags>
   </entry>
   <entry>
-    <title>RabbitMQ Spring-AMQP官方教程（三）--发布/订阅</title>
-    <url>/posts/14583/</url>
-    <content><![CDATA[<h1 id="publishsubscribe发布订阅"><a class="markdownIt-Anchor" href="#publishsubscribe发布订阅"></a> Publish/Subscribe（发布/订阅）</h1>
-<p>In the first tutorial we showed how to use <a href="http://start.spring.io">start.spring.io</a> to leverage Spring Initializr to create a project with the RabbitMQ starter dependency for create spring-amqp applications.</p>
-<p>在第一个教程中，我们展示了如何通过<a href="https://start.spring.io/">start.spring.io</a>上的Spring初始化手脚架来创建一个包含了RabbitMQ starter依赖的项目，并以此创建基于spring-amqp的应用。</p>
-<p>In the previous tutorial we created a new package (tut2) to place our config, sender and receiver and created a work queue with two consumers. The assumption behind a work queue is that each task is delivered to exactly one worker.</p>
-<p>在上一个教程当中，我们创建了一个新的包（tut2）来放置我们的配置类，发送者类和接收者类，并创建了一个对应着两个消费者的队列。工作队列背后的原理假设是，每个任务都发送给某个恰当的工作者。</p>
-<p>In this part we’ll implement the fanout pattern to deliver a message to multiple consumers. This pattern is known as “publish/subscribe” and is implementing by configuring a number of beans in our Tut3Config file.</p>
-<p>在这部分教程中，我们将实现广播模式（fanout pattern），从而将一条消息发送给多个消费者。这个模式被称为“发布/订阅”，我们将在Tut3Config文件里配置一系列bean来实现这个模式。</p>
+    <title>RabbitMQ Spring-AMQP官方教程（二）--工作队列</title>
+    <url>/posts/13955/</url>
+    <content><![CDATA[<h1 id="2-工作队列work-queues"><a class="markdownIt-Anchor" href="#2-工作队列work-queues"></a> 2 工作队列（Work Queues）</h1>
+<p><img src="https://www.rabbitmq.com/img/tutorials/python-two.png" alt="image" /></p>
+<p>In the first tutorial we wrote programs to send and receive messages from a named queue. In this one we’ll create a <em>Work</em> <em>Queue</em> that will be used to distribute time-consuming tasks among multiple workers.</p>
+<p>在第一个教程中，我们编写了两个程序，一个用于往一个命名了的队列发送消息，另一个从这个队列里接收消息。在本教程里，我们将创建一个工作队列（Work Queue），它将被用来在多个工作者之间分发耗时任务。</p>
 <span id="more"></span>
-<p>Essentially, published messages are going to be broadcast to all the receivers.</p>
-<p>本质上，发布的消息将被广播给所有的接收者。</p>
-<h2 id="exchanges交换器"><a class="markdownIt-Anchor" href="#exchanges交换器"></a> Exchanges（交换器）</h2>
-<p>In previous parts of the tutorial we sent and received messages to and from a queue. Now it’s time to introduce the full messaging model in Rabbit.</p>
-<p>在前面的教程里，我们通过一个队列来发送消息，并从这个队列里接收消息。接下来我们将介绍RabbitMQ完整的消息队列模型。</p>
-<p>Let’s quickly go over what we covered in the previous tutorials:</p>
-<p>我们先来快速过一遍前面的教程里涉及到的内容：</p>
-<p>A <em>producer</em> is a user application that sends messages.</p>
-<p>生产者是值发送消息的应用。</p>
-<p>A <em>queue</em> is a buffer that stores messages.</p>
-<p>队列是指存储消息的缓存。</p>
-<p>A <em>consumer</em> is a user application that receives messages.</p>
-<p>消费者是指接收消息的应用。</p>
-<p>The core idea in the messaging model in RabbitMQ is that the producer never sends any messages directly to a queue. Actually, quite often the producer doesn’t even know if a message will be delivered to any queue at all.</p>
-<p>RabbitMQ的消息队列模型的核心概念是：生产者从不直接往队列里发送任何消息。实际上，多数情况下生产者甚至不知道消息是否会被发送到队列里。</p>
-<p>Instead, the producer can only send messages to an <em>exchange</em>. An exchange is a very simple thing. On one side it receives messages from producers and the other side it pushes them to queues. The exchange must know exactly what to do with a message it receives. Should it be appended to a particular queue? Should it be appended to many queues? Or should it get discarded. The rules for that are defined by the <em>exchange type</em>.</p>
-<p>与此相反，生产者只能将消息发送到一个交换器里。交换器做的事情很简单。一方面它接收生产者发送过来的消息，另一方面它将收到的消息推入队列里。交换器必须明确对于收到的消息它该怎么处理。这条消息是否应该附加到某个特定的队列后面？这条消息是否应该附加到多个队列后面？这条消息是否应该被丢弃？这些规则都由交换器类型（exchange type）来定义。</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/exchanges.png" alt="image" /></p>
-<p>There are a few exchange types available: direct, topic, headers and fanout. We’ll focus on the last one – the fanout. Let’s configure a bean to describe an exchange of this type, and call it tut.fanout:</p>
-<p>有四种交换器类型可供我们选择：直连交换器（direct），主题交换器（topic），头部交换器（headers）和广播交换器（fanout）。我们将专注于最后一个——广播交换器。我们先配置一个bean来描述这种类型的交换器，并把这个交换器命名为tut.fanout：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut3&quot;, &quot;pub-sub&quot;, &quot;publish-subscribe&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut3Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> FanoutExchange <span class="title function_">fanout</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;tut.fanout&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Binding <span class="title function_">binding2</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue2)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue2).to(fanout);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut3Receiver <span class="title function_">receiver</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut3Receiver</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut3Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut3Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We ollow the same approach as in the previous two tutorials. We create three profiles, the tutorial (“tut3”, “pub-sub”, or “publish-subscribe”). They are all synonyms for running the fanout profile tutorial. Next we configure the FanoutExchange as a bean. Within the “receiver” (Tut3Receiver) file we define four beans: two autoDeleteQueues or AnonymousQueues and two bindings to bind those queues to the exchange.</p>
-<p>我们采用了与前面两个教程相同的方式。我们创建了三个配置组，“tut3”，“pub-sub”，或者叫“publish-subscribe”。这三个配置在运行本教程时都是等效的。接下来我们会配置一个类型为FanoutExchange的bean。在“receiver”配置组里，我们定义了四个bean：两个AnonymousQueue类型的队列，即autoDeleteQueue1和autoDeleteQueue2，及两个将队列绑定到交换器的绑定器（binding）。</p>
-<p>The fanout exchange is very simple. As you can probably guess from the name, it just broadcasts all the messages it receives to all the queues it knows. And that’s exactly what we need for fanning out our messages.</p>
-<p>广播交换器很简单。你大概可以从名字上看出，它只是将所有它接收到的消息广播给它所知道的所有队列。广播消息这一点正是我们需要的。</p>
+<p>The main idea behind Work Queues (aka: <em>Task Queues</em>) is to avoid doing a resource-intensive task immediately and having to wait for it to complete. Instead we schedule the task to be done later. We encapsulate a <em>task</em> as a message and send it to a queue. A worker process running in the background will pop the tasks and eventually execute the job. When you run many workers the tasks will be shared between them.</p>
+<p>工作队列（也叫做任务队列）背后的主要目的是为了避免立即执行资源密集型的任务以及避免必须等待任务完成的情况，相反，它计划着让这些任务可以留到后面去执行。我们将任务分装成消息，并将它发送到队列里。运行在后台的工作进程将取出任务并最终执行它。如果你运行了多个工作进程，那么所有的任务将被它们共享。</p>
+<p>This concept is especially useful in web applications where it’s impossible to handle a complex task during a short HTTP request window.</p>
+<p>对于web应用，这个概念特别有用，因为web应用无法在短短的HTTP请求窗口内处理复杂的任务。</p>
+<h3 id="preparation准备工作"><a class="markdownIt-Anchor" href="#preparation准备工作"></a> Preparation（准备工作）</h3>
+<p>In the previous part of this tutorial we sent a message containing “Hello World!”. Now we’ll be sending strings that stand for complex tasks. We don’t have a real-world task, like images to be resized or pdf files to be rendered, so let’s fake it by just pretending we’re busy - by using the Thread.sleep() function. We’ll take the number of dots in the string as its complexity; every dot will account for one second of “work”. For example, a fake task described by Hello… will take three seconds.</p>
+<p>在教程1里，我们实现了如何发送包含“Hello World!”的消息。现在，我们将发送表示复杂任务的字符串。由于我们没有真实的任务，如调整图片大小或者渲染pdf文件，所以我们通过使用Thread.sleep()函数来模拟繁忙的耗时任务。我们将在字符串中用点号的个数来表示复杂度，点号的个数表示整个任务执行秒的秒数。例如，Hello…表示模拟任务需要执行三秒。</p>
+<p>Please see the setup in first tutorial if you have not setup the project. We will follow the same pattern as in the first tutorial: create a package (tut2) and create a Tut2Config, Tut2Receiver, and Tut2Sender. Start by creating a new package (tut2) where we’ll place our three classes. In the configuration class we setup two profiles, the label for the tutorial (“tut2”) and the name of the pattern (“work-queues”). We leverage spring to expose the queue as a bean. We setup the receiver as a profile and define two beans to correspond to the workers in our diagram above： receiver1 and receiver2. Finally, we define a profile for the sender and define the sender bean. The configuration is now done.</p>
+<p>如果你还未建立配置好项目，请见教程1的配置过程。我们将采用与教程1相同的方式，新建一个包目录（tut2）并创建一个名为Tut2Config的配置类，一个名为Tut2Receiver的消息接收类，以及一个名为Tut2Sender的消息发送类。首先新建包目录（tut2），我们将在这个包下面放刚说到的那三个类。在配置类里，我们将配置两个配置组，一个作为当前教程的标签（“tut2”），一个作为当前RabbitMQ使用模式的名字（“work-queue”）。我们利用Spring框架将队列暴露为一个bean。我们设置一个接受者配置组，并定义两个bean来对应于上面图中的两个消费者：receiver1和receiver2。最后，我们会定义一个发送者配置组，并定义作为发送者的bean。这样配置就结束了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&#123;&quot;tut2&quot;, &quot;work-queues&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Config</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Queue <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Profile(&quot;receiver&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ReceiverConfig</span> &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver1</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="keyword">public</span> Tut2Receiver <span class="title function_">receiver2</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Receiver</span>(<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Profile(&quot;sender&quot;)</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Tut2Sender <span class="title function_">sender</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tut2Sender</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="sender发送者"><a class="markdownIt-Anchor" href="#sender发送者"></a> Sender（发送者）</h3>
+<p>We will modify the sender to provide a means for identifying whether its a longer running task by appending a dot to the message in a very contrived fashion using the same method on the RabbitTemplate to publish the message, convertAndSend. The documentation defines this as, “Convert a Java object to an Amqp Message and send it to a default exchange with a default routing key.”</p>
+<p>我们将对发送者类进行修改，在发送方法中，通过人为地在消息后面添加点号来识别当前任务是否耗时，并依旧使用RabbitTemplate的convertAndSend方法来发布消息。文档把convertAndSend方法定义为，“将一个Java对象转换成一个Amqp消息，并用一个默认路由键（routing key）将其发送到一个默认的exchange里。”</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Queue queue;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(queue.getName(), message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="receiver接收者"><a class="markdownIt-Anchor" href="#receiver接收者"></a> Receiver（接收者）</h3>
+<p>Our receiver, Tut2Receiver, simulates an arbitary length for a fake task in the doWork() method where the number of dots translates into the number of seconds the work will take. Again, we leverage a @RabbitListener on the “hello” queue and a @RabbitHandler to receive the message. The instance that is consuming the message is added to our monitor to show which instance, the message and the length of time to process the message.</p>
+<p>我们的接收者类，Tut2Receiver，在doWork()方法里根据消息所带点号的个数，将其转换成任务所需消耗的秒数，以此模拟了任意任务的长度。同样地，我们对“hello”队列使用了@RabbitListener注解，并通过@RabbitHandler注解来接收消息。同时，用一个编号来标识正在消费消息的实例，并将它加入我们的监控中，最终打印出实例编号，消息内容以及处理消息所耗费的时长。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RabbitListener(queues = &quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut2Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> instance;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Tut2Receiver</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.instance = i;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitHandler</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + <span class="built_in">this</span>.instance +</span><br><span class="line">		<span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">				<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h3>
+<p>Compile them using mvn package and run with the following options</p>
+<p>使用mvn package来编译上述代码，并在运行时添加下面的命令行参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,receiver</span><br><span class="line">java -jar target/rabbitmq-amqp-tutorials-0.0.1-SNAPSHOT.jar --spring.profiles.active=work-queues,sender</span><br></pre></td></tr></table></figure>
+<p>The output of the sender should look something like:</p>
+<p>发送者类的输出看起来应该是类似于这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">[x] Sent &#x27;Hello.1&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..2&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...3&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.4&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..5&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...6&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.7&#x27;</span><br><span class="line">[x] Sent &#x27;Hello..8&#x27;</span><br><span class="line">[x] Sent &#x27;Hello...9&#x27;</span><br><span class="line">[x] Sent &#x27;Hello.10&#x27;</span><br></pre></td></tr></table></figure>
+<p>And the output from the workers should look something like:</p>
+<p>而工作者类的输出看起来应该是类似于这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ready ... running for 10000ms</span><br><span class="line">instance 1 [x] Received &#x27;Hello.1&#x27;</span><br><span class="line">instance 2 [x] Received &#x27;Hello..2&#x27;</span><br><span class="line">instance 1 [x] Done in 1.001s</span><br><span class="line">instance 1 [x] Received &#x27;Hello...3&#x27;</span><br><span class="line">instance 2 [x] Done in 2.004s</span><br><span class="line">instance 2 [x] Received &#x27;Hello.4&#x27;</span><br><span class="line">instance 2 [x] Done in 1.0s</span><br><span class="line">instance 2 [x] Received &#x27;Hello..5&#x27;</span><br></pre></td></tr></table></figure>
+<h3 id="message-acknowledgment消息确认"><a class="markdownIt-Anchor" href="#message-acknowledgment消息确认"></a> Message acknowledgment（消息确认）</h3>
+<p>Doing a task can take a few seconds. You may wonder what happens if one of the consumers starts a long task and dies with it only partly done. Spring AMQP by default takes a conservative approach to <a href="https://www.rabbitmq.com/confirms.html">message acknowledgement</a>. If the listener throws an exception the container calls:</p>
+<p>完成一个任务需要耗费几秒。对于一个开始了长任务的消费者，你可能会想知道，当它只完成了部分任务就挂掉时发生了什么。Spring AMQP默认采用保守的方式来进行<a href="https://www.rabbitmq.com/confirms.html">消息确认</a>。如果监听器抛出了一个异常，那么容器会调用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicReject(deliveryTag, requeue)</span><br></pre></td></tr></table></figure>
+<p>Requeue is true by default unless you explicitly set:</p>
+<p>requeue（重入队列）默认为true，除非你显示地将其设置为false：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">defaultRequeueRejected=false</span><br></pre></td></tr></table></figure>
+<p>or the listener throws an AmqpRejectAndDontRequeueException. This is typically the bahavior you want from your listener. In this mode there is no need to worry about a forgotten acknowledgement. After processing the message the listener calls:</p>
+<p>否则监听器抛出AmqpRejectAndDontRequeueException异常。这通常会是你想要监听器的行为。在这种模式下，无需担心一个被忘记了的确认。在处理完消息后，监听器会调用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicAck()</span><br></pre></td></tr></table></figure>
+<p>Acknowledgement must be sent on the same channel the delivery it is for was received on. Attempts to acknowledge using a different channel will result in a channel-level protocol exception. See the <a href="https://www.rabbitmq.com/confirms.html">doc guide on confirmations</a> to learn more. Spring AMQP generally takes care of this but when used in combination with code that uses RabbitMQ Java client directly, this is something to keep in mind.</p>
+<p>消息确认必须在与接收信息相同的通道（channel）上进行发送。试图使用不同的通道来进行确认将导致通道级别的协议异常。若想更详细了解，可以参阅<a href="https://www.rabbitmq.com/confirms.html">关于消息确认的文档指南</a>。Spring AMQP一般都会处理好这种问题，但与直接使用RabbitMQ的Java客户端的代码结合使用时，这点要小心。</p>
 <blockquote>
-<h4 id="listing-exchanges列出所有的交换器"><a class="markdownIt-Anchor" href="#listing-exchanges列出所有的交换器"></a> Listing exchanges（列出所有的交换器）</h4>
-<p>To list the exchanges on the server you can run the ever useful rabbitmqctl:</p>
-<p>你可以通过运行强大的rabbitmqctl来列出服务器上所有的交换器：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_exchanges</span><br></pre></td></tr></table></figure>
-<p>In this list there will be some amq.* exchanges and the default (unnamed) exchange. These are created by default, but it is unlikely you’ll need to use them at the moment.</p>
-<p>在这个列表里，会出现一些类似于amq.开头的交换器，以及默认的（未命名）交换器。这些交换器都默认被创建，但这时你不一定会用到它们。</p>
-<h4 id="nameless-exchange匿名交换器"><a class="markdownIt-Anchor" href="#nameless-exchange匿名交换器"></a> Nameless exchange（匿名交换器）</h4>
-<p>In previous parts of the tutorial we knew nothing about exchanges, but still were able to send messages to queues. That was possible because we were using a default exchange, which we identify by the empty string (“”).</p>
-<p>在前面的教程里，我们虽然对交换器一无所知，但依旧能够将消息发送到队列里。之所以能这样是因为我们使用了一个默认的交换器，而这个默认的交换器则用空字符串（“”）来标识。</p>
-<p>Recall how we published a message before:</p>
-<p>回顾一下我们之前是如何发布消息的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">template.convertAndSend(fanout.getName(), &quot;&quot;, message);</span><br></pre></td></tr></table></figure>
-<p>The first parameter is the the name of the exchange that was autowired into the sender. The empty string denotes the default or <em>nameless</em> exchange: messages are routed to the queue with the name specified by routingKey, if it exists.</p>
-<p>第一个参数是被自动注入到发送者类的交换器的名字。空字符串表示该交换器是默认或者匿名的：如果路由键存在的话，消息则通过这个路由键名被路由到某个队列里：</p>
+<h4 id="forgotten-acknowledgment被遗忘的确认"><a class="markdownIt-Anchor" href="#forgotten-acknowledgment被遗忘的确认"></a> Forgotten acknowledgment（被遗忘的确认）</h4>
+<p>It’s a common mistake to miss the basicAck and spring-amqp helps to avoid this through its default configuraiton. The consequences are serious. Messages will be redelivered when your client quits (which may look like random redelivery), but RabbitMQ will eat more and more memory as it won’t be able to release any unacked messages.</p>
+<p>忘记调用basciAck方法是常见的一个错误，spring-amqp通过它的默认配置来避免它。这个错误的后果是很严重的。当你的客户端退出后，消息会被重复发送（看起来就像是随机重发），但RabbitMQ将吃掉越来越多的内存，因为它无法释放任何未确认的消息。</p>
+<p>In order to debug this kind of mistake you can use rabbitmqctl to print the messages_unacknowledged field:</p>
+<p>为了调试这种错误，你可以使用rabbitmqctl来打印messages_unacknowledged域：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
+<p>On Windows, drop the sudo:</p>
+<p>在Windows环境下，去掉sudo：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>Now, we can publish to our named exchange instead:</p>
-<p>现在，我们可以将信息发布到我们命名好的交换器里：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> FanoutExchange fanout; <span class="comment">// configured in Tut3Config above</span></span><br><span class="line"></span><br><span class="line">template.convertAndSend(fanout.getName(), <span class="string">&quot;&quot;</span>, message);</span><br></pre></td></tr></table></figure>
-<p>From now on the fanout exchange will append messages to our queue.</p>
-<p>从现在开始，广播交换器将会把信息附加到我们的队列里。</p>
-<h2 id="temporary-queues临时队列"><a class="markdownIt-Anchor" href="#temporary-queues临时队列"></a> Temporary queues（临时队列）</h2>
-<p>As you may remember previously we were using queues which had a specified name (remember hello). Being able to name a queue was crucial for us – we needed to point the workers to the same queue. Giving a queue a name is important when you want to share the queue between producers and consumers.</p>
-<p>就如你记住的那样，之前我们都是使用具有指定名字的队列（前面的教程里用的是hello）。命名一个队列对于我们是至关重要的——我们需要将工作者指到相同的队列上去。当你想要在生产者和消费者之间共享队列时，为队列指定一个名字是很重要的。</p>
-<p>But that’s not the case for our fanout example. We want to hear about all messages, not just a subset of them. We’re also interested only in currently flowing messages not in the old ones. To solve that we need two things.</p>
-<p>但在我们在用广播交换器时则不用这么做。我们需要收到所有的消息，而不仅仅是部分。我们也只关心当前的消息，而不是旧的那一部分。为了解决这些需求，我们需要做两件事。</p>
-<p>Firstly, whenever we connect to Rabbit we need a fresh, empty queue. To do this we could create a queue with a random name, or, even better - let the server choose a random queue name for us.</p>
-<p>首先，无论什么时候连接RabbitMQ，我们都需要一个新的而且是空的队列。为了做到这点，我们可以创建一个名字随机的队列，或者更好的做法是，让服务器为我们选一个随机的队列。</p>
-<p>Secondly, once we disconnect the consumer the queue should be automatically deleted. To do this with the spring-amqp client, we defined an <em>AnonymousQueue</em>, which creates a non-durable, exclusive, autodelete queue with a generated name:</p>
-<p>然后，一旦我们断开了消费者，队列应该被自动删除。我们可以通过spring-amqp客户端来做到这点，在配置里我们定义了一个AnonymousQueue类型的队列，它的名字是由客户端生成的，而且是非持久的，独占的，自动删除的队列：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Queue <span class="title function_">autoDeleteQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AnonymousQueue</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>At this point our queue names contain a random queue names. For example it may look like amq.gen-JzTY20BRgKO-HjmUJj0wLg.</p>
-<p>此时我们的队列名字是随机的。例如，队列名字可能看起来是这样的：amq.gen-JzTY20BRgKO-HjmUJj0wLg。</p>
-<h2 id="bindings绑定器"><a class="markdownIt-Anchor" href="#bindings绑定器"></a> Bindings（绑定器）</h2>
-<p><img src="https://www.rabbitmq.com/img/tutorials/bindings.png" alt="image" /></p>
-<p>We’ve already created a fanout exchange and a queue. Now we need to tell the exchange to send messages to our queue. That relationship between exchange and a queue is called a <em>binding</em>. In the above Tut3Config you can see that we have two bindings, one for each AnonymousQueue.</p>
-<p>我们已经创建了一个广播交换器和一个队列。现在我们需要让交换器将消息发送到我们的队列里。用于连接交换器和队列的对象被称为绑定器（binding）。在上面的Tut3Config里，你会发现我们配置了两个绑定器，分别对应一个AnonymousQueue。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Binding <span class="title function_">binding1</span><span class="params">(FanoutExchange fanout, Queue autoDeleteQueue1)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> BindingBuilder.bind(autoDeleteQueue1).to(fanout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="message-durability消息持久性"><a class="markdownIt-Anchor" href="#message-durability消息持久性"></a> Message durability（消息持久性）</h3>
+<p>With spring-amqp there are reasonable default values in the MessageProperties that account for message durability. In particular you can check the table for <a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">common properties</a>. You’ll see two relevant to our discussion here on durability:</p>
+<p>对于spring-amqp，消息属性配置里有很多合理的默认值，这些默认值共同决定了消息的持久性。你可以查阅<a href="http://docs.spring.io/spring-amqp/reference/htmlsingle/#_common_properties">常用属性表</a>。你将会看到与我们正在讨论的消息持久性相关的两个属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">default</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">durable</td>
+<td style="text-align:left">true</td>
+<td style="text-align:left">When declareExchange is true the durable flag is set to this value</td>
+</tr>
+<tr>
+<td style="text-align:left">deliveryMode</td>
+<td style="text-align:left">PERSISTENT</td>
+<td style="text-align:left">PERSISTENT or NON_PERSISTENT to determine whether or not RabbitMQ should persist the messages</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<h4 id="listing-bindings列出所有的绑定"><a class="markdownIt-Anchor" href="#listing-bindings列出所有的绑定"></a> Listing bindings（列出所有的绑定）</h4>
-<p>You can list existing bindings using, you guessed it,</p>
-<p>你可以通过使用某个命令来列出所有的绑定，猜是哪个，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rabbitmqctl list_bindings</span><br></pre></td></tr></table></figure>
+<h4 id="note-on-message-persistence关于消息持久化要注意的地方"><a class="markdownIt-Anchor" href="#note-on-message-persistence关于消息持久化要注意的地方"></a> Note on message persistence（关于消息持久化要注意的地方）</h4>
+<p>Marking messages as persistent doesn’t fully guarantee that a message won’t be lost. Although it tells RabbitMQ to save the message to disk, there is still a short time window when RabbitMQ has accepted a message and hasn’t saved it yet. Also, RabbitMQ doesn’t do fsync(2) for every message – it may be just saved to cache and not really written to the disk. The persistence guarantees aren’t strong, but it’s more than enough for our simple task queue. If you need a stronger guarantee then you can use publisher confirms.</p>
+<p>将消息标记为持久化并不能完全保证消息将不会丢失。虽然它告诉RabbitMQ要将消息保存到磁盘，但当RabbitMQ接收了某条消息并且还没有保存该消息时，仍有一个小的时间窗口。而且，RabbitMQ不会为每条消息都进行fsync操作——它可能仅仅只是将其缓存起来，但并没有真的将消息写入磁盘。这么做虽然无法完全保证持久化，但对于我们简单的任务队列来说，这已经很足够了。如果你需要完全保证持久化，那么你可以使用发布者确认。</p>
 </blockquote>
-<h2 id="putting-it-all-together代码整合"><a class="markdownIt-Anchor" href="#putting-it-all-together代码整合"></a> Putting it all together（代码整合）</h2>
-<p><img src="https://www.rabbitmq.com/img/tutorials/python-three-overall.png" alt="image" /></p>
-<p>The producer program, which emits messages, doesn’t look much different from the previous tutorial. The most important change is that we now want to publish messages to our fanout exchange instead of the nameless one. We need to supply a routingKey when sending, but its value is ignored for fanout exchanges. Here goes the code for tut3.Sender.java program:</p>
-<p>本教程里用于生产消息的生产者程序看起来与前面教程里的生产者程序没什么区别。最大的变化是我们现在想把消息发布到广播交换器里去，而不是匿名交换器。发送消息时我们需要用到路由键（routingKey），但对于广播交换器，它的值是被忽略的。以下是本教程的发送者类代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.FanoutExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Scheduled;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut3Sender</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RabbitTemplate template;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> FanoutExchange fanout;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">dots</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 1000, initialDelay = 500)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">send</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (dots++ == <span class="number">3</span>) &#123;</span><br><span class="line">			dots = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dots; i++) &#123;</span><br><span class="line">			builder.append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		builder.append(Integer.toString(++count));</span><br><span class="line">		<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> builder.toString();</span><br><span class="line">		template.convertAndSend(fanout.getName(), <span class="string">&quot;&quot;</span>, message);</span><br><span class="line">		System.out.println(<span class="string">&quot; [x] Sent &#x27;&quot;</span> + message + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>As you see, we leverage the beans from the Tut3Config file and autowire in the RabbitTemplate along with our configured FanoutExchange. This step is necessary as publishing to a non-existing exchange is forbidden.</p>
-<p>就如你所看到的那样，我们利用Tut3Config文件里配置好的bean，并自动注入RabbitTemplate和FanoutExchange。这一步是很有必要的，因为发布消息到不存在的交换器是不允许的。</p>
-<p>The messages will be lost if no queue is bound to the exchange yet, but that’s okay for us; if no consumer is listening yet we can safely discard the message.</p>
-<p>如果没有队列绑定到交换器，那么消息将会丢失，但这对于我们来说是可接受的；如果没有消费者在监听队列，那么即使消息丢失也是安全的。</p>
-<p>The code forTut3Receiver.java:</p>
-<p>以下是发送者类的代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StopWatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tut3Receiver</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue1.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive1</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RabbitListener(queues = &quot;#&#123;autoDeleteQueue2.name&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive2</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		receive(in, <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receive</span><span class="params">(String in, <span class="type">int</span> receiver)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="type">StopWatch</span> <span class="variable">watch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StopWatch</span>();</span><br><span class="line">		watch.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Received &#x27;&quot;</span> + in + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">		doWork(in);</span><br><span class="line">		watch.stop();</span><br><span class="line">		System.out.println(<span class="string">&quot;instance &quot;</span> + receiver + <span class="string">&quot; [x] Done in &quot;</span> + watch.getTotalTimeSeconds() + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">doWork</span><span class="params">(String in)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">char</span> ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Compile as before and we’re ready to execute the fanout sender and receiver.</p>
-<p>像之前那样编译，我们已经准备好要运行基于广播的发送者程序和接收者程序了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
-<p>And of course, to execute the tutorial do the following:</p>
-<p>当然，若要运行示例代码，我们还要执行以下命令行语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar --spring.profiles.active=pub-sub,receiver</span><br><span class="line">--tutorial.client.duration=60000</span><br><span class="line">java -jar target/rabbit-tutorials-1.7.1.RELEASE.jar --spring.profiles.active=pub-sub,sender</span><br><span class="line">--tutorial.client.duration=60000</span><br></pre></td></tr></table></figure>
-<p>Using rabbitmqctl list_bindings you can verify that the code actually creates bindings and queues as we want. With two ReceiveLogs.java programs running you should see something like:</p>
-<p>使用rabbitmqctl list_bindings语句你可以验证上述代码的确按照我们所想的创建了绑定和队列。执行语句后你会看到类似于如下的信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo rabbitmqctl list_bindings</span><br><span class="line">tut.fanout exchange 8b289c9c-a1eb-4a3a-b6a9-163c4fdcb6c2 queue []</span><br><span class="line">tut.fanout exchange d7e7d193-65b1-4128-a532-466a5256fd31 queue []</span><br></pre></td></tr></table></figure>
-<p>The interpretation of the result is straightforward: data from exchange logs goes to two queues with server-assigned names. And that’s exactly what we intended.</p>
-<p>打印结果的意思很明显：从交换器过来的消息进入了两个由服务器命名的队列。这正是我们想要的结果。</p>
-<p>To find out how to listen for a subset of messages, let’s move on to tutorial 4.</p>
+<h3 id="fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"><a class="markdownIt-Anchor" href="#fair-dispatch-vs-round-robin-dispatching公平调度vs循环调度"></a> Fair dispatch vs Round-robin dispatching（公平调度vs循环调度）</h3>
+<p>By default, RabbitMQ will send each message to the next consumer, in sequence. On average every consumer will get the same number of messages. This way of distributing messages is called round-robin. In this mode dispatching doesn’t necessarily work exactly as we want. For example in a situation with two workers, when all odd messages are heavy and even messages are light, one worker will be constantly busy and the other one will do hardly any work. Well, RabbitMQ doesn’t know anything about that and will still dispatch messages evenly.</p>
+<p>默认情况下，RabbitMQ将把每一条消息按顺序逐一发送给下一个消费者。每个消费者都将被平均分到相同的个数的消息。这种消息分派方式被称为循环调度。这种调度模式有时无法完全满足我们的需求。例如，假设有两个工作者，第奇数条消息是重任务，第偶数条消息是轻任务，那么其中一个工作者将会总是很繁忙，而另一个工作者则有可能没什么事做。然而，RabbitMQ并不知道这个状况，并且仍然会这么均匀地分发消息。</p>
+<p>This happens because RabbitMQ just dispatches a message when the message enters the queue. It doesn’t look at the number of unacknowledged messages for a consumer. It just blindly dispatches every n-th message to the n-th consumer.</p>
+<p>会发生这个情况是因为，当消息进入队列时，RabbitMQ仅仅是将消息分派出去。它不会去看某个消费者未确认的消息的数量。它只是盲目地将消息均匀分派给各个消费者。</p>
+<p>However, “Fair dispatch” is the default configuration for spring-amqp. The SimpleMessageListenerContainer defines the value for DEFAULT_PREFETCH_COUNT to be 1. If the DEFAULT_PREFECTH_COUNT were set to 0 the behavior would be round robin messaging as described above.</p>
+<p>然而，“公平调度”是spring-amqp的默认配置。SimpleMessageListenerContainer类将DEFAULT_PREFETCH_COUNT的值定义为1。如果DEFAULT_PREFETCH_COUNT的值被设置为0，那么调度方式将变成循环调用。</p>
+<p><img src="https://www.rabbitmq.com/img/tutorials/prefetch-count.png" alt="image" /></p>
+<p>However, with the prefetchCount set to 1 by default, this tells RabbitMQ not to give more than one message to a worker at a time. Or, in other words, don’t dispatch a new message to a worker until it has processed and acknowledged the previous one. Instead, it will dispatch it to the next worker that is not still busy.</p>
+<p>然而，prefetchCount的值默认设为1，这告诉RabbitMQ不要同时将多个消息分派给一个工作者。换句话说，在某个工作者处理完一条消息并确认它之前，RabbitMQ不会给该工作者分派新的消息，而是将新的消息分派给下一个不是很繁忙的工作者。</p>
+<blockquote>
+<h4 id="note-about-queue-size关于队列大小需要注意的地方"><a class="markdownIt-Anchor" href="#note-about-queue-size关于队列大小需要注意的地方"></a> Note about queue size（关于队列大小需要注意的地方）</h4>
+<p>If all the workers are busy, your queue can fill up. You will want to keep an eye on that, and maybe add more workers, or have some other strategy.</p>
+<p>如果所有的工作者都繁忙，那么你的队列会被填满。你需要注意这种情况，要么添加多几个工作者，要么就采用其它策略。</p>
+</blockquote>
+<p>By using spring-amqp you get reasonable values configured for message acknowledgments and fair dispatching. The default durability for queues and persistence for messages provided by spring-amqp allow let the messages to survive even if RabbitMQ is restarted.</p>
+<p>通过使用spring-amqp，你会发现，它已经为消息确认和公平调度配置好合理值。spring-amqp为队列和消息持久化提供的默认持久属性使得即使在RabbitMQ重启的情况下，消息还能保存下来。</p>
+<p>For more information on Channel methods and MessageProperties, you can browse the <a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">javadocs online</a>. For understanding the underlying foundation for spring-amqp you can find the <a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client</a>.</p>
+<p>关于channel方法和MessageProperties的更多信息，可以浏览<a href="http://docs.spring.io/spring-amqp/docs/current/api/index.html?org/springframework/amqp/package-summary.html">在线的javadocs</a>。若要了解spring-amqp的底层机制，可以参阅<a href="https://rabbitmq.github.io/rabbitmq-java-client/api/current/">rabbitmq-java-client文档</a>。</p>
+<p>Now we can move on to tutorial 3 and learn how to deliver the same message to many consumers.</p>
+<p>现在我们可以开始教程3，学习如何将相同的消息发送给多个消费者。</p>
 ]]></content>
       <categories>
         <category>RabbitMQ Spring-AMQP官方教程</category>
