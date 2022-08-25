@@ -89,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -223,6 +223,105 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/24584/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/24584/" class="post-title-link" itemprop="url">1084. 销售分析III</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-25 14:43:34 / 修改时间：14:50:27" itemprop="dateCreated datePublished" datetime="2022-08-25T14:43:34+08:00">2022-08-25</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/24584/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/24584/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 简单</p>
+<p>表:Product</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name  <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> product_id   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> product_name <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> unit_price   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line">Product_id是该表的主键。</span><br><span class="line">该表的每一行显示每个产品的名称和价格。</span><br></pre></td></tr></table></figure>
+<p>表:Sales</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> seller_id   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> product_id  <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> buyer_id    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> sale_date   <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> quantity    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> price       <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------ ------+---------+</span></span><br><span class="line">这个表没有主键，它可以有重复的行。</span><br><span class="line">product_id 是 Product 表的外键。</span><br><span class="line">该表的每一行包含关于一个销售的一些信息。</span><br></pre></td></tr></table></figure>
+<p>查询结果格式如下所示。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> personId <span class="operator">|</span> lastName <span class="operator">|</span> firstName <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> Wang     <span class="operator">|</span> Allen     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Alice    <span class="operator">|</span> Bob       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line">Address表:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> addressId <span class="operator">|</span> personId <span class="operator">|</span> city          <span class="operator">|</span> state      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Leetcode      <span class="operator">|</span> California <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> firstName <span class="operator">|</span> lastName <span class="operator">|</span> city          <span class="operator">|</span> state    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> Allen     <span class="operator">|</span> Wang     <span class="operator">|</span> <span class="keyword">Null</span>          <span class="operator">|</span> <span class="keyword">Null</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bob       <span class="operator">|</span> Alice    <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId <span class="operator">=</span> <span class="number">1</span> 的地址，所以它们的城市和州返回 <span class="keyword">null</span>。</span><br><span class="line">addressId <span class="operator">=</span> <span class="number">1</span> 包含了 personId <span class="operator">=</span> <span class="number">2</span> 的地址信息。</span><br></pre></td></tr></table></figure>
+<p>编写一个SQL查询，报告2019年春季才售出的产品。即仅在2019-01-01至2019-03-31（含）之间出售的商品。<br />
+以 <strong>任意顺序</strong> 返回结果表。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/24584/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/65510/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -253,7 +352,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-08-25 11:41:48 / 修改时间：11:47:58" itemprop="dateCreated datePublished" datetime="2022-08-25T11:41:48+08:00">2022-08-25</time>
+      <time title="创建时间：2022-08-25 11:41:48 / 修改时间：11:48:21" itemprop="dateCreated datePublished" datetime="2022-08-25T11:41:48+08:00">2022-08-25</time>
     </span>
 
   
@@ -1060,108 +1159,6 @@ ActorDirector 表：</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/22639/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/60755/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/60755/" class="post-title-link" itemprop="url">374. 猜数字大小</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-22 11:40:37 / 修改时间：11:58:10" itemprop="dateCreated datePublished" datetime="2022-08-22T11:40:37+08:00">2022-08-22</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/posts/60755/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/posts/60755/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>猜数字游戏的规则如下：</p>
-<ul>
-<li>每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。</li>
-<li>如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。</li>
-</ul>
-<p>你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：</p>
-<ul>
-<li>-1：我选出的数字比你猜的数字小 pick &lt; num</li>
-<li>1：我选出的数字比你猜的数字大 pick &gt; num</li>
-<li>0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num<br />
-返回我选出的数字。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/60755/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
