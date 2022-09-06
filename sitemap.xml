@@ -536,6 +536,13 @@
   </url>
   
   <url>
+    <loc>https://jiapengcai.github.io/tags/Tool/</loc>
+    <lastmod>2022-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/tags/Leetcode/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -544,13 +551,6 @@
   
   <url>
     <loc>https://jiapengcai.github.io/tags/SQL/</loc>
-    <lastmod>2022-09-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiapengcai.github.io/tags/Tool/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
