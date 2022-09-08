@@ -21,29 +21,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="难度系数： 中等 编写 SQL 查询对分数进行排序。排名按以下规则计算:  分数应按从高到低排列。 如果两个分数相等，那么两个分数的排名应该相同。 在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。 按 score 降序返回结果表。">
+    <meta name="description" content="最近团队在搭建新的测试环境，在搭建过程中需要建立对应的新的MySQL数据库。在搭建新的数据库过程中，遇到了几个字符集相关的问题，比如：如何查看库的字符集，如何查看表的字符集，charset和collation的区别是什么。这里做一个记录和总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="178. 分数排名">
-<meta property="og:url" content="https://jiapengcai.github.io/posts/32576/index.html">
+<meta property="og:title" content="MySQL如何查看字符集">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/61274/index.html">
 <meta property="og:site_name" content="PENG">
-<meta property="og:description" content="难度系数： 中等 编写 SQL 查询对分数进行排序。排名按以下规则计算:  分数应按从高到低排列。 如果两个分数相等，那么两个分数的排名应该相同。 在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。 按 score 降序返回结果表。">
+<meta property="og:description" content="最近团队在搭建新的测试环境，在搭建过程中需要建立对应的新的MySQL数据库。在搭建新的数据库过程中，遇到了几个字符集相关的问题，比如：如何查看库的字符集，如何查看表的字符集，charset和collation的区别是什么。这里做一个记录和总结。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-17T06:46:39.000Z">
-<meta property="article:modified_time" content="2022-06-17T07:00:08.207Z">
+<meta property="og:image" content="https://jiapengcai.github.io/posts/images/1.png">
+<meta property="og:image" content="https://jiapengcai.github.io/posts/images/2.png">
+<meta property="og:image" content="https://jiapengcai.github.io/posts/images/3.png">
+<meta property="og:image" content="https://jiapengcai.github.io/posts/images/4.png">
+<meta property="article:published_time" content="2022-09-08T02:39:41.000Z">
+<meta property="article:modified_time" content="2022-09-08T03:54:53.436Z">
 <meta property="article:author" content="Jiapeng Cai">
-<meta property="article:tag" content="Leetcode">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiapengcai.github.io/posts/images/1.png">
 
 
-<link rel="canonical" href="https://jiapengcai.github.io/posts/32576/">
+<link rel="canonical" href="https://jiapengcai.github.io/posts/61274/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/32576/","path":"posts/32576/","title":"178. 分数排名"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/61274/","path":"posts/61274/","title":"MySQL如何查看字符集"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>178. 分数排名 | PENG</title>
+<title>MySQL如何查看字符集 | PENG</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78165446-2"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78165446-2","only_pageview":false}</script>
@@ -137,7 +141,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -150,6 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text"> 环境说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text"> 如何查看数据库的字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80"><span class="nav-number">2.1.</span> <span class="nav-text"> 方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C"><span class="nav-number">2.2.</span> <span class="nav-text"> 方式二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">3.</span> <span class="nav-text"> 如何查看表的字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80-2"><span class="nav-number">3.1.</span> <span class="nav-text"> 方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C-2"><span class="nav-number">3.2.</span> <span class="nav-text"> 方式二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#charset%E5%92%8Ccollation%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text"> charset和collation有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text"> 参考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -228,7 +233,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/32576/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/61274/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -241,12 +246,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="178. 分数排名 | PENG">
+      <meta itemprop="name" content="MySQL如何查看字符集 | PENG">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          178. 分数排名
+          MySQL如何查看字符集
         </h1>
 
         <div class="post-meta-container">
@@ -258,7 +263,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-06-17 14:46:39 / 修改时间：15:00:08" itemprop="dateCreated datePublished" datetime="2022-06-17T14:46:39+08:00">2022-06-17</time>
+      <time title="创建时间：2022-09-08 10:39:41 / 修改时间：11:54:53" itemprop="dateCreated datePublished" datetime="2022-09-08T10:39:41+08:00">2022-09-08</time>
     </span>
 
   
@@ -270,8 +275,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="178. 分数排名" href="/posts/32576/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::3c991d5f558f6877ff84f1992f2646ec" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="MySQL如何查看字符集" href="/posts/61274/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::992086e6d0f7d493eb227f8b590068d2" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -285,25 +290,49 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><strong>难度系数：</strong> 中等<br />
-编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
-<ul>
-<li>分数应按从高到低排列。</li>
-<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
-<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。<br />
-按 <em><strong>score</strong></em> 降序返回结果表。</li>
-</ul>
+        <p>最近团队在搭建新的测试环境，在搭建过程中需要建立对应的新的MySQL数据库。在搭建新的数据库过程中，遇到了几个字符集相关的问题，比如：如何查看库的字符集，如何查看表的字符集，charset和collation的区别是什么。这里做一个记录和总结。</p>
 <span id="more"></span>
-<p><strong>SQL结构</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> If <span class="keyword">Not</span> <span class="keyword">Exists</span> Scores (id <span class="type">int</span>, score <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line"><span class="keyword">Truncate</span> <span class="keyword">table</span> Scores</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3.5&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;3.85&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;4.0&#x27;</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Scores (id, score) <span class="keyword">values</span> (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;3.65&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>表：Scores</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> score       <span class="operator">|</span> <span class="type">decimal</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">Scores 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> score <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5</span>  <span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">6</span>  <span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> score <span class="operator">|</span> rank <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4.00</span>  <span class="operator">|</span> <span class="number">1</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.85</span>  <span class="operator">|</span> <span class="number">2</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.65</span>  <span class="operator">|</span> <span class="number">3</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3.50</span>  <span class="operator">|</span> <span class="number">4</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+------+</span></span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  Score,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">   <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Score s</span><br><span class="line">         <span class="keyword">FROM</span> Scores) tmp</span><br><span class="line">   <span class="keyword">WHERE</span> s <span class="operator">&gt;=</span> Score) Rank</span><br><span class="line"><span class="keyword">FROM</span> Scores</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Score <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
+<h2 id="环境说明"><a class="markdownIt-Anchor" href="#环境说明"></a> 环境说明</h2>
+<ol>
+<li>MySQL版本：5.7.28</li>
+<li>数据库：sakila，这个是<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/index-other.html">MySQL官网提供的数据库样例</a></li>
+</ol>
+<h2 id="如何查看数据库的字符集"><a class="markdownIt-Anchor" href="#如何查看数据库的字符集"></a> 如何查看数据库的字符集</h2>
+<h3 id="方式一"><a class="markdownIt-Anchor" href="#方式一"></a> 方式一</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use sakila;</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>返果如下：<br />
+<img src="../images/1.png" alt="image" /><br />
+从返回的结果集里我们可以看到，character_set_database的值为utf8mb4，也就是说sakila数据库所使用的字符集为utf8mb4。</p>
+<h3 id="方式二"><a class="markdownIt-Anchor" href="#方式二"></a> 方式二</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use sakila;</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;collation%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>返回如下：<br />
+<img src="../images/2.png" alt="image" /><br />
+从返回的结果集里我们可以看到，collation_database的值为utf8mb4_general_ci，也就是说sakila数据库所使用的字符集为utf8mb4。</p>
+<h2 id="如何查看表的字符集"><a class="markdownIt-Anchor" href="#如何查看表的字符集"></a> 如何查看表的字符集</h2>
+<p>sakila库里有一张actor表，我们就来查这张表的字符集。</p>
+<h3 id="方式一-2"><a class="markdownIt-Anchor" href="#方式一-2"></a> 方式一</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">table</span> status <span class="keyword">from</span> sakila <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;actor&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>返回如下：<br />
+<img src="../images/3.png" alt="image" /><br />
+从返回的结果集里我们可以看到，collation的值为utf8mb4_general_ci，也就是说actor表所使用的字符集为utf8mb4。</p>
+<h3 id="方式二-2"><a class="markdownIt-Anchor" href="#方式二-2"></a> 方式二</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> actor;</span><br></pre></td></tr></table></figure>
+<p>返回如下：<br />
+<img src="../images/4.png" alt="image" /><br />
+从返回的结果集里我们可以看到，charset的值为utf8mb4，也就是说actor表所使用的字符集为utf8mb4。</p>
+<h2 id="charset和collation有什么区别"><a class="markdownIt-Anchor" href="#charset和collation有什么区别"></a> charset和collation有什么区别</h2>
+<p>这一会charset，一会collation的，那这两个有什么区别呢？首先从中文意义上看，charset是字符集，collation是整理，然后我们可以看一下<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/charset-general.html">MySQL官网</a>做出的解释：</p>
 <blockquote>
-<p>原题链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rank-scores">https://leetcode.cn/problems/rank-scores</a></p>
+<p>A character set is a set of symbols and encodings. A collation is a set of rules for comparing characters in a character set.</p>
+</blockquote>
+<p>大意是说，charset是一系列符号和编码的集合，而collation是在使用某个特定的charset时，在字符之间进行比较的一系列规则的集合。<br />
+也就是说，charset决定了字符在数据库里最终的存储所使用的字符集，而collation则决定了字符之间如何比较，比如order by，group by，distinct等。</p>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/index-other.html">MySQL官方数据库数据样例</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/charset-general.html">Character Sets and Collations in General</a></li>
+</ol>
 </blockquote>
 
     </div>
@@ -324,7 +353,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiapengcai.github.io/posts/32576/" title="178. 分数排名">https://jiapengcai.github.io/posts/32576/</a>
+      <a href="https://jiapengcai.github.io/posts/61274/" title="MySQL如何查看字符集">https://jiapengcai.github.io/posts/61274/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -333,7 +362,6 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Leetcode/" rel="tag"><i class="fa fa-tag"></i> Leetcode</a>
               <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
           </div>
 
@@ -341,14 +369,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/58200/" rel="prev" title="181. 超过经理收入的员工">
-                  <i class="fa fa-chevron-left"></i> 181. 超过经理收入的员工
+                <a href="/posts/39168/" rel="prev" title="1407. 排名靠前的旅行者">
+                  <i class="fa fa-chevron-left"></i> 1407. 排名靠前的旅行者
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/41601/" rel="next" title="180. 连续出现的数字">
-                  180. 连续出现的数字 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -360,7 +385,7 @@
 
 
 
-    <div class="comments" id="SOHUCS" sid="3c991d5f558f6877ff84f1992f2646ec"></div>
+    <div class="comments" id="SOHUCS" sid="992086e6d0f7d493eb227f8b590068d2"></div>
 </div>
   </main>
 
