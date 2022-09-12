@@ -223,6 +223,580 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/49825/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/49825/" class="post-title-link" itemprop="url">511. 游戏玩法分析 I</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-26 11:36:02 / 修改时间：11:53:06" itemprop="dateCreated datePublished" datetime="2022-08-26T11:36:02+08:00">2022-08-26</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="511. 游戏玩法分析 I" href="/posts/49825/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::46dcd02513149cf92e0898fd68f79656" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 中等<br />
+活动表 Activity：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name  <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> player_id    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> device_id    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> event_date   <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> games_played <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line">表的主键是 (player_id, event_date)。</span><br><span class="line">这张表展示了一些游戏玩家在游戏平台上的行为活动。</span><br><span class="line">每行数据记录了一名玩家在退出平台之前，当天使用同一台设备登录平台后打开的游戏的数目（可能是 <span class="number">0</span> 个）。</span><br></pre></td></tr></table></figure>
+<p>写一条 SQL 查询语句获取每位玩家 <strong>第一次登陆平台的日期</strong> 。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/49825/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/27437/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/27437/" class="post-title-link" itemprop="url">34. 在排序数组中查找元素的第一个和最后一个位置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-26 11:01:51 / 修改时间：11:10:05" itemprop="dateCreated datePublished" datetime="2022-08-26T11:01:51+08:00">2022-08-26</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="34. 在排序数组中查找元素的第一个和最后一个位置" href="/posts/27437/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::e2bd01ddb537b4f0caf5c36b1f4eb34c" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 中等<br />
+给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。</p>
+<p>如果数组中不存在目标值 target，返回 [-1, -1]。</p>
+<p>你必须设计并实现时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 的算法解决此问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/27437/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/4972/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/4972/" class="post-title-link" itemprop="url">35. 搜索插入位置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-23 12:01:15" itemprop="dateCreated datePublished" datetime="2022-08-23T12:01:15+08:00">2022-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-08-26 11:05:11" itemprop="dateModified" datetime="2022-08-26T11:05:11+08:00">2022-08-26</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="35. 搜索插入位置" href="/posts/4972/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::2ab37c9c58c7b16f44f0150e5a13b62c" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 简单<br />
+给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>请必须使用时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 的算法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/4972/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/48979/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/48979/" class="post-title-link" itemprop="url">278. 第一个错误的版本</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-26 09:50:45 / 修改时间：09:54:00" itemprop="dateCreated datePublished" datetime="2022-08-26T09:50:45+08:00">2022-08-26</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="278. 第一个错误的版本" href="/posts/48979/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7e5490f03d898ac2207800db0c9b678b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 简单</p>
+<p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
+<p>假设你有 n 个版本 [1, 2, …, n]，你想找出导致之后所有版本出错的第一个错误的版本。</p>
+<p>你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/48979/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/24584/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/24584/" class="post-title-link" itemprop="url">1084. 销售分析III</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-25 14:43:34 / 修改时间：14:56:02" itemprop="dateCreated datePublished" datetime="2022-08-25T14:43:34+08:00">2022-08-25</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="1084. 销售分析III" href="/posts/24584/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::38463818a5dfcca25e1c4462b7804553" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 简单</p>
+<p>表:Product</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name  <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line"><span class="operator">|</span> product_id   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> product_name <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> unit_price   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+---------+</span></span><br><span class="line">Product_id是该表的主键。</span><br><span class="line">该表的每一行显示每个产品的名称和价格。</span><br></pre></td></tr></table></figure>
+<p>表:Sales</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> seller_id   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> product_id  <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> buyer_id    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> sale_date   <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> quantity    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> price       <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------ ------+---------+</span></span><br><span class="line">这个表没有主键，它可以有重复的行。</span><br><span class="line">product_id 是 Product 表的外键。</span><br><span class="line">该表的每一行包含关于一个销售的一些信息。</span><br></pre></td></tr></table></figure>
+<p>查询结果格式如下所示。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">Product <span class="keyword">table</span>:</span><br><span class="line"><span class="operator">+</span><span class="comment">------------+--------------+------------+</span></span><br><span class="line"><span class="operator">|</span> product_id <span class="operator">|</span> product_name <span class="operator">|</span> unit_price <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+--------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span> S8           <span class="operator">|</span> <span class="number">1000</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>          <span class="operator">|</span> G4           <span class="operator">|</span> <span class="number">800</span>        <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span> iPhone       <span class="operator">|</span> <span class="number">1400</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------------+--------------+------------+</span></span><br><span class="line">Sales <span class="keyword">table</span>:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+------------+----------+------------+----------+-------+</span></span><br><span class="line"><span class="operator">|</span> seller_id <span class="operator">|</span> product_id <span class="operator">|</span> buyer_id <span class="operator">|</span> sale_date  <span class="operator">|</span> quantity <span class="operator">|</span> price <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+------------+----------+------------+----------+-------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">1</span>          <span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> <span class="number">2019</span><span class="number">-01</span><span class="number">-21</span> <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="number">2000</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>          <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="number">2019</span><span class="number">-02</span><span class="number">-17</span> <span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> <span class="number">800</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">2</span>          <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> <span class="number">2019</span><span class="number">-06</span><span class="number">-02</span> <span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> <span class="number">800</span>   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>         <span class="operator">|</span> <span class="number">3</span>          <span class="operator">|</span> <span class="number">4</span>        <span class="operator">|</span> <span class="number">2019</span><span class="number">-05</span><span class="number">-13</span> <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="number">2800</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+------------+----------+------------+----------+-------+</span></span><br><span class="line">输出：</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> product_id  <span class="operator">|</span> product_name <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+--------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>           <span class="operator">|</span> S8           <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+--------------+</span></span><br><span class="line">解释:</span><br><span class="line">id为<span class="number">1</span>的产品仅在<span class="number">2019</span>年春季销售。</span><br><span class="line">id为<span class="number">2</span>的产品在<span class="number">2019</span>年春季销售，但也在<span class="number">2019</span>年春季之后销售。</span><br><span class="line">id <span class="number">3</span>的产品在<span class="number">2019</span>年春季之后销售。</span><br><span class="line">我们只退回产品<span class="number">1</span>，因为它是<span class="number">2019</span>年春季才销售的产品。</span><br></pre></td></tr></table></figure>
+<p>编写一个SQL查询，报告2019年春季才售出的产品。即仅在2019-01-01至2019-03-31（含）之间出售的商品。<br />
+以 <strong>任意顺序</strong> 返回结果表。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/24584/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/65510/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/65510/" class="post-title-link" itemprop="url">1050. 合作过至少三次的演员和导演</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-08-25 11:41:48 / 修改时间：11:48:21" itemprop="dateCreated datePublished" datetime="2022-08-25T11:41:48+08:00">2022-08-25</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="1050. 合作过至少三次的演员和导演" href="/posts/65510/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::999f7be882c5bfa4ffe164c733686e7a" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>难度系数：</strong> 简单<br />
+ActorDirector 表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> actor_id    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> director_id <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="type">timestamp</span>   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="type">timestamp</span> 是这张表的主键.</span><br></pre></td></tr></table></figure>
+<p>写一条SQL查询语句获取合作过至少三次的演员和导演的 id 对 (actor_id, director_id)</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/65510/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/57538/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -582,586 +1156,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/18881/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/18881/" class="post-title-link" itemprop="url">367. 有效的完全平方数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-24 10:13:10 / 修改时间：10:26:10" itemprop="dateCreated datePublished" datetime="2022-08-24T10:13:10+08:00">2022-08-24</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="367. 有效的完全平方数" href="/posts/18881/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::99e3dab8b3aac3c3f63f93547f31b89c" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>难度系数：</strong> 简单</p>
-<p>给定一个 <strong>正整数</strong> num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。</p>
-<p><strong>进阶：</strong> 不要 使用任何内置的库函数，如  sqrt 。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/18881/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/12804/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/12804/" class="post-title-link" itemprop="url">852. 山脉数组的峰顶索引</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-23 16:37:52 / 修改时间：16:45:17" itemprop="dateCreated datePublished" datetime="2022-08-23T16:37:52+08:00">2022-08-23</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="852. 山脉数组的峰顶索引" href="/posts/12804/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::a6c0a6f80381e61c561f60a272d2aaa0" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>难度系数：</strong> 中等</p>
-<p>符合下列属性的数组 arr 称为 山脉数组 ：</p>
-<ul>
-<li>arr.length &gt;= 3</li>
-<li>存在 i（0 &lt; i &lt; arr.length - 1）使得：
-<ol>
-<li>arr[0] &lt; arr[1] &lt; … arr[i-1] &lt; arr[i]</li>
-<li>arr[i] &gt; arr[i+1] &gt; … &gt; arr[arr.length - 1]</li>
-</ol>
-</li>
-</ul>
-<p>给你由整数组成的山脉数组 arr ，返回任何满足 arr[0] &lt; arr[1] &lt; … arr[i - 1] &lt; arr[i] &gt; arr[i + 1] &gt; … &gt; arr[arr.length - 1] 的下标 i 。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/12804/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/22639/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/22639/" class="post-title-link" itemprop="url">584. 寻找用户推荐人</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-22 22:31:09" itemprop="dateCreated datePublished" datetime="2022-08-22T22:31:09+08:00">2022-08-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-08-23 10:01:03" itemprop="dateModified" datetime="2022-08-23T10:01:03+08:00">2022-08-23</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="584. 寻找用户推荐人" href="/posts/22639/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::fd374be4e3b4b6c6f1b8cdb80f1953b4" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>难度系数：</strong> 简单<br />
-给定表 customer ，里面保存了所有客户信息和他们的推荐人。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span> id   <span class="operator">|</span> name <span class="operator">|</span> referee_id<span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-----------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> Will <span class="operator">|</span>      <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">2</span> <span class="operator">|</span> Jane <span class="operator">|</span>      <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> Alex <span class="operator">|</span>         <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">4</span> <span class="operator">|</span> Bill <span class="operator">|</span>      <span class="keyword">NULL</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">5</span> <span class="operator">|</span> Zack <span class="operator">|</span>         <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">6</span> <span class="operator">|</span> Mark <span class="operator">|</span>         <span class="number">2</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-----------+</span></span><br></pre></td></tr></table></figure>
-<p>写一个查询语句，返回一个客户列表，列表中客户的推荐人的编号都 不是 2。<br />
-对于上面的示例数据，结果为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line"><span class="operator">|</span> name <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br><span class="line"><span class="operator">|</span> Will <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Jane <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bill <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Zack <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/22639/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/60755/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/60755/" class="post-title-link" itemprop="url">374. 猜数字大小</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-22 11:40:37 / 修改时间：11:58:10" itemprop="dateCreated datePublished" datetime="2022-08-22T11:40:37+08:00">2022-08-22</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="374. 猜数字大小" href="/posts/60755/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::5cf28cf36c424572269b214b125e7c6c" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>猜数字游戏的规则如下：</p>
-<ul>
-<li>每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。</li>
-<li>如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。</li>
-</ul>
-<p>你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：</p>
-<ul>
-<li>-1：我选出的数字比你猜的数字小 pick &lt; num</li>
-<li>1：我选出的数字比你猜的数字大 pick &gt; num</li>
-<li>0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num<br />
-返回我选出的数字。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/60755/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/54442/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/54442/" class="post-title-link" itemprop="url">704. 二分查找</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-22 10:34:35 / 修改时间：10:38:45" itemprop="dateCreated datePublished" datetime="2022-08-22T10:34:35+08:00">2022-08-22</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="704. 二分查找" href="/posts/54442/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::40c0792e138892de0dfa4b71aeb84632" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>难度系数：</strong> 简单</p>
-<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/54442/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/43131/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/43131/" class="post-title-link" itemprop="url">《小岛经济学》读后感</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-08-19 21:29:05 / 修改时间：21:34:22" itemprop="dateCreated datePublished" datetime="2022-08-19T21:29:05+08:00">2022-08-19</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="《小岛经济学》读后感" href="/posts/43131/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::248cc2df96fdcd1fc813e1f449fe5608" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>作者： 彼得·希夫 / 安德鲁·希夫（Peter D. Schiff / Andrew J. Schiff）<br />
-推荐系数：3/5<br />
-1、《小岛经济学》以美国经济为原型，用充满故事趣味性的方式，配合大量的配图，描述了资本是如何积累的、货币的起源、政府是如何诞生、贸易是如何发展的，通货膨胀是如何发生的，最后对中美贸易战做出了预判。相比《经济学原理》，这本书更接地气。<br />
-2、可能我比较蠢，最后还是没看懂通货膨胀及货币超发的关系及经济环境演变的内在逻辑。看评论，很多人说是经济学的入门读物，但是我怎么觉得顶多算是科普。<br />
-3、看的过程总觉得，作者好像很推崇自由经济，政府插手就会坏事。上网Google了一下，原来这是典型奥地利学派，与之相对的是凯恩斯主义。不知作者是不是把人心想得太美好了，因为资本都是逐利的。市场经济会受“看不见的手”调整，但是任由其自由发展仿佛也不对，还是需要“看得见的手”进行约束，反过来也一样。人家政治体系都还会搞三权分立呢，因为人都是会利己的，自私的基因从我们诞生就已经存在了。<br />
-4、也不能一棒子打死吧，里面还是有些不错的，比如要直面错误，勤劳致富等。</p>
-
       
     </div>
 
