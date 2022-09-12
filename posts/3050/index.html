@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/favicon-16x16.png">
+  <link rel="mask-icon" href="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="《高性能MySQL》第三版在章节1.3提到了脏读，不可重复读，幻读三个概念（中文版第9页），如下表所示，但是翻了下索引，却发现没有对这三个概念的解释，而这三个概念却是面试热点问题之一。本文通过一些实验案例来说明什么是脏读，不可重复读以及幻读。    隔离级别 脏读可能性 不可重复读可能性 幻读可能性 加锁读     READ UNCOMMITTED Yes Yes Yes No   READ CO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL环境下的脏读、不可重复读与幻读">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/3050/index.html">
+<meta property="og:site_name" content="PENG">
+<meta property="og:description" content="《高性能MySQL》第三版在章节1.3提到了脏读，不可重复读，幻读三个概念（中文版第9页），如下表所示，但是翻了下索引，却发现没有对这三个概念的解释，而这三个概念却是面试热点问题之一。本文通过一些实验案例来说明什么是脏读，不可重复读以及幻读。    隔离级别 脏读可能性 不可重复读可能性 幻读可能性 加锁读     READ UNCOMMITTED Yes Yes Yes No   READ CO">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209111121712.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121012147.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209111137897.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121016168.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121035156.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121040710.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121100184.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121113638.png">
+<meta property="article:published_time" content="2022-09-09T03:53:38.000Z">
+<meta property="article:modified_time" content="2022-09-12T03:23:56.909Z">
+<meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209111121712.png">
+
+
+<link rel="canonical" href="https://jiapengcai.github.io/posts/3050/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/3050/","path":"posts/3050/","title":"MySQL环境下的脏读、不可重复读与幻读"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySQL环境下的脏读、不可重复读与幻读 | PENG</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78165446-2"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78165446-2","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?c2245210e9e4ae6d32a120a571efc6d6"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">PENG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text"> 实验环境及准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text"> 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">1.2.</span> <span class="nav-text"> 准备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB"><span class="nav-number">2.</span> <span class="nav-text"> 脏读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.2.</span> <span class="nav-text"> 实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text"> 不可重复读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="nav-number">3.1.</span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.2.</span> <span class="nav-text"> 实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB"><span class="nav-number">4.</span> <span class="nav-text"> 幻读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-3"><span class="nav-number">4.1.</span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-3"><span class="nav-number">4.2.</span> <span class="nav-text"> 实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E4%B8%8E%E5%B9%BB%E8%AF%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text"> 不可重复读与幻读的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%81%A2%E5%A4%8D"><span class="nav-number">6.</span> <span class="nav-text"> 环境恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text"> 参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiapeng Cai"
+      src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jiapeng Cai</p>
+  <div class="site-description" itemprop="description">Life can be programmed.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jiapengcai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jiapengcai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:635793@gmail.com" title="E-Mail → mailto:635793@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/1988393071" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;1988393071" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/3050/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MySQL环境下的脏读、不可重复读与幻读 | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL环境下的脏读、不可重复读与幻读
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-09 11:53:38" itemprop="dateCreated datePublished" datetime="2022-09-09T11:53:38+08:00">2022-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-12 11:23:56" itemprop="dateModified" datetime="2022-09-12T11:23:56+08:00">2022-09-12</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="MySQL环境下的脏读、不可重复读与幻读" href="/posts/3050/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::60a7f189bbef8f5494b9149024552d80" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>《高性能MySQL》第三版在章节1.3提到了<strong>脏读，不可重复读，幻读</strong>三个概念（中文版第9页），如下表所示，但是翻了下索引，却发现没有对这三个概念的解释，而这三个概念却是面试热点问题之一。本文通过一些实验案例来说明什么是<strong>脏读，不可重复读以及幻读</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读可能性</th>
+<th>不可重复读可能性</th>
+<th>幻读可能性</th>
+<th>加锁读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITTED</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="实验环境及准备"><a class="markdownIt-Anchor" href="#实验环境及准备"></a> 实验环境及准备</h2>
+<h3 id="环境"><a class="markdownIt-Anchor" href="#环境"></a> 环境</h3>
+<ol>
+<li>MySQL版本：5.7.28</li>
+<li>数据库：sakila，这个是<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/index-other.html">MySQL官网提供的数据库样例</a></li>
+<li>数据表：actor</li>
+</ol>
+<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h3>
+<p>在接下来的实验里，我们将开启两个MySQL命令行窗口，所以我们需要先做好一些<strong>全局设置</strong>，主要包括隔离级别的设置和事务提交模式的设置。</p>
+<ol>
+<li><strong>设置隔离级别</strong><br />
+MySQL默认的隔离级别为REPEATABLE READ（可重复读），语句为：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@tx</span>_isolation;</span><br></pre></td></tr></table></figure>
+结果如下图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209111121712.png" alt="img" /><br />
+根据上表，当隔离级别为READ UNCOMMITTED（读未提交）时，脏读，不可重复读和幻读都可能会出现，因此，我们在实验环境里把<strong>全局</strong>的隔离级别设置为此级别，语句为：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> transaction isolation level read uncommitted;</span><br></pre></td></tr></table></figure>
+设置完后，我们需要退出当前会话（session）窗口，重新进入后可以检查下设置是否生效，如下图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121012147.png" alt="img" /></li>
+<li><strong>关闭事务自动提交</strong><br />
+MySQL默认的事务提交模式是auto commit（自动提交），如下图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209111137897.png" alt="img" /><br />
+为了方便实验，我们在实验环境里关闭自动提交，即改为手动提交，同样，也是<strong>全局</strong>配置，语句为：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> autocommit<span class="operator">=</span><span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+退出当前会话窗口后，重新进入检查设置是否生效，如下图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121016168.png" alt="img" /></li>
+</ol>
+<p>至此，实验所需的设置就处理好了，在环境恢复前，开启的任何MySQL命令行窗口的隔离级别都是READ UNCOMMITTED，而且事务提交模式都为手动提交。下面开始进行实验。</p>
+<h2 id="脏读"><a class="markdownIt-Anchor" href="#脏读"></a> 脏读</h2>
+<h3 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h3>
+<p><strong>脏读是指一个事务未提交的数据被另一个事务读到了。</strong></p>
+<h3 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h3>
+<ol>
+<li>开启两个MySQL命令行窗口；</li>
+<li>窗口A开启事务，并对数据进行更新，此时窗口A还未提交事务；</li>
+<li>窗口B查询窗口A更新的相应数据，发现读到了窗口A还未提交的数据，如图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121035156.png" alt="img" /></li>
+<li>窗口A进行数据回滚，窗口B再一次查询该条数据，读回来的数据仍旧是窗口A更新前的数据，如果程序里使用了回滚前的数据，则产生了脏读，如图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121040710.png" alt="img" /></li>
+</ol>
+<h2 id="不可重复读"><a class="markdownIt-Anchor" href="#不可重复读"></a> 不可重复读</h2>
+<h3 id="概念-2"><a class="markdownIt-Anchor" href="#概念-2"></a> 概念</h3>
+<p><strong>事务A访问了一条数据，在事务A结束前，事务B修改了该记录，此时如果事务A再一次访问该数据，会发现两次读取的结果不一样。</strong></p>
+<h3 id="实验-2"><a class="markdownIt-Anchor" href="#实验-2"></a> 实验</h3>
+<ol>
+<li>开启两个MySQL命令行窗口；</li>
+<li>窗口A开启事务，读取一条数据，此时窗口A还未结束事务；</li>
+<li>窗口B开启事务并对窗口A读取的事务进行更新，更新完后提交；</li>
+<li>窗口A再次读取该条数据，发现读取的数据与之前的不一致，出现了不可重复读，如图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121100184.png" alt="img" /></li>
+</ol>
+<h2 id="幻读"><a class="markdownIt-Anchor" href="#幻读"></a> 幻读</h2>
+<h3 id="概念-3"><a class="markdownIt-Anchor" href="#概念-3"></a> 概念</h3>
+<p><strong>事务A根据条件进行数据统计，在事务A结束前，事务B插入或删除了数据并提交，此时如果事务A再一次进行相同条件的数据统计，会发现两次的统计结果不一样。</strong></p>
+<h3 id="实验-3"><a class="markdownIt-Anchor" href="#实验-3"></a> 实验</h3>
+<ol>
+<li>开启两个MySQL命令行窗口；</li>
+<li>窗口A开启事务进行数据统计，此时窗口A还未结束事务；</li>
+<li>窗口B开启事务并插入新数据，插入完后提交；</li>
+<li>窗口A再次进行相同条件的数据统计，发现两次的统计结果不一致，出现了幻读，如图所示：<br />
+<img src="https://cdn.jsdelivr.net/gh/jiapengcai/resources@main/images/202209121113638.png" alt="img" /></li>
+</ol>
+<h2 id="不可重复读与幻读的区别"><a class="markdownIt-Anchor" href="#不可重复读与幻读的区别"></a> 不可重复读与幻读的区别</h2>
+<p>不可重复读和幻读在步骤流程上看起来可能会有点类似，但其中还是有区别的。不可重复读是读取了其它事务更新的数据，针对的是<strong>update</strong>操作。幻读是读取了其它事务新增的数据，针对的是<strong>insert或delete</strong>操作</p>
+<h2 id="环境恢复"><a class="markdownIt-Anchor" href="#环境恢复"></a> 环境恢复</h2>
+<p>实验结束后，对环境恢复只需反向执行实验准备的语句即可：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> transaction isolation level repeatable read;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> autocommit<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/index-other.html">MySQL官方数据库数据样例</a></li>
+</ol>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/3050/" title="MySQL环境下的脏读、不可重复读与幻读">https://jiapengcai.github.io/posts/3050/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/61274/" rel="prev" title="MySQL如何查看字符集">
+                  <i class="fa fa-chevron-left"></i> MySQL如何查看字符集
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="60a7f189bbef8f5494b9149024552d80"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-blog"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiapeng Cai</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyw6eBnnJ","appkey":"d9a894d6deebad5a3b69a40a6d47e519"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
