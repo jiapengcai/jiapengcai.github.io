@@ -253,7 +253,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-09-14 18:17:38 / 修改时间：18:17:45" itemprop="dateCreated datePublished" datetime="2022-09-14T18:17:38+08:00">2022-09-14</time>
+      <time title="创建时间：2022-09-14 18:17:38 / 修改时间：18:24:11" itemprop="dateCreated datePublished" datetime="2022-09-14T18:17:38+08:00">2022-09-14</time>
     </span>
 
   
@@ -282,23 +282,14 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h1>
 <p>最近在查找Redis的key过期策略相关的资料，发现网上的中文内容大部分都是互相复制的，后来换了英文搜索，觉得还是<a target="_blank" rel="noopener" href="https://redis.io/commands/expire/#how-redis-expires-keys">官方文档</a>才是权威。本文就是译自其中介绍过期缓存key的处理算法的内容。</p>
-<h1 id="译文"><a class="markdownIt-Anchor" href="#译文"></a> 译文</h1>
-<p>Redis通过两种方式来处理过期的key：被动方式和主动方式。<br />
-当客户端尝试访问某个key时，如果Redis发现该key已经超时了，此时该key会被过期。<br />
-当然，这么做是不够的，毕竟有些key可能永远不会被再次访问。由于这些key也应该被过期，Redis会定时随机测试部分key看是否要将其过期。所有过期的key都将被从内存空间里删除。<br />
-Redis每秒会做10次以下的步骤：</p>
-<ol>
-<li>随机测试20个key进行相关的过期检测。</li>
-<li>删除所有已过期key。</li>
-<li>如果超过25%的key都过期了，重新开始步骤1。</li>
-</ol>
-<p>这是一个很简单的概率算法，其基本思想是：假设我们的随机样本代表了整个key集，然后我们不断让那些可能需要被过期的key都过期掉，直到这个比例低于25%<br />
-也就是说，在任意一个时间内存里已过期的key的量的最大值为每秒最大写入操作量除以 4。</p>
-<h1 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h1>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://redis.io/commands/expire/#how-redis-expires-keys">How Redis expires keys</a></p>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/56398/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
