@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiapengcai.github.io/posts/22056/</loc>
+    
+    <lastmod>2022-09-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/posts/45568/</loc>
     
     <lastmod>2022-09-14</lastmod>
@@ -542,13 +551,6 @@
 
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Algorithm/</loc>
-    <lastmod>2022-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jiapengcai.github.io/tags/Translation/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -563,14 +565,21 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/SQL/</loc>
+    <loc>https://jiapengcai.github.io/tags/Gerrit/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Gerrit/</loc>
+    <loc>https://jiapengcai.github.io/tags/Algorithm/</loc>
+    <lastmod>2022-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiapengcai.github.io/tags/SQL/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -642,14 +651,14 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
