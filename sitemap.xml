@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiapengcai.github.io/posts/56398/</loc>
+    
+    <lastmod>2022-09-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/posts/45568/</loc>
     
     <lastmod>2022-09-14</lastmod>
@@ -551,7 +560,7 @@
 
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Translation/</loc>
+    <loc>https://jiapengcai.github.io/tags/Gerrit/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -565,6 +574,13 @@
   </url>
   
   <url>
+    <loc>https://jiapengcai.github.io/tags/Translation/</loc>
+    <lastmod>2022-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/tags/SQL/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -572,14 +588,14 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Tool/</loc>
+    <loc>https://jiapengcai.github.io/tags/Redis/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Gerrit/</loc>
+    <loc>https://jiapengcai.github.io/tags/Tool/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -616,13 +632,6 @@
 
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2022-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jiapengcai.github.io/categories/%E9%9A%8F%E7%AC%94%E5%A4%87%E5%BF%98/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -637,14 +646,21 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/</loc>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/MySQL%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Redis%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
+    <lastmod>2022-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -680,6 +696,13 @@
   
   <url>
     <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/RabbitMQ-Spring-AMQP%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2022-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/MySQL%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
     <lastmod>2022-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
