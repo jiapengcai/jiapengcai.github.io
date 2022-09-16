@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiapengcai.github.io/posts/39486/</loc>
+    
+    <lastmod>2022-09-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/posts/22056/</loc>
     
     <lastmod>2022-09-16</lastmod>
@@ -21,15 +30,6 @@
   
   <url>
     <loc>https://jiapengcai.github.io/posts/61274/</loc>
-    
-    <lastmod>2022-09-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiapengcai.github.io/posts/39486/</loc>
     
     <lastmod>2022-09-16</lastmod>
     
@@ -590,13 +590,6 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Redis/</loc>
-    <lastmod>2022-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jiapengcai.github.io/tags/SQL/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -604,7 +597,7 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Leetcode/</loc>
+    <loc>https://jiapengcai.github.io/tags/Redis/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -612,6 +605,13 @@
   
   <url>
     <loc>https://jiapengcai.github.io/tags/Tool/</loc>
+    <lastmod>2022-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiapengcai.github.io/tags/Leetcode/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -669,6 +669,13 @@
   </url>
   
   <url>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Redis%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
+    <lastmod>2022-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Google%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E8%A7%84%E7%BA%A6/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -690,7 +697,7 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Redis%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
+    <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -698,13 +705,6 @@
   
   <url>
     <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
