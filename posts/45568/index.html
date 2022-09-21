@@ -29,7 +29,7 @@
 <meta property="og:description" content="说明 本文译自MySQL 5.7官方文档的章节14.7.1，InnoDB的锁类型。  译文 本章节介绍了InnoDB所使用的锁类型。  共享锁和排他锁（Shared and Exclusive Locks） 意向锁（Intention Locks） 记录锁（Record Locks） 间隙锁（Gap Locks） 临键锁（Next-Key Locks） 插入意向锁（Insert Intentio">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-14T03:50:09.000Z">
-<meta property="article:modified_time" content="2022-09-14T06:10:43.358Z">
+<meta property="article:modified_time" content="2022-09-21T03:22:27.220Z">
 <meta property="article:author" content="Jiapeng Cai">
 <meta property="article:tag" content="Translation">
 <meta property="article:tag" content="SQL">
@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text"> 说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%91%E6%96%87"><span class="nav-number">2.</span> <span class="nav-text"> 译文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E9%94%81%E5%92%8C%E6%8E%92%E4%BB%96%E9%94%81shared-and-exclusive-locks"><span class="nav-number">2.1.</span> <span class="nav-text"> 共享锁和排他锁（Shared and Exclusive Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%8F%E5%90%91%E9%94%81intention-locks"><span class="nav-number">2.2.</span> <span class="nav-text"> 意向锁（Intention Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E9%94%81record-locks"><span class="nav-number">2.3.</span> <span class="nav-text"> 记录锁（Record Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%B4%E9%9A%99%E9%94%81gap-locks"><span class="nav-number">2.4.</span> <span class="nav-text"> 间隙锁（Gap Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E9%94%AE%E9%94%81next-key-locks"><span class="nav-number">2.5.</span> <span class="nav-text"> 临键锁（Next-Key Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81insert-intention-locks"><span class="nav-number">2.6.</span> <span class="nav-text"> 插入意向锁（Insert Intention Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E%E9%94%81auto-inc-locks"><span class="nav-number">2.7.</span> <span class="nav-text"> 自增锁（AUTO-INC Locks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95%E7%9A%84%E8%B0%93%E8%AF%8D%E9%94%81predicate-locks-for-spatial-indexes"><span class="nav-number">2.8.</span> <span class="nav-text"> 空间索引的谓词锁（Predicate Locks for Spatial Indexes）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text"> 原文</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text"> 说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%91%E6%96%87"><span class="nav-number">2.</span> <span class="nav-text"> 译文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E9%94%81%E5%92%8C%E6%8E%92%E4%BB%96%E9%94%81shared-and-exclusive-locks"><span class="nav-number">2.1.</span> <span class="nav-text"> 共享锁和排他锁（Shared and Exclusive Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%84%8F%E5%90%91%E9%94%81intention-locks"><span class="nav-number">2.2.</span> <span class="nav-text"> 意向锁（Intention Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E9%94%81record-locks"><span class="nav-number">2.3.</span> <span class="nav-text"> 记录锁（Record Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%B4%E9%9A%99%E9%94%81gap-locks"><span class="nav-number">2.4.</span> <span class="nav-text"> 间隙锁（Gap Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B4%E9%94%AE%E9%94%81next-key-locks"><span class="nav-number">2.5.</span> <span class="nav-text"> 临键锁（Next-Key Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81insert-intention-locks"><span class="nav-number">2.6.</span> <span class="nav-text"> 插入意向锁（Insert Intention Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E%E9%94%81auto-inc-locks"><span class="nav-number">2.7.</span> <span class="nav-text"> 自增锁（AUTO-INC Locks）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95%E7%9A%84%E8%B0%93%E8%AF%8D%E9%94%81predicate-locks-for-spatial-indexes"><span class="nav-number">2.8.</span> <span class="nav-text"> 空间索引的谓词锁（Predicate Locks for Spatial Indexes）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text"> 原文</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,9 +257,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-09-14 11:50:09 / 修改时间：14:10:43" itemprop="dateCreated datePublished" datetime="2022-09-14T11:50:09+08:00">2022-09-14</time>
+      <time title="创建时间：2022-09-14 11:50:09" itemprop="dateCreated datePublished" datetime="2022-09-14T11:50:09+08:00">2022-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-21 11:22:27" itemprop="dateModified" datetime="2022-09-21T11:22:27+08:00">2022-09-21</time>
     </span>
 
   
@@ -286,9 +292,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h1>
+        <h2 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h2>
 <p>本文译自<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">MySQL 5.7官方文档的章节14.7.1，InnoDB的锁类型</a>。</p>
-<h1 id="译文"><a class="markdownIt-Anchor" href="#译文"></a> 译文</h1>
+<h2 id="译文"><a class="markdownIt-Anchor" href="#译文"></a> 译文</h2>
 <p>本章节介绍了InnoDB所使用的锁类型。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">共享锁和排他锁（Shared and Exclusive Locks）</a></li>
@@ -301,7 +307,7 @@
 <li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-predicate-locks">空间索引的谓词锁（Predicate Locks for Spatial Indexes）</a></li>
 </ul>
 <span id="more"></span>
-<h2 id="共享锁和排他锁shared-and-exclusive-locks"><a class="markdownIt-Anchor" href="#共享锁和排他锁shared-and-exclusive-locks"></a> 共享锁和排他锁（Shared and Exclusive Locks）</h2>
+<h3 id="共享锁和排他锁shared-and-exclusive-locks"><a class="markdownIt-Anchor" href="#共享锁和排他锁shared-and-exclusive-locks"></a> 共享锁和排他锁（Shared and Exclusive Locks）</h3>
 <p>InnoDB实现了两种标准的行级锁：共享锁（也称为S锁）和排他锁（也称为X锁）。</p>
 <ul>
 <li>共享锁允许持有该锁的事务读取一行记录。</li>
@@ -313,7 +319,7 @@
 <li>如果T2申请的是排他锁，那么将不会被立即满足。</li>
 </ul>
 <p>如果事务T1持有记录r的排他锁，那么，如果此时另一个不同的事务T2无论发起了申请记录r的哪一类的锁请求，都将不会被立即满足。事务T2必须等待事务T1释放它在记录r上的锁。</p>
-<h2 id="意向锁intention-locks"><a class="markdownIt-Anchor" href="#意向锁intention-locks"></a> 意向锁（Intention Locks）</h2>
+<h3 id="意向锁intention-locks"><a class="markdownIt-Anchor" href="#意向锁intention-locks"></a> 意向锁（Intention Locks）</h3>
 <p>InnoDB支持多种粒度的锁，允许了行级锁和表级锁的共存。例如，类似于<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html">LOCK TABLES … WRITE</a>的语句会在指定表上加上排他锁（X锁）。为了使得多种粒度级别的锁变得可行，InnoDB使用了意向锁。意向锁是表级别的锁，它指明了一个事务对表中的记录将需要哪种类型的锁（共享还是排他）。意向锁有两类：</p>
 <ul>
 <li>意向共享锁（即IS锁），指明一个事务将会在表的某些行上设置一个共享锁。</li>
@@ -371,12 +377,12 @@
 <p>意向锁不会阻塞全表请求（例如，<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html">LOCK TABLES … WRITE</a>）之外的任务东西。意向锁的主要目的是表明有事务正锁着某行记录，或者将要锁住表的某行记录。</p>
 <p>意向锁的事务数据在<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">TABLE</span> LOCK <span class="keyword">table</span> `test`.`t` trx id <span class="number">10080</span> lock mode IX</span><br></pre></td></tr></table></figure>
-<h2 id="记录锁record-locks"><a class="markdownIt-Anchor" href="#记录锁record-locks"></a> 记录锁（Record Locks）</h2>
+<h3 id="记录锁record-locks"><a class="markdownIt-Anchor" href="#记录锁record-locks"></a> 记录锁（Record Locks）</h3>
 <p>记录锁是一种在索引记录上的锁。例如，SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE; 这条语句阻止了其它事务对条件为t.c1值为10的记录进行插入，更新或者删除操作。</p>
 <p>记录锁总是锁定索引的记录，即使表里并没有定义索引。在这种情况下，InnoDB创建了一个隐藏的聚簇索引并使用这个索引来锁定记录。详见<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-index-types.html">章节14.6.2.1，“聚簇索引和二级索引”</a></p>
 <p>记录锁的事务数据在<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">58</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`t`</span><br><span class="line">trx id <span class="number">10078</span> lock_mode X locks rec but <span class="keyword">not</span> gap</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">2</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">8000000</span>a; <span class="keyword">asc</span>     ;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">00000000274</span>f; <span class="keyword">asc</span>     <span class="string">&#x27;O;;</span></span><br><span class="line"><span class="string"> 2: len 7; hex b60000019d0110; asc        ;;</span></span><br></pre></td></tr></table></figure>
-<h2 id="间隙锁gap-locks"><a class="markdownIt-Anchor" href="#间隙锁gap-locks"></a> 间隙锁（Gap Locks）</h2>
+<h3 id="间隙锁gap-locks"><a class="markdownIt-Anchor" href="#间隙锁gap-locks"></a> 间隙锁（Gap Locks）</h3>
 <p>间隙锁是在索引记录之间的间隙上的锁，或者是在第一条索引记录之前或最后一条索引记录之后的间隙上的锁。例如，SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE; 这条语句阻止了其它事务将值15插入列t.c1，无论该列是否已经有这个值。这是因为，这个范围内的所有间隙都被锁了。</p>
 <p>一个间隙可能会跨越单个索引值，多个索引值，甚至是空的。</p>
 <p>间隙锁是性能与并发之间的折中手段之一，被用于某些事务隔离级别。</p>
@@ -387,7 +393,7 @@
 <p>InnoDB中的间隙锁纯粹是为了抑制，意思是说，间隙锁唯一的目的是为了防止其它事务往间隙里插入数据。间隙锁可以彼此共存。</p>
 <p>你可以通过把事务隔离级别设置为<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_read-committed">READ COMMITTED（读提交）</a>或者启用<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_locks_unsafe_for_binlog">innodb_locks_unsafe_for_binlog</a>系统参数（目前这个参数已经过时），来禁用间隙锁。在这种情况下，间隙锁对搜索和索引扫描禁用，仅用于外键约束检查和重复键检查。</p>
 <p>使用<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_read-committed">READ COMMITTED（读提交）</a>或者启用<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_locks_unsafe_for_binlog">innodb_locks_unsafe_for_binlog</a>还有其它的影响。在MySQL评估WHERE条件后，对于不匹配的记录行，记录锁将会被释放。对于UPDATE语句，InnoDB会进行“半一致性”读，这样它将返回最新的提交版本给到MySQL，以便MySQL确定该记录行是否符合该条UPDATE语句的WHERE条件。</p>
-<h2 id="临键锁next-key-locks"><a class="markdownIt-Anchor" href="#临键锁next-key-locks"></a> 临键锁（Next-Key Locks）</h2>
+<h3 id="临键锁next-key-locks"><a class="markdownIt-Anchor" href="#临键锁next-key-locks"></a> 临键锁（Next-Key Locks）</h3>
 <p>临键锁是索引记录上的记录锁和索引前的间隙上的间隙锁的组合。</p>
 <p>InnoDB以这样的一种方式来执行行级锁：当它搜索或者扫描表索引时，它会在它遇到的索引记录上设置共享或排他锁。因此，行级锁实际上是索引记录锁。一个索引记录上的临键锁也会影响该索引记录前的间隙。也就是说，临键锁是索引记录锁加上索引记录前面的间隙上的间隙锁。如果一个会话在索引中的记录行R上持有一个共享或者排他锁，那么其它会话则不能在索引顺序中R前面的间隙中插入新的索引记录。</p>
 <p>假设一个索引包含了值10，11，13和20。这个索引可能存在的临键锁包含一下几个区间，其中圆括号表示不包含区间端点，方括号表示包含区间端点：</p>
@@ -396,7 +402,7 @@
 <p>InnoDB的默认事务隔离级别为<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read">REPEATABLE READ（可重复读）</a>。在这种条件下，InnoDB采用临键锁来搜索和索引扫描，从而避免了幻读（详见<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-next-key-locking.html">章节14.7.4，“幻行记录”</a>）。</p>
 <p>临键锁的事务数据在<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">58</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`t`</span><br><span class="line">trx id <span class="number">10080</span> lock_mode X</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">1</span> PHYSICAL RECORD: n_fields <span class="number">1</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">8</span>; hex <span class="number">73757072656</span>d756d; <span class="keyword">asc</span> supremum;;</span><br><span class="line"></span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">2</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">8000000</span>a; <span class="keyword">asc</span>     ;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">00000000274</span>f; <span class="keyword">asc</span>     <span class="string">&#x27;O;;</span></span><br><span class="line"><span class="string"> 2: len 7; hex b60000019d0110; asc        ;;</span></span><br></pre></td></tr></table></figure>
-<h2 id="插入意向锁insert-intention-locks"><a class="markdownIt-Anchor" href="#插入意向锁insert-intention-locks"></a> 插入意向锁（Insert Intention Locks）</h2>
+<h3 id="插入意向锁insert-intention-locks"><a class="markdownIt-Anchor" href="#插入意向锁insert-intention-locks"></a> 插入意向锁（Insert Intention Locks）</h3>
 <p>插入意向锁是一种在插入行之前由<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/insert.html">INSERT</a>操作设置的间隙锁。此锁表示插入的意图：如果插入到同一索引间隙中的多个事务未插入到间隙内的同一位置，则它们无需相互等待。 假设有两条索引记录，值分别为4和7的。此时，同时有两个单独事务，分别尝试插入值5和6，在获得插入行的排他锁之前，每个事务使用插入意向锁锁定4和7之间的间隙，但不会相互阻塞，因为行是不冲突的。</p>
 <p>以下这个示例演示了一个在获取到被插入行记录的排他锁之前先获取插入意向锁的事务。示例里包含了两个客户端，A和B。</p>
 <p>客户端A创建了一个包含两条索引记录（90和102）的表，然后开启一个事务，该事务在ID大于100的索引记录上放置了一个排他锁。这个排他锁包含了记录102之前的间隙锁：</p>
@@ -405,15 +411,15 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> child (id) <span class="keyword">VALUES</span> (<span class="number">101</span>);</span><br></pre></td></tr></table></figure>
 <p>插入意向锁的事务数据在<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">31</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`child`</span><br><span class="line">trx id <span class="number">8731</span> lock_mode X locks gap before rec <span class="keyword">insert</span> intention waiting</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">3</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">80000066</span>; <span class="keyword">asc</span>    f;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">000000002215</span>; <span class="keyword">asc</span>     &quot; ;;</span><br><span class="line"> 2: len 7; hex 9000000172011c; asc     r  ;;...</span><br></pre></td></tr></table></figure>
-<h2 id="自增锁auto-inc-locks"><a class="markdownIt-Anchor" href="#自增锁auto-inc-locks"></a> 自增锁（AUTO-INC Locks）</h2>
+<h3 id="自增锁auto-inc-locks"><a class="markdownIt-Anchor" href="#自增锁auto-inc-locks"></a> 自增锁（AUTO-INC Locks）</h3>
 <p>自增锁是一种特殊的表级锁，由插入到具有AUTO_INCREMENT列的表中的事务使用。在最简单的情况下，如果一个事务正在向表中插入值，则任何其他事务如果要向该表进行插入则都必须等待，以便第一个事务插入的行能收到连续的主键值。</p>
 <p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a>参数控制着自增锁所采用的算法。这个参数允许你选择如何在可预测的自增值序列和插入操作的最大并发之间做权衡。</p>
 <p>更多信息详见<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html">章节14.6.1.6，“InnoDB中的自增处理”</a>。</p>
-<h2 id="空间索引的谓词锁predicate-locks-for-spatial-indexes"><a class="markdownIt-Anchor" href="#空间索引的谓词锁predicate-locks-for-spatial-indexes"></a> 空间索引的谓词锁（Predicate Locks for Spatial Indexes）</h2>
+<h3 id="空间索引的谓词锁predicate-locks-for-spatial-indexes"><a class="markdownIt-Anchor" href="#空间索引的谓词锁predicate-locks-for-spatial-indexes"></a> 空间索引的谓词锁（Predicate Locks for Spatial Indexes）</h3>
 <p>InnoDB支持对包含空间数据的列进行空间索引（详见<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/optimizing-spatial-analysis.html">章节11.4.8，“优化空间分析”</a>）</p>
 <p>为了处理涉及空间索引的操作的锁，临键锁定不能很好地支持<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read">REPEATABLE READ（可重复读）</a>或<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_serializable">SERIALIZABLE（序列化）</a>事务隔离级别。多维数据中没有绝对的排序概念，所以无法定义哪个是临键。</p>
 <p>为了使具有空间索引的表支持隔离级别，InnoDB使用了谓词锁。空间索引包含最小边界矩形 (MBR) 值，因此InnoDB通过在用于查询的MBR值上设置谓词锁来强制对索引进行一致读取。 其他事务则无法插入或修改与查询条件匹配的行。</p>
-<h1 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h1>
+<h2 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h2>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">MySQL 5.7 Reference Manual 14.7.1 InnoDB Locking</a></p>
 </blockquote>
