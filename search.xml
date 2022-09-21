@@ -145,6 +145,26 @@
       </tags>
   </entry>
   <entry>
+    <title>Redis分布式锁</title>
+    <url>/posts/64631/</url>
+    <content><![CDATA[<h2 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h2>
+<p>本文译自<a href="https://redis.io/docs/reference/patterns/distributed-locks/">Redis官方文档的关于分布式锁的部分内容</a></p>
+<h2 id="译文"><a class="markdownIt-Anchor" href="#译文"></a> 译文</h2>
+<h2 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h2>
+<blockquote>
+<p><a href="https://redis.io/docs/reference/patterns/distributed-locks/">Distributed Locks with Redis</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>翻译</category>
+        <category>Redis官方文档</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis如何处理过期的缓存key</title>
     <url>/posts/56398/</url>
     <content><![CDATA[<h1 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h1>
@@ -1476,8 +1496,8 @@ Anyway，真的是好看！而且我也是名软件工程师！</p>
         <category>随笔备忘</category>
       </categories>
       <tags>
-        <tag>Gerrit</tag>
         <tag>Code Review</tag>
+        <tag>Gerrit</tag>
       </tags>
   </entry>
   <entry>
