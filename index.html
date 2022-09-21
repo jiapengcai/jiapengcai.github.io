@@ -333,7 +333,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/39486/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/56398/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
@@ -351,7 +351,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/39486/" class="post-title-link" itemprop="url">如何用Java实现LRU算法</a>
+          <a href="/posts/56398/" class="post-title-link" itemprop="url">Redis如何处理过期的缓存key</a>
         </h2>
 
         <div class="post-meta-container">
@@ -362,14 +362,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-09-11 09:11:16" itemprop="dateCreated datePublished" datetime="2022-09-11T09:11:16+08:00">2022-09-11</time>
+      <time title="创建时间：2022-09-14 18:17:38" itemprop="dateCreated datePublished" datetime="2022-09-14T18:17:38+08:00">2022-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-16 17:59:31" itemprop="dateModified" datetime="2022-09-16T17:59:31+08:00">2022-09-16</time>
+      <time title="修改时间：2022-09-15 09:27:01" itemprop="dateModified" datetime="2022-09-15T09:27:01+08:00">2022-09-15</time>
     </span>
 
   
@@ -381,8 +381,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="如何用Java实现LRU算法" href="/posts/39486/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::2d93087274208dc65215c1e4bd2b13fc" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Redis如何处理过期的缓存key" href="/posts/56398/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::972c2562346b2234a4fd9fb47dc74ffa" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -396,13 +396,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="介绍及使用场景"><a class="markdownIt-Anchor" href="#介绍及使用场景"></a> 介绍及使用场景</h1>
-<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
-<p>LRU，全称为Least Recently Used，即最近最少用。算法的核心思想是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果最近频繁访问的数据，那么在接下来也很可能会被访问到</span><br></pre></td></tr></table></figure>
+          <h1 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h1>
+<p>最近在查找Redis的key过期策略相关的资料，发现网上的中文内容大部分都是互相复制的，后来换了英文搜索，觉得还是<a target="_blank" rel="noopener" href="https://redis.io/commands/expire/#how-redis-expires-keys">官方文档</a>才是权威。本文就是译自其中介绍过期缓存key的处理算法的内容。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/39486/#more" rel="contents">
+              <a class="btn" href="/posts/56398/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -500,6 +498,106 @@
 推荐系数：4.9/5<br />
 <img src="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/202209141331540.png" alt="img" /></p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/39486/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | PENG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/39486/" class="post-title-link" itemprop="url">如何用Java实现LRU算法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-11 09:11:16" itemprop="dateCreated datePublished" datetime="2022-09-11T09:11:16+08:00">2022-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-16 17:59:31" itemprop="dateModified" datetime="2022-09-16T17:59:31+08:00">2022-09-16</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="如何用Java实现LRU算法" href="/posts/39486/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::2d93087274208dc65215c1e4bd2b13fc" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="介绍及使用场景"><a class="markdownIt-Anchor" href="#介绍及使用场景"></a> 介绍及使用场景</h1>
+<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<p>LRU，全称为Least Recently Used，即最近最少用。算法的核心思想是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果最近频繁访问的数据，那么在接下来也很可能会被访问到</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/39486/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -760,7 +858,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/56398/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/39168/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
@@ -778,7 +876,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/56398/" class="post-title-link" itemprop="url">Redis如何处理过期的缓存key</a>
+          <a href="/posts/39168/" class="post-title-link" itemprop="url">1407. 排名靠前的旅行者</a>
         </h2>
 
         <div class="post-meta-container">
@@ -788,15 +886,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-09-14 18:17:38" itemprop="dateCreated datePublished" datetime="2022-09-14T18:17:38+08:00">2022-09-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-15 09:27:01" itemprop="dateModified" datetime="2022-09-15T09:27:01+08:00">2022-09-15</time>
+      <time title="创建时间：2022-08-30 11:29:02 / 修改时间：11:31:56" itemprop="dateCreated datePublished" datetime="2022-08-30T11:29:02+08:00">2022-08-30</time>
     </span>
 
   
@@ -808,8 +900,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="Redis如何处理过期的缓存key" href="/posts/56398/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::972c2562346b2234a4fd9fb47dc74ffa" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="1407. 排名靠前的旅行者" href="/posts/39168/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::d4b9c4d34fcbee75db74b510a24a6f04" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -823,11 +915,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h1>
-<p>最近在查找Redis的key过期策略相关的资料，发现网上的中文内容大部分都是互相复制的，后来换了英文搜索，觉得还是<a target="_blank" rel="noopener" href="https://redis.io/commands/expire/#how-redis-expires-keys">官方文档</a>才是权威。本文就是译自其中介绍过期缓存key的处理算法的内容。</p>
+          <p><strong>难度系数：</strong> 简单</p>
+<p>表：Users</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name   <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id            <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name          <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line">id 是该表单主键。</span><br><span class="line">name 是用户名字。</span><br></pre></td></tr></table></figure>
+<p>表：Rides</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name   <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id            <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> user_id       <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> distance      <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line">id 是该表单主键。</span><br><span class="line">user_id 是本次行程的用户的 id, 而该用户此次行程距离为 distance 。</span><br></pre></td></tr></table></figure>
+<p>写一段 SQL ,  报告每个用户的旅行距离。</p>
+<p>返回的结果表单，以 travelled_distance <strong>降序排列</strong> ，如果有两个或者更多的用户旅行了相同的距离,  那么再以 name <strong>升序排列</strong> 。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/56398/#more" rel="contents">
+              <a class="btn" href="/posts/39168/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -858,7 +955,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/45937/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/36256/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
@@ -876,7 +973,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/45937/" class="post-title-link" itemprop="url">6、处理代码评审过程产生的抵触问题</a>
+          <a href="/posts/36256/" class="post-title-link" itemprop="url">1179. 重新格式化部门表</a>
         </h2>
 
         <div class="post-meta-container">
@@ -886,15 +983,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-06-12 09:50:46" itemprop="dateCreated datePublished" datetime="2022-06-12T09:50:46+08:00">2022-06-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-12 16:22:04" itemprop="dateModified" datetime="2022-09-12T16:22:04+08:00">2022-09-12</time>
+      <time title="创建时间：2022-08-30 11:20:29 / 修改时间：11:24:27" itemprop="dateCreated datePublished" datetime="2022-08-30T11:20:29+08:00">2022-08-30</time>
     </span>
 
   
@@ -906,8 +997,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="6、处理代码评审过程产生的抵触问题" href="/posts/45937/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::35a7050e856b80c90f6af6d8143d34af" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="1179. 重新格式化部门表" href="/posts/36256/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::eba69bff2083166090d1566565f82f9b" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -921,11 +1012,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Sometimes a developer will push back on a code review. Either they will disagree with your suggestion or they will complain that you are being too strict in general.<br />
-有时开发人员可能会对某次代码审查结果产生抵触。他要么就是不同意你的建议，要么就是抱怨你太严格了。</p>
+          <p><strong>难度系数：</strong> 简单</p>
+<p>部门表 Department：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name   <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id            <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> revenue       <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">month</span>         <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line">(id, <span class="keyword">month</span>) 是表的联合主键。</span><br><span class="line">这个表格有关于每个部门每月收入的信息。</span><br><span class="line">月份（<span class="keyword">month</span>）可以取下列值 [&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;]。</span><br></pre></td></tr></table></figure>
+<p>编写一个 SQL 查询来重新格式化表，使得新的表中有一个部门 id 列和一些对应 每个月 的收入（revenue）列。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/45937/#more" rel="contents">
+              <a class="btn" href="/posts/36256/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -956,7 +1049,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/16518/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/45086/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
@@ -974,7 +1067,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/16518/" class="post-title-link" itemprop="url">4、代码审查内容</a>
+          <a href="/posts/45086/" class="post-title-link" itemprop="url">1148. 文章浏览 I</a>
         </h2>
 
         <div class="post-meta-container">
@@ -984,15 +1077,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-05-31 17:48:21" itemprop="dateCreated datePublished" datetime="2022-05-31T17:48:21+08:00">2022-05-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-12 16:21:41" itemprop="dateModified" datetime="2022-09-12T16:21:41+08:00">2022-09-12</time>
+      <time title="创建时间：2022-08-29 19:56:04 / 修改时间：20:01:39" itemprop="dateCreated datePublished" datetime="2022-08-29T19:56:04+08:00">2022-08-29</time>
     </span>
 
   
@@ -1004,8 +1091,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="4、代码审查内容" href="/posts/16518/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::b9da224598c87d20a9cc411930370c8e" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="1148. 文章浏览 I" href="/posts/45086/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::21c102662a0cf91ad9cc932f1b8f028f" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1019,11 +1106,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Note: Always make sure to take into account <a href="../51044">The Standard of Code Review</a> when considering each of these points.<br />
-注意：在审查下面这几点时，请确保也将<a href="../51044">代码审查标准</a>考虑了进去。</p>
+          <p><strong>难度系数：</strong> 简单</p>
+<p>Views 表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name   <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line"><span class="operator">|</span> article_id    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> author_id     <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> viewer_id     <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> view_date     <span class="operator">|</span> <span class="type">date</span>    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+---------+</span></span><br><span class="line">此表无主键，因此可能会存在重复行。</span><br><span class="line">此表的每一行都表示某人在某天浏览了某位作者的某篇文章。</span><br><span class="line">请注意，同一人的 author_id 和 viewer_id 是相同的。</span><br></pre></td></tr></table></figure>
+<p>请编写一条 SQL 查询以找出所有浏览过自己文章的作者，结果按照 id 升序排列。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/16518/#more" rel="contents">
+              <a class="btn" href="/posts/45086/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1054,7 +1143,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/12266/">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/21450/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
@@ -1072,7 +1161,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/12266/" class="post-title-link" itemprop="url">5、如何写代码审查评论</a>
+          <a href="/posts/21450/" class="post-title-link" itemprop="url">如何使用MyBatis Generator</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1083,14 +1172,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-06-09 11:46:12" itemprop="dateCreated datePublished" datetime="2022-06-09T11:46:12+08:00">2022-06-09</time>
+      <time title="创建时间：2022-08-29 19:05:31" itemprop="dateCreated datePublished" datetime="2022-08-29T19:05:31+08:00">2022-08-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-12 16:21:29" itemprop="dateModified" datetime="2022-09-12T16:21:29+08:00">2022-09-12</time>
+      <time title="修改时间：2022-08-30 11:52:55" itemprop="dateModified" datetime="2022-08-30T11:52:55+08:00">2022-08-30</time>
     </span>
 
   
@@ -1102,8 +1191,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="5、如何写代码审查评论" href="/posts/12266/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::de5008cca41072d2db00fce0cd757fb1" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="如何使用MyBatis Generator" href="/posts/21450/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::2a8b7a361b2127bbc7f0d1e4e86abfa6" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1117,138 +1206,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="how-to-write-code-review-comments"><a class="markdownIt-Anchor" href="#how-to-write-code-review-comments"></a> How to write code review comments</h1>
-<h1 id="如何写代码审查评论"><a class="markdownIt-Anchor" href="#如何写代码审查评论"></a> 如何写代码审查评论</h1>
-<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
-<ul>
-<li>
-<p>Be kind.</p>
-</li>
-<li>
-<p>Explain your reasoning.</p>
-</li>
-<li>
-<p>Balance giving explicit directions with just pointing out problems and letting the developer decide.</p>
-</li>
-<li>
-<p>Encourage developers to simplify code or add code comments instead of just explaining the complexity to you.</p>
-</li>
-<li>
-<p>语气要和善；</p>
-</li>
-<li>
-<p>解释这么评论的原因；</p>
-</li>
-<li>
-<p>在明确指示与指出问题之间做好平衡，并让开发人员自己决定；</p>
-</li>
-<li>
-<p>鼓励开发人员简化代码或者增加注释，而不只是让他们向你就代码的复杂性进行说明。</p>
-</li>
-</ul>
+          <h2 id="你是不是正在遇到以下问题"><a class="markdownIt-Anchor" href="#你是不是正在遇到以下问题"></a> 你是不是正在遇到以下问题</h2>
+<ol>
+<li>在采用MyBatis框架时，每新增一个表，都需要对着表<strong>手工</strong>写一遍数据库模型类，<strong>手工</strong>新增相应的mapper接口类，<strong>手工</strong>新增相应的mapper.xml文件；</li>
+<li><strong>手工</strong>编写xml文件时，有时还会漏了映射某个字段，或者写错了某些字母符合，然后到启动项目后才发现。</li>
+</ol>
+<p><strong><a target="_blank" rel="noopener" href="https://mybatis.org/generator/index.html">MyBatis Generator</a></strong> 可以高效帮你解决这些问题。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/12266/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/41083/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
-      <meta itemprop="name" content="Jiapeng Cai">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PENG">
-      <meta itemprop="description" content="Life can be programmed.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | PENG">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/41083/" class="post-title-link" itemprop="url">2、如何进行代码审查</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-05-31 17:41:06" itemprop="dateCreated datePublished" datetime="2022-05-31T17:41:06+08:00">2022-05-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-12 16:21:22" itemprop="dateModified" datetime="2022-09-12T16:21:22+08:00">2022-09-12</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="2、如何进行代码审查" href="/posts/41083/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::ba3b3f7a4bdc22e449d1fa716e477c05" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="如何进行代码审查"><a class="markdownIt-Anchor" href="#如何进行代码审查"></a> 如何进行代码审查</h1>
-<p>The pages in this section contain recommendations on the best way to do code reviews, based on long experience. All together they represent one complete document, broken up into many separate sections. You don’t have to read them all, but many people have found it very helpful to themselves and their team to read the entire set.</p>
-<p>本文档包含了关于代码审查最佳实践的一些建议，这些建议都是基于长期实践总结出来的。我们将在不同的章节对它们进行阐述。你无需全部阅读它们，但很多人发现读完整个文档对他们自己或者团队都非常有帮助。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/41083/#more" rel="contents">
+              <a class="btn" href="/posts/21450/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
