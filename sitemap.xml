@@ -610,7 +610,7 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Translation/</loc>
+    <loc>https://jiapengcai.github.io/tags/Java/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -624,7 +624,7 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/tags/Java/</loc>
+    <loc>https://jiapengcai.github.io/tags/Translation/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -682,14 +682,14 @@
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/</loc>
+    <loc>https://jiapengcai.github.io/categories/%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -710,6 +710,13 @@
   </url>
   
   <url>
+    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Java%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2022-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/MySQL%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -718,13 +725,6 @@
   
   <url>
     <loc>https://jiapengcai.github.io/categories/Leetcode%E9%A2%98%E8%A7%A3/</loc>
-    <lastmod>2022-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiapengcai.github.io/categories/%E7%BF%BB%E8%AF%91/Java%E6%BA%90%E7%A0%81/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
