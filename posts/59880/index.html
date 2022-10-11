@@ -21,25 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiapengcai.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Life can be programmed.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PENG">
-<meta property="og:url" content="https://jiapengcai.github.io/tags/Algorithm/page/2/index.html">
+    <meta name="description" content="Redis key淘汰策略概述（LRU，LFU，等等。）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis key淘汰策略">
+<meta property="og:url" content="https://jiapengcai.github.io/posts/59880/index.html">
 <meta property="og:site_name" content="PENG">
-<meta property="og:description" content="Life can be programmed.">
+<meta property="og:description" content="Redis key淘汰策略概述（LRU，LFU，等等。）">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-11T03:13:37.000Z">
+<meta property="article:modified_time" content="2022-10-11T03:13:37.495Z">
 <meta property="article:author" content="Jiapeng Cai">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Translation">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jiapengcai.github.io/tags/Algorithm/page/2/">
+<link rel="canonical" href="https://jiapengcai.github.io/posts/59880/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/Algorithm/page/2/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiapengcai.github.io/posts/59880/","path":"posts/59880/","title":"Redis key淘汰策略"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: Algorithm | PENG</title>
+<title>Redis key淘汰策略 | PENG</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78165446-2"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78165446-2","only_pageview":false}</script>
@@ -133,7 +137,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -146,6 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#maxmemory%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text"> maxmemory配置指令</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -213,74 +218,135 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">Algorithm
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiapengcai.github.io/posts/59880/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/avatar.png">
+      <meta itemprop="name" content="Jiapeng Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PENG">
+      <meta itemprop="description" content="Life can be programmed.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis key淘汰策略 | PENG">
+      <meta itemprop="description" content="Redis key淘汰策略概述（LRU，LFU，等等。）">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis key淘汰策略
         </h1>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-11 11:13:37" itemprop="dateCreated datePublished" datetime="2022-10-11T11:13:37+08:00">2022-10-11</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Redis key淘汰策略" href="/posts/59880/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::74b6519aa122a49f7a0bc382306fe6ec" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">Redis key淘汰策略概述（LRU，LFU，等等。）</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>当Redis作为缓存来用时，如果能让它在我们添加新数据时自动淘汰老数据，将会给我们带来很大的便利。这种行为在开发者社区里广为人知，毕竟memcached系统的默认行为。</p>
+<p>本文涵盖了Redis <strong>maxmemory</strong>指令相关的主题内容，这条指令用于将内存使用限制到一个固定的值。除此之外，本文还着重介绍了Redis的LRU淘汰算法，与单纯的LRU算法基本一致。</p>
+<h2 id="maxmemory配置指令"><a class="markdownIt-Anchor" href="#maxmemory配置指令"></a> maxmemory配置指令</h2>
+<p><strong>maxmemory</strong>配置指令为Redis指定了固定的能用于存储数据的内存大小。你可以通过在redis.conf文件里设置这个值，也可以在运行时通过<strong>CONFIG SET</strong>指令来设置。</p>
+<p>例如，如果要把内存使用限制在100mb，你可以在redis.conf文件里使用以下指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxmemory 100mb</span><br></pre></td></tr></table></figure>
+<p>如果把<strong>maxmemory</strong>的值设置为0，则意味着对内存的使用是无限制的。这个是64位系统的默认行为，与此同时，32位系统隐含的内存使用上限不能超过3GB。</p>
+<p>当内存使用量达到指定值时，<strong>淘汰策略</strong>的配置决定了默认如何淘汰旧数据。对于会导致超出内存限制的命令，Redis会返回错误，或者在新增数据时会淘汰旧数据来满足内存使用限制。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-06-01T21:16:09+08:00"
-              content="2022-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/35052/" itemprop="url">
-            <span itemprop="name">9. 回文数</span>
-          </a>
-      </div>
-
+    
+    
+    
       
-    </header>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Jiapeng Cai
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiapengcai.github.io/posts/59880/" title="Redis key淘汰策略">https://jiapengcai.github.io/posts/59880/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+              <a href="/tags/Translation/" rel="tag"><i class="fa fa-tag"></i> Translation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/58651/" rel="prev" title="ConcurrentHashMap">
+                  <i class="fa fa-chevron-left"></i> ConcurrentHashMap
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-05-31T21:16:06+08:00"
-              content="2022-05-31">
-          05-31
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/63105/" itemprop="url">
-            <span itemprop="name">136. 只出现一次的数字</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-    </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/tags/Algorithm/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/tags/Algorithm/">1</a><span class="page-number current">2</span>
-  </nav>
 
+
+    <div class="comments" id="SOHUCS" sid="74b6519aa122a49f7a0bc382306fe6ec"></div>
 </div>
   </main>
 
