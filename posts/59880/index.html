@@ -28,12 +28,14 @@
 <meta property="og:site_name" content="PENG">
 <meta property="og:description" content="Redis key淘汰策略概述（LRU，LFU，等等。）">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redis.io/docs/images/lru_comparison.png">
 <meta property="article:published_time" content="2022-10-11T03:13:37.000Z">
-<meta property="article:modified_time" content="2022-10-11T03:13:47.002Z">
+<meta property="article:modified_time" content="2022-10-11T09:38:55.459Z">
 <meta property="article:author" content="Jiapeng Cai">
 <meta property="article:tag" content="Redis">
 <meta property="article:tag" content="Translation">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redis.io/docs/images/lru_comparison.png">
 
 
 <link rel="canonical" href="https://jiapengcai.github.io/posts/59880/">
@@ -150,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#maxmemory%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text"> maxmemory配置指令</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#maxmemory%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text"> maxmemory配置指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text"> 淘汰策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84"><span class="nav-number">3.</span> <span class="nav-text"> 移除过程是怎样的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%91%E4%BC%BC%E7%9A%84lru%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text"> 近似的LRU算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E6%96%87"><span class="nav-number">5.</span> <span class="nav-text"> 原文</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,7 +261,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-10-11 11:13:37 / 修改时间：11:13:47" itemprop="dateCreated datePublished" datetime="2022-10-11T11:13:37+08:00">2022-10-11</time>
+      <time title="创建时间：2022-10-11 11:13:37 / 修改时间：17:38:55" itemprop="dateCreated datePublished" datetime="2022-10-11T11:13:37+08:00">2022-10-11</time>
     </span>
 
   
@@ -295,6 +297,52 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxmemory 100mb</span><br></pre></td></tr></table></figure>
 <p>如果把<strong>maxmemory</strong>的值设置为0，则意味着对内存的使用是无限制的。这个是64位系统的默认行为，与此同时，32位系统隐含的内存使用上限不能超过3GB。</p>
 <p>当内存使用量达到指定值时，<strong>淘汰策略</strong>的配置决定了默认如何淘汰旧数据。对于会导致超出内存限制的命令，Redis会返回错误，或者在新增数据时会淘汰旧数据来满足内存使用限制。</p>
+<h2 id="淘汰策略"><a class="markdownIt-Anchor" href="#淘汰策略"></a> 淘汰策略</h2>
+<p>当内存使用量达到<strong>maxmemory</strong>设置的值时，Redis将会执行指定的行为，而这个通过maxmemory-policy配置指令来指定。</p>
+<p>以下这些是可以配置的策略值：</p>
+<ul>
+<li><strong>noeviction</strong>：当内存使用量达到限定值时，新增的数据将不会被保存。如果一个数据库使用了主从复制，那么这将作用于主数据库。</li>
+<li><strong>allkeys-lru</strong>：保留最近最常使用的key，移除最近最少使用（LRU）的key</li>
+<li><strong>allkeys-lfu</strong>：保留频繁使用的key，移除最不频繁使用（LFU）的key</li>
+<li><strong>volatile-lru</strong>：移除最近最少使用且<strong>expire</strong>值为<strong>true</strong>的key</li>
+<li><strong>volatile-lfu</strong>：移除最近最不频繁使用且<strong>expire</strong>值为<strong>true</strong>的key</li>
+<li><strong>allkeys-random</strong>：随机移除部分key来给新增的数据腾出空间</li>
+<li><strong>volatile-random</strong>：随机移除部分<strong>expire</strong>值为<strong>true</strong>的key</li>
+<li><strong>volatile-ttl</strong>：移除<strong>expire</strong>值为<strong>true</strong>而且存活时间（TTL）最短的key。</li>
+</ul>
+<p>对于<strong>volatile-lru, volatile-lfu, volatile-random</strong>以及<strong>volatile-ttl</strong>这几个策略，当没有key满足先决条件时，这些策略将会和<strong>noeviction</strong>策略一样，不会进行key的移除。</p>
+<p>选择正确的移除策略很重要，而这取决于应用访问Redis的模式，不过，在应用运行时，你也可以在Redis运行时去重新配置策略，并使用 Redis <strong>INFO</strong>输出监控缓存未命中和命中的数量来调整您的设置。</p>
+<p>一般情况下，根据经验可以这么设置：</p>
+<ul>
+<li>如果你希望你的请求受欢迎度呈<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%82%E5%BE%8B%E5%88%86%E5%B8%83">幂律分布</a>，也就是说，你希望某些数据会比其余的数据更频繁地访问，在这种情况下你可以使用<strong>allkeys-lru</strong>策略。<strong>在你不确定的时候，这是个不错的选择</strong></li>
+<li>如果你会循环访问，所有的key会被不断扫描，或者希望分布变得均匀，那么可以使用<strong>allkeys-random</strong>策略。</li>
+<li>如果您希望能够在创建缓存对象时，通过使用不同的TTL值向Redis提示哪些可以优先移除，那么请使用<strong>volatile-ttl</strong>。</li>
+</ul>
+<p><strong>volatile-lru</strong>策略和<strong>volatile-random</strong>策略主要用于当你想使用单个实例进行缓存并拥有永远不会过期的key的场景。然而，运行两个Redis实例来解决这样的问题通常是一个更好的主意。</p>
+<p>还值得注意的是，为某个key设置过期值会消耗内存，因此使用<strong>allkeys-lru</strong>之类的策略会更节省内存，因为在内存压力下无需为需要被移除的key设置<strong>expire</strong>值。</p>
+<h2 id="移除过程是怎样的"><a class="markdownIt-Anchor" href="#移除过程是怎样的"></a> 移除过程是怎样的</h2>
+<p>理解移除过程是很重要的：</p>
+<ul>
+<li>客户端执行一个新命令，该命令导致数据新增。</li>
+<li>Redis检查内存的使用量，如果超过了设定的<strong>maxmemory</strong>限定值，则根据移除策略移除某些key。</li>
+<li>新命令被执行，依此类推。</li>
+</ul>
+<p>于是我们不断地越过内存限制的边界，然后通过移除key使得内存使用量保持在限制之下。</p>
+<p>如果某个命令导致在一段时间内使用大量内存（例如将大集合交集保存到一个新key里），则内存限制可能会被明显超过。</p>
+<h2 id="近似的lru算法"><a class="markdownIt-Anchor" href="#近似的lru算法"></a> 近似的LRU算法</h2>
+<p>Redis的LRU算法并非是真正的实现。这意味着Redis无法挑选最适合的key来移除。Redis采用了近似的LRU算法，通过对少量的key进行采样，然后移除最适合的（很久前访问过）key。</p>
+<p>然而，从Redis3.0开始对算法进行了改进，同时也采用了一个良好的候选池进行移除。这提高了算法的性能，使得它更接近真正的LRU算法。</p>
+<p>Redis LRU算法的重要之处在于，可以通过更改样本数量来<strong>调整</strong>算法的精度，这个数量用于每次移除前的检查。这个参数通过以下配置命令进行控制：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxmemory-samples 5</span><br></pre></td></tr></table></figure>
+<p>Redis之所以没有用真正的LRU是因为它需要使用更多的内存。然而，对于使用Redis的应用程序来说，这种近似的实现是几乎等效的。下图对Redis所使用的LRU近似实现与实际的LRU进行了对比。<br />
+<img src="https://redis.io/docs/images/lru_comparison.png" alt="img" /></p>
+<h2 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://redis.io/docs/manual/eviction/">Key eviction</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%82%E5%BE%8B%E5%88%86%E5%B8%83">幂律分布</a></p>
+</blockquote>
 
     </div>
 
