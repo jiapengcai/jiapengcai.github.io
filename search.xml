@@ -98,7 +98,7 @@
 <p>Redis LRU算法的重要之处在于，可以通过更改样本数量来<strong>调整</strong>算法的精度，这个数量用于每次移除前的检查。这个参数通过以下配置命令进行控制：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">maxmemory-samples 5</span><br></pre></td></tr></table></figure>
 <p>Redis之所以没有用真正的LRU是因为它需要使用更多的内存。然而，对于使用Redis的应用程序来说，这种近似的实现是几乎等效的。下图对Redis所使用的LRU近似实现与实际的LRU进行了对比。<br />
-<img src="https://redis.io/docs/images/lru_comparison.png" alt="img" /></p>
+<img src="https://redis.io/docs/latest/develop/reference/eviction/lru_comparison.png" alt="img" /></p>
 <h2 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h2>
 <blockquote>
 <p><a href="https://redis.io/docs/manual/eviction/">Key eviction</a></p>
