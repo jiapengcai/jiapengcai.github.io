@@ -1,155 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>InnoDB 锁类型</title>
-    <url>/posts/45568/</url>
-    <content><![CDATA[<h2 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h2>
-<p>本文译自<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">MySQL 5.7官方文档的章节14.7.1，InnoDB的锁类型</a>。</p>
-<h2 id="译文"><a class="markdownIt-Anchor" href="#译文"></a> 译文</h2>
-<p>本章节介绍了InnoDB所使用的锁类型。</p>
-<ul>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">共享锁和排他锁（Shared and Exclusive Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-intention-locks">意向锁（Intention Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-record-locks">记录锁（Record Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-gap-locks">间隙锁（Gap Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-next-key-locks">临键锁（Next-Key Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-insert-intention-locks">插入意向锁（Insert Intention Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-auto-inc-locks">自增锁（AUTO-INC Locks）</a></li>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-predicate-locks">空间索引的谓词锁（Predicate Locks for Spatial Indexes）</a></li>
-</ul>
-<span id="more"></span>
-<h3 id="共享锁和排他锁shared-and-exclusive-locks"><a class="markdownIt-Anchor" href="#共享锁和排他锁shared-and-exclusive-locks"></a> 共享锁和排他锁（Shared and Exclusive Locks）</h3>
-<p>InnoDB实现了两种标准的行级锁：共享锁（也称为S锁）和排他锁（也称为X锁）。</p>
-<ul>
-<li>共享锁允许持有该锁的事务读取一行记录。</li>
-<li>排他锁允许持有该锁的事务更新或者删除一行记录。</li>
-</ul>
-<p>如果事务T1在记录r上持有一个共享锁，那么，如果此时另一个不同的事务T2发起了申请记录r的锁的请求，将会被这样处理：</p>
-<ul>
-<li>如果T2申请的是共享锁，那么将会立即被满足。此时，T1和T2都持有一个r的共享锁。</li>
-<li>如果T2申请的是排他锁，那么将不会被立即满足。</li>
-</ul>
-<p>如果事务T1持有记录r的排他锁，那么，如果此时另一个不同的事务T2无论发起了申请记录r的哪一类的锁请求，都将不会被立即满足。事务T2必须等待事务T1释放它在记录r上的锁。</p>
-<h3 id="意向锁intention-locks"><a class="markdownIt-Anchor" href="#意向锁intention-locks"></a> 意向锁（Intention Locks）</h3>
-<p>InnoDB支持多种粒度的锁，允许了行级锁和表级锁的共存。例如，类似于<a href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html">LOCK TABLES … WRITE</a>的语句会在指定表上加上排他锁（X锁）。为了使得多种粒度级别的锁变得可行，InnoDB使用了意向锁。意向锁是表级别的锁，它指明了一个事务对表中的记录将需要哪种类型的锁（共享还是排他）。意向锁有两类：</p>
-<ul>
-<li>意向共享锁（即IS锁），指明一个事务将会在表的某些行上设置一个共享锁。</li>
-<li>意向排他锁（即IX锁），指明一个事务将会在表的某些行上设置一个排他锁。</li>
-</ul>
-<p>例如，<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html">SELECT … LOCK IN SHARE MODE</a>设置了一个意向共享锁，<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html">SELECT … FOR UPDATE</a>设置了一个意向排他锁。</p>
-<p>意向锁的协议有以下两点：</p>
-<ul>
-<li>一个事务在获取表的一行记录的共享锁之前，它首先必须获取该表的意向共享锁或者更强级别的锁。</li>
-<li>一个事务在获取表的一行记录的排他锁之前，它首先必须获取该表的意向排他锁。</li>
-</ul>
-<p>表级别的锁类型之间的兼容性可以用下表来表示：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>X</th>
-<th>IX</th>
-<th>S</th>
-<th>IS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>X</td>
-<td>冲突</td>
-<td>冲突</td>
-<td>冲突</td>
-<td>冲突</td>
-</tr>
-<tr>
-<td>IX</td>
-<td>冲突</td>
-<td>兼容</td>
-<td>冲突</td>
-<td>兼容</td>
-</tr>
-<tr>
-<td>S</td>
-<td>冲突</td>
-<td>冲突</td>
-<td>兼容</td>
-<td>兼容</td>
-</tr>
-<tr>
-<td>IS</td>
-<td>冲突</td>
-<td>兼容</td>
-<td>兼容</td>
-<td>兼容</td>
-</tr>
-</tbody>
-</table>
-<p>一个事务在申请锁时，如果申请的锁与当前存在的锁兼容，那么这个申请将会得到满足。如果锁冲突，则事务会等待已存在的锁被释放。如果一个锁请求与当前存在的锁产生了冲突并且由于会引发<a href="https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_deadlock">死锁</a>而得不到满足，此时就发生了错误。</p>
-<p>意向锁不会阻塞全表请求（例如，<a href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html">LOCK TABLES … WRITE</a>）之外的任务东西。意向锁的主要目的是表明有事务正锁着某行记录，或者将要锁住表的某行记录。</p>
-<p>意向锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">TABLE</span> LOCK <span class="keyword">table</span> `test`.`t` trx id <span class="number">10080</span> lock mode IX</span><br></pre></td></tr></table></figure>
-<h3 id="记录锁record-locks"><a class="markdownIt-Anchor" href="#记录锁record-locks"></a> 记录锁（Record Locks）</h3>
-<p>记录锁是一种在索引记录上的锁。例如，SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE; 这条语句阻止了其它事务对条件为t.c1值为10的记录进行插入，更新或者删除操作。</p>
-<p>记录锁总是锁定索引的记录，即使表里并没有定义索引。在这种情况下，InnoDB创建了一个隐藏的聚簇索引并使用这个索引来锁定记录。详见<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-index-types.html">章节14.6.2.1，“聚簇索引和二级索引”</a></p>
-<p>记录锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">58</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`t`</span><br><span class="line">trx id <span class="number">10078</span> lock_mode X locks rec but <span class="keyword">not</span> gap</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">2</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">8000000</span>a; <span class="keyword">asc</span>     ;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">00000000274</span>f; <span class="keyword">asc</span>     <span class="string">&#x27;O;;</span></span><br><span class="line"><span class="string"> 2: len 7; hex b60000019d0110; asc        ;;</span></span><br></pre></td></tr></table></figure>
-<h3 id="间隙锁gap-locks"><a class="markdownIt-Anchor" href="#间隙锁gap-locks"></a> 间隙锁（Gap Locks）</h3>
-<p>间隙锁是在索引记录之间的间隙上的锁，或者是在第一条索引记录之前或最后一条索引记录之后的间隙上的锁。例如，SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE; 这条语句阻止了其它事务将值15插入列t.c1，无论该列是否已经有这个值。这是因为，这个范围内的所有间隙都被锁了。</p>
-<p>一个间隙可能会跨越单个索引值，多个索引值，甚至是空的。</p>
-<p>间隙锁是性能与并发之间的折中手段之一，被用于某些事务隔离级别。</p>
-<p>使用唯一索引来查找特定记录行的语句不需要间隙锁。例如，如果id列包含了唯一索引，那么下列这条语句对于id值为100的记录行仅使用了索引记录锁，至于其它会话是否在前面的间隙里插入记录则无关紧要：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> child <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
-<p>如果id没有加索引或者具有非唯一的索引，那么上述这条语句就会给前面的间隙加上锁。</p>
-<p>这里还有一个值得注意的地方，不同的事务可以在间隙上持有冲突的锁。例如，在事务A在一个间隙上持有一个共享间隙锁（也称为间隙S锁）的同时，事务B可以在同一个间隙上持有一个排他间隙锁（也称为间隙X锁）。允许间隙锁冲突的原因在于，如果一条记录通过索引被清除了，那么不同的事务在这条记录上所持有的间隙锁必须被合并。</p>
-<p>InnoDB中的间隙锁纯粹是为了抑制，意思是说，间隙锁唯一的目的是为了防止其它事务往间隙里插入数据。间隙锁可以彼此共存。</p>
-<p>你可以通过把事务隔离级别设置为<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_read-committed">READ COMMITTED（读提交）</a>或者启用<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_locks_unsafe_for_binlog">innodb_locks_unsafe_for_binlog</a>系统参数（目前这个参数已经过时），来禁用间隙锁。在这种情况下，间隙锁对搜索和索引扫描禁用，仅用于外键约束检查和重复键检查。</p>
-<p>使用<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_read-committed">READ COMMITTED（读提交）</a>或者启用<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_locks_unsafe_for_binlog">innodb_locks_unsafe_for_binlog</a>还有其它的影响。在MySQL评估WHERE条件后，对于不匹配的记录行，记录锁将会被释放。对于UPDATE语句，InnoDB会进行“半一致性”读，这样它将返回最新的提交版本给到MySQL，以便MySQL确定该记录行是否符合该条UPDATE语句的WHERE条件。</p>
-<h3 id="临键锁next-key-locks"><a class="markdownIt-Anchor" href="#临键锁next-key-locks"></a> 临键锁（Next-Key Locks）</h3>
-<p>临键锁是索引记录上的记录锁和索引前的间隙上的间隙锁的组合。</p>
-<p>InnoDB以这样的一种方式来执行行级锁：当它搜索或者扫描表索引时，它会在它遇到的索引记录上设置共享或排他锁。因此，行级锁实际上是索引记录锁。一个索引记录上的临键锁也会影响该索引记录前的间隙。也就是说，临键锁是索引记录锁加上索引记录前面的间隙上的间隙锁。如果一个会话在索引中的记录行R上持有一个共享或者排他锁，那么其它会话则不能在索引顺序中R前面的间隙中插入新的索引记录。</p>
-<p>假设一个索引包含了值10，11，13和20。这个索引可能存在的临键锁包含一下几个区间，其中圆括号表示不包含区间端点，方括号表示包含区间端点：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(负无穷, 10]</span><br><span class="line">(10, 11]</span><br><span class="line">(11, 13]</span><br><span class="line">(13, 20]</span><br><span class="line">(20, 正无穷)</span><br></pre></td></tr></table></figure>
-<p>对于最后一个区间，临键锁锁定索引中最大值上的间隙，并且“最高”伪记录的值高于索引中的任何实际值。这个最高值不是一个真正的记录，所以这个临键锁实际上只锁定了最大索引值之后的间隙。</p>
-<p>InnoDB的默认事务隔离级别为<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read">REPEATABLE READ（可重复读）</a>。在这种条件下，InnoDB采用临键锁来搜索和索引扫描，从而避免了幻读（详见<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-next-key-locking.html">章节14.7.4，“幻行记录”</a>）。</p>
-<p>临键锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">58</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`t`</span><br><span class="line">trx id <span class="number">10080</span> lock_mode X</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">1</span> PHYSICAL RECORD: n_fields <span class="number">1</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">8</span>; hex <span class="number">73757072656</span>d756d; <span class="keyword">asc</span> supremum;;</span><br><span class="line"></span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">2</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">8000000</span>a; <span class="keyword">asc</span>     ;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">00000000274</span>f; <span class="keyword">asc</span>     <span class="string">&#x27;O;;</span></span><br><span class="line"><span class="string"> 2: len 7; hex b60000019d0110; asc        ;;</span></span><br></pre></td></tr></table></figure>
-<h3 id="插入意向锁insert-intention-locks"><a class="markdownIt-Anchor" href="#插入意向锁insert-intention-locks"></a> 插入意向锁（Insert Intention Locks）</h3>
-<p>插入意向锁是一种在插入行之前由<a href="https://dev.mysql.com/doc/refman/5.7/en/insert.html">INSERT</a>操作设置的间隙锁。此锁表示插入的意图：如果插入到同一索引间隙中的多个事务未插入到间隙内的同一位置，则它们无需相互等待。 假设有两条索引记录，值分别为4和7的。此时，同时有两个单独事务，分别尝试插入值5和6，在获得插入行的排他锁之前，每个事务使用插入意向锁锁定4和7之间的间隙，但不会相互阻塞，因为行是不冲突的。</p>
-<p>以下这个示例演示了一个在获取到被插入行记录的排他锁之前先获取插入意向锁的事务。示例里包含了两个客户端，A和B。</p>
-<p>客户端A创建了一个包含两条索引记录（90和102）的表，然后开启一个事务，该事务在ID大于100的索引记录上放置了一个排他锁。这个排他锁包含了记录102之前的间隙锁：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> child (id <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>, <span class="keyword">PRIMARY</span> KEY(id)) ENGINE<span class="operator">=</span>InnoDB;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> child (id) <span class="keyword">values</span> (<span class="number">90</span>),(<span class="number">102</span>);</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> child <span class="keyword">WHERE</span> id <span class="operator">&gt;</span> <span class="number">100</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----+</span></span><br><span class="line"><span class="operator">|</span> id  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">102</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+</span></span><br></pre></td></tr></table></figure>
-<p>客户端B开启一个在这个间隙里插入一条记录的事务。这个事务在等待获取排他锁时拿到了一个插入意向锁。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> child (id) <span class="keyword">VALUES</span> (<span class="number">101</span>);</span><br></pre></td></tr></table></figure>
-<p>插入意向锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">31</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`child`</span><br><span class="line">trx id <span class="number">8731</span> lock_mode X locks gap before rec <span class="keyword">insert</span> intention waiting</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">3</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">80000066</span>; <span class="keyword">asc</span>    f;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">000000002215</span>; <span class="keyword">asc</span>     &quot; ;;</span><br><span class="line"> 2: len 7; hex 9000000172011c; asc     r  ;;...</span><br></pre></td></tr></table></figure>
-<h3 id="自增锁auto-inc-locks"><a class="markdownIt-Anchor" href="#自增锁auto-inc-locks"></a> 自增锁（AUTO-INC Locks）</h3>
-<p>自增锁是一种特殊的表级锁，由插入到具有AUTO_INCREMENT列的表中的事务使用。在最简单的情况下，如果一个事务正在向表中插入值，则任何其他事务如果要向该表进行插入则都必须等待，以便第一个事务插入的行能收到连续的主键值。</p>
-<p><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a>参数控制着自增锁所采用的算法。这个参数允许你选择如何在可预测的自增值序列和插入操作的最大并发之间做权衡。</p>
-<p>更多信息详见<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html">章节14.6.1.6，“InnoDB中的自增处理”</a>。</p>
-<h3 id="空间索引的谓词锁predicate-locks-for-spatial-indexes"><a class="markdownIt-Anchor" href="#空间索引的谓词锁predicate-locks-for-spatial-indexes"></a> 空间索引的谓词锁（Predicate Locks for Spatial Indexes）</h3>
-<p>InnoDB支持对包含空间数据的列进行空间索引（详见<a href="https://dev.mysql.com/doc/refman/5.7/en/optimizing-spatial-analysis.html">章节11.4.8，“优化空间分析”</a>）</p>
-<p>为了处理涉及空间索引的操作的锁，临键锁定不能很好地支持<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read">REPEATABLE READ（可重复读）</a>或<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_serializable">SERIALIZABLE（序列化）</a>事务隔离级别。多维数据中没有绝对的排序概念，所以无法定义哪个是临键。</p>
-<p>为了使具有空间索引的表支持隔离级别，InnoDB使用了谓词锁。空间索引包含最小边界矩形 (MBR) 值，因此InnoDB通过在用于查询的MBR值上设置谓词锁来强制对索引进行一致读取。 其他事务则无法插入或修改与查询条件匹配的行。</p>
-<h2 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h2>
-<blockquote>
-<p><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">MySQL 5.7 Reference Manual 14.7.1 InnoDB Locking</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>翻译</category>
-        <category>MySQL官方文档</category>
-      </categories>
-      <tags>
-        <tag>Translation</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《软技能-代码之外的的生存指南》第2版读后感</title>
     <url>/posts/53510/</url>
     <content><![CDATA[<p>作者：约翰Z. 森梅兹（John Z. Sonmez）<br />
-  作者通过自身的经历和经验总结针对IT从业人员从职业，自我营销，学习，生产力提高，健身，心态6个方面进行了具有指导意义的分析和分享。<br />
-  受限于作者写书时的环境和作者个人本身的经验，有些观点或许不适合国内，比如自我营销篇的社交网络得营销，或许不适合现在这个环境，比如理财篇的房地产投资，或许干脆前后矛盾，比如健身篇的增肌或减肥与轻断食的，但这些依旧不妨碍引起我们的思考。<br />
+  作者通过自身的经历和经验总结针对IT从业人员从职业，自我营销，学习，生产力提高，健身，心态6个方面进行了具有指导意义的分析和分享。</p>
+<span id="more"></span>
+<p>  受限于作者写书时的环境和作者个人本身的经验，有些观点或许不适合国内，比如自我营销篇的社交网络得营销，或许不适合现在这个环境，比如理财篇的房地产投资，或许干脆前后矛盾，比如健身篇的增肌或减肥与轻断食的，但这些依旧不妨碍引起我们的思考。<br />
   从我的角度来说，这本书更多的是帮我总结并提醒我已经知道的观点。提醒了我博客的作用，分享的意义，为什么要理财，怎样增肌，等等。<br />
   不过最大的收获还是提醒了我不要畏惧开始，很多事不一定都能达到只欠东风时才可以开始，管它三七二十一，动起来再说，即便做出来的是一坨屎，后面也可以再慢慢优化。<strong>这条规则应该纳入我的底层原理集合里</strong>，因为它适用于很多场景，比如，脑子里有个副业idea了，先开发个模型出来看看，又比如，学习了一项技术，不一定要全部学完才可以分享才可以做项目，以我经验，边做边学是最有效率的，也更贴近费曼学习法，再比如，不一定要文笔练好了才能写博客，不一定口才练好了才能当众演讲。</p>
 <p>  然后关于自由职业，作者在书里专门开了一篇来分享他的职业路程。就连作者自己都在说自己有幸运的成分。我想，应该是每个成功的案例都会说自己有幸运的成分。但也如作者所说的，“如果你脚踏实地、努力工作，总是尝试提升自己和周围的人，那你获得好运气的可能性会大大增加。”，这也许就是所谓的越努力越幸运吧。纯为公司打工，也许安全一些，可同时也几乎就跟这些幸运无缘了。边打工边想办法尝试副业是最为妥当的办法，进可攻退可守。但这样同样是要付出很多努力，真的搞成了，依旧符合越努力越幸运的定理。</p>
@@ -340,6 +197,150 @@ Redis每秒会做10次以下的步骤：</p>
       </categories>
       <tags>
         <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>InnoDB 锁类型</title>
+    <url>/posts/45568/</url>
+    <content><![CDATA[<h2 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h2>
+<p>本文译自<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">MySQL 5.7官方文档的章节14.7.1，InnoDB的锁类型</a>。</p>
+<h2 id="译文"><a class="markdownIt-Anchor" href="#译文"></a> 译文</h2>
+<p>本章节介绍了InnoDB所使用的锁类型。</p>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">共享锁和排他锁（Shared and Exclusive Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-intention-locks">意向锁（Intention Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-record-locks">记录锁（Record Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-gap-locks">间隙锁（Gap Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-next-key-locks">临键锁（Next-Key Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-insert-intention-locks">插入意向锁（Insert Intention Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-auto-inc-locks">自增锁（AUTO-INC Locks）</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-predicate-locks">空间索引的谓词锁（Predicate Locks for Spatial Indexes）</a></li>
+</ul>
+<span id="more"></span>
+<h3 id="共享锁和排他锁shared-and-exclusive-locks"><a class="markdownIt-Anchor" href="#共享锁和排他锁shared-and-exclusive-locks"></a> 共享锁和排他锁（Shared and Exclusive Locks）</h3>
+<p>InnoDB实现了两种标准的行级锁：共享锁（也称为S锁）和排他锁（也称为X锁）。</p>
+<ul>
+<li>共享锁允许持有该锁的事务读取一行记录。</li>
+<li>排他锁允许持有该锁的事务更新或者删除一行记录。</li>
+</ul>
+<p>如果事务T1在记录r上持有一个共享锁，那么，如果此时另一个不同的事务T2发起了申请记录r的锁的请求，将会被这样处理：</p>
+<ul>
+<li>如果T2申请的是共享锁，那么将会立即被满足。此时，T1和T2都持有一个r的共享锁。</li>
+<li>如果T2申请的是排他锁，那么将不会被立即满足。</li>
+</ul>
+<p>如果事务T1持有记录r的排他锁，那么，如果此时另一个不同的事务T2无论发起了申请记录r的哪一类的锁请求，都将不会被立即满足。事务T2必须等待事务T1释放它在记录r上的锁。</p>
+<h3 id="意向锁intention-locks"><a class="markdownIt-Anchor" href="#意向锁intention-locks"></a> 意向锁（Intention Locks）</h3>
+<p>InnoDB支持多种粒度的锁，允许了行级锁和表级锁的共存。例如，类似于<a href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html">LOCK TABLES … WRITE</a>的语句会在指定表上加上排他锁（X锁）。为了使得多种粒度级别的锁变得可行，InnoDB使用了意向锁。意向锁是表级别的锁，它指明了一个事务对表中的记录将需要哪种类型的锁（共享还是排他）。意向锁有两类：</p>
+<ul>
+<li>意向共享锁（即IS锁），指明一个事务将会在表的某些行上设置一个共享锁。</li>
+<li>意向排他锁（即IX锁），指明一个事务将会在表的某些行上设置一个排他锁。</li>
+</ul>
+<p>例如，<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html">SELECT … LOCK IN SHARE MODE</a>设置了一个意向共享锁，<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html">SELECT … FOR UPDATE</a>设置了一个意向排他锁。</p>
+<p>意向锁的协议有以下两点：</p>
+<ul>
+<li>一个事务在获取表的一行记录的共享锁之前，它首先必须获取该表的意向共享锁或者更强级别的锁。</li>
+<li>一个事务在获取表的一行记录的排他锁之前，它首先必须获取该表的意向排他锁。</li>
+</ul>
+<p>表级别的锁类型之间的兼容性可以用下表来表示：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>X</th>
+<th>IX</th>
+<th>S</th>
+<th>IS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>IX</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>S</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>IS</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+</tbody>
+</table>
+<p>一个事务在申请锁时，如果申请的锁与当前存在的锁兼容，那么这个申请将会得到满足。如果锁冲突，则事务会等待已存在的锁被释放。如果一个锁请求与当前存在的锁产生了冲突并且由于会引发<a href="https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_deadlock">死锁</a>而得不到满足，此时就发生了错误。</p>
+<p>意向锁不会阻塞全表请求（例如，<a href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html">LOCK TABLES … WRITE</a>）之外的任务东西。意向锁的主要目的是表明有事务正锁着某行记录，或者将要锁住表的某行记录。</p>
+<p>意向锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">TABLE</span> LOCK <span class="keyword">table</span> `test`.`t` trx id <span class="number">10080</span> lock mode IX</span><br></pre></td></tr></table></figure>
+<h3 id="记录锁record-locks"><a class="markdownIt-Anchor" href="#记录锁record-locks"></a> 记录锁（Record Locks）</h3>
+<p>记录锁是一种在索引记录上的锁。例如，SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE; 这条语句阻止了其它事务对条件为t.c1值为10的记录进行插入，更新或者删除操作。</p>
+<p>记录锁总是锁定索引的记录，即使表里并没有定义索引。在这种情况下，InnoDB创建了一个隐藏的聚簇索引并使用这个索引来锁定记录。详见<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-index-types.html">章节14.6.2.1，“聚簇索引和二级索引”</a></p>
+<p>记录锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">58</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`t`</span><br><span class="line">trx id <span class="number">10078</span> lock_mode X locks rec but <span class="keyword">not</span> gap</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">2</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">8000000</span>a; <span class="keyword">asc</span>     ;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">00000000274</span>f; <span class="keyword">asc</span>     <span class="string">&#x27;O;;</span></span><br><span class="line"><span class="string"> 2: len 7; hex b60000019d0110; asc        ;;</span></span><br></pre></td></tr></table></figure>
+<h3 id="间隙锁gap-locks"><a class="markdownIt-Anchor" href="#间隙锁gap-locks"></a> 间隙锁（Gap Locks）</h3>
+<p>间隙锁是在索引记录之间的间隙上的锁，或者是在第一条索引记录之前或最后一条索引记录之后的间隙上的锁。例如，SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE; 这条语句阻止了其它事务将值15插入列t.c1，无论该列是否已经有这个值。这是因为，这个范围内的所有间隙都被锁了。</p>
+<p>一个间隙可能会跨越单个索引值，多个索引值，甚至是空的。</p>
+<p>间隙锁是性能与并发之间的折中手段之一，被用于某些事务隔离级别。</p>
+<p>使用唯一索引来查找特定记录行的语句不需要间隙锁。例如，如果id列包含了唯一索引，那么下列这条语句对于id值为100的记录行仅使用了索引记录锁，至于其它会话是否在前面的间隙里插入记录则无关紧要：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> child <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p>如果id没有加索引或者具有非唯一的索引，那么上述这条语句就会给前面的间隙加上锁。</p>
+<p>这里还有一个值得注意的地方，不同的事务可以在间隙上持有冲突的锁。例如，在事务A在一个间隙上持有一个共享间隙锁（也称为间隙S锁）的同时，事务B可以在同一个间隙上持有一个排他间隙锁（也称为间隙X锁）。允许间隙锁冲突的原因在于，如果一条记录通过索引被清除了，那么不同的事务在这条记录上所持有的间隙锁必须被合并。</p>
+<p>InnoDB中的间隙锁纯粹是为了抑制，意思是说，间隙锁唯一的目的是为了防止其它事务往间隙里插入数据。间隙锁可以彼此共存。</p>
+<p>你可以通过把事务隔离级别设置为<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_read-committed">READ COMMITTED（读提交）</a>或者启用<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_locks_unsafe_for_binlog">innodb_locks_unsafe_for_binlog</a>系统参数（目前这个参数已经过时），来禁用间隙锁。在这种情况下，间隙锁对搜索和索引扫描禁用，仅用于外键约束检查和重复键检查。</p>
+<p>使用<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_read-committed">READ COMMITTED（读提交）</a>或者启用<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_locks_unsafe_for_binlog">innodb_locks_unsafe_for_binlog</a>还有其它的影响。在MySQL评估WHERE条件后，对于不匹配的记录行，记录锁将会被释放。对于UPDATE语句，InnoDB会进行“半一致性”读，这样它将返回最新的提交版本给到MySQL，以便MySQL确定该记录行是否符合该条UPDATE语句的WHERE条件。</p>
+<h3 id="临键锁next-key-locks"><a class="markdownIt-Anchor" href="#临键锁next-key-locks"></a> 临键锁（Next-Key Locks）</h3>
+<p>临键锁是索引记录上的记录锁和索引前的间隙上的间隙锁的组合。</p>
+<p>InnoDB以这样的一种方式来执行行级锁：当它搜索或者扫描表索引时，它会在它遇到的索引记录上设置共享或排他锁。因此，行级锁实际上是索引记录锁。一个索引记录上的临键锁也会影响该索引记录前的间隙。也就是说，临键锁是索引记录锁加上索引记录前面的间隙上的间隙锁。如果一个会话在索引中的记录行R上持有一个共享或者排他锁，那么其它会话则不能在索引顺序中R前面的间隙中插入新的索引记录。</p>
+<p>假设一个索引包含了值10，11，13和20。这个索引可能存在的临键锁包含一下几个区间，其中圆括号表示不包含区间端点，方括号表示包含区间端点：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(负无穷, 10]</span><br><span class="line">(10, 11]</span><br><span class="line">(11, 13]</span><br><span class="line">(13, 20]</span><br><span class="line">(20, 正无穷)</span><br></pre></td></tr></table></figure>
+<p>对于最后一个区间，临键锁锁定索引中最大值上的间隙，并且“最高”伪记录的值高于索引中的任何实际值。这个最高值不是一个真正的记录，所以这个临键锁实际上只锁定了最大索引值之后的间隙。</p>
+<p>InnoDB的默认事务隔离级别为<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read">REPEATABLE READ（可重复读）</a>。在这种条件下，InnoDB采用临键锁来搜索和索引扫描，从而避免了幻读（详见<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-next-key-locking.html">章节14.7.4，“幻行记录”</a>）。</p>
+<p>临键锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">58</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`t`</span><br><span class="line">trx id <span class="number">10080</span> lock_mode X</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">1</span> PHYSICAL RECORD: n_fields <span class="number">1</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">8</span>; hex <span class="number">73757072656</span>d756d; <span class="keyword">asc</span> supremum;;</span><br><span class="line"></span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">2</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">8000000</span>a; <span class="keyword">asc</span>     ;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">00000000274</span>f; <span class="keyword">asc</span>     <span class="string">&#x27;O;;</span></span><br><span class="line"><span class="string"> 2: len 7; hex b60000019d0110; asc        ;;</span></span><br></pre></td></tr></table></figure>
+<h3 id="插入意向锁insert-intention-locks"><a class="markdownIt-Anchor" href="#插入意向锁insert-intention-locks"></a> 插入意向锁（Insert Intention Locks）</h3>
+<p>插入意向锁是一种在插入行之前由<a href="https://dev.mysql.com/doc/refman/5.7/en/insert.html">INSERT</a>操作设置的间隙锁。此锁表示插入的意图：如果插入到同一索引间隙中的多个事务未插入到间隙内的同一位置，则它们无需相互等待。 假设有两条索引记录，值分别为4和7的。此时，同时有两个单独事务，分别尝试插入值5和6，在获得插入行的排他锁之前，每个事务使用插入意向锁锁定4和7之间的间隙，但不会相互阻塞，因为行是不冲突的。</p>
+<p>以下这个示例演示了一个在获取到被插入行记录的排他锁之前先获取插入意向锁的事务。示例里包含了两个客户端，A和B。</p>
+<p>客户端A创建了一个包含两条索引记录（90和102）的表，然后开启一个事务，该事务在ID大于100的索引记录上放置了一个排他锁。这个排他锁包含了记录102之前的间隙锁：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> child (id <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>, <span class="keyword">PRIMARY</span> KEY(id)) ENGINE<span class="operator">=</span>InnoDB;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> child (id) <span class="keyword">values</span> (<span class="number">90</span>),(<span class="number">102</span>);</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> child <span class="keyword">WHERE</span> id <span class="operator">&gt;</span> <span class="number">100</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----+</span></span><br><span class="line"><span class="operator">|</span> id  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">102</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----+</span></span><br></pre></td></tr></table></figure>
+<p>客户端B开启一个在这个间隙里插入一条记录的事务。这个事务在等待获取排他锁时拿到了一个插入意向锁。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> child (id) <span class="keyword">VALUES</span> (<span class="number">101</span>);</span><br></pre></td></tr></table></figure>
+<p>插入意向锁的事务数据在<a href="https://dev.mysql.com/doc/refman/5.7/en/show-engine.html">SHOW ENGINE INNODB STATUS</a>和<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-standard-monitor.html">InnoDB 监视器</a>输出中的显示内容类似于如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">RECORD LOCKS space id <span class="number">31</span> page <span class="keyword">no</span> <span class="number">3</span> n bits <span class="number">72</span> index `<span class="keyword">PRIMARY</span>` <span class="keyword">of</span> <span class="keyword">table</span> `test`.`child`</span><br><span class="line">trx id <span class="number">8731</span> lock_mode X locks gap before rec <span class="keyword">insert</span> intention waiting</span><br><span class="line">Record lock, heap <span class="keyword">no</span> <span class="number">3</span> PHYSICAL RECORD: n_fields <span class="number">3</span>; compact format; info bits <span class="number">0</span></span><br><span class="line"> <span class="number">0</span>: len <span class="number">4</span>; hex <span class="number">80000066</span>; <span class="keyword">asc</span>    f;;</span><br><span class="line"> <span class="number">1</span>: len <span class="number">6</span>; hex <span class="number">000000002215</span>; <span class="keyword">asc</span>     &quot; ;;</span><br><span class="line"> 2: len 7; hex 9000000172011c; asc     r  ;;...</span><br></pre></td></tr></table></figure>
+<h3 id="自增锁auto-inc-locks"><a class="markdownIt-Anchor" href="#自增锁auto-inc-locks"></a> 自增锁（AUTO-INC Locks）</h3>
+<p>自增锁是一种特殊的表级锁，由插入到具有AUTO_INCREMENT列的表中的事务使用。在最简单的情况下，如果一个事务正在向表中插入值，则任何其他事务如果要向该表进行插入则都必须等待，以便第一个事务插入的行能收到连续的主键值。</p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a>参数控制着自增锁所采用的算法。这个参数允许你选择如何在可预测的自增值序列和插入操作的最大并发之间做权衡。</p>
+<p>更多信息详见<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html">章节14.6.1.6，“InnoDB中的自增处理”</a>。</p>
+<h3 id="空间索引的谓词锁predicate-locks-for-spatial-indexes"><a class="markdownIt-Anchor" href="#空间索引的谓词锁predicate-locks-for-spatial-indexes"></a> 空间索引的谓词锁（Predicate Locks for Spatial Indexes）</h3>
+<p>InnoDB支持对包含空间数据的列进行空间索引（详见<a href="https://dev.mysql.com/doc/refman/5.7/en/optimizing-spatial-analysis.html">章节11.4.8，“优化空间分析”</a>）</p>
+<p>为了处理涉及空间索引的操作的锁，临键锁定不能很好地支持<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_repeatable-read">REPEATABLE READ（可重复读）</a>或<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html#isolevel_serializable">SERIALIZABLE（序列化）</a>事务隔离级别。多维数据中没有绝对的排序概念，所以无法定义哪个是临键。</p>
+<p>为了使具有空间索引的表支持隔离级别，InnoDB使用了谓词锁。空间索引包含最小边界矩形 (MBR) 值，因此InnoDB通过在用于查询的MBR值上设置谓词锁来强制对索引进行一致读取。 其他事务则无法插入或修改与查询条件匹配的行。</p>
+<h2 id="原文"><a class="markdownIt-Anchor" href="#原文"></a> 原文</h2>
+<blockquote>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks">MySQL 5.7 Reference Manual 14.7.1 InnoDB Locking</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>翻译</category>
+        <category>MySQL官方文档</category>
+      </categories>
+      <tags>
+        <tag>Translation</tag>
+        <tag>SQL</tag>
       </tags>
   </entry>
   <entry>
