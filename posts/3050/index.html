@@ -323,7 +323,7 @@
 <p>在接下来的实验里，我们将开启两个MySQL命令行窗口，所以我们需要先做好一些<strong>全局设置</strong>，主要包括隔离级别的设置和事务提交模式的设置。</p>
 <ol>
 <li><strong>设置隔离级别</strong><br />
-MySQL默认的隔离级别为REPEATABLE READ（可重复读），语句为：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@tx</span>_isolation;</span><br></pre></td></tr></table></figure>
+MySQL默认的隔离级别为REPEATABLE READ（可重复读），语句为：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@tx_isolation</span>;</span><br></pre></td></tr></table></figure>
 结果如下图所示：<br />
 <img src="https://blog-1257338834.cos.ap-guangzhou.myqcloud.com/202209111121712.png" alt="img" /><br />
 根据上表，当隔离级别为READ UNCOMMITTED（读未提交）时，脏读，不可重复读和幻读都可能会出现，因此，我们在实验环境里把<strong>全局</strong>的隔离级别设置为此级别，语句为：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> transaction isolation level read uncommitted;</span><br></pre></td></tr></table></figure>
